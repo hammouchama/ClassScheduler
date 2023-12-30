@@ -17,7 +17,7 @@ ClassScheduler is a web application to help manage and schedule training classes
 
 - Spring Boot
 - Java
-- Oracle
+- Oracle Database
 
 ## Getting Started  
 

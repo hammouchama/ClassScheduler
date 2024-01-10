@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+
+//create query
+@NamedQuery(name = "User.findAllAssistant",query = "select new com.classscheduler.backend.dto.AssistantDTO(u.id,u.firstName,u.lastName,u.phone, u.address, u.email, u.status) from User u where role='assistant'")
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

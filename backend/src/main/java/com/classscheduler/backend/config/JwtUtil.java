@@ -1,5 +1,6 @@
 package com.classscheduler.backend.config;
 
+import com.classscheduler.backend.constants.ProjectConst;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.function.Function;
 public class JwtUtil {
 
     private String secret="betchdays";
+
 
 
     public String extractUsername(String token){
@@ -39,7 +41,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +100 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + ProjectConst.EXP_TOKEN_DATE))
                 .signWith(SignatureAlgorithm.HS256,secret).compact();
     }
 

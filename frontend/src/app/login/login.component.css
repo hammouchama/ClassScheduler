@@ -1,0 +1,16 @@
+.container{
+     display: flex;
+     justify-self: center;
+     align-items: center;
+     margin:2% 20%;  
+}
+.actions{
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+}
+.form_bottom{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+}

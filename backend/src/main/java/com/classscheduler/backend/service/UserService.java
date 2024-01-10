@@ -5,7 +5,6 @@ import com.classscheduler.backend.config.CustomerUserDetailsService;
 import com.classscheduler.backend.config.JwtFilter;
 import com.classscheduler.backend.config.JwtUtil;
 import com.classscheduler.backend.constants.ProjectConst;
-import com.classscheduler.backend.dto.UserDTO;
 import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.UserRepository;
 import com.classscheduler.backend.utils.Helpers;
@@ -58,7 +57,7 @@ public class UserService {
         }catch (Exception exception){
             exception.printStackTrace();
         }
-        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+        return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<String> addAssistant(Map<String, String> requestyMap) {

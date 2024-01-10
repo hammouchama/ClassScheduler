@@ -38,7 +38,7 @@ git clone https://github.com/oussamaWebDev/ClassScheduler.git
 ```sh
 cd frontend
 npm install
-npm start
+ng serve
 ```
 
 3. Install and run the Spring Boot back-end

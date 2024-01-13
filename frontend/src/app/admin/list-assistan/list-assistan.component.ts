@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { publishFacade } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Assistant } from 'src/app/model/assistant.model';
 import { AssistantService } from 'src/app/service/-assistant.service';
-
 
 //############################
 @Component({
@@ -16,7 +15,8 @@ export class ListAssistanComponent implements OnInit {
 
 
   dataSource: Assistant[] = []
-  constructor(private assistanService: AssistantService) { }
+  constructor(private assistanService: AssistantService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getAllAssistant()
@@ -26,7 +26,7 @@ export class ListAssistanComponent implements OnInit {
     this.assistanService.getAllAssistant().subscribe(
       (resp: Assistant[]) => {
         this.dataSource = resp
-        console.log(this.dataSource)
+        // console.log(this.dataSource)
       }, (error: HttpErrorResponse) => {
         console.log("error")
         console.log(error)
@@ -34,4 +34,10 @@ export class ListAssistanComponent implements OnInit {
     )
   }
   displayedColumns: string[] = ['name', 'email', 'phone', 'address', 'status', 'action']
+
+  public viewMore(assistantId: number) {
+
+    this.router.navigate(['admin/assistant/info', assistantId]);
+
+  }
 }

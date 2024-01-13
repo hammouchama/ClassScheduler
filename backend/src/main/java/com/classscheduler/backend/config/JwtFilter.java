@@ -25,12 +25,14 @@ public class JwtFilter extends OncePerRequestFilter {
     private String userName=null;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
         if(request.getServletPath().matches("/login|/forgotPassword|/")){
             filterChain.doFilter(request,response);
         }else {
-
+            System.out.println("checking token");
             String authorizationHeader=request.getHeader("Authorization");
             String token=null;
+            System.out.println("checking token");
             if (authorizationHeader!=null && authorizationHeader.startsWith("Bearer ")){
                 token=authorizationHeader.substring(7);
                 userName= jwtUtil.extractUsername(token);

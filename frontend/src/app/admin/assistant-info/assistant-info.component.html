@@ -1,0 +1,91 @@
+<div class="assistant-info">
+  <h1>Assistant info</h1>
+  <div class="assistant-info-card">
+    <form
+      #updateAssistant="ngForm"
+      (ngSubmit)="Update(updateAssistant, assistan.id)"
+    >
+      <!-- First name input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="assistan.firstName"
+            name="firstName"
+            required
+          />
+        </mat-form-field>
+      </p>
+      <!-- Last name input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="assistan.lastName"
+            name="lastName"
+            required
+          />
+        </mat-form-field>
+      </p>
+      <!-- Email input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="assistan.email" name="email" required />
+        </mat-form-field>
+      </p>
+      <!-- Phone input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>Phone</mat-label>
+          <input matInput [(ngModel)]="assistan.phone" name="phone" required />
+        </mat-form-field>
+      </p>
+      <!-- Address input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [(ngModel)]="assistan.address"
+            name="address"
+            required
+          />
+        </mat-form-field>
+      </p>
+      <!-- Status input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="assistan.status" name="status">
+            <mat-option value="ACTIVE">ACTIVE</mat-option>
+            <mat-option value="DISACTIVE">DISACTIVE</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+      <!-- Password input -->
+      <p>
+        <mat-form-field class="input-box">
+          <mat-label>New Password</mat-label>
+          <input matInput ngModel name="password" required />
+        </mat-form-field>
+      </p>
+      <p class="actions">
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>update</mat-icon>Update
+        </button>
+
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="deletAssistant(assistan.id)"
+        >
+          <mat-icon>delete_forever</mat-icon>Delete
+        </button>
+      </p>
+    </form>
+  </div>
+</div>

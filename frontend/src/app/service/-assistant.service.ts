@@ -8,30 +8,22 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root'
 })
 export class AssistantService {
-  requestHeader = {
-    Authorization: `Bearer ${this.auth.getToken()}`,
-    'Content-Type': 'application/json',
-  }
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.auth.getToken()}` // Replace with your actual token
-  });
-  constructor(private httpClint: HttpClient,
-    private auth: UserAuthService) {
-    console.log(this.auth.getToken());
-
+  constructor(private httpClient: HttpClient) {
   }
 
   public getAllAssistant() {
-    return this.httpClint.get<Assistant[]>(environment.apiEndpoint + "/admin/getAllAssistant")
+    return this.httpClient.get<Assistant[]>(environment.apiEndpoint + "/admin/getAllAssistant")
   }
   public getAssistant(id: number) {
-    return this.httpClint.get<Assistant>(environment.apiEndpoint + `/admin/assistant/${id}`)
+    return this.httpClient.get<Assistant>(environment.apiEndpoint + `/admin/assistant/${id}`)
   }
   public deletAssistant(id: number) {
-    console.log("id", id)
-    console.log("API", environment.apiEndpoint + `/admin/assistant/${id}`)
-
-    return this.httpClint.delete(environment.apiEndpoint + `/admin/assistant/${id}`, { headers: this.headers })
+    return this.httpClient.delete(environment.apiEndpoint + `/admin/assistant/${id}`)
+  }
+  public updateAssistant(id: number, data: any) {
+    return this.httpClient.put(environment.apiEndpoint + `/admin/assistant/${id}`, data);
+  }
+  public addAssistant(data: any) {
+    return this.httpClient.post(environment.apiEndpoint + "/admin/addAssistant", data);
   }
 }

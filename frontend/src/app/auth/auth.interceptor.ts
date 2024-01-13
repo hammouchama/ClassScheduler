@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
           const token = this.userAuthService.getToken();
           if (token) {
                req = this.addToken(req, token);
-               // req = this.addCorsHeaders(req); // Add CORS headers
+               //req = this.addCorsHeaders(req); // Add CORS headers
           }
 
           return next.handle(req).pipe(
@@ -47,7 +47,6 @@ export class AuthInterceptor implements HttpInterceptor {
                {
                     setHeaders: {
                          Authorization: `Bearer ${token}`,
-                         'content-type': 'application/json',
                     }
                }
           );

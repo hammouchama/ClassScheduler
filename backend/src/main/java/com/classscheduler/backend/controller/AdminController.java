@@ -17,7 +17,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin")
 @AllArgsConstructor
-@CrossOrigin(origins = "*", methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.PUT})
 public class AdminController {
 
     private UserService userService;
@@ -59,6 +58,7 @@ public class AdminController {
     @DeleteMapping("/assistant/{id}")
     public ResponseEntity<String> deleteAssistant(@PathVariable long id){
         try{
+          //  System.out.println("the id is :"+id);
            return adminService.deleteAssistant(id);
         }catch (Exception ex){
             ex.printStackTrace();
@@ -66,5 +66,17 @@ public class AdminController {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // update assistant
+    @PutMapping("/assistant/{id}")
+    public ResponseEntity<String> updateAssistant(@PathVariable long id,@RequestBody Map<String ,String> requestyMap){
+         try {
+             return adminService.updateAssistant(id,requestyMap);
+
+         }catch (Exception exception){
+             exception.printStackTrace();
+         }
+
+         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

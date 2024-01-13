@@ -14,22 +14,27 @@ import Swal from 'sweetalert2';
 export class AssistantInfoComponent implements OnInit {
 
   assistan!: Assistant;
-  assistantId: number = 0
+  isAdd: boolean = false //this for chech wiche form would be display
+  isUpdate: boolean = false
+  assistantId: any;
   yourFormControl: any;
   constructor(private route: ActivatedRoute,
     private assistanService: AssistantService,
     private router: Router) { }
   ngOnInit(): void {
     this.getId()
-    if (this.assistantId != 0) {
-      this.getAssistant(this.assistantId)
+    if (this.assistantId) {
+      if (this.assistantId >= 0) {
+        this.isUpdate = true
+        this.getAssistant(this.assistantId)
+      }
     } else {
-      this.router.navigate(['admin/assistant'])
+      this.isAdd = true
     }
   }
 
   //get assistant details
-  public getAssistant(id: number) {
+  public async getAssistant(id: number) {
     this.assistanService.getAssistant(id).subscribe(
       (resp: Assistant) => {
         this.assistan = resp
@@ -46,18 +51,34 @@ export class AssistantInfoComponent implements OnInit {
   //get id from the url 
   public getId() {
     this.route.paramMap.subscribe((params) => {
-      this.assistantId = parseInt(params.get('id') || '', 10);
+      this.assistantId = parseInt(params.get('id') || '')
     });
   }
 
   //update assistant 
-  public Update(updateAssistant: NgForm, id: number) {
-    console.log(updateAssistant.value)
+  public Update(updateAssistantFrom: NgForm, id: number) {
+    console.log(updateAssistantFrom.value)
+    this.assistanService.updateAssistant(id, updateAssistantFrom.value).subscribe(
+      (respons: any) => {
+        Swal.fire({
+          title: "Updated!",
+          text: respons.message,
+          icon: "success"
+        });
+      },
+      (error: HttpErrorResponse) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+
+    )
   }
 
   //delet assisstant
   public deletAssistant(id: number) {
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -70,18 +91,46 @@ export class AssistantInfoComponent implements OnInit {
       if (result.isConfirmed) {
         this.assistanService.deletAssistant(id).subscribe(
           (respons: any) => {
-            console.log("res", respons)
+            if (respons.message) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+              this.router.navigate(['admin/assistant'])
+            }
           },
           (error: HttpErrorResponse) => {
             console.log("error: ", error)
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
           }
         )
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
       }
     });
   }
+
+  // add new assistant 
+  public AddAssistant(addAssistant: NgForm) {
+    this.assistanService.addAssistant(addAssistant.value).subscribe(
+      (respon: any) => {
+        Swal.fire({
+          title: "Added!",
+          text: respon.message,
+          icon: "success"
+        });
+      },
+      (error: HttpErrorResponse) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    )
+  }
+
 }

@@ -39,3 +39,13 @@ input {
   margin-top: -10px;
   margin-bottom: -10px;
 }
+.add-butn {
+  background-color: aqua;
+  width: 40%;
+  align-self: center;
+  margin-left: 30%;
+}
+.ations-bar {
+  justify-content: center;
+  align-items: center;
+}

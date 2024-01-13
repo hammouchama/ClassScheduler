@@ -2,3 +2,21 @@
   padding: 6px;
   margin: 2% 5%;
 }
+.conternt-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0%;
+}
+.conternt-top .add {
+  /* background-color: aqua; */
+  width: 120px;
+  height: 45px;
+  margin: 2px;
+  font-size: large;
+}
+.conternt-top input {
+  height: 30px;
+  margin: 2px;
+}

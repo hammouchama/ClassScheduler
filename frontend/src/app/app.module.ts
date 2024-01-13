@@ -27,6 +27,7 @@ import { AssistantInfoComponent } from './admin/assistant-info/assistant-info.co
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     MatTableModule,
     MatInputModule,
     MatSelectModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    MatPaginatorModule
   ],
   providers: [
     AuthGuard,

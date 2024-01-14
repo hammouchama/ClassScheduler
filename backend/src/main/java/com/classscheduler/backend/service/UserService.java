@@ -81,7 +81,18 @@ public class UserService {
         }
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+   // add admin
+    public  void addAdmin(){
 
+        if (Objects.isNull(userRepository.findByEmail("admin@gmail.com"))) {
+            User user = new User();
+           user.setEmail("admin@gmail.com");
+           user.setPassword(passwordEncoder.encode("admin1234"));
+           user.setRole("Admin");
+           user.setStatus("ACTIVE");
+           userRepository.save(user);
+        }
+    }
 
     private boolean validateSignUpMap(Map<String,String> reqMap){
         return  reqMap.containsKey("firstName") && reqMap.containsKey("lastName") && reqMap.containsKey("address")

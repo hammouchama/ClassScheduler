@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,6 +23,11 @@ import { UserService } from './service/user.service';
 import { ListAssistanComponent } from './admin/list-assistan/list-assistan.component';
 import { MatTableModule } from '@angular/material/table';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { AssistantInfoComponent } from './admin/assistant-info/assistant-info.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +38,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AssistantComponent,
     ListAssistanComponent,
     ForbiddenComponent,
+    AssistantInfoComponent,
 
   ],
   imports: [
@@ -48,7 +53,11 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    MatSelectModule,
+    SweetAlert2Module,
+    MatPaginatorModule
   ],
   providers: [
     AuthGuard,

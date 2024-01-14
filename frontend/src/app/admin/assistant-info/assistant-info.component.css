@@ -1,0 +1,51 @@
+/* :host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.assistant-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8%;
+  box-sizing: border-box;
+}
+.assistant-info-card {
+  align-self: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.input-box {
+  width: 100%;
+}
+
+form p {
+  width: 500px;
+}
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+input {
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+.add-butn {
+  background-color: aqua;
+  width: 40%;
+  align-self: center;
+  margin-left: 30%;
+}
+.ations-bar {
+  justify-content: center;
+  align-items: center;
+}

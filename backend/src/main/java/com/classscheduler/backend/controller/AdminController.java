@@ -42,5 +42,41 @@ public class AdminController {
         }
      return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    //get Assistant by id
+    @GetMapping("/assistant/{id}")
+    public ResponseEntity<AssistantDTO> getAssistantById(@PathVariable long id){
+        try{
+            return adminService.getAssistant(id);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new AssistantDTO() ,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //delete assistant
+    @DeleteMapping("/assistant/{id}")
+    public ResponseEntity<String> deleteAssistant(@PathVariable long id){
+        try{
+          //  System.out.println("the id is :"+id);
+           return adminService.deleteAssistant(id);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // update assistant
+    @PutMapping("/assistant/{id}")
+    public ResponseEntity<String> updateAssistant(@PathVariable long id,@RequestBody Map<String ,String> requestyMap){
+         try {
+             return adminService.updateAssistant(id,requestyMap);
+
+         }catch (Exception exception){
+             exception.printStackTrace();
+         }
+
+         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

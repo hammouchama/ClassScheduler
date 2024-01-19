@@ -5,6 +5,7 @@ import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.AssistantDTO;
 import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.UserRepository;
+import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -24,6 +25,7 @@ public class AdminService {
     UserRepository userRepository;
     JwtFilter jwtFilter;
     BCryptPasswordEncoder passwordEncoder;
+    EmailHelper emailHelper;
 
     public ResponseEntity<List<AssistantDTO>> getAllAssistant() {
         try {
@@ -80,9 +82,9 @@ public class AdminService {
                 if (!Objects.isNull(user)){
                     if(validateAssistantInfoFromMap(requestyMap)){
                         userRepository.save(getAssistantFromMap(requestyMap,user));
-
                         // send an email to assistant
-
+                        String fullname=user.getFirstName()+" "+user.getLastName();
+                        emailHelper.sendLoginInfoEmail(requestyMap.get("email"),requestyMap.get("password"),fullname,"Assistant");
                       return Helpers.getResponseEntity("Assistant has updated successfully",HttpStatus.OK);
 
                     }

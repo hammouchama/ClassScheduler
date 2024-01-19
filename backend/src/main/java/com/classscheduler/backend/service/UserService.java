@@ -7,6 +7,7 @@ import com.classscheduler.backend.config.JwtUtil;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.UserRepository;
+import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
 import lombok.AllArgsConstructor;
 
@@ -31,6 +32,8 @@ public class UserService {
      BCryptPasswordEncoder passwordEncoder;
 
      AuthenticationManager authenticationManager;
+     EmailHelper emailHelper;
+
 
     JwtUtil jwtUtil;
 
@@ -67,6 +70,8 @@ public class UserService {
                     User user = userRepository.findByEmail(requestyMap.get("email"));
                     if (Objects.isNull(user)) {
                         userRepository.save(getUserFromMap(requestyMap));
+                        String fullname=requestyMap.get("firstName")+" "+requestyMap.get("lastName");
+                        emailHelper.sendLoginInfoEmail(requestyMap.get("email"),requestyMap.get("password"),fullname,"Assistant");
                         return Helpers.getResponseEntity("Successfully Registered", HttpStatus.OK);
                     } else {
                         return Helpers.getResponseEntity("Email already exist ", HttpStatus.BAD_REQUEST);

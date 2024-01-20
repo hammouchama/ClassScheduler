@@ -18,11 +18,13 @@ const routes: Routes = [
   { path: 'login2', component: SignInMainComponent },
   {
     path: 'admin',
-    component: AdminComponent,
+    loadChildren: () =>
+      import('./admin/admin-routing.module').then((m) => m.AdminRoutingModule),
+    /* component: AdminComponent, */
     canActivate: [AuthGuard],
     data: { role: 'Admin' },
   },
-  {
+  /* {
     path: 'admin/assistant',
     component: ListAssistanComponent,
     canActivate: [AuthGuard],
@@ -33,7 +35,7 @@ const routes: Routes = [
     component: AssistantInfoComponent,
     canActivate: [AuthGuard],
     data: { role: 'Admin' },
-  },
+  }, */
   { path: 'forbidden', component: ForbiddenComponent },
 ];
 

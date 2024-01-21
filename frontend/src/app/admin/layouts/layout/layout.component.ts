@@ -29,6 +29,7 @@ export class LayoutComponent implements OnInit {
    * Check if the vertical layout is requested
    */
   isVerticalLayoutRequested() {
+    console.log(this.layoutType);
     return this.layoutType === LAYOUT_VERTICAL;
   }
 

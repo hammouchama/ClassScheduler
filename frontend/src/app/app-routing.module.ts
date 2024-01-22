@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
   // { path: 'login', component: LoginComponent },
-  { path: 'login2', component: SignInMainComponent },
+  { path: 'login', component: SignInMainComponent },
   {
     path: 'admin',
     loadChildren: () =>
@@ -41,9 +41,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [],
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

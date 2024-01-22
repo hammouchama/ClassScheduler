@@ -45,7 +45,10 @@ export class CalendarComponent implements OnInit {
   constructor(private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit() {
-    this.breadCrumbItems = [{ label: 'Nazox' }, { label: 'Calendar', active: true }];
+    this.breadCrumbItems = [
+      { label: 'ClassScheduler' },
+      { label: 'Calendar', active: true },
+    ];
 
     /**
      * Event Model validation

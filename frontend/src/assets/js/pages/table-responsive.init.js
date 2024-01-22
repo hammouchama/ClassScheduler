@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Table responsive Init Js File
 */
 

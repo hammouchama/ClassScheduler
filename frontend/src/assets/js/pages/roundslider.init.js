@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Round slider Init Js File
 */
 
@@ -11,7 +9,7 @@ $("#default-slider").roundSlider({
     radius: 80,
     sliderType: "default",
     value: 42,
-    
+
 });
 
 $("#min-range").roundSlider({

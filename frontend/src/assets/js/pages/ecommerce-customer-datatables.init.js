@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Ecommerce customer datatables Js File
 */
 
@@ -31,5 +29,5 @@ $(document).ready(function() {
     });
 
     $(".dataTables_length select").addClass('form-select form-select-sm');
-    
+
 });

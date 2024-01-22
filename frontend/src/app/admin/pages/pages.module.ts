@@ -26,6 +26,7 @@ import { UIModule } from './ui/ui.module';
 // import { ChartModule } from './chart/chart.module';
 // import { FormModule } from './form/form.module';
 import { TablesModule } from './tables/tables.module';
+import { AssistantsModule } from './assistants/assistants.module';
 // import { MapsModule } from './maps/maps.module';
 
 
@@ -47,6 +48,7 @@ import { TablesModule } from './tables/tables.module';
     FullCalendarModule,
     UIModule,
     TablesModule,
+    AssistantsModule,
     NgbNavModule,
     NgbDropdownModule,
     NgbTooltipModule

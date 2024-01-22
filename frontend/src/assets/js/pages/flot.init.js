@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Flot chart init Js File
 */
 
@@ -55,7 +53,7 @@ File: Flot chart init Js File
                   },
                   shadowSize: 0
               },
-              
+
               legend: {
                   position: 'nw',
                   backgroundColor: "transparent",
@@ -211,7 +209,7 @@ File: Flot chart init Js File
         font : {
           color : '#8791af'
         }
-        
+
 			},
 			xaxis : {
 				show : false
@@ -220,7 +218,7 @@ File: Flot chart init Js File
 
         return plot;
     },
-    
+
     //creates Pie Chart
     FlotChart.prototype.createDonutGraph = function(selector, labels, datas, colors) {
         var data = [{

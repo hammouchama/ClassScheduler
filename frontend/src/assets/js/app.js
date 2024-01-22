@@ -1,8 +1,4 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Version: 2.0.0
-Contact: themesdesign.in@gmail.com
 File: Main Js File
 */
 ​
@@ -141,7 +137,7 @@ File: Main Js File
             window.addEventListener("resize", updateMenu);
         }
     }
-    
+
     ​function updateMenu() {
         var elements = document.getElementById("topnav-menu-content").getElementsByTagName("a");
         for(var i = 0, len = elements.length; i < len; i++) {

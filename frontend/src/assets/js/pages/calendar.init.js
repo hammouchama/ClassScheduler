@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Calendar
 */
 
@@ -13,7 +11,7 @@ File: Calendar
     CalendarPage.prototype.init = function() {
 
 
-                       
+
             var addEvent=$("#event-modal");
             var modalTitle = $("#modal-title");
             var formEvent = $("#form-event");
@@ -106,7 +104,7 @@ File: Calendar
                 modalTitle.text('Add Event');
                 newEventData = info;
             }
-            
+
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
@@ -136,7 +134,7 @@ File: Calendar
                 events : defaultEvents
             });
             calendar.render();
-            
+
              /*Add new event*/
             // Form to add new event
 
@@ -145,7 +143,7 @@ File: Calendar
                 var inputs = $('#form-event :input');
                 var updatedTitle = $("#event-title").val();
                 var updatedCategory =  $('#event-category').val();
-                
+
                 // validation
                 if (forms[0].checkValidity() === false) {
                         event.preventDefault();
@@ -185,7 +183,7 @@ File: Calendar
     $.CalendarPage = new CalendarPage, $.CalendarPage.Constructor = CalendarPage
 }(window.jQuery),
 
-//initializing 
+//initializing
 function($) {
     "use strict";
     $.CalendarPage.init()

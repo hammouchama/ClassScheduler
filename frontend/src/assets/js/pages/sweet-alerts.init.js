@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Sweetalert Js File
 */
 
@@ -110,7 +108,7 @@ File: Sweetalert Js File
                 animation: false
             })
         });
-		
+
         //Auto Close Timer
         $('#sa-close').click(function () {
             var timerInterval;

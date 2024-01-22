@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
-// import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClickOutsideModule } from 'ng-click-outside';
 // import { TranslateModule } from '@ngx-translate/core';
 
@@ -14,6 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RightsidebarComponent } from './rightsidebar/rightsidebar.component';
 import { HorizontaltopbarComponent } from './horizontaltopbar/horizontaltopbar.component';
 import { HorizontalnavbarComponent } from './horizontalnavbar/horizontalnavbar.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
@@ -22,9 +22,9 @@ import { HorizontalnavbarComponent } from './horizontalnavbar/horizontalnavbar.c
     CommonModule,
     NgScrollbarModule,
     /* TranslateModule,
-    PerfectScrollbarModule,
+    PerfectScrollbarModule,*/
     NgbDropdownModule,
-     */
+
     ClickOutsideModule,
     RouterModule,
     FormsModule,

@@ -1,7 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Datatables Js File
 */
 
@@ -16,7 +14,7 @@ $(document).ready(function() {
         "drawCallback": function () {
             $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
         }
-        
+
     });
 
     //Buttons examples
@@ -130,7 +128,7 @@ $(document).ready(function() {
         },
         "drawCallback": function () {
             $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
-            $(".dataTables_length select").addClass('form-select form-select-sm'); 
+            $(".dataTables_length select").addClass('form-select form-select-sm');
         }
     });
 } );

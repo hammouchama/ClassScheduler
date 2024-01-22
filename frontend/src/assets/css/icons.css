@@ -1,8 +1,5 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Version: 2.0.0
-Contact: themesdesign.in@gmail.com
+
 File: Icons Css File
 */
 /* MaterialDesignIcons.com */
@@ -11,7 +8,7 @@ File: Icons Css File
   src: url("../../../../fonts/materialdesignicons-webfont.eot?v=5.9.55");
   src: url("../../../../fonts/materialdesignicons-webfont.eot?#iefix&v=5.9.55") format("embedded-opentype"),
    url("../../../../fonts/materialdesignicons-webfont.woff2?v=5.9.55") format("woff2"),
-    url("../../../../fonts/materialdesignicons-webfont.woff?v=5.9.55") format("woff"), 
+    url("../../../../fonts/materialdesignicons-webfont.woff?v=5.9.55") format("woff"),
     url("../../../../fonts/materialdesignicons-webfont.ttf?v=5.9.55") format("truetype");
   font-weight: normal;
   font-style: normal;

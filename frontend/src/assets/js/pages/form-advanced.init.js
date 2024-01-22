@@ -1,30 +1,28 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Form Advanced Js File
 */
 
 !function ($) {
     "use strict";
-  
+
     var AdvancedForm = function () { };
-  
+
     AdvancedForm.prototype.init = function () {
-  
+
       // Select2
       $(".select2").select2();
-  
+
       $(".select2-limiting").select2({
         maximumSelectionLength: 2
       });
-  
-  
+
+
       $(".select2-search-disable").select2({
         minimumResultsForSearch: Infinity
       });
-  
-  
+
+
       $('.select2-ajax').select2({
         ajax: {
           url: "https://api.github.com/search/repositories",
@@ -42,7 +40,7 @@ File: Form Advanced Js File
             // alter the remote JSON data, except to indicate that infinite
             // scrolling can be used
             params.page = params.page || 1;
-  
+
             return {
               results: data.items,
               pagination: {
@@ -57,12 +55,12 @@ File: Form Advanced Js File
         templateResult: formatRepo,
         templateSelection: formatRepoSelection
       });
-  
+
       function formatRepo(repo) {
         if (repo.loading) {
           return repo.text;
         }
-  
+
         var $container = $(
           "<div class='select2-result-repository clearfix'>" +
           "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
@@ -77,21 +75,21 @@ File: Form Advanced Js File
           "</div>" +
           "</div>"
         );
-  
+
         $container.find(".select2-result-repository__title").text(repo.full_name);
         $container.find(".select2-result-repository__description").text(repo.description);
         $container.find(".select2-result-repository__forks").append(repo.forks_count + " Forks");
         $container.find(".select2-result-repository__stargazers").append(repo.stargazers_count + " Stars");
         $container.find(".select2-result-repository__watchers").append(repo.watchers_count + " Watchers");
-  
+
         return $container;
       }
-  
+
       function formatRepoSelection(repo) {
         return repo.full_name || repo.text;
       }
-  
-  
+
+
       function formatState(state) {
         if (!state.id) {
           return state.text;
@@ -102,18 +100,18 @@ File: Form Advanced Js File
         );
         return $state;
       };
-  
+
       $(".select2-templating").select2({
         templateResult: formatState
       });
-  
+
       //colorpicker start
       $("#colorpicker-default").spectrum();
-  
+
       $("#colorpicker-showalpha").spectrum({
         showAlpha: true
       });
-  
+
       $("#colorpicker-showpaletteonly").spectrum({
         showPaletteOnly: true,
         showPalette: true,
@@ -124,7 +122,7 @@ File: Form Advanced Js File
           ['red', 'yellow', 'green', 'blue', 'violet']
         ]
       });
-  
+
       $("#colorpicker-togglepaletteonly").spectrum({
         showPaletteOnly: true,
         togglePaletteOnly: true,
@@ -142,19 +140,19 @@ File: Form Advanced Js File
             ["#600","#783f04","#7f6000","#274e13","#0c343d","#073763","#20124d","#4c1130"]
         ]
     });
-  
+
     $("#colorpicker-showintial").spectrum({
       showInitial: true
     });
-  
+
     $("#colorpicker-showinput-intial").spectrum({
       showInitial: true,
       showInput: true
     });
-  
-    
-  
-  
+
+
+
+
       //Bootstrap-TouchSpin
       var defaultOptions = {
       };
@@ -227,19 +225,19 @@ File: Form Advanced Js File
         warningClass: "badge bg-info",
         limitReachedClass: "badge bg-warning"
       });
-  
+
       $('input#thresholdconfig').maxlength({
         threshold: 20,
         warningClass: "badge bg-info",
         limitReachedClass: "badge bg-warning"
       });
-  
+
       $('input#moreoptions').maxlength({
         alwaysShow: true,
         warningClass: "badge bg-success",
         limitReachedClass: "badge bg-danger"
       });
-  
+
       $('input#alloptions').maxlength({
         alwaysShow: true,
         warningClass: "badge bg-success",
@@ -249,35 +247,35 @@ File: Form Advanced Js File
         postText: ' chars available.',
         validate: true
       });
-  
+
       $('textarea#textarea').maxlength({
         alwaysShow: true,
         warningClass: "badge bg-info",
         limitReachedClass: "badge bg-warning"
       });
-  
+
       $('input#placement').maxlength({
         alwaysShow: true,
         placement: 'top-left',
         warningClass: "badge bg-info",
         limitReachedClass: "badge bg-warning"
       });
-  
-  
+
+
     },
       //init
       $.AdvancedForm = new AdvancedForm, $.AdvancedForm.Constructor = AdvancedForm
   }(window.jQuery),
-  
+
     //Datepicker
     function ($) {
       "use strict";
       $.AdvancedForm.init();
     }(window.jQuery);
-  
+
   $(function () {
     'use strict';
-  
+
     var $date = $('.docs-date');
     var $container = $('.docs-datepicker-container');
     var $trigger = $('.docs-datepicker-trigger');
@@ -292,7 +290,7 @@ File: Form Advanced Js File
         console.log(e.type, e.namespace, e.view);
       }
     };
-  
+
     $date.on({
       'show.datepicker': function (e) {
         console.log(e.type, e.namespace);
@@ -304,14 +302,14 @@ File: Form Advanced Js File
         console.log(e.type, e.namespace, e.view);
       }
     }).datepicker(options);
-  
+
     $('.docs-options, .docs-toggles').on('change', function (e) {
       var target = e.target;
       var $target = $(target);
       var name = $target.attr('name');
       var value = target.type === 'checkbox' ? target.checked : $target.val();
       var $optionContainer;
-  
+
       switch (name) {
         case 'container':
           if (value) {
@@ -320,9 +318,9 @@ File: Form Advanced Js File
           } else {
             $container.hide();
           }
-  
+
           break;
-  
+
         case 'trigger':
           if (value) {
             value = $trigger;
@@ -330,45 +328,45 @@ File: Form Advanced Js File
           } else {
             $trigger.prop('disabled', true);
           }
-  
+
           break;
-  
+
         case 'inline':
           $optionContainer = $('input[name="container"]');
-  
+
           if (!$optionContainer.prop('checked')) {
             $optionContainer.click();
           }
-  
+
           break;
-  
+
         case 'language':
           $('input[name="format"]').val($.fn.datepicker.languages[value].format);
           break;
       }
-  
+
       options[name] = value;
       $date.datepicker('reset').datepicker('destroy').datepicker(options);
     });
-  
+
     $('.docs-actions').on('click', 'button', function (e) {
       var data = $(this).data();
       var args = data.arguments || [];
       var result;
-  
+
       e.stopPropagation();
-  
+
       if (data.method) {
         if (data.source) {
           $date.datepicker(data.method, $(data.source).val());
         } else {
           result = $date.datepicker(data.method, args[0], args[1], args[2]);
-  
+
           if (result && data.target) {
             $(data.target).val(result);
           }
         }
       }
     });
-  
+
   });

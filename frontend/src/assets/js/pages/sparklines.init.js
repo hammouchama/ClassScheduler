@@ -1,20 +1,18 @@
 /*
-Template Name: Nazox -  Admin & Dashboard Template
-Author: Themesdesign
-Contact: themesdesign.in@gmail.com
+
 File: Sparkline chart Init
 */
 
 $(document).ready(function() {
     var SparklineCharts = function() {
-  
+
       $('#sparkline1').sparkline([20, 40, 30], {
         type: 'pie',
         height: '200',
         resize: true,
         sliceColors: ['#1cbb8c', '#5664d2', '#e9ecef']
       });
-  
+
       $("#sparkline2").sparkline([5,6,2,8,9,4,7,10,11,12,10,4,7,10], {
         type: 'bar',
         height: '200',
@@ -22,7 +20,7 @@ $(document).ready(function() {
         barSpacing: 7,
         barColor: '#1cbb8c'
       });
-  
+
       $('#sparkline3').sparkline([5, 6, 2, 9, 4, 7, 10, 12,4,7,10], {
         type: 'bar',
         height: '200',
@@ -41,7 +39,7 @@ $(document).ready(function() {
         highlightLineColor: 'rgba(0,0,0,.1)',
         highlightSpotColor: 'rgba(0,0,0,.2)'
       });
-  
+
       $("#sparkline4").sparkline([0, 23, 43, 35, 44, 45, 56, 37, 40, 45, 56, 7, 10], {
         type: 'line',
         width: '100%',
@@ -66,7 +64,7 @@ $(document).ready(function() {
         highlightLineColor: 'rgba(0,0,0,.1)',
         highlightSpotColor: 'rgba(0,0,0,.2)',
       });
-  
+
       $('#sparkline5').sparkline([0, 13, 10, 14, 15, 10, 18, 20, 0], {
         type: 'line',
         width: '100%',
@@ -79,14 +77,14 @@ $(document).ready(function() {
         highlightLineColor: 'rgba(0,0,0,.1)',
         highlightSpotColor: 'rgba(0,0,0,.2)',
       });
-  
+
       $("#sparkline6").sparkline([4, 6, 7, 7, 4, 3, 2, 1, 4, 4, 5, 6, 3, 4, 5, 8, 7, 6, 9, 3, 2, 4, 1, 5, 6, 4, 3, 7], {
         type: 'discrete',
         width: '280',
         height: '200',
         lineColor: '#ffffff'
       });
-  
+
       $('#sparkline7').sparkline([10,12,12,9,7], {
         type: 'bullet',
         width: '280',
@@ -116,16 +114,16 @@ $(document).ready(function() {
         barSpacing: 3,
         zeroAxis: false
       });
-  
-  
-  
+
+
+
     }
     var sparkResize;
-  
+
     $(window).resize(function(e) {
       clearTimeout(sparkResize);
       sparkResize = setTimeout(SparklineCharts, 500);
     });
     SparklineCharts();
-  
+
   });

@@ -10,6 +10,7 @@ import { ListAssistanComponent } from './admin/list-assistan/list-assistan.compo
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { AssistantInfoComponent } from './admin/assistant-info/assistant-info.component';
 import { SignInMainComponent } from './user/sign-in/sign-in-main/sign-in-main.component';
+import { AdminRoutingModule } from './admin/admin-routing.module';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,8 +19,7 @@ const routes: Routes = [
   { path: 'login', component: SignInMainComponent },
   {
     path: 'admin',
-    loadChildren: () =>
-      import('./admin/admin-routing.module').then((m) => m.AdminRoutingModule),
+    loadChildren: () => AdminRoutingModule,
     /* component: AdminComponent, */
     canActivate: [AuthGuard],
     data: { role: 'Admin' },

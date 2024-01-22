@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     User findByEmail(@Param("email") String email);
 
     List<AssistantDTO> findAllAssistant();
+
+    User findAssistantById(@Param("id") long id);
 }

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../advancedtable/advancedtable.component.scss"
+    ],
+    "names": [],
+    "file": "advancedtable.component.min.css"
+}

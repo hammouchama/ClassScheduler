@@ -1,0 +1,1 @@
+sass --watch D:\Dropbox\educal\assets\scss\main.scss D:\Dropbox\educal\assets\css\style.css

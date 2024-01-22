@@ -13,7 +13,7 @@ public class AssistantDTO {
     private String phone;
     private String address;
     private String email;
-    private String password;
+    //private String password;
     private String status;
 
     public AssistantDTO(Long id, String firstName, String lastName, String phone, String address, String email, String status) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../service/user-auth.service';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
 
   }
 
@@ -27,3 +26,4 @@ export class HeaderComponent implements OnInit {
     return this.useAthuService.isLoggedIn()
   }
 }
+ */

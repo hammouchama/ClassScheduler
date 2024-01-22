@@ -26,6 +26,9 @@ public class Formation {
     private String status="ACTIVE";
     private float cost=0.00F;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private ImagesModel photo;
 
 
 }

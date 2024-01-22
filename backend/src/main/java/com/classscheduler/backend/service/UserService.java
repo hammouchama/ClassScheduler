@@ -9,6 +9,7 @@ import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.UserRepository;
 import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ public class UserService {
      BCryptPasswordEncoder passwordEncoder;
 
      AuthenticationManager authenticationManager;
+
      EmailHelper emailHelper;
 
 
@@ -40,7 +42,7 @@ public class UserService {
     JwtFilter jwtFilter;
 
      CustomerUserDetailsService customerUserDetailsService;
-
+    @Transactional
     public ResponseEntity<String> login(Map<String, String> requestMap) {
         try {
               if(requestMap.containsKey("email")&& requestMap.containsKey("password")){
@@ -63,6 +65,7 @@ public class UserService {
         return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
     }
 
+    @Transactional
     public ResponseEntity<String> addAssistant(Map<String, String> requestyMap) {
         try {
             if (jwtFilter.isAdmin()) {
@@ -87,6 +90,7 @@ public class UserService {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
    // add admin
+   @Transactional
     public  void addAdmin(){
 
         if (Objects.isNull(userRepository.findByEmail("admin@gmail.com"))) {

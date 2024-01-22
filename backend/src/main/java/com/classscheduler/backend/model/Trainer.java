@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+@NamedQuery(name = "Trainer.getTrainerNotAccepted",query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.url,t.formation.title) from Trainer t where t.accepted='false'")
 @Entity
 @Data
 @AllArgsConstructor
@@ -21,9 +23,16 @@ public class Trainer{
     private String email;
     private String password;
 
-    private String accepted="False";
+    private String accepted="false";
     private String skills;
-    private String photo;
     private String description;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private ImagesModel photo;
 
 }

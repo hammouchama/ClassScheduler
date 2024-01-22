@@ -7,6 +7,7 @@ import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.UserRepository;
 import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class AdminService {
     BCryptPasswordEncoder passwordEncoder;
     EmailHelper emailHelper;
 
+    @Transactional
     public ResponseEntity<List<AssistantDTO>> getAllAssistant() {
         try {
             if (jwtFilter.isAdmin()){
@@ -41,6 +43,7 @@ public class AdminService {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Transactional
     public ResponseEntity<AssistantDTO> getAssistant(long id) {
         try {
             if (jwtFilter.isAdmin()){
@@ -57,6 +60,7 @@ public class AdminService {
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Transactional
     public ResponseEntity<String> deleteAssistant(long id) {
         try {
             if (jwtFilter.isAdmin()){
@@ -75,6 +79,7 @@ public class AdminService {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Transactional
     public ResponseEntity<String> updateAssistant(long id, Map<String, String> requestyMap) {
         try {
             if (jwtFilter.isAdmin()){

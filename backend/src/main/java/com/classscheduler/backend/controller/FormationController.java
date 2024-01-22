@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,10 @@ public class FormationController {
 
     //add formation
     @PostMapping("/add")
-    public ResponseEntity<String> addFormation(@RequestBody Map<String ,String> requestyMap){
+    public ResponseEntity<String> addFormation(@RequestPart("image") MultipartFile image ,@RequestPart("data") Map<String ,String> requestyMap){
         try{
-            return formationService.addFormation(requestyMap);
+           return formationService.addFormation(requestyMap,image);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -67,9 +69,9 @@ public class FormationController {
 
     //update formation
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateFormation(@PathVariable long id,@RequestBody Map<String,String> requestMap){
+    public ResponseEntity<String> updateFormation(@PathVariable long id,@RequestPart("data") Map<String,String> requestMap,@RequestPart("image") MultipartFile image ){
         try {
-            return formationService.updateFormation(id,requestMap);
+            return formationService.updateFormation(id,requestMap,image);
         }catch (Exception e){
             e.printStackTrace();
         }

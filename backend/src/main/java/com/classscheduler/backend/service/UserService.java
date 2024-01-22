@@ -83,11 +83,13 @@ public class UserService {
     }
    // add admin
     public  void addAdmin(){
-        User user = userRepository.findByEmail("admin@gmail.com");
-        if (Objects.isNull(user)) {
+
+        if (Objects.isNull(userRepository.findByEmail("admin@gmail.com"))) {
+            User user = new User();
            user.setEmail("admin@gmail.com");
            user.setPassword(passwordEncoder.encode("admin1234"));
            user.setRole("Admin");
+           user.setStatus("ACTIVE");
            userRepository.save(user);
         }
     }

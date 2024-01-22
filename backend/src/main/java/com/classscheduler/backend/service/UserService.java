@@ -7,7 +7,9 @@ import com.classscheduler.backend.config.JwtUtil;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.UserRepository;
+import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -26,40 +28,47 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserService {
 
-     UserRepository userRepository;
+    UserRepository userRepository;
 
-     BCryptPasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder passwordEncoder;
 
-     AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager;
+
+    EmailHelper emailHelper;
 
     JwtUtil jwtUtil;
 
     JwtFilter jwtFilter;
 
-     CustomerUserDetailsService customerUserDetailsService;
+    CustomerUserDetailsService customerUserDetailsService;
 
+    @Transactional
     public ResponseEntity<String> login(Map<String, String> requestMap) {
         try {
-              if(requestMap.containsKey("email")&& requestMap.containsKey("password")){
-                  Authentication auth=authenticationManager.authenticate(
-                          new UsernamePasswordAuthenticationToken(requestMap.get("email"),requestMap.get("password"))
-                  );
-                  if(auth.isAuthenticated()){
-                      if (customerUserDetailsService.getUserDetail().getStatus().equalsIgnoreCase("ACTIVE")){
-                          return new ResponseEntity<>("{\"token\":\""+
-                                  jwtUtil.genreateToken(customerUserDetailsService.getUserDetail().getEmail(),
-                                          customerUserDetailsService.getUserDetail().getRole())+"\",\"role\":\""+customerUserDetailsService.getUserDetail().getRole()+"\"}",HttpStatus.OK);
-                      }else {
-                          return new ResponseEntity<>("{\"message\":\""+"This account is banned. "+"\"}",HttpStatus.BAD_REQUEST);
-                      }
-                  }
-              }else return Helpers.getResponseEntity(ProjectConst.INVALID_DATA,HttpStatus.BAD_REQUEST);
-        }catch (Exception exception){
+            if (requestMap.containsKey("email") && requestMap.containsKey("password")) {
+                Authentication auth = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password")));
+                if (auth.isAuthenticated()) {
+                    if (customerUserDetailsService.getUserDetail().getStatus().equalsIgnoreCase("ACTIVE")) {
+                        return new ResponseEntity<>("{\"token\":\"" +
+                                jwtUtil.genreateToken(customerUserDetailsService.getUserDetail().getEmail(),
+                                        customerUserDetailsService.getUserDetail().getRole())
+                                + "\",\"role\":\"" + customerUserDetailsService.getUserDetail().getRole() + "\"}",
+                                HttpStatus.OK);
+                    } else {
+                        return new ResponseEntity<>("{\"message\":\"" + "This account is banned. " + "\"}",
+                                HttpStatus.BAD_REQUEST);
+                    }
+                }
+            } else
+                return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
         return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
     }
 
+    @Transactional
     public ResponseEntity<String> addAssistant(Map<String, String> requestyMap) {
         try {
             if (jwtFilter.isAdmin()) {
@@ -67,38 +76,56 @@ public class UserService {
                     User user = userRepository.findByEmail(requestyMap.get("email"));
                     if (Objects.isNull(user)) {
                         userRepository.save(getUserFromMap(requestyMap));
+                        String fullname = requestyMap.get("firstName") + " " + requestyMap.get("lastName");
+                        emailHelper.sendLoginInfoEmail(requestyMap.get("email"), requestyMap.get("password"), fullname,
+                                "Assistant");
                         return Helpers.getResponseEntity("Successfully Registered", HttpStatus.OK);
                     } else {
                         return Helpers.getResponseEntity("Email already exist ", HttpStatus.BAD_REQUEST);
                     }
 
-                } else return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
-            }else {
-                return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS,HttpStatus.UNAUTHORIZED);
+                } else
+                    return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
+            } else {
+                return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS, HttpStatus.UNAUTHORIZED);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-   // add admin
-    public  void addAdmin(){
+
+    // add admin
+    @Transactional
+    public void addAdmin() {
+
+        if (Objects.isNull(userRepository.findByEmail("admin@gmail.com"))) {
+            User user = new User();
+            user.setEmail("admin@gmail.com");
+            user.setPassword(passwordEncoder.encode("admin1234"));
+            user.setRole("Admin");
+            user.setStatus("ACTIVE");
+            userRepository.save(user);
+        }
+    } // add admin
+
+    public void addAdmin() {
         User user = userRepository.findByEmail("admin@gmail.com");
         if (Objects.isNull(user)) {
-           user.setEmail("admin@gmail.com");
-           user.setPassword(passwordEncoder.encode("admin1234"));
-           user.setRole("Admin");
-           userRepository.save(user);
+            user.setEmail("admin@gmail.com");
+            user.setPassword(passwordEncoder.encode("admin1234"));
+            user.setRole("Admin");
+            userRepository.save(user);
         }
     }
 
-    private boolean validateSignUpMap(Map<String,String> reqMap){
-        return  reqMap.containsKey("firstName") && reqMap.containsKey("lastName") && reqMap.containsKey("address")
-                && reqMap.containsKey("email") &&reqMap.containsKey("password") && reqMap.containsKey("phone");
+    private boolean validateSignUpMap(Map<String, String> reqMap) {
+        return reqMap.containsKey("firstName") && reqMap.containsKey("lastName") && reqMap.containsKey("address")
+                && reqMap.containsKey("email") && reqMap.containsKey("password") && reqMap.containsKey("phone");
     }
 
-    private User getUserFromMap(Map<String,String> requestMap){
-        User user=new User();
+    private User getUserFromMap(Map<String, String> requestMap) {
+        User user = new User();
         user.setFirstName(requestMap.get("firstName"));
         user.setLastName(requestMap.get("lastName"));
         user.setEmail(requestMap.get("email"));
@@ -109,6 +136,5 @@ public class UserService {
         user.setRole("assistant");
         return user;
     }
-
 
 }

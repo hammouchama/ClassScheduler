@@ -1,0 +1,50 @@
+
+iframe {
+	height: 350px;
+	width: 100%;
+}
+.modal-body p {
+	margin-bottom: 0;
+}
+.modal-header {
+    padding: 0px;
+    border: none;
+    margin: 0px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+	z-index: 99999;
+}
+.modal-title {
+	display: none;
+}
+.modal-content {
+    border: none;
+    padding: 10px;
+    padding-bottom: 0;
+    background: transparent;
+}
+.modal-dialog {
+    max-width: 700px;
+}
+.modal-content button.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url("../../img/icon/close.png") center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: 1;
+}
+.btn-close:hover {
+    opacity: 1;
+}
+.btn-close:focus {
+    box-shadow: none;
+}
+
+.modal-footer {
+	display: none;
+}

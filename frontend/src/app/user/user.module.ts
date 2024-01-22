@@ -17,11 +17,21 @@ import { SignInAreaComponent } from './sign-in/sign-in-area/sign-in-area.compone
 import { HeaderComponent } from './common/header/header.component';
 import { HomeComponent } from './home/home-main/home.component';
 import { FormsModule } from '@angular/forms';
+import { HeroAreaComponent } from './home/hero-area/hero-area.component';
+import { ServiceAreaComponent } from './home/service-area/service-area.component';
+import { CoursesComponent } from './home/courses/courses.component';
+import { WhatAreaComponent } from './home/what-area/what-area.component';
+import { WhyAreaComponent } from './home/why-area/why-area.component';
+import { CounterAreaComponent } from './home/counter-area/counter-area.component';
+import { TestimonialAreaComponent } from './home/testimonial-area/testimonial-area.component';
+import { BlogComponent } from './home/blog/blog.component';
+import { CtaAreaComponent } from './home/cta-area/cta-area.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
+    HeroAreaComponent,ServiceAreaComponent,CoursesComponent,WhatAreaComponent,WhyAreaComponent,CounterAreaComponent,TestimonialAreaComponent,BlogComponent,CtaAreaComponent,
     HomeComponent,
     AboutAreaComponent,
     BrandAreaComponent,

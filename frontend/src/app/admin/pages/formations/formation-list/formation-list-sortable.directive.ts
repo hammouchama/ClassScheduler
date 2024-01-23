@@ -18,7 +18,7 @@ export interface SortEvent {
   }
 })
 
-export class CourseListSortableDirective {
+export class FormationListSortableDirective {
 
   constructor() { }
 

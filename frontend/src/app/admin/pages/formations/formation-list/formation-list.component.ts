@@ -3,50 +3,50 @@ import { DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
-import { CourseListService } from './course-list.service';
+import { FormationListService } from './formation-list.service';
 import {
-  CourseListSortableDirective,
+  FormationListSortableDirective,
   SortEvent,
-} from './course-list-sortable.directive';
-import { CourseService } from 'src/app/service/-course.service';
-import { Course } from 'src/app/model/course.model';
+} from './formation-list-sortable.directive';
+import { Formation } from 'src/app/model/formation.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormationService } from 'src/app/service/-formation.service';
 
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss'],
-  providers: [CourseListService, DecimalPipe],
+  selector: 'app-formation-list',
+  templateUrl: './formation-list.component.html',
+  styleUrls: ['./formation-list.component.scss'],
+  providers: [FormationListService, DecimalPipe],
 })
 
 /**
  * Advanced table component
  */
-export class CourseListComponent implements OnInit {
+export class FormationListComponent implements OnInit {
   // bread crum data
   breadCrumbItems!: Array<{}>;
   hideme: boolean[] = [];
 
   // Table data
-  courseData!: Course[];
+  formationData!: Formation[];
 
-  tables$: Observable<Course[]>;
+  tables$: Observable<Formation[]>;
   total$: Observable<number>;
 
-  @ViewChildren(CourseListSortableDirective)
-  headers!: QueryList<CourseListSortableDirective>;
+  @ViewChildren(FormationListSortableDirective)
+  headers!: QueryList<FormationListSortableDirective>;
 
   constructor(
-    private courseService: CourseService,
-    public service: CourseListService
+    private formationService: FormationService,
+    public service: FormationListService
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
   }
   ngOnInit() {
     this.breadCrumbItems = [
-      { label: 'Courses' },
-      { label: 'List of Courses', active: true },
+      { label: 'Formations' },
+      { label: 'List of Formations', active: true },
     ];
 
     /**
@@ -63,13 +63,13 @@ export class CourseListComponent implements OnInit {
    * fetches the table value
    */
   _fetchData() {
-    this.courseService.getAllCourse().subscribe(
-      (resp: Course[]) => {
+    this.formationService.getAllFormation().subscribe(
+      (resp: Formation[]) => {
         this.service.updateTableData(resp);
-        this.courseData = resp; // Assign data
+        this.formationData = resp; // Assign data
 
-        // Initialize hideme with true for each element in courseData
-        this.hideme = Array.from({ length: this.courseData?.length }, () => true);
+        // Initialize hideme with true for each element in formationData
+        this.hideme = Array.from({ length: this.formationData?.length }, () => true);
 
       },
       (error: HttpErrorResponse) => {

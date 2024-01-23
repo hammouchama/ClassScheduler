@@ -37,19 +37,19 @@ export const MENU: MenuItem[] = [
   },
   {
     id: 6,
-    label: 'Courses',
+    label: 'Formations',
     icon: 'ri-user-settings-line',
     subItems: [
       {
         id: 7,
-        label: 'List of Courses',
-        link: '/admin/courses',
+        label: 'List of Formations',
+        link: '/admin/formations',
         parentId: 6,
       },
       {
         id: 8,
-        label: 'Add new Course',
-        link: '/admin/courses/new',
+        label: 'Add new Formation',
+        link: '/admin/formations/new',
         parentId: 6,
       },
     ],

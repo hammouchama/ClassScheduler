@@ -4,12 +4,12 @@ import { DecimalPipe } from '@angular/common';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
-import { SearchResult } from './assistant-list.model';
+import { SearchResult } from './course-list.model';
 
 import { tableData } from './data';
 
-import { SortDirection } from './assistant-list-sortable.directive';
-import { Assistant } from 'src/app/model/assistant.model';
+import { SortDirection } from './course-list-sortable.directive';
+import { Course } from 'src/app/model/course.model';
 
 interface State {
     page: number;
@@ -28,11 +28,11 @@ function compare(v1:any, v2: any) {
 
 /**
  * Sort the table data
- * @param tables Assistant field value
+ * @param tables Course field value
  * @param column Fetch the column
  * @param direction Sort direction Ascending or Descending
  */
-function sort(tables: Assistant[], column: keyof Assistant, direction: string): Assistant[] {
+function sort(tables: Course[], column: keyof Course, direction: string): Course[] {
   if (direction === '') {
     return tables;
   } else {
@@ -44,11 +44,11 @@ function sort(tables: Assistant[], column: keyof Assistant, direction: string): 
 }
 
 /**
- * Assistant Data Match with Search input
- * @param tables Assistant field value fetch
+ * Course Data Match with Search input
+ * @param tables Course field value fetch
  * @param term Search the value
  */
-function matches(tables: Assistant, term: string, pipe: PipeTransform) {
+function matches(tables: Course, term: string, pipe: PipeTransform) {
     return tables.firstName.toLowerCase().includes(term.toLowerCase())
         || tables.lastName.toLowerCase().includes(term.toLowerCase())
         || tables.email.toLowerCase().includes(term.toLowerCase())
@@ -59,12 +59,12 @@ function matches(tables: Assistant, term: string, pipe: PipeTransform) {
 @Injectable({
   providedIn: 'root',
 })
-export class AssistantListService {
+export class CourseListService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _tables$ = new BehaviorSubject<Assistant[]>([]);
+  private _tables$ = new BehaviorSubject<Course[]>([]);
   // Table data
-  private assistantData= new BehaviorSubject<Assistant[]>([]);
+  private courseData= new BehaviorSubject<Course[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -170,9 +170,9 @@ export class AssistantListService {
     this._search$.next();
   }
 
-  updateTableData(data: Assistant[]) {
+  updateTableData(data: Course[]) {
     this._tables$.next(data);
-    this.assistantData.next(data);
+    this.courseData.next(data);
   }
 
   /**
@@ -187,8 +187,8 @@ export class AssistantListService {
     console.log(this._tables$.value);
     // 1. sort
     let tables = sort(
-      this.assistantData.value,
-      sortColumn as keyof Assistant,
+      this.courseData.value,
+      sortColumn as keyof Course,
       sortDirection
     );
     console.log(tables);

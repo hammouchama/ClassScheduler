@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 // import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/service/user-auth.service';
 
 /* import { AuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
@@ -31,7 +32,7 @@ export class TopbarComponent implements OnInit {
   ]; */
 
   // tslint:disable-next-line: max-line-length
-constructor(@Inject(DOCUMENT) private document: any, private router: Router) { }
+constructor(@Inject(DOCUMENT) private document: any, private router: Router, private userAuthService : UserAuthService) { }
   // !constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService, public languageService: LanguageService, public cookiesService: CookieService) { }
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
@@ -120,6 +121,8 @@ constructor(@Inject(DOCUMENT) private document: any, private router: Router) { }
    * Logout the user
    */
   logout() {
+    this.userAuthService.clear()
+    this.router.navigate(["/"]);
     /* if (environment.defaultauth === 'firebase') {
       this.authService.logout();
     } else {

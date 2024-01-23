@@ -20,7 +20,6 @@ export const MENU: MenuItem[] = [
     id: 3,
     label: 'Assistants',
     icon: 'ri-user-settings-line',
-    link: '/admin/calendar',
     subItems: [
       {
         id: 4,
@@ -31,18 +30,37 @@ export const MENU: MenuItem[] = [
       {
         id: 5,
         label: 'Add new Assistant',
-        link: '/ecommerce/products',
+        link: '/admin/assistants/new',
         parentId: 3,
       },
     ],
   },
   {
     id: 6,
+    label: 'Courses',
+    icon: 'ri-user-settings-line',
+    subItems: [
+      {
+        id: 7,
+        label: 'List of Courses',
+        link: '/admin/courses',
+        parentId: 6,
+      },
+      {
+        id: 8,
+        label: 'Add new Course',
+        link: '/admin/courses/new',
+        parentId: 6,
+      },
+    ],
+  },
+  {
+    id: 9,
     label: 'Other',
     isTitle: true,
   },
   {
-    id: 2,
+    id: 10,
     label: 'Calendar',
     icon: 'ri-calendar-2-line',
     link: '/calendar',

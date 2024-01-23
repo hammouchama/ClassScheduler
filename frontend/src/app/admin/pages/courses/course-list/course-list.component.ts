@@ -3,50 +3,50 @@ import { DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
-import { AssistantListService } from './assistant-list.service';
+import { CourseListService } from './course-list.service';
 import {
-  AssistantListSortableDirective,
+  CourseListSortableDirective,
   SortEvent,
-} from './assistant-list-sortable.directive';
-import { AssistantService } from 'src/app/service/-assistant.service';
-import { Assistant } from 'src/app/model/assistant.model';
+} from './course-list-sortable.directive';
+import { CourseService } from 'src/app/service/-course.service';
+import { Course } from 'src/app/model/course.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-assistant-list',
-  templateUrl: './assistant-list.component.html',
-  styleUrls: ['./assistant-list.component.scss'],
-  providers: [AssistantListService, DecimalPipe],
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.scss'],
+  providers: [CourseListService, DecimalPipe],
 })
 
 /**
  * Advanced table component
  */
-export class AssistantListComponent implements OnInit {
+export class CourseListComponent implements OnInit {
   // bread crum data
   breadCrumbItems!: Array<{}>;
   hideme: boolean[] = [];
 
   // Table data
-  assistantData!: Assistant[];
+  courseData!: Course[];
 
-  tables$: Observable<Assistant[]>;
+  tables$: Observable<Course[]>;
   total$: Observable<number>;
 
-  @ViewChildren(AssistantListSortableDirective)
-  headers!: QueryList<AssistantListSortableDirective>;
+  @ViewChildren(CourseListSortableDirective)
+  headers!: QueryList<CourseListSortableDirective>;
 
   constructor(
-    private assistantService: AssistantService,
-    public service: AssistantListService
+    private courseService: CourseService,
+    public service: CourseListService
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
   }
   ngOnInit() {
     this.breadCrumbItems = [
-      { label: 'Assistants' },
-      { label: 'List of Assistants', active: true },
+      { label: 'Courses' },
+      { label: 'List of Courses', active: true },
     ];
 
     /**
@@ -63,13 +63,13 @@ export class AssistantListComponent implements OnInit {
    * fetches the table value
    */
   _fetchData() {
-    this.assistantService.getAllAssistant().subscribe(
-      (resp: Assistant[]) => {
+    this.courseService.getAllCourse().subscribe(
+      (resp: Course[]) => {
         this.service.updateTableData(resp);
-        this.assistantData = resp; // Assign data
+        this.courseData = resp; // Assign data
 
-        // Initialize hideme with true for each element in assistantData
-        this.hideme = Array.from({ length: this.assistantData?.length }, () => true);
+        // Initialize hideme with true for each element in courseData
+        this.hideme = Array.from({ length: this.courseData?.length }, () => true);
 
       },
       (error: HttpErrorResponse) => {

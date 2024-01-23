@@ -122,6 +122,7 @@ export class AssistantInfoComponent implements OnInit {
           text: respon.message,
           icon: "success"
         });
+        this.router.navigate(['admin/assistant'])
       },
       (error: HttpErrorResponse) => {
         Swal.fire({

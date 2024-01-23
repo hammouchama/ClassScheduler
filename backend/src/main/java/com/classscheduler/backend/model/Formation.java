@@ -4,31 +4,31 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
-import java.util.Date;
 
 
-
+@NamedQuery(name = "Formation.getAllActiveFormation" ,
+        query = "select new com.classscheduler.backend.dto.FormationDTO(f.id,f.title,f.category,f.city,f.nb_hours, f.objective, f.description)" +
+                " from Formation f where f.status='ACTIVE'")
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "Formation")
-@DynamicInsert
-@DynamicUpdate
 public class Formation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String category;
-    private Boolean forCompany;
-    private String address;
-    private Date startingDate;
-    private Long nbHours;
-    private String objectives;
+    private String city;
+    private int nb_hours;
+    private String objective;
     private String description;
-    private String status;
+    private String status="ACTIVE";
+    private float cost=0.00F;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private ImagesModel photo;
+
+
 }

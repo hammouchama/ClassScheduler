@@ -107,16 +107,6 @@ public class UserService {
             user.setStatus("ACTIVE");
             userRepository.save(user);
         }
-    } // add admin
-
-    public void addAdmin() {
-        User user = userRepository.findByEmail("admin@gmail.com");
-        if (Objects.isNull(user)) {
-            user.setEmail("admin@gmail.com");
-            user.setPassword(passwordEncoder.encode("admin1234"));
-            user.setRole("Admin");
-            userRepository.save(user);
-        }
     }
 
     private boolean validateSignUpMap(Map<String, String> reqMap) {

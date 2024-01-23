@@ -67,6 +67,7 @@ public class FormationService {
                 && requestyMap.containsKey("objective")
                 && requestyMap.containsKey("description")
                 && requestyMap.containsKey("cost")
+                && requestyMap.containsKey("for_individual")
         ){
             return true;
         }
@@ -81,6 +82,7 @@ public class FormationService {
         formation.setDescription(requestyMap.get("description"));
         formation.setObjective(requestyMap.get("objective"));
         formation.setNb_hours(Integer.parseInt(requestyMap.get("nb_hours")));
+        formation.setFor_individual(requestyMap.get("for_individual"));
 
         return formation;
     }

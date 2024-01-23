@@ -24,6 +24,10 @@ public class Remarks {
     private Trainer trainer;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "formation_id")
-    private Formation formation;
+    @JoinColumn(name = "individual_id")
+    private Individual individual;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
+    private Company company;
 }

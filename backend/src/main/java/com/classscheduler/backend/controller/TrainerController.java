@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/trainer")
+@RequestMapping("/public/trainer")
 @AllArgsConstructor
 public class TrainerController {
 

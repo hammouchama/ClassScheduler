@@ -16,8 +16,9 @@ public class FormationDTO {
     private int nb_hours;
     private String objective;
     private String description;
+    private String for_individual;
 
-    public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective, String description) {
+    public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective, String description,String for_individual) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -25,6 +26,7 @@ public class FormationDTO {
         this.nb_hours = nb_hours;
         this.objective = objective;
         this.description = description;
+        this.for_individual=for_individual;
     }
     public FormationDTO fromFormation(Formation formation){
         FormationDTO formationDTO=new FormationDTO();

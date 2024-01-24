@@ -1,0 +1,18 @@
+@import '../src/assets/css/fontAwesome5Pro.css';
+@import '../src/assets/css/elegantFont.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import 'swiper/swiper-bundle.css';
+@import '../src/assets/scss/main.scss';
+
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

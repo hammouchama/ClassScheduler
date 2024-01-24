@@ -1,0 +1,90 @@
+// sidebar start
+.side-mobile-menu {
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    right: -350px;
+    visibility: hidden;
+    opacity: 0;
+    width: 300px;
+    padding: 30px;
+    height: 100%;
+    background: #fff;
+    z-index: 1020;
+    transition: all .6s cubic-bezier(.785,.135,.15,.86);
+    box-shadow: -5px 0 20px -5px rgba(0,0,0,.5);
+}
+.side-mobile-menu.active {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+}
+.sidebar__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.mm-menu ul li.has-droupdown {
+    color: black;
+    cursor: pointer;
+}
+.mm-menu ul li {
+    display: block;
+}
+.mm-menu ul li a {
+    padding: 12px 0;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    font-size: 14px;
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+}
+.mm-menu ul li.has-droupdown.active>a {
+    color: black;
+}
+.mm-menu ul li.has-droupdown.active>a:after {
+    transform: rotate(-135deg) translateY(-50%);
+}
+.mm-menu ul li.has-droupdown>a:after {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-color: initial;
+    right: 2px;
+    top: 50%;
+    transform: rotate(-45deg) translateY(-50%);
+    transform-origin: top;
+    transition: all .3s ease-out;
+}
+.mm-menu ul li.has-droupdown ul.sub-menu {
+    padding-left: 0;
+    list-style: none;
+}
+// .mm-menu ul li.has-droupdown ul.sub-menu li {
+//     padding-left: 15px;
+// }
+.mm-menu ul li {
+    display: block;
+}
+.mm-menu ul li.has-droupdown.active ul.sub-menu.active li a {
+    height: 46px;
+    visibility: visible;
+    opacity: 1;
+}
+.mm-menu ul li.has-droupdown ul.sub-menu li a {
+    position: relative;
+    padding: 0 0 0 15px;
+    text-transform: capitalize;
+    font-size: 13px;
+    height: 0;
+    line-height: 46px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
+}

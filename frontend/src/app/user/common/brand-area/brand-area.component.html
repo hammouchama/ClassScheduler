@@ -1,0 +1,63 @@
+<section class="brand__area pb-110">
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-12">
+        <div class="brand__content text-center">
+          <h3 class="brand__title">Trusted by 100 world's best companies</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xxl-12">
+        <div class="brand__slider swiper-container">
+          <swiper
+            [spaceBetween]="30"
+            [loop]="true"
+            [autoplay]="{ delay: 2500}"
+            [breakpoints]="{
+              '280': {
+                  slidesPerView: 2,
+                  spaceBetween: 30
+                },
+              '640': {
+                slidesPerView: 3,
+                spaceBetween: 30
+              },
+              '991': {
+                slidesPerView: 5,
+                spaceBetween: 30
+              },
+              '1200': {
+                slidesPerView: 6,
+                spaceBetween: 30
+              },
+              '1400': {
+                slidesPerView: 6,
+                spaceBetween: 30
+              }
+            }"
+
+          >
+            <ng-template *ngFor="let brand of brandData" swiperSlide>
+                <div class="brand__item text-center">
+                    <img src="{{brand.img}}" alt="">
+                </div>
+            </ng-template>
+
+          </swiper>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xxl-12">
+        <div class="brand__more text-center">
+          <a [routerLink]="['/about']" class="link-btn">
+            View all partners
+            <i class="far fa-arrow-right"></i>
+            <i class="far fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { UserAuthService } from '../service/user-auth.service';
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.userAuthService.setToken(response.token)
         const role = response.role
         this.userAuthService.setRole(role)
-        //! redarect 
+        //! redarect
         role === "Admin"
           ? this.router.navigate(['/admin'])
           : role === "assistant" ?
@@ -48,3 +48,5 @@ export class LoginComponent implements OnInit {
   }
 
 }
+
+ */

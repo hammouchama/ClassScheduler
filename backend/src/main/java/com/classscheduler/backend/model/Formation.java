@@ -5,10 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@NamedQuery(name = "Formation.getAllActiveFormation" ,
-        query = "select new com.classscheduler.backend.dto.FormationDTO(f.id,f.title,f.category,f.city,f.nb_hours, f.objective, f.description,f.for_individual)" +
-                " from Formation f where f.status='ACTIVE'")
+@NamedQuery(name = "Formation.getAllActiveFormation", query = "select new com.classscheduler.backend.dto.FormationDTO(f.id,f.title,f.category,f.city,f.nb_hours, f.objective, f.description,f.for_individual)"
+        +
+        " from Formation f where f.status='ACTIVE'")
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,13 +22,12 @@ public class Formation {
     private int nb_hours;
     private String objective;
     private String description;
-    private String status="ACTIVE";
-    private float cost=0.00F;
-    private String for_individual="false";
+    private String status = "ACTIVE";
+    private float cost = 0.00F;
+    private String for_individual = "false";
     private int ability;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
     private ImagesModel photo;
-
 
 }

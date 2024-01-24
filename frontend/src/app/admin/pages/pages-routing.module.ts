@@ -13,6 +13,7 @@ const routes: Routes = [
      { path: 'calendar', component: CalendarComponent },
      { path: 'assistants0', component: ListAssistanComponent },
      { path: 'assistants', loadChildren: () => import('./assistants/assistants.module').then(m => m.AssistantsModule) },
+     { path: 'formations', loadChildren: () => import('./formations/formations.module').then(m => m.FormationsModule) },
     //  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UIModule) },
     //  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     /*{ path: 'chat', component: ChatComponent },

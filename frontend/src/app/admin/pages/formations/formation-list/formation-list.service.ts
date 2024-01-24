@@ -4,12 +4,12 @@ import { DecimalPipe } from '@angular/common';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
-import { SearchResult } from './assistant-list.model';
+import { SearchResult } from './formation-list.model';
 
 import { tableData } from './data';
 
-import { SortDirection } from './assistant-list-sortable.directive';
-import { Assistant } from 'src/app/model/assistant.model';
+import { SortDirection } from './formation-list-sortable.directive';
+import { Formation } from 'src/app/model/formation.model';
 
 interface State {
     page: number;
@@ -28,11 +28,11 @@ function compare(v1:any, v2: any) {
 
 /**
  * Sort the table data
- * @param tables Assistant field value
+ * @param tables Formation field value
  * @param column Fetch the column
  * @param direction Sort direction Ascending or Descending
  */
-function sort(tables: Assistant[], column: keyof Assistant, direction: string): Assistant[] {
+function sort(tables: Formation[], column: keyof Formation, direction: string): Formation[] {
   if (direction === '') {
     return tables;
   } else {
@@ -44,27 +44,27 @@ function sort(tables: Assistant[], column: keyof Assistant, direction: string): 
 }
 
 /**
- * Assistant Data Match with Search input
- * @param tables Assistant field value fetch
+ * Formation Data Match with Search input
+ * @param tables Formation field value fetch
  * @param term Search the value
  */
-function matches(tables: Assistant, term: string, pipe: PipeTransform) {
-    return tables.firstName.toLowerCase().includes(term.toLowerCase())
+function matches(tables: Formation, term: string, pipe: PipeTransform) {
+    return /* tables.firstName.toLowerCase().includes(term.toLowerCase())
         || tables.lastName.toLowerCase().includes(term.toLowerCase())
         || tables.email.toLowerCase().includes(term.toLowerCase())
         || tables.phone.toLowerCase().includes(term.toLowerCase())
-        || tables.address.toLowerCase().includes(term.toLowerCase());
+        || tables.address.toLowerCase().includes(term.toLowerCase()); */;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class AssistantListService {
+export class FormationListService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _tables$ = new BehaviorSubject<Assistant[]>([]);
+  private _tables$ = new BehaviorSubject<Formation[]>([]);
   // Table data
-  private assistantData= new BehaviorSubject<Assistant[]>([]);
+  private formationData= new BehaviorSubject<Formation[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -170,9 +170,9 @@ export class AssistantListService {
     this._search$.next();
   }
 
-  updateTableData(data: Assistant[]) {
+  updateTableData(data: Formation[]) {
     this._tables$.next(data);
-    this.assistantData.next(data);
+    this.formationData.next(data);
   }
 
   /**
@@ -187,8 +187,8 @@ export class AssistantListService {
     console.log(this._tables$.value);
     // 1. sort
     let tables = sort(
-      this.assistantData.value,
-      sortColumn as keyof Assistant,
+      this.formationData.value,
+      sortColumn as keyof Formation,
       sortDirection
     );
     console.log(tables);

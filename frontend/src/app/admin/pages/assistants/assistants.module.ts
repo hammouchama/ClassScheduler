@@ -10,12 +10,12 @@ import {
   NgbDropdownModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { AssistantsRoutingModule } from './assistants-routing.module';
-import { AdvancedSortableDirective } from './list-assistants/assistant-list-sortable.directive';
+import { AssistantListSortableDirective } from './list-assistants/assistant-list-sortable.directive';
 import { AssistantListComponent } from './list-assistants/assistant-list.component';
 
 
 @NgModule({
-  declarations: [AssistantListComponent, AdvancedSortableDirective],
+  declarations: [AssistantListComponent, AssistantListSortableDirective],
   imports: [
     CommonModule,
     AssistantsRoutingModule,
@@ -24,7 +24,7 @@ import { AssistantListComponent } from './list-assistants/assistant-list.compone
     NgbPaginationModule,
     NgbTypeaheadModule,
     FormsModule,
-  ]/* ,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], */
+  ] ,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AssistantsModule {}

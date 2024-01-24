@@ -24,7 +24,7 @@ export const MENU: MenuItem[] = [
       {
         id: 4,
         label: 'List of Assistants',
-        link: '/admin/assistants',
+        link: '/admin/assistants/list',
         parentId: 3,
       },
       {
@@ -43,7 +43,7 @@ export const MENU: MenuItem[] = [
       {
         id: 7,
         label: 'List of Formations',
-        link: '/admin/formations',
+        link: '/admin/formations/list',
         parentId: 6,
       },
       {

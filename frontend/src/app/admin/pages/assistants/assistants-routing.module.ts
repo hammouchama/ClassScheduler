@@ -6,8 +6,8 @@ import { AssistantListComponent } from './list-assistants/assistant-list.compone
 
 const routes: Routes = [
   {
-    path: '',
-    component: AssistantListComponent
+    path: 'list',
+    component: AssistantListComponent,
   },
 ];
 

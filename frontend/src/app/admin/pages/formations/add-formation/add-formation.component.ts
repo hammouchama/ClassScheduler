@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MustMatch } from './add-formation.mustmatch';
+import { FormationService } from 'src/app/service/-formation.service';
 
 @Component({
   selector: 'app-add-formation',
@@ -18,8 +19,13 @@ export class AddFormationComponent implements OnInit {
   rangeValidationForm!: UntypedFormGroup; // range validation form
 
   imageUrl: string | null = null;
+  cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
+  selectedFile!: File;
 
-  constructor(public formBuilder: UntypedFormBuilder) {}
+  constructor(
+    public formBuilder: UntypedFormBuilder,
+    private formationService: FormationService
+  ) {}
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -31,8 +37,8 @@ export class AddFormationComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbItems = [
-      { label: 'Formation' },
-      { label: 'Add Formation', active: true },
+      { label: 'Formations' },
+      { label: 'Add new Formation', active: true },
     ];
 
     /**
@@ -46,8 +52,17 @@ export class AddFormationComponent implements OnInit {
           [Validators.required, Validators.pattern('[a-zA-Z0-9]+')],
         ],
         city: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-        state: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-        zip: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+        nb_hours: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+        objective: [
+          '',
+          [Validators.required, Validators.pattern('[a-zA-Z0-9]*')],
+        ],
+        description: [
+          '',
+          [Validators.required, Validators.pattern('[a-zA-Z0-9]*')],
+        ],
+        cost: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+        status: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       } /* , {
       validator: MustMatch('password', 'confirmpwd'),} */
     );
@@ -58,7 +73,7 @@ export class AddFormationComponent implements OnInit {
     this.rangesubmit = false; */
   }
 
-  onImageChange(event: any) {
+  /* onImageChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -67,7 +82,7 @@ export class AddFormationComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
-  }
+  } */
 
   /**
    * Returns form
@@ -81,14 +96,22 @@ export class AddFormationComponent implements OnInit {
    */
   validSubmit() {
     this.submit = true;
-
-    if (this.formationForm.valid) {
-      // Implement your logic to send the formation data to the server
-      const formData = this.formationForm.value;
-      formData.image = this.imageUrl; // You can send the image URL to the server
-
+    if (this.formationForm.valid && this.selectedFile) {
+      // Create a FormData object to send form data
+      const formData = new FormData();
+      formData.append('image', this.selectedFile, "fesfsf.jpg");
+      formData.append('data', JSON.stringify(this.formationForm.value));
       // Call your service method to add the new formation
-      // For example: this.formationService.addFormation(formData).subscribe(result => { /* handle success */ });
+      this.formationService.addFormation(formData).subscribe(
+        (result) => {
+          // Handle success
+          console.log('Formation added successfully:', result);
+        },
+        (error) => {
+          // Handle error
+          console.error('Error adding formation:', error);
+        }
+      );
     }
   }
 
@@ -132,5 +155,30 @@ export class AddFormationComponent implements OnInit {
    */
   rangeSubmit() {
     this.rangesubmit = true;
+  }
+  // dropzone upload function
+
+  public onUploadSuccess(event: any): void {
+    const uploadInfo = event[0].upload;
+    const filename = uploadInfo.filename;
+    const fileBase64 = event[0].dataURL;
+
+    const blob = this.dataURItoBlob(fileBase64);
+    const file = new File([blob], filename, { type: blob.type });
+    this.selectedFile = file;
+
+    console.log('onUploadSuccess:', event);
+  }
+  // Helper function to convert base64 to Blob
+  private dataURItoBlob(dataURI: string): Blob {
+    const byteString = atob(dataURI.split(',')[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([uint8Array], { type: 'image/jpeg' });
   }
 }

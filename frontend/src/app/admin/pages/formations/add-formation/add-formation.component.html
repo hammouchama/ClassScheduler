@@ -1,48 +1,75 @@
 <div class="container-fluid">
   <app-pagetitle title="Add New Formation" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="card-title">Formation Information</div>
-          <p class="card-title-desc">Fill in the details for the new formation.</p>
-
-          <form (ngSubmit)="validSubmit()" [formGroup]="formationForm">
-            <!-- Image Upload -->
-            <div class="form-group">
-              <label for="image">Formation Image</label>
-              <input type="file" id="image" (change)="onImageChange($event)" class="form-control">
-              <img *ngIf="imageUrl" [src]="imageUrl" alt="Formation Image" class="img-fluid mt-2">
-            </div>
-
-
-            <!-- <div>
-              <form action="#" class="dropzone-1">
-                <dropzone class="dropzone"></dropzone>
-              </form>
-            </div> -->
-
+  <form (ngSubmit)="validSubmit()" [formGroup]="formationForm" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Formation Information</div>
+            <p class="card-title-desc">Fill in the details for the new formation.</p>
 
             <!-- Other Formation Information -->
-            <div class="form-group">
+            <div class="form-group mb-4">
               <label for="title">Title</label>
               <input type="text" id="title" formControlName="title" class="form-control">
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-4">
               <label for="category">Category</label>
               <input type="text" id="category" formControlName="category" class="form-control">
             </div>
 
+            <div class="form-group mb-4">
+              <label for="city">City</label>
+              <ng-select id="city" [items]="cities" formControlName="city"></ng-select>
+              <!-- <select id="city" formControlName="city" class="form-control">
+                <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+              </select> -->
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="nb_hours">Number of Hours</label>
+              <input type="number" id="nb_hours" formControlName="nb_hours" class="form-control">
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="objective">Objective</label>
+              <textarea id="objective" formControlName="objective" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="description">Description</label>
+              <textarea id="description" formControlName="description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="cost">Cost</label>
+              <input type="number" id="cost" formControlName="cost" class="form-control">
+            </div>
+
+
+            <div class="form-group mb-4 row">
+              <label for="switchStatus" class="col-md-2">Status</label>
+              <ui-switch class="col-md-10" id="switchStatus" defaultBoColor="#dfdfdf" color="#00b19d" formControlName="status" [checked]="true" uncheckedLabel="INACTIVE" checkedLabel="ACTIVE" size="small"></ui-switch>
+
+            </div>
             <!-- Add other form controls as needed -->
 
             <div class="text-center mt-4">
               <button type="submit" class="btn btn-primary">Add Formation</button>
             </div>
-          </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Formation thumbnail</h4>
+            <dropzone class="dropzone" [message]="'Click or drag images here to upload'" (success)="onUploadSuccess($event)"></dropzone>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

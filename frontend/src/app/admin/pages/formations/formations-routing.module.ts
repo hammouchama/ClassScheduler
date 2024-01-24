@@ -7,7 +7,7 @@ import { AddFormationComponent } from './add-formation/add-formation.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'list',
     component: FormationListComponent,
   },
   {

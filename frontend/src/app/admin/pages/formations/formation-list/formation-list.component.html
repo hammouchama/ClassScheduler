@@ -38,28 +38,28 @@
               <thead>
                 <tr>
                   <!-- <th></th> -->
-                  <th sortable="firstName" (sort)="onSort($event)">First Name
+                  <th sortable="firstName" (sort)="onSort($event)">Title
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(0)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(0)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container>
                   </th>
-                  <th sortable="lastName" (sort)="onSort($event)">Last Name
+                  <th sortable="lastName" (sort)="onSort($event)">Category
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(1)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(1)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
-                  <th sortable="email" (sort)="onSort($event)">Email
+                  <th sortable="email" (sort)="onSort($event)">City
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(2)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(2)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
-                  <th sortable="phone" (sort)="onSort($event)">Phone
+                  <th sortable="phone" (sort)="onSort($event)">Nb Hours
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(3)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(3)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
-                  <th sortable="address" (sort)="onSort($event)">Address
+                  <th sortable="address" (sort)="onSort($event)">Cost
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(4)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(4)?.direction === 'desc'" class="fas fa-arrow-down"></i>
@@ -80,19 +80,19 @@
                     </a>
                   </td> -->
                   <td>
-                    <ngb-highlight [result]="assistant.firstName" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="assistant.title" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.lastName" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="assistant.category" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.email" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="assistant.city" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.phone" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="assistant.nb_hours.toString()" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.address" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="assistant.cost.toString()" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
                     <div class="badge font-size-12" [ngClass]="{'bg-danger-subtle text-danger': assistant.status === 'INACTIVE',

@@ -41,6 +41,7 @@
     "metismenujs": "^1.4.0",
     "ng-apexcharts": "^1.8.0",
     "ng-click-outside": "^9.0.1",
+    "ngx-dropzone-wrapper": "^16.0.0",
     "ngx-scrollbar": "^13.0.3",
     "ngx-slider-v2": "^17.0.0",
     "ngx-ui-switch": "^15.0.0",

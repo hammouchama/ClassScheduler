@@ -1,17 +1,20 @@
 // Table data
-export interface Table {
-    name: string;
-    position: string;
-    office: string;
-    age: number;
-    date: string;
-    salary: string;
-    unit: number;
-    enddate: string;
-}
+
+import { Assistant } from "src/app/model/assistant.model";
+
+/* export interface Table {
+  name: string;
+  position: string;
+  office: string;
+  age: number;
+  date: string;
+  salary: string;
+  unit: number;
+  enddate: string;
+} */
 
 // Search Data
 export interface SearchResult {
-    tables: Table[];
-    total: number;
+  tables: Assistant[];
+  total: number;
 }

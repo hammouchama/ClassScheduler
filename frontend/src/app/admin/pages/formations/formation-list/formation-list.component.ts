@@ -3,50 +3,50 @@ import { DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
-import { AssistantListService } from './assistant-list.service';
+import { FormationListService } from './formation-list.service';
 import {
-  AssistantListSortableDirective,
+  FormationListSortableDirective,
   SortEvent,
-} from './assistant-list-sortable.directive';
-import { AssistantService } from 'src/app/service/-assistant.service';
-import { Assistant } from 'src/app/model/assistant.model';
+} from './formation-list-sortable.directive';
+import { Formation } from 'src/app/model/formation.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormationService } from 'src/app/service/-formation.service';
 
 @Component({
-  selector: 'app-assistant-list',
-  templateUrl: './assistant-list.component.html',
-  styleUrls: ['./assistant-list.component.scss'],
-  providers: [AssistantListService, DecimalPipe],
+  selector: 'app-formation-list',
+  templateUrl: './formation-list.component.html',
+  styleUrls: ['./formation-list.component.scss'],
+  providers: [FormationListService, DecimalPipe],
 })
 
 /**
  * Advanced table component
  */
-export class AssistantListComponent implements OnInit {
+export class FormationListComponent implements OnInit {
   // bread crum data
   breadCrumbItems!: Array<{}>;
   hideme: boolean[] = [];
 
   // Table data
-  assistantData!: Assistant[];
+  formationData!: Formation[];
 
-  tables$: Observable<Assistant[]>;
+  tables$: Observable<Formation[]>;
   total$: Observable<number>;
 
-  @ViewChildren(AssistantListSortableDirective)
-  headers!: QueryList<AssistantListSortableDirective>;
+  @ViewChildren(FormationListSortableDirective)
+  headers!: QueryList<FormationListSortableDirective>;
 
   constructor(
-    private assistantService: AssistantService,
-    public service: AssistantListService
+    private formationService: FormationService,
+    public service: FormationListService
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
   }
   ngOnInit() {
     this.breadCrumbItems = [
-      { label: 'Assistants' },
-      { label: 'List of Assistants', active: true },
+      { label: 'Formations' },
+      { label: 'List of Formations', active: true },
     ];
 
     /**
@@ -63,13 +63,13 @@ export class AssistantListComponent implements OnInit {
    * fetches the table value
    */
   _fetchData() {
-    this.assistantService.getAllAssistant().subscribe(
-      (resp: Assistant[]) => {
+    this.formationService.getAllFormation().subscribe(
+      (resp: Formation[]) => {
         this.service.updateTableData(resp);
-        this.assistantData = resp; // Assign data
+        this.formationData = resp; // Assign data
 
-        // Initialize hideme with true for each element in assistantData
-        this.hideme = Array.from({ length: this.assistantData?.length }, () => true);
+        // Initialize hideme with true for each element in formationData
+        this.hideme = Array.from({ length: this.formationData?.length }, () => true);
 
       },
       (error: HttpErrorResponse) => {

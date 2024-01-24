@@ -25,7 +25,7 @@ export class AddFormationComponent implements OnInit {
   constructor(
     public formBuilder: UntypedFormBuilder,
     private formationService: FormationService
-  ) {}
+  ) { }
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -99,8 +99,8 @@ export class AddFormationComponent implements OnInit {
     if (this.formationForm.valid && this.selectedFile) {
       // Create a FormData object to send form data
       const formData = new FormData();
-      formData.append('image', this.selectedFile, "fesfsf.jpg");
-      formData.append('data', JSON.stringify(this.formationForm.value));
+      formData.append('image', this.selectedFile);
+      formData.append('data', new Blob([JSON.stringify(this.formationForm.value)], { type: 'application/json' }));
       // Call your service method to add the new formation
       this.formationService.addFormation(formData).subscribe(
         (result) => {
@@ -159,14 +159,14 @@ export class AddFormationComponent implements OnInit {
   // dropzone upload function
 
   public onUploadSuccess(event: any): void {
-    const uploadInfo = event[0].upload;
-    const filename = uploadInfo.filename;
-    const fileBase64 = event[0].dataURL;
+    // const uploadInfo = event[0].upload;
+    // const filename = uploadInfo.filename;
+    // const fileBase64 = event[0].dataURL;
 
-    const blob = this.dataURItoBlob(fileBase64);
-    const file = new File([blob], filename, { type: blob.type });
-    this.selectedFile = file;
-
+    // const blob = this.dataURItoBlob(fileBase64);
+    // const file = new File([blob], filename, { type: blob.type });
+    this.selectedFile = event[0];
+    console.log("fileis :", this.selectedFile)
     console.log('onUploadSuccess:', event);
   }
   // Helper function to convert base64 to Blob

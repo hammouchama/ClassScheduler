@@ -35,8 +35,8 @@
 
   .cancel {
     position: absolute;
-    top: 18px;
-    right: 18px;
+    top: min(18px, 5%);
+    right: min(18px, 5%);
     width: 25px;
     height: 25px;
     min-width: 5%;

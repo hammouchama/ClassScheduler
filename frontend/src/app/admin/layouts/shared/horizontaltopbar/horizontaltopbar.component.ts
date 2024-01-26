@@ -106,12 +106,6 @@ export class HorizontaltopbarComponent implements OnInit {
     element?.classList.toggle('show');
   }
 
-  /**
-   * on settings button clicked from topbar
-   */
-  onSettingsButtonClicked() {
-    document.body.classList.toggle('right-bar-enabled');
-  }
 
   /**
    * Logout the user

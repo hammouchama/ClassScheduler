@@ -10,14 +10,13 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { TopbarComponent } from './topbar/topbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { RightsidebarComponent } from './rightsidebar/rightsidebar.component';
 import { HorizontaltopbarComponent } from './horizontaltopbar/horizontaltopbar.component';
 import { HorizontalnavbarComponent } from './horizontalnavbar/horizontalnavbar.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [TopbarComponent, FooterComponent, SidebarComponent, RightsidebarComponent, HorizontaltopbarComponent, HorizontalnavbarComponent],
+  declarations: [TopbarComponent, FooterComponent, SidebarComponent, HorizontaltopbarComponent, HorizontalnavbarComponent],
   imports: [
     CommonModule,
     NgScrollbarModule,
@@ -30,6 +29,6 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [TopbarComponent, FooterComponent, SidebarComponent, RightsidebarComponent, HorizontaltopbarComponent, HorizontalnavbarComponent]
+  exports: [TopbarComponent, FooterComponent, SidebarComponent, HorizontaltopbarComponent, HorizontalnavbarComponent]
 })
 export class SharedModule { }

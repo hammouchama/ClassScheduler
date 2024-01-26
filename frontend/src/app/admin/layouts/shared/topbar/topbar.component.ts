@@ -36,7 +36,6 @@ constructor(@Inject(DOCUMENT) private document: any, private router: Router, pri
   // !constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService, public languageService: LanguageService, public cookiesService: CookieService) { }
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
-  @Output() settingsButtonClicked = new EventEmitter();
 
   ngOnInit(): void {
     this.element = document.documentElement;
@@ -63,12 +62,6 @@ constructor(@Inject(DOCUMENT) private document: any, private router: Router, pri
     this.mobileMenuButtonClicked.emit();
   }
 
-  /**
-   * Toggles the right sidebar
-   */
-  toggleRightSidebar() {
-    this.settingsButtonClicked.emit();
-  }
 
   /**
    * Fullscreen method

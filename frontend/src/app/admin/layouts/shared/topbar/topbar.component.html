@@ -208,57 +208,7 @@
         </div>
       </div>
 
-      <div class="dropdown d-none d-lg-inline-block ms-1" ngbDropdown>
-        <button type="button" ngbDropdownToggle class="btn header-item noti-icon waves-effect" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="ri-apps-2-line"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end" ngbDropdownMenu>
-          <div class="px-lg-2">
-            <div class="row g-0">
-              <div class="col">
-                <a class="dropdown-icon-item" href="javascript: void(0);">
-                  <img src="assets/images/brands/github.png" alt="Github">
-                  <span>GitHub</span>
-                </a>
-              </div>
-              <div class="col">
-                <a class="dropdown-icon-item" href="javascript: void(0);">
-                  <img src="assets/images/brands/bitbucket.png" alt="bitbucket">
-                  <span>Bitbucket</span>
-                </a>
-              </div>
-              <div class="col">
-                <a class="dropdown-icon-item" href="javascript: void(0);">
-                  <img src="assets/images/brands/dribbble.png" alt="dribbble">
-                  <span>Dribbble</span>
-                </a>
-              </div>
-            </div>
 
-            <div class="row g-0">
-              <div class="col">
-                <a class="dropdown-icon-item" href="javascript: void(0);">
-                  <img src="assets/images/brands/dropbox.png" alt="dropbox">
-                  <span>Dropbox</span>
-                </a>
-              </div>
-              <div class="col">
-                <a class="dropdown-icon-item" href="javascript: void(0);">
-                  <img src="assets/images/brands/mail_chimp.png" alt="mail_chimp">
-                  <span>Mail Chimp</span>
-                </a>
-              </div>
-              <div class="col">
-                <a class="dropdown-icon-item" href="javascript: void(0);">
-                  <img src="assets/images/brands/slack.png" alt="slack">
-                  <span>Slack</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="dropdown d-none d-lg-inline-block ms-1">
         <button type="button" class="btn header-item noti-icon waves-effect" (click)="fullscreen()">
@@ -266,121 +216,26 @@
         </button>
       </div>
 
-      <div class="dropdown d-inline-block" ngbDropdown>
-        <button type="button" ngbDropdownToggle class="btn header-item noti-icon waves-effect"
-          id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="ri-notification-3-line"></i>
-          <span class="noti-dot"></span>
-        </button>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" ngbDropdownMenu
-          aria-labelledby="page-header-notifications-dropdown">
-          <div class="p-3">
-            <div class="row align-items-center">
-              <div class="col">
-                <h6 class="m-0">{{ 'HEADER.NOTIFICATIONS.TITLE' }} </h6>
-              </div>
-              <div class="col-auto">
-                <a href="javascript: void(0);" class="small">{{ 'HEADER.NOTIFICATIONS.VIEW_ALL' }}</a>
-              </div>
-            </div>
-          </div>
-          <ng-scrollbar style="position: relative; height: 230px;" >
-            <a href="" class="text-reset notification-item">
-              <div class="d-flex">
-                <div class="avatar-xs me-3">
-                  <span class="avatar-title bg-primary rounded-circle font-size-16">
-                    <i class="ri-shopping-cart-line"></i>
-                  </span>
-                </div>
-                <div class="flex-1">
-                  <h6 class="mt-0 mb-1">{{ 'HEADER.NOTIFICATIONS.FIRST.TITLE' }}</h6>
-                  <div class="font-size-12 text-muted">
-                    <p class="mb-1">{{ 'HEADER.NOTIFICATIONS.FIRST.TEXT' }}</p>
-                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i>
-                      {{ 'HEADER.NOTIFICATIONS.FIRST.TIME' }}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            <a href="" class="text-reset notification-item">
-              <div class="d-flex">
-                <img src="assets/images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                <div class="flex-1">
-                  <h6 class="mt-0 mb-1">{{ 'HEADER.NOTIFICATIONS.SECOND.TITLE' }}</h6>
-                  <div class="font-size-12 text-muted">
-                    <p class="mb-1">{{ 'HEADER.NOTIFICATIONS.SECOND.TEXT' }}</p>
-                    <p class="mb-0"><i
-                        class="mdi mdi-clock-outline"></i>{{ 'HEADER.NOTIFICATIONS.SECOND.TIME' }}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            <a href="" class="text-reset notification-item">
-              <div class="d-flex">
-                <div class="avatar-xs me-3">
-                  <span class="avatar-title bg-success rounded-circle font-size-16">
-                    <i class="ri-checkbox-circle-line"></i>
-                  </span>
-                </div>
-                <div class="flex-1">
-                  <h6 class="mt-0 mb-1">{{ 'HEADER.NOTIFICATIONS.THIRD.TITLE' }}</h6>
-                  <div class="font-size-12 text-muted">
-                    <p class="mb-1">{{ 'HEADER.NOTIFICATIONS.THIRD.TEXT' }}</p>
-                    <p class="mb-0"><i
-                        class="mdi mdi-clock-outline"></i>{{ 'HEADER.NOTIFICATIONS.THIRD.TIME' }}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-            <a href="" class="text-reset notification-item">
-              <div class="d-flex">
-                <img src="assets/images/users/avatar-4.jpg" class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                <div class="flex-1">
-                  <h6 class="mt-0 mb-1">{{ 'HEADER.NOTIFICATIONS.FOUR.TITLE' }}</h6>
-                  <div class="font-size-12 text-muted">
-                    <p class="mb-1">{{ 'HEADER.NOTIFICATIONS.FOUR.TEXT' }}</p>
-                    <p class="mb-0"><i
-                        class="mdi mdi-clock-outline"></i>{{ 'HEADER.NOTIFICATIONS.FOUR.TIME' }}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </ng-scrollbar>
-          <div class="p-2 border-top">
-            <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
-              <i class="mdi mdi-arrow-right-circle me-1"></i> {{ 'HEADER.NOTIFICATIONS.LOAD_MORE' }}
-            </a>
-          </div>
-        </div>
-      </div>
-
       <div class="dropdown d-inline-block user-dropdown" ngbDropdown>
         <button type="button" ngbDropdownToggle class="btn header-item waves-effect" id="page-header-user-dropdown"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-2.jpg" alt="Header Avatar">
-          <span class="d-none d-xl-inline-block ms-1">Kevin</span>
+          <img class="rounded-circle header-profile-user" src="assets/images/users/avatar.png" alt="Header Avatar">
+          <span class="d-none d-xl-inline-block ms-1">Admin</span>
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>
 
         <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
           <!-- item-->
-          <a class="dropdown-item" href="javascript: void(0);"><i class="ri-user-line align-middle me-1"></i>
+          <!-- <a class="dropdown-item" href="javascript: void(0);"><i class="ri-user-line align-middle me-1"></i>
             Profile</a>
           <a class="dropdown-item d-block" href="javascript: void(0);"><span
               class="badge badge-success float-end mt-1">11</span><i
               class="ri-settings-2-line align-middle me-1"></i>Settings </a>
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider"></div> -->
           <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
               class="ri-shut-down-line align-middle me-1 text-danger"></i>
             Logout</a>
         </div>
-      </div>
-
-      <div class="dropdown d-inline-block">
-        <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect"
-          (click)="toggleRightSidebar()">
-          <i class="ri-settings-2-line"></i>
-        </button>
       </div>
 
     </div>

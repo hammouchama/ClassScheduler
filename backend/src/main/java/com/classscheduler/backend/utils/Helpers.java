@@ -31,7 +31,7 @@ public class Helpers {
         }
 
         // Generate a unique file name
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename().replaceAll("[^a-zA-Z0-9._-]", "");
 
         // Construct the path to save the file
         Path filePath = Path.of(uploadDir, fileName);

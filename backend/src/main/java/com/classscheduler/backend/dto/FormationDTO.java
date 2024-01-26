@@ -19,7 +19,7 @@ public class FormationDTO {
     private String photo;
 
     public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description, String for_individual) {
+            String description, String for_individual,String photo) {
         this.id = id;
         this.title = title;
         this.category = category;

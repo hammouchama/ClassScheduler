@@ -26,7 +26,7 @@ public class Formation {
     private float cost = 0.00F;
     private String for_individual = "false";
     private int capacity;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "image_id")
     private ImagesModel photo;
 

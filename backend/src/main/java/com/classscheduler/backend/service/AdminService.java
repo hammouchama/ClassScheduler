@@ -27,7 +27,7 @@ public class AdminService {
     JwtFilter jwtFilter;
     BCryptPasswordEncoder passwordEncoder;
     EmailHelper emailHelper;
-
+    ModelMapper modelMapper;
     @Transactional
     public ResponseEntity<List<AssistantDTO>> getAllAssistant() {
         try {
@@ -47,7 +47,7 @@ public class AdminService {
     public ResponseEntity<AssistantDTO> getAssistant(long id) {
         try {
             if (jwtFilter.isAdmin()){
-                ModelMapper modelMapper=new ModelMapper();
+
                 User user=userRepository.findAssistantById(id);
                 if (!Objects.isNull(user))
                 return new ResponseEntity<>(modelMapper.map(user,AssistantDTO.class),HttpStatus.OK);

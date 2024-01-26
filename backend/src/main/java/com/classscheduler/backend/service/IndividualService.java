@@ -48,7 +48,7 @@ public class IndividualService {
 
                 // Check conditions to decide if a new group needs to be created
                 if (numberOfGroups == 0
-                        || individualRepository.countIndividualsByGroupId(groups.get(groups.size() - 1).getId()) == formation.getAbility()) {
+                        || individualRepository.countIndividualsByGroupId(groups.get(groups.size() - 1).getId()) == formation.getCapacity()) {
                     // Create a new group if conditions are met
                     Group group = new Group();
                     group.setGroupName(groupName);

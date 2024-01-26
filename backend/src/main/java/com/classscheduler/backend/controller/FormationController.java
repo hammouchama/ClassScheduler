@@ -16,14 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/formation")
 @AllArgsConstructor
 public class FormationController {
 
     private FormationService formationService;
 
     //add formation
-    @PostMapping("/add")
+    @PostMapping("/formation/add")
     public ResponseEntity<String> addFormation(@RequestPart("image") MultipartFile image ,@RequestPart("data") Map<String ,String> requestyMap){
         try{
            return formationService.addFormation(requestyMap,image);
@@ -35,7 +34,7 @@ public class FormationController {
     }
 
     //get All formation Active for admin
-    @GetMapping("/get")
+    @GetMapping("/formation/get")
     public ResponseEntity<List<Formation>> getAllFormation(){
         try {
             return formationService.getAllFormation();
@@ -46,7 +45,7 @@ public class FormationController {
     }
 
     //get formation by id
-    @GetMapping("/get/{id}")
+    @GetMapping("/formation/get/{id}")
      public ResponseEntity<Object> getFormation(@PathVariable  long id){
         try{
            return formationService.getFormation(id);
@@ -57,7 +56,7 @@ public class FormationController {
      }
 
     // remove formation by id
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/formation/delete/{id}")
     public ResponseEntity<String > deleteFormation(@PathVariable long id){
         try {
           return formationService.deleteFormation(id);
@@ -68,7 +67,7 @@ public class FormationController {
     }
 
     //update formation
-    @PutMapping("/update/{id}")
+    @PutMapping("/formation/update/{id}")
     public ResponseEntity<String> updateFormation(@PathVariable long id,@RequestPart("data") Map<String,String> requestMap,@RequestPart("image") MultipartFile image ){
         try {
             return formationService.updateFormation(id,requestMap,image);

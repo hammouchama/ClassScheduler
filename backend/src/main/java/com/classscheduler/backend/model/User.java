@@ -11,7 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 //create query
 @NamedQuery(name = "User.findAllAssistant",query = "select new com.classscheduler.backend.dto.AssistantDTO(u.id,u.firstName,u.lastName,u.phone, u.address, u.email, u.status) from User u where role='assistant'")
 
-@NamedQuery(name = "User.findAssistantById" ,query = "select User from User u where u.role='assistant' and u.id=:id")
+@NamedQuery(name = "User.findAssistantById" ,query = "select u from User u where u.role='assistant' and u.id=:id")
 
 @Data
 @AllArgsConstructor

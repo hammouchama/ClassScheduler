@@ -26,7 +26,6 @@ public class AdminController {
     private AdminService adminService;
 
 
-
     @PostMapping("/addAssistant")
     public ResponseEntity<String> addAssistant(@RequestBody Map<String ,String> requestyMap){
         try {
@@ -44,7 +43,7 @@ public class AdminController {
         }catch (Exception ex){
             ex.printStackTrace();
         }
-     return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
     //get Assistant by id
     @GetMapping("/assistant/{id}")
@@ -62,8 +61,8 @@ public class AdminController {
     @DeleteMapping("/assistant/{id}")
     public ResponseEntity<String> deleteAssistant(@PathVariable long id){
         try{
-          //  System.out.println("the id is :"+id);
-           return adminService.deleteAssistant(id);
+            //  System.out.println("the id is :"+id);
+            return adminService.deleteAssistant(id);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -73,14 +72,14 @@ public class AdminController {
     // update assistant
     @PutMapping("/assistant/{id}")
     public ResponseEntity<String> updateAssistant(@PathVariable long id,@RequestBody Map<String ,String> requestyMap){
-         try {
-             return adminService.updateAssistant(id,requestyMap);
+        try {
+            return adminService.updateAssistant(id,requestyMap);
 
-         }catch (Exception exception){
-             exception.printStackTrace();
-         }
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
 
-         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

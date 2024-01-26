@@ -48,9 +48,8 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable()
                 )
                 .authorizeRequests(auth->
-                        auth.requestMatchers("/login","/public/**","/forgotPassword","/static/**")
+                        auth.requestMatchers("/login","/public/**","/forgotPassword","/static/**","/images/**")
                                 .permitAll()
-                                .requestMatchers("/images/**").permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -73,7 +72,7 @@ public class SecurityConfig {
     }
 
     public CorsConfiguration corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        //UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:4200"); // Reemplaza con la URL de tu aplicación Angular
@@ -82,11 +81,6 @@ public class SecurityConfig {
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");
-        source.registerCorsConfiguration("/login", config);
-        source.registerCorsConfiguration("/public/**", config);
-        source.registerCorsConfiguration("/forgotPassword", config);
-        source.registerCorsConfiguration("/static/**", config);
-        source.registerCorsConfiguration("/images/**", config);
 
          return config;
     }

@@ -26,9 +26,11 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if(request.getServletPath().matches("/login|/forgotPassword|/|/trainer/register|/images/|/public/")){
-            filterChain.doFilter(request,response);
-        }else {
+            if(request.getServletPath().matches("/login|/forgotPassword|/|/trainer/register")
+                    ||request.getServletPath().startsWith("/images/")
+                    ||request.getServletPath().startsWith("/public/")){
+                filterChain.doFilter(request,response);
+            }else {
             String authorizationHeader=request.getHeader("Authorization");
             String token=null;
             if (authorizationHeader!=null && authorizationHeader.startsWith("Bearer ")){

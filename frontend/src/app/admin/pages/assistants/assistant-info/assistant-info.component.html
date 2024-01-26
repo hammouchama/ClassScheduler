@@ -1,0 +1,272 @@
+<div class="container-fluid">
+  <app-pagetitle
+    title="List of Assistants"
+    [breadcrumbItems]="breadCrumbItems"
+  ></app-pagetitle>
+
+  <div *ngIf="isUpdate">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Assistant info</div>
+        <p class="card-title-desc">
+          Fill in the details for the new formation.
+        </p>
+        <form
+          #updateAssistant="ngForm"
+          (ngSubmit)="Update(updateAssistant, assistant.id)"
+        >
+          <div class="row">
+            <!-- First name input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="firstName">First Name</label>
+              <input
+                matInput
+                ngModel
+                [(ngModel)]="assistant.firstName"
+                name="firstName"
+                id="firstName"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <!-- Last name input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="lastName">Last Name</label>
+              <input
+                matInput
+                ngModel
+                [(ngModel)]="assistant.lastName"
+                name="lastName"
+                id="lastName"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Email input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="email">Email</label>
+              <input
+                matInput
+                ngModel
+                [(ngModel)]="assistant.email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+
+            <!-- Phone input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="phone">Phone</label>
+              <input
+                matInput
+                ngModel
+                [(ngModel)]="assistant.phone"
+                class="form-control"
+                id="phone"
+                name="phone"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Address input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="address">Address</label>
+              <input
+                matInput
+                ngModel
+                [(ngModel)]="assistant.address"
+                class="form-control"
+                id="address"
+                name="address"
+                required
+              />
+            </div>
+
+            <!-- Status input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="switchStatus" class="col-md-4">Status</label>
+              <ui-switch
+                ngModel
+                name="status"
+                class="col-md"
+                id="switchStatus"
+                defaultBoColor="#dfdfdf"
+                color="#00b19d"
+                [checked]="assistant.status === 'ACTIVE'"
+                uncheckedLabel="INACTIVE"
+                checkedLabel="ACTIVE"
+                size="small"
+              ></ui-switch>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Password input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="password">New Password</label>
+              <input
+                matInput
+                ngModel
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+
+            <div class="button-items text-center mt-4">
+              <button mat-raised-button color="primary" type="submit" class="btn btn-primary">
+                Update
+                <i class="ri-install-line align-middle ms-2"></i>
+              </button>
+
+              <button mat-raised-button type="button" class="btn btn-danger" color="accent"
+                (click)="deletAssistant(assistant.id)">
+                Delete
+                <i class="ri-delete-bin-line align-middle ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- add form -->
+
+  <div *ngIf="isAdd">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Add new Assistant</div>
+        <p class="card-title-desc">
+          Fill in the details for the new formation.
+        </p>
+        <form #addAssistant="ngForm" (ngSubmit)="AddAssistant(addAssistant)">
+          <div class="row">
+            <!-- First name input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="firstName">First Name</label>
+              <input
+                matInput
+                ngModel
+                name="firstName"
+                id="firstName"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <!-- Last name input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="lastName">Last Name</label>
+              <input
+                matInput
+                ngModel
+                name="lastName"
+                id="lastName"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Email input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="email">Email</label>
+              <input
+                matInput
+                ngModel
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+
+            <!-- Password input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="password">Password</label>
+              <input
+                matInput
+                ngModel
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Phone input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="phone">Phone</label>
+              <input
+                matInput
+                ngModel
+                class="form-control"
+                id="phone"
+                name="phone"
+                required
+              />
+            </div>
+
+            <!-- Address input -->
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="address">Address</label>
+              <input
+                matInput
+                ngModel
+                class="form-control"
+                id="address"
+                name="address"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Status input -->
+            <div class="input-box form-group mb-4 col-lg-6 row">
+              <label for="switchStatus" class="col-md-4">Status</label>
+              <ui-switch
+                ngModel
+                name="status"
+                class="col-md"
+                id="switchStatus"
+                defaultBoColor="#dfdfdf"
+                color="#00b19d"
+                [checked]="true"
+                uncheckedLabel="INACTIVE"
+                checkedLabel="ACTIVE"
+                size="small"
+              ></ui-switch>
+              <!-- <mat-select ngModel
+                class="form-control"
+                id="status" name="status">
+                <mat-option value="ACTIVE">ACTIVE</mat-option>
+                <mat-option value="DISACTIVE">DISACTIVE</mat-option>
+              </mat-select> -->
+            </div>
+
+            <div class="text-center mt-4">
+              <button mat-raised-button type="submit" class="btn btn-primary">
+                Add
+                <i class="ri-add-box-line align-middle ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import {
 import { AssistantService } from 'src/app/service/-assistant.service';
 import { Assistant } from 'src/app/model/assistant.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-assistant-list',
@@ -69,15 +70,52 @@ export class AssistantListComponent implements OnInit {
         this.assistantData = resp; // Assign data
 
         // Initialize hideme with true for each element in assistantData
-        this.hideme = Array.from({ length: this.assistantData?.length }, () => true);
-
+        this.hideme = Array.from(
+          { length: this.assistantData?.length },
+          () => true
+        );
       },
       (error: HttpErrorResponse) => {
         console.log('error');
         console.log(error);
       }
     );
+  }
 
+  //delet assisstant
+  public deleteAssistant(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.assistantService.deletAssistant(id).subscribe(
+          (respons: any) => {
+            if (respons.message) {
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success',
+              });
+              this._fetchData();
+            }
+          },
+          (error: HttpErrorResponse) => {
+            console.log('error: ', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          }
+        );
+      }
+    });
   }
 
   /**
@@ -86,7 +124,7 @@ export class AssistantListComponent implements OnInit {
    *
    */
   onSort({ column, direction }: SortEvent) {
-    console.log("onSort");
+    console.log('onSort');
     console.log(column, '//', direction);
     console.log(this.headers.get(0)?.direction);
     // resetting other headers

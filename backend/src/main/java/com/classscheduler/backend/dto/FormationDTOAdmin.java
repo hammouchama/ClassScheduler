@@ -22,7 +22,8 @@ public class FormationDTOAdmin {
     private int capacity;
     private ImagesModel photo;
 
-    public FormationDTOAdmin(Long id, String title, String category, String city, int nb_hours, String objective, String description, String status, float cost, String for_individual, int ability, ImagesModel photo) {
+    public FormationDTOAdmin(Long id, String title, String category, String city, int nb_hours, String objective,
+            String description, String status, float cost, String for_individual, int capacity, ImagesModel photo) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -32,14 +33,15 @@ public class FormationDTOAdmin {
         this.description = description;
         this.status = status;
         this.cost = cost;
-        this.for_individual=for_individual;
-        this.capacity=ability;
-        this.photo=photo;
+        this.for_individual = for_individual;
+        this.photo = photo;
+        this.capacity = capacity;
+
     }
 
-    public FormationDTOAdmin fromFormation(Formation formation){
-        FormationDTOAdmin formationDTO=new FormationDTOAdmin();
-        BeanUtils.copyProperties(formation,formationDTO);
+    public FormationDTOAdmin fromFormation(Formation formation) {
+        FormationDTOAdmin formationDTO = new FormationDTOAdmin();
+        BeanUtils.copyProperties(formation, formationDTO);
         return formationDTO;
     }
 }

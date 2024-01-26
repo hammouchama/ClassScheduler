@@ -1,7 +1,7 @@
 import { ImagesModel } from "./imagesModel.model";
 
 export interface Formation {
-  id?: number;
+  id: number;
   title: string;
   category: string;
   city: string;
@@ -9,6 +9,8 @@ export interface Formation {
   objective: string;
   description: string;
   status: string;
+  for_individual: string;
   cost: number;
+  capacity: number;
   photo?: ImagesModel;
 }

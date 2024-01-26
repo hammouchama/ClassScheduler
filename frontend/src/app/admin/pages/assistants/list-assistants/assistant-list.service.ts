@@ -4,9 +4,6 @@ import { DecimalPipe } from '@angular/common';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
-import { SearchResult } from './assistant-list.model';
-
-import { tableData } from './data';
 
 import { SortDirection } from './assistant-list-sortable.directive';
 import { Assistant } from 'src/app/model/assistant.model';
@@ -20,6 +17,11 @@ interface State {
     startIndex: number;
     endIndex: number;
     totalRecords: number;
+}
+
+interface SearchResult {
+  tables: Assistant[];
+  total: number;
 }
 
 function compare(v1:any, v2: any) {

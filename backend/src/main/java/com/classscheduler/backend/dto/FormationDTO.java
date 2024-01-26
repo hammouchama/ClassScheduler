@@ -1,6 +1,5 @@
 package com.classscheduler.backend.dto;
 
-
 import com.classscheduler.backend.model.Formation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,8 @@ public class FormationDTO {
     private String for_individual;
     private String photo;
 
-    public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective, String description,String for_individual,String  photo) {
+    public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
+            String description, String for_individual) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -27,12 +27,13 @@ public class FormationDTO {
         this.nb_hours = nb_hours;
         this.objective = objective;
         this.description = description;
-        this.for_individual=for_individual;
-        this.photo=photo;
+        this.for_individual = for_individual;
+        this.photo = photo;
     }
-    public FormationDTO fromFormation(Formation formation){
-        FormationDTO formationDTO=new FormationDTO();
-        BeanUtils.copyProperties(formation,formationDTO);
+
+    public FormationDTO fromFormation(Formation formation) {
+        FormationDTO formationDTO = new FormationDTO();
+        BeanUtils.copyProperties(formation, formationDTO);
         return formationDTO;
     }
 }

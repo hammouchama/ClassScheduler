@@ -27,6 +27,7 @@ import { UIModule } from './ui/ui.module';
 // import { FormModule } from './form/form.module';
 import { TablesModule } from './tables/tables.module';
 import { AssistantsModule } from './assistants/assistants.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // import { MapsModule } from './maps/maps.module';
 
 
@@ -51,7 +52,8 @@ import { AssistantsModule } from './assistants/assistants.module';
     AssistantsModule,
     NgbNavModule,
     NgbDropdownModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    SweetAlert2Module,
   ],
 })
 export class PagesModule {}

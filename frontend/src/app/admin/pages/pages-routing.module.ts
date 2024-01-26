@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { ListAssistanComponent } from '../list-assistan/list-assistan.component';
 /* import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { KanbanComponent } from './kanban/kanban.component'; */
@@ -11,7 +10,6 @@ import { KanbanComponent } from './kanban/kanban.component'; */
 const routes: Routes = [
     { path: '', component: DashboardComponent },
      { path: 'calendar', component: CalendarComponent },
-     { path: 'assistants0', component: ListAssistanComponent },
      { path: 'assistants', loadChildren: () => import('./assistants/assistants.module').then(m => m.AssistantsModule) },
      { path: 'formations', loadChildren: () => import('./formations/formations.module').then(m => m.FormationsModule) },
     //  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UIModule) },

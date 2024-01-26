@@ -18,9 +18,9 @@ public class FormationDTOAdmin {
     private String status;
     private float cost;
     private String for_individual;
-    private int ability;
+    private int capacity;
 
-    public FormationDTOAdmin(Long id, String title, String category, String city, int nb_hours, String objective, String description, String status, float cost,String for_individual,int ability) {
+    public FormationDTOAdmin(Long id, String title, String category, String city, int nb_hours, String objective, String description, String status, float cost,String for_individual,int capacity) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -31,7 +31,7 @@ public class FormationDTOAdmin {
         this.status = status;
         this.cost = cost;
         this.for_individual=for_individual;
-        this.ability=ability;
+        this.capacity=capacity;
     }
 
     public FormationDTOAdmin fromFormation(Formation formation){

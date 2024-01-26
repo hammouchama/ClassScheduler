@@ -37,32 +37,37 @@
               class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
               <thead>
                 <tr>
-                  <!-- <th></th> -->
-                  <th sortable="firstName" (sort)="onSort($event)">Title
+                  <th></th>
+                  <th sortable="title" (sort)="onSort($event)">Title
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(0)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(0)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container>
                   </th>
-                  <th sortable="lastName" (sort)="onSort($event)">Category
+                  <th sortable="category" (sort)="onSort($event)">Category
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(1)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(1)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
-                  <th sortable="email" (sort)="onSort($event)">City
+                  <th sortable="city" (sort)="onSort($event)">City
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(2)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(2)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
-                  <th sortable="phone" (sort)="onSort($event)">Nb Hours
+                  <th sortable="nb_hours" (sort)="onSort($event)">Nb Hours
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(3)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(3)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
-                  <th sortable="address" (sort)="onSort($event)">Cost
+                  <th sortable="cost" (sort)="onSort($event)">Cost
                   <ng-container *ngIf="headers">
                     <i *ngIf="headers.get(4)?.direction === 'asc'" class="fas fa-arrow-up"></i>
                     <i *ngIf="headers.get(4)?.direction === 'desc'" class="fas fa-arrow-down"></i>
+                  </ng-container></th>
+                  <th sortable="for_individual" (sort)="onSort($event)">Target
+                  <ng-container *ngIf="headers">
+                    <i *ngIf="headers.get(5)?.direction === 'asc'" class="fas fa-arrow-up"></i>
+                    <i *ngIf="headers.get(5)?.direction === 'desc'" class="fas fa-arrow-down"></i>
                   </ng-container></th>
                   <th sortable="status" (sort)="onSort($event)">Status
                   <ng-container *ngIf="headers">
@@ -72,42 +77,51 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let assistant of tables$ | async;let i=index">
+              <tbody *ngFor="let formation of tables$ | async;let i=index">
                 <tr>
+                  <td>
+                    <img src="{{formation.photo?.url}}" alt="image" class="rounded-circle avatar-sm" />
+                  </td>
                   <!-- <td align="center">
                     <a class="expand-row" (click)="changeValue(i)">
                       +
                     </a>
                   </td> -->
                   <td>
-                    <ngb-highlight [result]="assistant.title" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="formation.title" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.category" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="formation.category" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.city" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="formation.city" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.nb_hours.toString()" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="formation.nb_hours.toString()" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="assistant.cost.toString()" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight [result]="formation.cost.toString()+'DH'" [term]="service.searchTerm"></ngb-highlight>
                   </td>
                   <td>
-                    <div class="badge font-size-12" [ngClass]="{'bg-danger-subtle text-danger': assistant.status === 'INACTIVE',
-                      'bg-success-subtle text-success':assistant.status === 'ACTIVE'}">{{assistant.status}}
+                    <div class="badge font-size-12" [ngClass]="{'bg-warning-subtle text-warning': formation.for_individual,
+                      'bg-info-subtle text-info': !formation.for_individual}">
+                      {{formation.for_individual?"Individuals":"Companies"}}
                     </div>
-                    <!-- <ngb-highlight [result]="assistant.status" [term]="service.searchTerm"></ngb-highlight> -->
+                    <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
+                  </td>
+                  <td>
+                    <div class="badge font-size-12" [ngClass]="{'bg-danger-subtle text-danger': formation.status === 'INACTIVE',
+                      'bg-success-subtle text-success':formation.status === 'ACTIVE'}">{{formation.status}}
+                    </div>
+                    <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
                   </td>
                   <td>
                     <div ngbDropdown placement="bottom-left">
                       <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
                         aria-expanded="true"></i>
                       <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                        <a class="dropdown-item" href="javascript: void(0);"><i class="mdi mdi-plus"></i>Add</a>
-                        <a class="dropdown-item" href="javascript: void(0);"><i
-                            class="mdi mdi-account-edit"></i>Edit</a>
+                        <a class="dropdown-item" [routerLink]="['/admin/formations/update/', formation.id]"><i class="mdi mdi-account-edit"></i>Edit</a>
+                        <a class="dropdown-item" (click)="deleteFormation(formation.id)" href="javascript: void(0);"><i class="mdi mdi-delete-outline"></i>Delete</a>
                       </div>
                     </div>
                   </td>
@@ -124,14 +138,31 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td>{{assistant.email}}</td>
-                          <td>{{assistant.phone}}</td>
+                          <td>{{formation.email}}</td>
+                          <td>{{formation.phone}}</td>
                         </tr>
                       </tbody>
                     </table>
                   </td>
                 </tr> -->
               </tbody>
+              <!-- if the table is empty -->
+              <tbody *ngIf="(tables$ | async)?.length === 0 && !(service.loading$|async)">
+                <tr>
+                  <td colspan="9" style="text-align: center">No formation found</td>
+                </tr>
+              </tbody>
+
+              <!-- if the table is loading -->
+              <ng-container *ngIf="service.loading$|async">
+                <tr>
+                  <td colspan="9" style="text-align: center">
+                    <div class="spinner-border text-primary m-1" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
             </table>
           </div>
           <!-- End table -->

@@ -4,10 +4,6 @@ import { DecimalPipe } from '@angular/common';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
-import { SearchResult } from './formation-list.model';
-
-import { tableData } from './data';
-
 import { SortDirection } from './formation-list-sortable.directive';
 import { Formation } from 'src/app/model/formation.model';
 
@@ -20,6 +16,10 @@ interface State {
     startIndex: number;
     endIndex: number;
     totalRecords: number;
+}
+interface SearchResult {
+  tables: Formation[];
+  total: number;
 }
 
 function compare(v1:any, v2: any) {
@@ -49,11 +49,13 @@ function sort(tables: Formation[], column: keyof Formation, direction: string): 
  * @param term Search the value
  */
 function matches(tables: Formation, term: string, pipe: PipeTransform) {
-    return /* tables.firstName.toLowerCase().includes(term.toLowerCase())
-        || tables.lastName.toLowerCase().includes(term.toLowerCase())
-        || tables.email.toLowerCase().includes(term.toLowerCase())
-        || tables.phone.toLowerCase().includes(term.toLowerCase())
-        || tables.address.toLowerCase().includes(term.toLowerCase()); */;
+    return tables.title.toLowerCase().includes(term.toLowerCase())
+        || tables.category.toLowerCase().includes(term.toLowerCase())
+        || tables.city.toLowerCase().includes(term.toLowerCase())
+        || tables.nb_hours.toString().includes(term.toLowerCase())
+        || tables.cost.toString().includes(term.toLowerCase())
+        || tables.for_individual.toLowerCase().includes(term.toLowerCase())
+        || tables.status.toLowerCase().includes(term.toLowerCase())
 }
 
 @Injectable({

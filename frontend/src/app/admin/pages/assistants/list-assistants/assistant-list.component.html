@@ -105,9 +105,8 @@
                       <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
                         aria-expanded="true"></i>
                       <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                        <a class="dropdown-item" href="javascript: void(0);"><i class="mdi mdi-plus"></i>Add</a>
-                        <a class="dropdown-item" href="javascript: void(0);"><i
-                            class="mdi mdi-account-edit"></i>Edit</a>
+                        <a class="dropdown-item" [routerLink]="['/admin/assistants/update/', assistant.id]"><i class="mdi mdi-account-edit"></i>Edit</a>
+                        <a class="dropdown-item" (click)="deleteAssistant(assistant.id)" href="javascript: void(0);"><i class="mdi mdi-delete-outline"></i>Delete</a>
                       </div>
                     </div>
                   </td>
@@ -132,6 +131,24 @@
                   </td>
                 </tr> -->
               </tbody>
+              <!-- if the table is empty -->
+              <tbody *ngIf="(tables$ | async)?.length === 0 && !(service.loading$|async)">
+                <tr>
+                  <td colspan="7" style="text-align: center">No assistant found</td>
+                </tr>
+              </tbody>
+
+              <!-- if the table is loading -->
+              <ng-container *ngIf="service.loading$|async">
+                <tr>
+                  <td colspan="7" style="text-align: center">
+                    <div class="spinner-border text-primary m-1" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+
             </table>
           </div>
           <!-- End table -->

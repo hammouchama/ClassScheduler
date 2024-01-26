@@ -75,6 +75,9 @@ public class FormationService {
     }
 
     private Formation extractFormationInfo(Map<String, String> requestyMap,Formation formation){
+        //print requestyMap in console
+        System.out.println(requestyMap);
+
         formation.setTitle(requestyMap.get("title"));
         formation.setCategory(requestyMap.get("category"));
         formation.setCity(requestyMap.get("city"));
@@ -83,6 +86,7 @@ public class FormationService {
         formation.setObjective(requestyMap.get("objective"));
         formation.setNb_hours(Integer.parseInt(requestyMap.get("nb_hours")));
         formation.setFor_individual(requestyMap.get("for_individual"));
+        formation.setNb_hours(Integer.parseInt(requestyMap.get("capacity")));
 
         return formation;
     }

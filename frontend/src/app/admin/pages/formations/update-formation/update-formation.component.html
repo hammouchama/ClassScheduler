@@ -28,6 +28,7 @@
                 id="title"
                 formControlName="title"
                 class="form-control"
+                [(ngModel)]="formation.title"
               />
               <div *ngIf="submit && form['title'].errors" class="invalid-feedback">
                 <span *ngIf="form['title'].errors['required']">This value is required.</span>
@@ -43,6 +44,7 @@
                 id="category"
                 formControlName="category"
                 class="form-control"
+                [(ngModel)]="formation.category"
               />
               <div *ngIf="submit && form['category'].errors" class="invalid-feedback">
                 <span *ngIf="form['category'].errors['required']">This value is required.</span>
@@ -57,6 +59,7 @@
                 id="city"
                 [items]="cities"
                 formControlName="city"
+                [(ngModel)]="formation.city"
               ></ng-select>
               <div *ngIf="submit && form['city'].errors" class="invalid-feedback">
                 <span *ngIf="form['city'].errors['required']">This value is required.</span>
@@ -75,6 +78,7 @@
                 id="nb_hours"
                 formControlName="nb_hours"
                 class="form-control"
+                [(ngModel)]="formation.nb_hours"
               />
               <div *ngIf="submit && form['nb_hours'].errors" class="invalid-feedback">
                 <span *ngIf="form['nb_hours'].errors['required']">This value is required.</span>
@@ -90,6 +94,7 @@
                 id="objective"
                 formControlName="objective"
                 class="form-control"
+                [(ngModel)]="formation.objective"
               ></textarea>
               <div *ngIf="submit && form['objective'].errors" class="invalid-feedback">
                 <span *ngIf="form['objective'].errors['required']">This value is required.</span>
@@ -104,6 +109,7 @@
                 id="description"
                 formControlName="description"
                 class="form-control"
+                [(ngModel)]="formation.description"
               ></textarea>
               <div *ngIf="submit && form['description'].errors" class="invalid-feedback">
                 <span *ngIf="form['description'].errors['required']">This value is required.</span>
@@ -119,6 +125,7 @@
                 id="cost"
                 formControlName="cost"
                 class="form-control"
+                [(ngModel)]="formation.cost"
               />
               <div *ngIf="submit && form['cost'].errors" class="invalid-feedback">
                 <span *ngIf="form['cost'].errors['required']">This value is required.</span>
@@ -135,6 +142,7 @@
                 id="capacity"
                 formControlName="capacity"
                 class="form-control"
+                [(ngModel)]="formation.capacity"
               />
               <div *ngIf="submit && form['title'].errors" class="invalid-feedback">
                 <span *ngIf="form['title'].errors['required']">This value is required.</span>
@@ -149,7 +157,7 @@
                 defaultBoColor="#dfdfdf"
                 color="#00b19d"
                 (change)="onChangeForIndividualSwitch($event)"
-                [checked]="false"
+                [checked]="formation.for_individual === 'true'"
                 uncheckedLabel="False"
                 checkedLabel="True"
                 size="small"

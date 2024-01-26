@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MustMatch } from './add-formation.mustmatch';
+import { MustMatch } from './update-formation.mustmatch';
 import { FormationService } from 'src/app/service/-formation.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Formation } from 'src/app/model/formation.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-add-formation',
-  templateUrl: './add-formation.component.html',
-  styleUrls: ['./add-formation.component.scss'],
+  selector: 'app-update-formation',
+  templateUrl: './update-formation.component.html',
+  styleUrls: ['./update-formation.component.scss'],
 })
 
 /**
  * Forms Validation component
  */
-export class AddFormationComponent implements OnInit {
+export class UpdateFormationComponent implements OnInit {
   formationForm!: UntypedFormGroup; // bootstrap validation form
+  formation!: Formation;
+  formationId: any;
 
   cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
 
@@ -28,7 +32,8 @@ export class AddFormationComponent implements OnInit {
   constructor(
     public formBuilder: UntypedFormBuilder,
     private formationService: FormationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
   // bread crumb items
   breadCrumbItems!: Array<{}>;
@@ -42,8 +47,16 @@ export class AddFormationComponent implements OnInit {
   ngOnInit() {
     this.breadCrumbItems = [
       { label: 'Formations' },
-      { label: 'Add new Formation', active: true },
+      { label: 'Update new Formation', active: true },
     ];
+
+
+    this.getId();
+    if (this.formationId && this.formationId >= 0) {
+        this.getFormation(this.formationId);
+    }else{
+      this.router.navigate(['admin/formations/list']);
+    }
 
     /**
      * Bootstrap validation form data
@@ -51,20 +64,11 @@ export class AddFormationComponent implements OnInit {
     this.formationForm = this.formBuilder.group(
       {
         title: ['', [Validators.required]],
-        category: [
-          '',
-          [Validators.required],
-        ],
+        category: ['', [Validators.required]],
         city: ['', [Validators.required]],
         nb_hours: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-        objective: [
-          '',
-          [Validators.required],
-        ],
-        description: [
-          '',
-          [Validators.required],
-        ],
+        objective: ['', [Validators.required]],
+        description: ['', [Validators.required]],
         cost: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         capacity: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       } /* , {
@@ -75,6 +79,29 @@ export class AddFormationComponent implements OnInit {
     /* this.formsubmit = false;
     this.typesubmit = false;
     this.rangesubmit = false; */
+  }
+  //get formation details
+  public async getFormation(id: number) {
+    console.log('id', id);
+    this.formationService.getFormation(id).subscribe(
+      (resp: Formation) => {
+        console.log('resp', resp);
+        this.formation = resp;
+        this.imageUrl = this.formation.photo?.url || null;
+      },
+      (error: HttpErrorResponse) => {
+        console.log('error');
+        console.log(error);
+        this.router.navigate(['admin/formations/list']);
+      }
+    );
+  }
+
+  //get id from the url
+  public getId() {
+    this.route.paramMap.subscribe((params) => {
+      this.formationId = parseInt(params.get('id') || '');
+    });
   }
 
   /**
@@ -112,18 +139,18 @@ export class AddFormationComponent implements OnInit {
           type: 'application/json',
         })
       ); */
-      // Call your service method to add the new formation
-      this.formationService.addFormation(formData).subscribe(
+      // Call your service method to update the new formation
+      this.formationService.updateFormation(this.formationId,formData).subscribe(
         (result) => {
           // Handle success
           Swal.fire({
-            title: 'Formation added successfully',
+            title: 'Formation Updated successfully',
             icon: 'success',
             confirmButtonColor: '#5438dc',
           });
           this.router.navigate(['/admin/formations/list']);
 
-          console.log('Formation added successfully:', result);
+          console.log('Formation Updated successfully:', result);
         },
         (error) => {
           // Handle error
@@ -132,12 +159,11 @@ export class AddFormationComponent implements OnInit {
             title: 'Oops...',
             text: 'Something went wrong!',
           });
-          console.error('Error adding formation:', error);
+          console.error('Error while Updating formation:', error);
         }
       );
     }
   }
-
 
   // dropzone upload function
 

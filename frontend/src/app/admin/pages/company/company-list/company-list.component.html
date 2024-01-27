@@ -56,9 +56,8 @@
             >
               <thead>
                 <tr>
-                  <th></th>
-                  <th sortable="title" (sort)="onSort($event)">
-                    Title
+                  <th sortable="name" (sort)="onSort($event)">
+                    Name
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(0)?.direction === 'asc'"
@@ -70,8 +69,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="category" (sort)="onSort($event)">
-                    Category
+                  <th sortable="address" (sort)="onSort($event)">
+                    Address
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(1)?.direction === 'asc'"
@@ -83,8 +82,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="city" (sort)="onSort($event)">
-                    City
+                  <th sortable="phone" (sort)="onSort($event)">
+                    phone
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(2)?.direction === 'asc'"
@@ -96,8 +95,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="nb_hours" (sort)="onSort($event)">
-                    Nb Hours
+                  <th sortable="email" (sort)="onSort($event)">
+                    Email
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(3)?.direction === 'asc'"
@@ -109,8 +108,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="cost" (sort)="onSort($event)">
-                    Cost
+                  <th sortable="url" (sort)="onSort($event)">
+                    Url
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(4)?.direction === 'asc'"
@@ -122,74 +121,47 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="for_individual" (sort)="onSort($event)">
-                    Target
-                    <ng-container *ngIf="headers">
-                      <i
-                        *ngIf="headers.get(5)?.direction === 'asc'"
-                        class="fas fa-arrow-up"
-                      ></i>
-                      <i
-                        *ngIf="headers.get(5)?.direction === 'desc'"
-                        class="fas fa-arrow-down"
-                      ></i>
-                    </ng-container>
-                  </th>
-                  <th sortable="status" (sort)="onSort($event)">
-                    Status
-                    <ng-container *ngIf="headers">
-                      <i
-                        *ngIf="headers.get(5)?.direction === 'asc'"
-                        class="fas fa-arrow-up"
-                      ></i>
-                      <i
-                        *ngIf="headers.get(5)?.direction === 'desc'"
-                        class="fas fa-arrow-down"
-                      ></i>
-                    </ng-container>
-                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let formation of tables$ | async; let i = index">
+              <tbody *ngFor="let company of tables$ | async; let i = index">
                 <tr>
-                  <td  class="text-center">
-                    <img src="{{formation.photo?.url}}" alt="image" class="avatar-sm" />
-                  </td>
                   <!-- <td align="center">
-                    <a class="expand-row" (click)="changeValue(i)">
-                      +
-                    </a>
-                  </td> -->
-                  <td class="align-middle">
-                    <ngb-highlight [result]="formation.title" [term]="service.searchTerm"></ngb-highlight>
+                       <a class="expand-row" (click)="changeValue(i)">
+                         +
+                       </a>
+                     </td> -->
+                  <td>
+                    <ngb-highlight
+                      [result]="company.name"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
-                  <td class="align-middle">
-                    <ngb-highlight [result]="formation.category" [term]="service.searchTerm"></ngb-highlight>
+                  <td>
+                    <ngb-highlight
+                      [result]="company.address"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
-                  <td class="align-middle">
-                    <ngb-highlight [result]="formation.city" [term]="service.searchTerm"></ngb-highlight>
+                  <td>
+                    <ngb-highlight
+                      [result]="company.phone"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
-                  <td class="align-middle">
-                    <ngb-highlight [result]="formation.nb_hours.toString()" [term]="service.searchTerm"></ngb-highlight>
+                  <td>
+                    <ngb-highlight
+                      [result]="company.email"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
-                  <td class="align-middle">
-                    <ngb-highlight [result]="formation.cost.toString()+'DH'" [term]="service.searchTerm"></ngb-highlight>
+                  <td>
+                    <ngb-highlight
+                      [result]="company.url"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
-                  <td class="align-middle">
-                    <div class="badge font-size-12" [ngClass]="{'bg-warning-subtle text-warning': formation.for_individual,
-                      'bg-info-subtle text-info': !formation.for_individual}">
-                      {{formation.for_individual?"Individuals":"Companies"}}
-                    </div>
-                    <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
-                  </td>
-                  <td class="align-middle">
-                    <div class="badge font-size-12" [ngClass]="{'bg-danger-subtle text-danger': formation.status === 'INACTIVE',
-                      'bg-success-subtle text-success':formation.status === 'ACTIVE'}">{{formation.status}}
-                    </div>
-                    <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
-                  </td>
-                  <td class="align-middle">
+                  <td>
                     <div ngbDropdown placement="bottom-left">
                       <i
                         class="mdi mdi-dots-vertical dropdown-toggle"
@@ -205,13 +177,13 @@
                           class="dropdown-item"
                           [routerLink]="[
                             '/dashboard/formations/update/',
-                            formation.id
+                            company.id
                           ]"
                           ><i class="mdi mdi-account-edit"></i>Edit</a
                         >
                         <a
                           class="dropdown-item"
-                          (click)="deleteFormation(formation.id)"
+                          (click)="deleteCompany(company.id)"
                           href="javascript: void(0);"
                           ><i class="mdi mdi-delete-outline"></i>Delete</a
                         >
@@ -219,27 +191,9 @@
                     </div>
                   </td>
                 </tr>
-                <!-- <tr *ngIf="!hideme[i]" class="sub-table no-bg">
-                  <td align="center"> </td>
-                  <td colspan="15" class="p-0">
-                    <table class="table mb-0 table-striped">
-                      <thead>
-                        <tr>
-                          <th>Email</th>
-                          <th>Phone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>{{formation.email}}</td>
-                          <td>{{formation.phone}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr> -->
+                <!-- if the table is empty -->
               </tbody>
-              <!-- if the table is empty -->
+
               <tbody
                 *ngIf="
                   (tables$ | async)?.length === 0 && !(service.loading$ | async)
@@ -247,7 +201,7 @@
               >
                 <tr>
                   <td colspan="9" style="text-align: center">
-                    No formation found
+                    No company found
                   </td>
                 </tr>
               </tbody>
@@ -285,7 +239,7 @@
               <div class="text-md-end float-md-end s pagination-rounded">
                 Loading : {{ service.loading$ | async }}
                 <!-- <ngb-pagination [collectionSize]="(total$ | async) || 0" [(page)]="service.page" [pageSize]="service.pageSize" >
-                </ngb-pagination> -->
+                   </ngb-pagination> -->
               </div>
             </div>
             <!-- End Pagination -->

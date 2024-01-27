@@ -18,6 +18,7 @@ export class TopbarComponent implements OnInit {
 
   element: any;
   configData: any;
+  role: String = "";
   /* cookieValue;
   flagvalue;
   countryName;
@@ -32,7 +33,9 @@ export class TopbarComponent implements OnInit {
   ]; */
 
   // tslint:disable-next-line: max-line-length
-constructor(@Inject(DOCUMENT) private document: any, private router: Router, private userAuthService : UserAuthService) { }
+  constructor(@Inject(DOCUMENT) private document: any,
+    private router: Router,
+    private userAuthService: UserAuthService,) { }
   // !constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService, public languageService: LanguageService, public cookiesService: CookieService) { }
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
@@ -43,6 +46,7 @@ constructor(@Inject(DOCUMENT) private document: any, private router: Router, pri
       suppressScrollX: true,
       wheelSpeed: 0.3
     };
+    this.role = this.userAuthService.getRole() + ""
 
     /* this.cookieValue = this.cookiesService.get('lang');
     const val = this.listLang.filter(x => x.lang === this.cookieValue);

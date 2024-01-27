@@ -75,9 +75,13 @@ public class UserService {
                 if (validateSignUpMap(requestyMap)) {
                     User user = userRepository.findByEmail(requestyMap.get("email"));
                     if (Objects.isNull(user)) {
-                        userRepository.save(getUserFromMap(requestyMap));
+                        String password=Helpers.generatePassword();
+                        user=new User();
+                        user=getUserFromMap(requestyMap,user);
+                        user.setPassword(passwordEncoder.encode(password));
+                        userRepository.save(user);
                         String fullname = requestyMap.get("firstName") + " " + requestyMap.get("lastName");
-                        emailHelper.sendLoginInfoEmail(requestyMap.get("email"), requestyMap.get("password"), fullname,
+                        emailHelper.sendLoginInfoEmail(requestyMap.get("email"), password, fullname,
                                 "Assistant");
                         return Helpers.getResponseEntity("Successfully Registered", HttpStatus.OK);
                     } else {
@@ -111,19 +115,19 @@ public class UserService {
 
     private boolean validateSignUpMap(Map<String, String> reqMap) {
         return reqMap.containsKey("firstName") && reqMap.containsKey("lastName") && reqMap.containsKey("address")
-                && reqMap.containsKey("email") && reqMap.containsKey("password") && reqMap.containsKey("phone");
+                && reqMap.containsKey("email") && reqMap.containsKey("phone");
     }
 
-    private User getUserFromMap(Map<String, String> requestMap) {
-        User user = new User();
+    private User getUserFromMap(Map<String, String> requestMap,User user) {
+       // User user = new User();
         user.setFirstName(requestMap.get("firstName"));
         user.setLastName(requestMap.get("lastName"));
         user.setEmail(requestMap.get("email"));
-        user.setPassword(passwordEncoder.encode(requestMap.get("password")));
+        //user.setPassword(passwordEncoder.encode(requestMap.get("password")));
         user.setPhone(requestMap.get("phone"));
         user.setAddress(requestMap.get("address"));
         user.setStatus("ACTIVE");
-        user.setRole("assistant");
+        user.setRole("Assistant");
         return user;
     }
 

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,6 +54,7 @@ import { UserModule } from './user/user.module';
     MatPaginatorModule,
     FormsModule,
     UserModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthGuard,
@@ -66,4 +67,4 @@ import { UserModule } from './user/user.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

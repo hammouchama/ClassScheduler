@@ -1,11 +1,9 @@
 import { Injectable, PipeTransform } from '@angular/core';
+import { Company } from 'src/app/model/company.model';
+import { SortDirection } from './company-list-sortable.directive';
+import { BehaviorSubject, Observable, Subject, debounceTime, delay, of, switchMap, tap } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
 
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
-
-import { SortDirection } from './formation-list-sortable.directive';
-import { Formation } from 'src/app/model/formation.model';
 
 interface State {
   page: number;
@@ -18,55 +16,20 @@ interface State {
   totalRecords: number;
 }
 interface SearchResult {
-  tables: Formation[];
+  tables: Company[];
   total: number;
 }
 
-function compare(v1: any, v2: any) {
-  return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
-}
-
-/**
- * Sort the table data
- * @param tables Formation field value
- * @param column Fetch the column
- * @param direction Sort direction Ascending or Descending
- */
-function sort(tables: Formation[], column: keyof Formation, direction: string): Formation[] {
-  if (direction === '') {
-    return tables;
-  } else {
-    return [...tables].sort((a, b) => {
-      const res = compare(a[column], b[column]);
-      return direction === 'asc' ? res : -res;
-    });
-  }
-}
-
-/**
- * Formation Data Match with Search input
- * @param tables Formation field value fetch
- * @param term Search the value
- */
-function matches(tables: Formation, term: string, pipe: PipeTransform) {
-  return tables.title.toLowerCase().includes(term.toLowerCase())
-    || tables.category.toLowerCase().includes(term.toLowerCase())
-    || tables.city.toLowerCase().includes(term.toLowerCase())
-    || tables.nb_hours.toString().includes(term.toLowerCase())
-    || tables.cost.toString().includes(term.toLowerCase())
-    || tables.for_individual.toLowerCase().includes(term.toLowerCase())
-    || tables.status.toLowerCase().includes(term.toLowerCase())
-}
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class FormationListService {
+export class CompanyListService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _tables$ = new BehaviorSubject<Formation[]>([]);
+  private _tables$ = new BehaviorSubject<Company[]>([]);
   // Table data
-  private formationData = new BehaviorSubject<Formation[]>([]);
+  private companyData = new BehaviorSubject<Company[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -98,8 +61,8 @@ export class FormationListService {
   }
 
   /**
-   * Returns the value
-   */
+  * Returns the value
+  */
   get tables$() {
     return this._tables$.asObservable();
   }
@@ -161,6 +124,7 @@ export class FormationListService {
   }
 
   private _set(patch: Partial<State>) {
+
     const newState = { ...this._state, ...patch };
 
     if (
@@ -175,9 +139,9 @@ export class FormationListService {
     this._search$.next();
   }
 
-  updateTableData(data: Formation[]) {
+  updateTableData(data: Company[]) {
     this._tables$.next(data);
-    this.formationData.next(data);
+    this.companyData.next(data);
   }
 
   /**
@@ -189,15 +153,14 @@ export class FormationListService {
       this._state;
     // 1. sort
     let tables = sort(
-      this.formationData.value,
-      sortColumn as keyof Formation,
+      this.companyData.value,
+      sortColumn as keyof Company,
       sortDirection
     );
+
     // 2. filter
     tables = tables.filter((table) => matches(table, searchTerm, this.pipe));
     const total = tables.length;
-
-    console.log(tables);
     // 3. paginate
     this.totalRecords = tables.length;
     this._state.startIndex = (page - 1) * this.pageSize + 1;
@@ -206,8 +169,40 @@ export class FormationListService {
       this.endIndex = this.totalRecords;
     }
     tables = tables.slice(this._state.startIndex - 1, this._state.endIndex - 1);
-
-    console.log(tables);
     return of({ tables, total });
   }
+}
+
+function compare(v1: any, v2: any) {
+  return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+}
+
+/**
+* Sort the table data
+* @param tables Company field value
+* @param column Fetch the column
+* @param direction Sort direction Ascending or Descending
+*/
+function sort(tables: Company[], column: keyof Company, direction: string): Company[] {
+  if (direction === '') {
+    return tables;
+  } else {
+    return [...tables].sort((a, b) => {
+      const res = compare(a[column], b[column]);
+      return direction === 'asc' ? res : -res;
+    });
+  }
+}
+
+/**
+* Company Data Match with Search input
+* @param tables Company field value fetch
+* @param term Search the value
+*/
+function matches(tables: Company, term: string, pipe: PipeTransform) {
+  return tables.name.toLowerCase().includes(term.toLowerCase())
+    || tables.address.toLowerCase().includes(term.toLowerCase())
+    || tables.phone.toLowerCase().includes(term.toLowerCase())
+    || tables.email.toString().includes(term.toLowerCase())
+    || tables.url.toString().includes(term.toLowerCase())
 }

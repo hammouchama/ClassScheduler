@@ -5,184 +5,71 @@
       <div class="navbar-brand-box">
         <a href="/" class="logo logo-dark">
           <span class="logo-sm">
-            <img src="assets/img/logo/logo-icon.png" alt="" height="30">
+            <img src="assets/img/logo/logo-icon.png" alt="" height="30" />
           </span>
           <span class="logo-lg">
-            <img src="assets/img/logo/logo.png" alt="" height="50">
+            <img src="assets/img/logo/logo.png" alt="" height="50" />
           </span>
         </a>
 
         <a href="/" class="logo logo-light">
           <span class="logo-sm">
-            <img src="assets/img/logo/Logo-2-sm.png" alt="" height="30">
+            <img src="assets/img/logo/Logo-2-sm.png" alt="" height="30" />
           </span>
           <span class="logo-lg">
-            <img src="assets/img/logo/logo-2.png" alt="" height="50">
+            <img src="assets/img/logo/logo-2.png" alt="" height="50" />
           </span>
         </a>
       </div>
 
-      <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn"
-        (click)="toggleMobileMenu($event)">
+      <button
+        type="button"
+        class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+        id="vertical-menu-btn"
+        (click)="toggleMobileMenu($event)"
+      >
         <i class="ri-menu-2-line align-middle"></i>
       </button>
 
       <!-- App Search-->
       <form class="app-search d-none d-lg-block">
         <div class="position-relative">
-          <input type="text" class="form-control" placeholder="Search...">
+          <input type="text" class="form-control" placeholder="Search..." />
           <span class="ri-search-line"></span>
         </div>
       </form>
-
-      <!-- <div class="dropdown dropdown-mega d-none d-lg-block ms-2" ngbDropdown>
-        <button ngbDropdownToggle type="button" class="btn header-item waves-effect" data-toggle="dropdown"
-          aria-haspopup="false" aria-expanded="false">
-          Mega Menu
-          <i class="mdi mdi-chevron-down"></i>
-        </button>
-        <div class="dropdown-menu dropdown-megamenu" ngbDropdownMenu>
-          <div class="row">
-            <div class="col-sm-8">
-              <div class="row">
-                <div class="col-md-4">
-                  <h5 class="font-size-14 mt-0"> {{ 'HEADER.UI.TITLE' }}</h5>
-                  <ul class="list-unstyled megamenu-list">
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.LIGHTBOX' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.RANGE_SLIDER' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.SWEET_ALERT' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.RATING' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.FORMS' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.TABLES' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.CHARTS' }}</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="col-md-4">
-                  <h5 class="font-size-14 mt-0">{{ 'HEADER.APPLICATIONS.TITLE' }}</h5>
-                  <ul class="list-unstyled megamenu-list">
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.APPLICATIONS.ECOMMERCE' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.APPLICATIONS.CALENDAR' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.APPLICATIONS.EMAIL' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.APPLICATIONS.PROJECTS' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.APPLICATIONS.TASKS' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.APPLICATIONS.CONTACTS' }}</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="col-md-4">
-                  <h5 class="font-size-14 mt-0">{{ 'HEADER.EXTRA_PAGES.TITLE' }}</h5>
-                  <ul class="list-unstyled megamenu-list">
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.LIGHT_SIDEBAR' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.COMPACT_SIDEBAR' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.HORIZONTAL_LAYOUT' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.MAINTENANCE' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.COMING SOON' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.TIMELINE' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.EXTRA_PAGES.FAQ' }}</a>
-                    </li>
-
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h5 class="font-size-14 mt-0"> {{ 'HEADER.UI.TITLE' }}</h5>
-                  <ul class="list-unstyled megamenu-list">
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.LIGHTBOX' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.RANGE_SLIDER' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.SWEET_ALERT' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.RATING' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.FORMS' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.TABLES' }}</a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">{{ 'HEADER.UI.CHARTS' }}</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="col-sm-5">
-                  <div>
-                    <img src="assets/images/megamenu-img.png" alt="" class="img-fluid mx-auto d-block">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div> -->
     </div>
 
     <div class="d-flex">
-
       <div class="dropdown d-inline-block d-lg-none ms-2" ngbDropdown>
-        <button type="button" ngbDropdownToggle class="btn header-item noti-icon waves-effect"
-          id="page-header-search-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button
+          type="button"
+          ngbDropdownToggle
+          class="btn header-item noti-icon waves-effect"
+          id="page-header-search-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <i class="ri-search-line"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-          aria-labelledby="page-header-search-dropdown" ngbDropdownMenu>
-
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+          aria-labelledby="page-header-search-dropdown"
+          ngbDropdownMenu
+        >
           <form class="p-3">
             <div class="form-group m-0">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search ...">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search ..."
+                />
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="submit"><i class="ri-search-line"></i></button>
+                  <button class="btn btn-primary" type="submit">
+                    <i class="ri-search-line"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -191,53 +78,48 @@
       </div>
 
       <div class="dropdown d-inline-block" ngbDropdown>
-        <!-- <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
-          <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16"> <span
-            class="ms-1">{{countryName}}</span>
-          <img *ngIf="flagvalue === undefined" src="{{valueset}}" alt="Header Language" height="16">
-          <span *ngIf="flagvalue === undefined" class="ms-1">English</span>
-        </button> -->
-        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-          <!-- item-->
-          <!-- <a href="javascript:void(0);" class="dropdown-item notify-item" *ngFor="let item of listLang"
-            (click)="setLanguage(item.text, item.lang, item.flag)" [ngClass]="{'active': cookieValue === item.lang}">
-            <img src="{{item.flag}}" alt="user-image" class="me-1" height="12"> <span
-              class="align-middle">{{item.text}}</span>
-          </a> -->
-          <!-- item-->
-        </div>
+        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu></div>
       </div>
 
-
-
       <div class="dropdown d-none d-lg-inline-block ms-1">
-        <button type="button" class="btn header-item noti-icon waves-effect" (click)="fullscreen()">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          (click)="fullscreen()"
+        >
           <i class="ri-fullscreen-line"></i>
         </button>
       </div>
 
       <div class="dropdown d-inline-block user-dropdown" ngbDropdown>
-        <button type="button" ngbDropdownToggle class="btn header-item waves-effect" id="page-header-user-dropdown"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="rounded-circle header-profile-user" src="assets/images/users/avatar.png" alt="Header Avatar">
-          <span class="d-none d-xl-inline-block ms-1">Admin</span>
+        <button
+          type="button"
+          ngbDropdownToggle
+          class="btn header-item waves-effect"
+          id="page-header-user-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="rounded-circle header-profile-user"
+            src="assets/images/users/avatar.png"
+            alt="Header Avatar"
+          />
+          <span class="d-none d-xl-inline-block ms-1">{{ role }}</span>
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>
 
         <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-          <!-- item-->
-          <!-- <a class="dropdown-item" href="javascript: void(0);"><i class="ri-user-line align-middle me-1"></i>
-            Profile</a>
-          <a class="dropdown-item d-block" href="javascript: void(0);"><span
-              class="badge badge-success float-end mt-1">11</span><i
-              class="ri-settings-2-line align-middle me-1"></i>Settings </a>
-          <div class="dropdown-divider"></div> -->
-          <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
-              class="ri-shut-down-line align-middle me-1 text-danger"></i>
-            Logout</a>
+          <a
+            class="dropdown-item text-danger"
+            href="javascript: void(0);"
+            (click)="logout()"
+            ><i class="ri-shut-down-line align-middle me-1 text-danger"></i>
+            Logout</a
+          >
         </div>
       </div>
-
     </div>
   </div>
 </header>

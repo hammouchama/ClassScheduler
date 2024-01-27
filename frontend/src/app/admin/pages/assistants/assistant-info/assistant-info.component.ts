@@ -22,7 +22,7 @@ export class AssistantInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private assistanService: AssistantService,
     private router: Router
-  ) {}
+  ) { }
   ngOnInit(): void {
 
     this.breadCrumbItems = [
@@ -43,17 +43,17 @@ export class AssistantInfoComponent implements OnInit {
 
   //get assistant details
   public async getAssistant(id: number) {
-    console.log("id",id);
+    console.log("id", id);
     this.assistanService.getAssistant(id).subscribe(
       (resp: Assistant) => {
-        console.log("resp",resp);
+        console.log("resp", resp);
         this.assistant = resp;
         // console.log(this.assistan)
       },
       (error: HttpErrorResponse) => {
         console.log('error');
         console.log(error);
-        this.router.navigate(['admin/assistant']);
+        this.router.navigate(['dashboard/assistant/list']);
       }
     );
   }
@@ -108,7 +108,7 @@ export class AssistantInfoComponent implements OnInit {
                 text: 'Your file has been deleted.',
                 icon: 'success',
               });
-              this.router.navigate(['admin/assistant']);
+              this.router.navigate(['dashboard/assistant']);
             }
           },
           (error: HttpErrorResponse) => {
@@ -128,22 +128,23 @@ export class AssistantInfoComponent implements OnInit {
   public AddAssistant(addAssistant: NgForm) {
     addAssistant.value['status'] = addAssistant.value['status'].toString();
     console.log(addAssistant.value);
-    /* this.assistanService.addAssistant(addAssistant.value).subscribe(
+    this.assistanService.addAssistant(addAssistant.value).subscribe(
       (respon: any) => {
         Swal.fire({
           title: 'Added!',
           text: respon.message,
           icon: 'success',
         });
-        this.router.navigate(['admin/assistant']);
+        this.router.navigate(['dashboard/assistant/list']);
       },
-      (error: HttpErrorResponse) => {
+      (error: any) => {
+        console.log(error)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: error,
         });
       }
-    ); */
+    );
   }
 }

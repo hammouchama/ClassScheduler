@@ -14,9 +14,9 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
     if (this.userAthuService.getToken() !== null) {
-      const role = route.data['role']
-      if (role) {
-        if (role === this.userAthuService.getRole()) {
+      const roles = route.data['role'] as string[]
+      if (roles) {
+        if (this.userAthuService.roleMatch(roles)) {
           return true
         } else {
           this.router.navigate(['/forbidden']);

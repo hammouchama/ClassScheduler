@@ -45,6 +45,8 @@ export class FormationListComponent implements OnInit {
     this.total$ = service.total$;
   }
   ngOnInit() {
+    this.service.loading = true;
+
     this.breadCrumbItems = [
       { label: 'Formations' },
       { label: 'List of Formations', active: true },
@@ -54,6 +56,7 @@ export class FormationListComponent implements OnInit {
      * fetch data
      */
     this._fetchData();
+    this.service.loading = false;
   }
 
   changeValue(i: number) {

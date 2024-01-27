@@ -45,6 +45,8 @@ export class AssistantListComponent implements OnInit {
     this.total$ = service.total$;
   }
   ngOnInit() {
+    this.service.loading=true;
+
     this.breadCrumbItems = [
       { label: 'Assistants' },
       { label: 'List of Assistants', active: true },
@@ -54,6 +56,7 @@ export class AssistantListComponent implements OnInit {
      * fetch data
      */
     this._fetchData();
+    this.service.loading = false;
   }
 
   changeValue(i: number) {

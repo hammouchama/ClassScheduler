@@ -63,7 +63,7 @@ export const MENU: MenuItem[] = [
     id: 10,
     label: 'Calendar',
     icon: 'ri-calendar-2-line',
-    link: '/calendar',
+    link: '/admin/calendar',
   },
   // {
   //   id: 6,

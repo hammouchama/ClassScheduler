@@ -66,7 +66,7 @@ export class AssistantListService {
   private _search$ = new Subject<void>();
   private _tables$ = new BehaviorSubject<Assistant[]>([]);
   // Table data
-  private assistantData= new BehaviorSubject<Assistant[]>([]);
+  private assistantData = new BehaviorSubject<Assistant[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -156,6 +156,9 @@ export class AssistantListService {
   set sortDirection(sortDirection: SortDirection) {
     this._set({ sortDirection });
   }
+  set loading(loading: boolean) {
+    this._loading$.next(loading);
+  }
 
   private _set(patch: Partial<State>) {
     console.log('_set called with:', patch);
@@ -163,7 +166,11 @@ export class AssistantListService {
 
     const newState = { ...this._state, ...patch };
 
-    if (newState.searchTerm === this._state.searchTerm && newState.sortColumn === this._state.sortColumn && newState.sortDirection === this._state.sortDirection) {
+    if (
+      newState.searchTerm === this._state.searchTerm &&
+      newState.sortColumn === this._state.sortColumn &&
+      newState.sortDirection === this._state.sortDirection
+    ) {
       console.log('No change in searchTerm, not triggering search.');
       return;
     }

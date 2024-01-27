@@ -79,43 +79,43 @@
               </thead>
               <tbody *ngFor="let formation of tables$ | async;let i=index">
                 <tr>
-                  <td>
-                    <img src="{{formation.photo?.url}}" alt="image" class="rounded-circle avatar-sm" />
+                  <td  class="text-center">
+                    <img src="{{formation.photo?.url}}" alt="image" class="avatar-sm" />
                   </td>
                   <!-- <td align="center">
                     <a class="expand-row" (click)="changeValue(i)">
                       +
                     </a>
                   </td> -->
-                  <td>
+                  <td class="align-middle">
                     <ngb-highlight [result]="formation.title" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <ngb-highlight [result]="formation.category" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <ngb-highlight [result]="formation.city" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <ngb-highlight [result]="formation.nb_hours.toString()" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <ngb-highlight [result]="formation.cost.toString()+'DH'" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <div class="badge font-size-12" [ngClass]="{'bg-warning-subtle text-warning': formation.for_individual,
                       'bg-info-subtle text-info': !formation.for_individual}">
                       {{formation.for_individual?"Individuals":"Companies"}}
                     </div>
                     <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <div class="badge font-size-12" [ngClass]="{'bg-danger-subtle text-danger': formation.status === 'INACTIVE',
                       'bg-success-subtle text-success':formation.status === 'ACTIVE'}">{{formation.status}}
                     </div>
                     <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <div ngbDropdown placement="bottom-left">
                       <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
                         aria-expanded="true"></i>

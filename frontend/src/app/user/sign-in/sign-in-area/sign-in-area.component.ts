@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in-area.component.scss'],
 })
 export class SignInAreaComponent implements OnInit {
-  hide: any;
+  hide: boolean = true;
   email: any;
   errorMessa: string = 'ddd';
   error: boolean = false;

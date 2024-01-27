@@ -10,41 +10,7 @@
                          <img src="assets/img/logo/logo.png" alt="logo">
                       </a>
                    </div>
-                   <div class="header__category d-none d-lg-block">
-                      <nav>
-                         <ul>
-                            <li>
-                               <a [routerLink]="['/courses']" class="cat-menu d-flex align-items-center">
-                                  <div class="cat-dot-icon d-inline-block">
-                                     <svg viewBox="0 0 276.2 276.2">
-                                        <g>
-                                           <g>
-                                              <path class="cat-dot" d="M33.1,2.5C15.3,2.5,0.9,17,0.9,34.8s14.5,32.3,32.3,32.3s32.3-14.5,32.3-32.3S51,2.5,33.1,2.5z"/>
-                                              <path class="cat-dot" d="M137.7,2.5c-17.8,0-32.3,14.5-32.3,32.3s14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3S155.5,2.5,137.7,2.5    z"/>
-                                              <path class="cat-dot" d="M243.9,67.1c17.8,0,32.3-14.5,32.3-32.3S261.7,2.5,243.9,2.5S211.6,17,211.6,34.8S226.1,67.1,243.9,67.1z"/>
-                                              <path class="cat-dot" d="M32.3,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3S0,120.4,0,138.2S14.5,170.5,32.3,170.5z"/>
-                                              <path class="cat-dot" d="M136.8,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3c-17.8,0-32.3,14.5-32.3,32.3    C104.5,156.1,119,170.5,136.8,170.5z"/>
-                                              <path class="cat-dot" d="M243,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3s-32.3,14.5-32.3,32.3    C210.7,156.1,225.2,170.5,243,170.5z"/>
-                                              <path class="cat-dot" d="M33,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3s32.3-14.5,32.3-32.3S50.8,209.1,33,209.1z    "/>
-                                              <path class="cat-dot" d="M137.6,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3    S155.4,209.1,137.6,209.1z"/>
-                                              <path class="cat-dot" d="M243.8,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3    S261.6,209.1,243.8,209.1z"/>
-                                           </g>
-                                        </g>
-                                     </svg>
-                                  </div>
-                                  <span>Category</span>
-                               </a>
-                               <ul class="cat-submenu">
-                                  <li><a [routerLink]="['/course-details']">English Learning</a></li>
-                                  <li><a [routerLink]="['/course-details']">Web Development</a></li>
-                                  <li><a [routerLink]="['/course-details']">Logo Design</a></li>
-                                  <li><a [routerLink]="['/course-details']">Motion Graphics</a></li>
-                                  <li><a [routerLink]="['/course-details']">Video Edition</a></li>
-                               </ul>
-                            </li>
-                         </ul>
-                      </nav>
-                   </div>
+
                 </div>
              </div>
              <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
@@ -52,45 +18,20 @@
                    <div class="main-menu main-menu-2">
                       <nav id="mobile-menu" class="d-none d-xl-block">
                          <ul>
-                            <li class="has-dropdown">
+                            <li>
                               <a [routerLink]="['/']">Home</a>
-                              <ul class="submenu">
-                                 <li><a [routerLink]="['/home']">Home Style 1</a></li>
-                                 <li><a [routerLink]="['/home-two']"  >Home Style 2</a></li>
-                                 <li><a [routerLink]="['/home-three']">Home Style 3</a></li>
-                              </ul>
                             </li>
                             <li class="has-dropdown">
-                              <a [routerLink]="['/courses']">Courses</a>
+                              <a [routerLink]="['/formations']">Formations</a>
                               <ul class="submenu">
-                                 <li><a [routerLink]="['/courses']">Courses</a></li>
-                                 <li><a [routerLink]="['/courses-list']">Course List</a></li>
-                                 <li><a [routerLink]="['/courses-sidebar']">Course sidebar</a></li>
-                                 <li><a [routerLink]="['/course-details']">Course Details</a></li>
+                                <li><a [routerLink]="['/Development']">Development</a></li>
+                                <li><a [routerLink]="['/Design']">Design</a></li>
+                                <li><a [routerLink]="['/Data_Science']">Data Science</a></li>
+                                <li><a [routerLink]="['/Business']">Business</a></li>
+                                <li><a [routerLink]="['/IT_Software']">IT & Software</a></li>
                               </ul>
                             </li>
-                            <li class="has-dropdown">
-                              <a [routerLink]="['/blog']">Blog</a>
-                              <ul class="submenu">
-                                 <li><a [routerLink]="['/blog']">Blog</a></li>
-                                 <li><a [routerLink]="['/blog-details']">Blog Details</a></li>
-                              </ul>
-                            </li>
-                            <li class="has-dropdown">
-                              <a [routerLink]="['/courses']">Pages</a>
-                              <ul class="submenu">
-                                 <li><a [routerLink]="['/about']">About</a></li>
-                                 <li><a [routerLink]="['/instructor']">Instructor</a></li>
-                                 <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
-                                 <li><a [routerLink]="['/event-details']">Event Details</a></li>
-                                 <li><a [routerLink]="['/cart']">My Cart</a></li>
-                                 <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
-                                 <li><a [routerLink]="['/checkout']">checkout</a></li>
-                                 <li><a [routerLink]="['/sign-in']">Sign In</a></li>
-                                 <li><a [routerLink]="['/sign-up']">Sign Up</a></li>
-                                 <li><a [routerLink]="['/error']">Error</a></li>
-                              </ul>
-                           </li>
+                           <li><a [routerLink]="['apply-trainer']">Become a Trainer</a></li>
                            <li><a [routerLink]="['/contact']">Contact</a></li>
                          </ul>
                       </nav>
@@ -132,68 +73,39 @@
          <div class="side-info-content sidebar-menu mm-menu">
 
             <ul>
-              <li class="menu-item-has-children has-droupdown"
-              [class.active]="showHomeDropdown">
-                  <a (click)="homeDropdown()">Home</a >
-                  <ul class="sub-menu" [class.active]="showHomeDropdown">
-                    <li>
-                        <a [routerLink]="['/']" >Home Style 1</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/home-two']" >Home Style 2</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/home-three']" >Home Style 3</a>
-                    </li>
-                  </ul>
+              <li>
+                  <a [routerLink]="['/']" class="border-0">Home</a>
               </li>
 
               <li class="menu-item-has-children has-droupdown"
               [class.active]="showCoursesDropdown">
-                    <a (click)="coursesDropdown()">Courses</a>
+                    <a (click)="coursesDropdown()">Formations</a>
                     <ul class="sub-menu" [class.active]="showCoursesDropdown">
                           <li>
-                            <a [routerLink]="['/courses']">Courses</a>
+                            <a [routerLink]="['/formations']">View All</a>
                           </li>
                           <li>
-                            <a [routerLink]="['/courses-list']">Course List</a>
+                            <a [routerLink]="['/Development']">Development</a>
                           </li>
                           <li>
-                            <a [routerLink]="['/courses-sidebar']">Course sidebar </a>
+                            <a [routerLink]="['/Design']">Design</a>
                           </li>
                           <li>
-                            <a [routerLink]="['/course-details']">Course Details</a>
+                            <a [routerLink]="['/Data_Science']">Data Science</a>
+                          </li>
+                          <li>
+                            <a [routerLink]="['/Business']">Business</a>
+                          </li>
+                          <li>
+                            <a [routerLink]="['/IT_Software']">IT & Software</a>
                           </li>
                     </ul>
                   </li>
 
-                  <li class="menu-item-has-children has-droupdown"
-                  [class.active]="showBlogDropdown">
 
-                <a (click)="blogDropdown()">Blog</a>
-                <ul class="sub-menu"
-                [class.active]="showBlogDropdown">
-                <li><a [routerLink]="['/blog']">Blog</a></li>
-                <li><a [routerLink]="['/blog-details']">Blog Details</a></li>
-                </ul>
-              </li>
 
-              <li class="menu-item-has-children has-droupdown"
-              [class.active]="showPagesDropdown">
-                  <a (click)="pagesDropDown()">Pages</a>
-                  <ul class="sub-menu"
-                  [class.active]="showPagesDropdown">
-                  <li><a [routerLink]="['/about']">About</a></li>
-                  <li><a [routerLink]="['/instructor']">Instructor</a></li>
-                  <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
-                  <li><a [routerLink]="['/event-details']">Event Details</a></li>
-                  <li><a [routerLink]="['/cart']">My Cart</a></li>
-                  <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
-                  <li><a [routerLink]="['/checkout']">checkout</a></li>
-                  <li><a [routerLink]="['/sign-in']">Sign In</a></li>
-                  <li><a [routerLink]="['/sign-up']">Sign Up</a></li>
-                  <li><a [routerLink]="['/error']">Error</a></li>
-                  </ul>
+              <li>
+                  <a [routerLink]="['/apply-trainer']" class="border-0">Become a Trainer</a>
               </li>
 
               <li>
@@ -208,18 +120,6 @@
               <input type="text" placeholder="Search...">
               <button type="submit"><i class="fad fa-search"></i></button>
           </form>
-        </div>
-        <div class="sidebar__cart mt-30">
-          <a href="#">
-              <div class="header__cart-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle class="st0" cx="9" cy="21" r="1"/>
-                    <circle class="st0" cx="20" cy="21" r="1"/>
-                    <path class="st0" d="M1,1h4l2.7,13.4c0.2,1,1,1.6,2,1.6h9.7c1,0,1.8-0.7,2-1.6L23,6H6"/>
-                </svg>
-              </div>
-              <span class="cart-item">3</span>
-          </a>
         </div>
     </div>
   </div>

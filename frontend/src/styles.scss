@@ -1,9 +1,8 @@
-@import '../src/assets/css/fontAwesome5Pro.css';
-@import '../src/assets/css/elegantFont.css';
+@import "./assets/css/fontAwesome5Pro.css";
+@import "./assets/css/elegantFont.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import 'swiper/swiper-bundle.css';
-@import '../src/assets/scss/main.scss';
-
+@import "swiper/swiper-bundle.css";
+@import "./assets/scss/main.scss";
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -15,4 +14,31 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Hind, sans-serif;
+  color: #0e1133;
+  margin-top: 0;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: all 0.3s ease-out 0s;
+  &.section__title {
+    font-size: 40px;
+    color: #0e1133;
+    text-transform: capitalize;
+    z-index: 1;
+    margin-bottom: 3px;
+  }
+}
+.section__title {
+  font-size: 40px;
+  color: #0e1133;
+  text-transform: capitalize;
+  z-index: 1;
+  margin-bottom: 3px;
 }

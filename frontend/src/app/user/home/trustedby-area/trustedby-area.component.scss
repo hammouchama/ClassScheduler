@@ -1,0 +1,14 @@
+.swiper-wrapper.trustedby{
+  background-color: black;
+  padding: 100px;
+  .swiper-slide{
+    max-width: 100px;
+    position: relative;
+    img{
+      max-width: 100%;
+      height: auto;
+      width: 100px;
+    }
+  }
+
+}

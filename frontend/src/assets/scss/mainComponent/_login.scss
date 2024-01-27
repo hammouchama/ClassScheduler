@@ -26,7 +26,7 @@
             z-index: -1;
             &.man-1{
                 left: 28%;
-                top: 60%;
+                top: 50%;
                 z-index: 1;
                 @media #{$xxl}{
                     left: 19%;
@@ -39,6 +39,7 @@
                 }
                 @media #{$md}{
                     left: 2%;
+                    top: 42%;
                 }
                 @media #{$sm}{
                     left: 1%;
@@ -50,6 +51,7 @@
             &.man-2{
                 right: 24%;
                 top: 65%;
+                z-index: 1;
                 @media #{$xxl}{
                     top: 55%;
                     right: 20%;
@@ -65,12 +67,12 @@
                 @media #{$md}{
                     top: 60%;
                     right: 0%;
-                    z-index: 1;
+                    /* z-index: 1; */
                 }
                 @media #{$sm}{
                     top: 60%;
                     right: 0%;
-                    z-index: 1;
+                    /* z-index: 1; */
                 }
                 @media #{$xs}{
                     display: none;
@@ -335,6 +337,10 @@
             left: 25px;
             font-size: 14px;
             color: $grey-13;
+            &.right{
+                left: auto;
+                right: 25px;
+            }
         }
     }
     &__agree{

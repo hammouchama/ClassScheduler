@@ -15,9 +15,6 @@
             Sign in to <br />
             recharge direct.
           </h2>
-          <p>
-            it you don't have an account you can <a href="#">Register here!</a>
-          </p>
         </div>
       </div>
     </div>
@@ -64,6 +61,7 @@
                     (click)="hide = !hide"
                     [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide"
+                    type="button"
                   >
                     <i [ngClass]="hide ? 'right far fa-eye-slash' : 'right far fa-eye'"></i>
                   </button>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignInAreaComponent } from './sign-in-area.component';
+import { TrustedbyAreaComponent } from './trustedby-area.component';
 
-describe('SignInAreaComponent', () => {
-  let component: SignInAreaComponent;
-  let fixture: ComponentFixture<SignInAreaComponent>;
+describe('TrustedbyAreaComponent', () => {
+  let component: TrustedbyAreaComponent;
+  let fixture: ComponentFixture<TrustedbyAreaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignInAreaComponent ]
+      declarations: [ TrustedbyAreaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignInAreaComponent);
+    fixture = TestBed.createComponent(TrustedbyAreaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

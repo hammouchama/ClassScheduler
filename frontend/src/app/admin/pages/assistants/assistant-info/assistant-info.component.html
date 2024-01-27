@@ -123,13 +123,23 @@
             </div>
 
             <div class="button-items text-center mt-4">
-              <button mat-raised-button color="primary" type="submit" class="btn btn-primary">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="btn btn-primary"
+              >
                 Update
                 <i class="ri-install-line align-middle ms-2"></i>
               </button>
 
-              <button mat-raised-button type="button" class="btn btn-danger" color="accent"
-                (click)="deletAssistant(assistant.id)">
+              <button
+                mat-raised-button
+                type="button"
+                class="btn btn-danger"
+                color="accent"
+                (click)="deletAssistant(assistant.id)"
+              >
                 Delete
                 <i class="ri-delete-bin-line align-middle ms-2"></i>
               </button>
@@ -192,15 +202,15 @@
               />
             </div>
 
-            <!-- Password input -->
+            <!-- Address input -->
             <div class="input-box form-group mb-4 col-lg-6">
-              <label for="password">Password</label>
+              <label for="address">Address</label>
               <input
                 matInput
                 ngModel
                 class="form-control"
-                id="password"
-                name="password"
+                id="address"
+                name="address"
                 required
               />
             </div>
@@ -219,29 +229,13 @@
                 required
               />
             </div>
-
-            <!-- Address input -->
-            <div class="input-box form-group mb-4 col-lg-6">
-              <label for="address">Address</label>
-              <input
-                matInput
-                ngModel
-                class="form-control"
-                id="address"
-                name="address"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="row">
             <!-- Status input -->
-            <div class="input-box form-group mb-4 col-lg-6 row">
-              <label for="switchStatus" class="col-md-4">Status</label>
+            <div class="input-box form-group mb-4 col-lg-6">
+              <label for="switchStatus">Status</label><br/>
               <ui-switch
                 ngModel
                 name="status"
-                class="col-md"
+                class="mt-"
                 id="switchStatus"
                 defaultBoColor="#dfdfdf"
                 color="#00b19d"
@@ -257,13 +251,13 @@
                 <mat-option value="DISACTIVE">DISACTIVE</mat-option>
               </mat-select> -->
             </div>
+          </div>
 
-            <div class="text-center mt-4">
-              <button mat-raised-button type="submit" class="btn btn-primary">
-                Add
-                <i class="ri-add-box-line align-middle ms-2"></i>
-              </button>
-            </div>
+          <div class="text-center mt-4">
+            <button mat-raised-button type="submit" class="btn btn-primary">
+              Add
+              <i class="ri-add-box-line align-middle ms-2"></i>
+            </button>
           </div>
         </form>
       </div>

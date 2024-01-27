@@ -26,12 +26,14 @@ import { CounterAreaComponent } from './home/counter-area/counter-area.component
 import { TestimonialAreaComponent } from './home/testimonial-area/testimonial-area.component';
 import { BlogComponent } from './home/blog/blog.component';
 import { CtaAreaComponent } from './home/cta-area/cta-area.component';
+import { CompanyAreaComponent } from './common/company-area/company-area.component';
+import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    HeroAreaComponent,ServiceAreaComponent,CoursesComponent,WhatAreaComponent,WhyAreaComponent,CounterAreaComponent,TestimonialAreaComponent,BlogComponent,CtaAreaComponent,
+    HeroAreaComponent,ServiceAreaComponent,CoursesComponent,WhatAreaComponent,WhyAreaComponent,CounterAreaComponent,TestimonialAreaComponent,BlogComponent,CtaAreaComponent,CompanyAreaComponent,TrustedbyAreaComponent,
     HomeComponent,
     AboutAreaComponent,
     BrandAreaComponent,
@@ -43,6 +45,7 @@ import { CtaAreaComponent } from './home/cta-area/cta-area.component';
     BlogSidebarComponent,
     SignInMainComponent,
     SignInAreaComponent,
+
   ],
   imports: [
     CommonModule,

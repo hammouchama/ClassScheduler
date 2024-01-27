@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignInMainComponent } from './sign-in-main.component';
+import { CompanyAreaComponent } from './company-area.component';
 
-describe('SignInMainComponent', () => {
-  let component: SignInMainComponent;
-  let fixture: ComponentFixture<SignInMainComponent>;
+describe('CompanyAreaComponent', () => {
+  let component: CompanyAreaComponent;
+  let fixture: ComponentFixture<CompanyAreaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignInMainComponent ]
+      declarations: [ CompanyAreaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignInMainComponent);
+    fixture = TestBed.createComponent(CompanyAreaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

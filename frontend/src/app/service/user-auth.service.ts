@@ -29,4 +29,16 @@ export class UserAuthService {
   public isAdmmin() {
     return this.getRole() && this.getRole() === "Admin";
   }
+
+  public roleMatch(allowedRoles: string[]): boolean {
+    const userRole = this.getRole();
+
+    if (userRole !== null) {
+
+      // Check if the userRole is equal to any of the allowed roles
+      return allowedRoles.includes(userRole.trim());
+    }
+
+    return false;
+  }
 }

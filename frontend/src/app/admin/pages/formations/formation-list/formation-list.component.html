@@ -1,86 +1,164 @@
 <div class="container-fluid">
-  <app-pagetitle title="List of Assistants" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+  <app-pagetitle
+    title="List of Formation"
+    [breadcrumbItems]="breadCrumbItems"
+  ></app-pagetitle>
 
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Advanced Data Table</h4>
-          <p class="card-sub-title">
-            Example of datatable.
-          </p>
           <div class="row mb-md-2">
             <div class="col-sm-12 col-md-6">
-              <div class="dataTables_length" id="tickets-table_length"><label
-                  class="d-inline-flex align-items-center">Show
-                  <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+              <div class="dataTables_length" id="tickets-table_length">
+                <label class="d-inline-flex align-items-center"
+                  >Show
+                  <select
+                    name="tickets-table_length"
+                    aria-controls="tickets-table"
+                    name="pageSize"
                     [(ngModel)]="service.pageSize"
-                    class="custom-select custom-select-sm form-control form-control-sm mx-2">
+                    class="custom-select custom-select-sm form-control form-control-sm mx-2"
+                  >
                     <option [ngValue]="10">10</option>
                     <option [ngValue]="25">25</option>
                     <option [ngValue]="50">50</option>
                     <option [ngValue]="100">100</option>
-                  </select> entries</label></div>
+                  </select>
+                  entries</label
+                >
+              </div>
             </div>
             <!-- Search -->
             <div class="col-sm-12 col-md-6">
-              <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
-                  class="d-inline-flex align-items-center">Search:
-                  <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
-                    aria-controls="tickets-table" [(ngModel)]="service.searchTerm"></label></div>
+              <div
+                id="tickets-table_filter"
+                class="dataTables_filter text-md-end"
+              >
+                <label class="d-inline-flex align-items-center"
+                  >Search:
+                  <input
+                    type="text"
+                    name="searchTerm"
+                    class="form-control form-control-sm ms-2"
+                    aria-controls="tickets-table"
+                    [(ngModel)]="service.searchTerm"
+                /></label>
+              </div>
             </div>
             <!-- End search -->
           </div>
           <!-- Table -->
           <div>
-            <table id="basic-datatable"
-              class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+            <table
+              id="basic-datatable"
+              class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline"
+            >
               <thead>
                 <tr>
                   <th></th>
-                  <th sortable="title" (sort)="onSort($event)">Title
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(0)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(0)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container>
+                  <th sortable="title" (sort)="onSort($event)">
+                    Title
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(0)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(0)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
                   </th>
-                  <th sortable="category" (sort)="onSort($event)">Category
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(1)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(1)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container></th>
-                  <th sortable="city" (sort)="onSort($event)">City
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(2)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(2)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container></th>
-                  <th sortable="nb_hours" (sort)="onSort($event)">Nb Hours
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(3)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(3)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container></th>
-                  <th sortable="cost" (sort)="onSort($event)">Cost
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(4)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(4)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container></th>
-                  <th sortable="for_individual" (sort)="onSort($event)">Target
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(5)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(5)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container></th>
-                  <th sortable="status" (sort)="onSort($event)">Status
-                  <ng-container *ngIf="headers">
-                    <i *ngIf="headers.get(5)?.direction === 'asc'" class="fas fa-arrow-up"></i>
-                    <i *ngIf="headers.get(5)?.direction === 'desc'" class="fas fa-arrow-down"></i>
-                  </ng-container></th>
+                  <th sortable="category" (sort)="onSort($event)">
+                    Category
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(1)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(1)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
+                  </th>
+                  <th sortable="city" (sort)="onSort($event)">
+                    City
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(2)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(2)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
+                  </th>
+                  <th sortable="nb_hours" (sort)="onSort($event)">
+                    Nb Hours
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(3)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(3)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
+                  </th>
+                  <th sortable="cost" (sort)="onSort($event)">
+                    Cost
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(4)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(4)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
+                  </th>
+                  <th sortable="for_individual" (sort)="onSort($event)">
+                    Target
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(5)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(5)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
+                  </th>
+                  <th sortable="status" (sort)="onSort($event)">
+                    Status
+                    <ng-container *ngIf="headers">
+                      <i
+                        *ngIf="headers.get(5)?.direction === 'asc'"
+                        class="fas fa-arrow-up"
+                      ></i>
+                      <i
+                        *ngIf="headers.get(5)?.direction === 'desc'"
+                        class="fas fa-arrow-down"
+                      ></i>
+                    </ng-container>
+                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let formation of tables$ | async;let i=index">
+              <tbody *ngFor="let formation of tables$ | async; let i = index">
                 <tr>
                   <td>
-                    <img src="{{formation.photo?.url}}" alt="image" class="rounded-circle avatar-sm" />
+                    <img
+                      src="{{ formation.photo?.url }}"
+                      alt="image"
+                      class="rounded-circle avatar-sm"
+                    />
                   </td>
                   <!-- <td align="center">
                     <a class="expand-row" (click)="changeValue(i)">
@@ -88,40 +166,90 @@
                     </a>
                   </td> -->
                   <td>
-                    <ngb-highlight [result]="formation.title" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight
+                      [result]="formation.title"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="formation.category" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight
+                      [result]="formation.category"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="formation.city" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight
+                      [result]="formation.city"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="formation.nb_hours.toString()" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight
+                      [result]="formation.nb_hours.toString()"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight [result]="formation.cost.toString()+'DH'" [term]="service.searchTerm"></ngb-highlight>
+                    <ngb-highlight
+                      [result]="formation.cost.toString() + 'DH'"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
                   </td>
                   <td>
-                    <div class="badge font-size-12" [ngClass]="{'bg-warning-subtle text-warning': formation.for_individual,
-                      'bg-info-subtle text-info': !formation.for_individual}">
-                      {{formation.for_individual?"Individuals":"Companies"}}
+                    <div
+                      class="badge font-size-12"
+                      [ngClass]="{
+                        'bg-warning-subtle text-warning':
+                          formation.for_individual,
+                        'bg-info-subtle text-info': !formation.for_individual
+                      }"
+                    >
+                      {{
+                        formation.for_individual ? "Individuals" : "Companies"
+                      }}
                     </div>
                     <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
                   </td>
                   <td>
-                    <div class="badge font-size-12" [ngClass]="{'bg-danger-subtle text-danger': formation.status === 'INACTIVE',
-                      'bg-success-subtle text-success':formation.status === 'ACTIVE'}">{{formation.status}}
+                    <div
+                      class="badge font-size-12"
+                      [ngClass]="{
+                        'bg-danger-subtle text-danger':
+                          formation.status === 'INACTIVE',
+                        'bg-success-subtle text-success':
+                          formation.status === 'ACTIVE'
+                      }"
+                    >
+                      {{ formation.status }}
                     </div>
                     <!-- <ngb-highlight [result]="formation.status" [term]="service.searchTerm"></ngb-highlight> -->
                   </td>
                   <td>
                     <div ngbDropdown placement="bottom-left">
-                      <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
-                        aria-expanded="true"></i>
-                      <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                        <a class="dropdown-item" [routerLink]="['/admin/formations/update/', formation.id]"><i class="mdi mdi-account-edit"></i>Edit</a>
-                        <a class="dropdown-item" (click)="deleteFormation(formation.id)" href="javascript: void(0);"><i class="mdi mdi-delete-outline"></i>Delete</a>
+                      <i
+                        class="mdi mdi-dots-vertical dropdown-toggle"
+                        ngbDropdownToggle
+                        data-toggle="dropdown"
+                        aria-expanded="true"
+                      ></i>
+                      <div
+                        class="dropdown-menu dropdown-menu-end"
+                        ngbDropdownMenu
+                      >
+                        <a
+                          class="dropdown-item"
+                          [routerLink]="[
+                            '/dashboard/formations/update/',
+                            formation.id
+                          ]"
+                          ><i class="mdi mdi-account-edit"></i>Edit</a
+                        >
+                        <a
+                          class="dropdown-item"
+                          (click)="deleteFormation(formation.id)"
+                          href="javascript: void(0);"
+                          ><i class="mdi mdi-delete-outline"></i>Delete</a
+                        >
                       </div>
                     </div>
                   </td>
@@ -147,14 +275,20 @@
                 </tr> -->
               </tbody>
               <!-- if the table is empty -->
-              <tbody *ngIf="(tables$ | async)?.length === 0 && !(service.loading$|async)">
+              <tbody
+                *ngIf="
+                  (tables$ | async)?.length === 0 && !(service.loading$ | async)
+                "
+              >
                 <tr>
-                  <td colspan="9" style="text-align: center">No formation found</td>
+                  <td colspan="9" style="text-align: center">
+                    No formation found
+                  </td>
                 </tr>
               </tbody>
 
               <!-- if the table is loading -->
-              <ng-container *ngIf="service.loading$|async">
+              <ng-container *ngIf="service.loading$ | async">
                 <tr>
                   <td colspan="9" style="text-align: center">
                     <div class="spinner-border text-primary m-1" role="status">
@@ -166,18 +300,25 @@
             </table>
           </div>
           <!-- End table -->
-          <div class="row justify-content-md-between align-items-md-center mt-2">
+          <div
+            class="row justify-content-md-between align-items-md-center mt-2"
+          >
             <div class="col-sm-12 col-md-5">
-              <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
-                {{service.startIndex}} to
-                {{service.endIndex}} of {{service.totalRecords}}
+              <div
+                class="dataTables_info mb-2"
+                id="tickets-table_info"
+                role="status"
+                aria-live="polite"
+              >
+                Showing {{ service.startIndex }} to {{ service.endIndex }} of
+                {{ service.totalRecords }}
                 entries
               </div>
             </div>
             <!-- Pagination -->
             <div class="col-sm-12 col-md-5">
               <div class="text-md-end float-md-end s pagination-rounded">
-                Loading : {{service.loading$ | async}}
+                Loading : {{ service.loading$ | async }}
                 <!-- <ngb-pagination [collectionSize]="(total$ | async) || 0" [(page)]="service.page" [pageSize]="service.pageSize" >
                 </ngb-pagination> -->
               </div>

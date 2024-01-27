@@ -13,7 +13,7 @@ import { FormationsRoutingModule } from './formations-routing.module';
 import { FormationListSortableDirective } from './formation-list/formation-list-sortable.directive';
 import { FormationListComponent } from './formation-list/formation-list.component';
 import { AddFormationComponent } from './add-formation/add-formation.component';
-import { DropzoneModule, DROPZONE_CONFIG , DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
+import { DropzoneModule, DROPZONE_CONFIG, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UpdateFormationComponent } from './update-formation/update-formation.component';
@@ -62,4 +62,4 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class FormationsModule {}
+export class FormationsModule { }

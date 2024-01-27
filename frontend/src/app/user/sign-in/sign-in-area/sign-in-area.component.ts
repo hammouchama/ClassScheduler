@@ -18,9 +18,9 @@ export class SignInAreaComponent implements OnInit {
     private userService: UserService,
     private userAuthService: UserAuthService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   login(loginForm: NgForm) {
     //! console.log(loginForm.value)
     this.userService.login(loginForm.value).subscribe(
@@ -32,10 +32,10 @@ export class SignInAreaComponent implements OnInit {
         this.userAuthService.setRole(role);
         //! redarect
         role === 'Admin'
-          ? this.router.navigate(['/admin'])
-          : role === 'assistant'
-          ? this.router.navigate(['/assistant'])
-          : this.router.navigate(['/user']);
+          ? this.router.navigate(['/dashboard'])
+          : role === 'Assistant'
+            ? this.router.navigate(['/dashboard'])
+            : this.router.navigate(['/user']);
       },
       (error) => {
         this.error = true;

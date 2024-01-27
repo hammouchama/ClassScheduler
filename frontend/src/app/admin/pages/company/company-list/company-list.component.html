@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-pagetitle
-    title="List of Assistants"
+    title="List of Formation"
     [breadcrumbItems]="breadCrumbItems"
   ></app-pagetitle>
 
@@ -56,9 +56,8 @@
             >
               <thead>
                 <tr>
-                  <!-- <th></th> -->
-                  <th sortable="firstName" (sort)="onSort($event)">
-                    First Name
+                  <th sortable="name" (sort)="onSort($event)">
+                    Name
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(0)?.direction === 'asc'"
@@ -70,8 +69,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="lastName" (sort)="onSort($event)">
-                    Last Name
+                  <th sortable="address" (sort)="onSort($event)">
+                    Address
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(1)?.direction === 'asc'"
@@ -83,8 +82,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="email" (sort)="onSort($event)">
-                    Email
+                  <th sortable="phone" (sort)="onSort($event)">
+                    phone
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(2)?.direction === 'asc'"
@@ -96,8 +95,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="phone" (sort)="onSort($event)">
-                    Phone
+                  <th sortable="email" (sort)="onSort($event)">
+                    Email
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(3)?.direction === 'asc'"
@@ -109,8 +108,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="address" (sort)="onSort($event)">
-                    Address
+                  <th sortable="url" (sort)="onSort($event)">
+                    Url
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(4)?.direction === 'asc'"
@@ -122,72 +121,45 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="status" (sort)="onSort($event)">
-                    Status
-                    <ng-container *ngIf="headers">
-                      <i
-                        *ngIf="headers.get(5)?.direction === 'asc'"
-                        class="fas fa-arrow-up"
-                      ></i>
-                      <i
-                        *ngIf="headers.get(5)?.direction === 'desc'"
-                        class="fas fa-arrow-down"
-                      ></i>
-                    </ng-container>
-                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let assistant of tables$ | async; let i = index">
+              <tbody *ngFor="let company of tables$ | async; let i = index">
                 <tr>
                   <!-- <td align="center">
-                    <a class="expand-row" (click)="changeValue(i)">
-                      +
-                    </a>
-                  </td> -->
+                       <a class="expand-row" (click)="changeValue(i)">
+                         +
+                       </a>
+                     </td> -->
                   <td>
                     <ngb-highlight
-                      [result]="assistant.firstName"
+                      [result]="company.name"
                       [term]="service.searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="assistant.lastName"
+                      [result]="company.address"
                       [term]="service.searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="assistant.email"
+                      [result]="company.phone"
                       [term]="service.searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="assistant.phone"
+                      [result]="company.email"
                       [term]="service.searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="assistant.address"
+                      [result]="company.url"
                       [term]="service.searchTerm"
                     ></ngb-highlight>
-                  </td>
-                  <td>
-                    <div
-                      class="badge font-size-12"
-                      [ngClass]="{
-                        'bg-danger-subtle text-danger':
-                          assistant.status === 'INACTIVE',
-                        'bg-success-subtle text-success':
-                          assistant.status === 'ACTIVE'
-                      }"
-                    >
-                      {{ assistant.status }}
-                    </div>
-                    <!-- <ngb-highlight [result]="assistant.status" [term]="service.searchTerm"></ngb-highlight> -->
                   </td>
                   <td>
                     <div ngbDropdown placement="bottom-left">
@@ -204,14 +176,14 @@
                         <a
                           class="dropdown-item"
                           [routerLink]="[
-                            '/dashboard/assistants/update/',
-                            assistant.id
+                            '/dashboard/formations/update/',
+                            company.id
                           ]"
                           ><i class="mdi mdi-account-edit"></i>Edit</a
                         >
                         <a
                           class="dropdown-item"
-                          (click)="deleteAssistant(assistant.id)"
+                          (click)="deleteCompany(company.id)"
                           href="javascript: void(0);"
                           ><i class="mdi mdi-delete-outline"></i>Delete</a
                         >
@@ -219,35 +191,17 @@
                     </div>
                   </td>
                 </tr>
-                <!-- <tr *ngIf="!hideme[i]" class="sub-table no-bg">
-                  <td align="center"> </td>
-                  <td colspan="15" class="p-0">
-                    <table class="table mb-0 table-striped">
-                      <thead>
-                        <tr>
-                          <th>Email</th>
-                          <th>Phone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>{{assistant.email}}</td>
-                          <td>{{assistant.phone}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr> -->
+                <!-- if the table is empty -->
               </tbody>
-              <!-- if the table is empty -->
+
               <tbody
                 *ngIf="
                   (tables$ | async)?.length === 0 && !(service.loading$ | async)
                 "
               >
                 <tr>
-                  <td colspan="7" style="text-align: center">
-                    No assistant found
+                  <td colspan="9" style="text-align: center">
+                    No company found
                   </td>
                 </tr>
               </tbody>
@@ -255,7 +209,7 @@
               <!-- if the table is loading -->
               <ng-container *ngIf="service.loading$ | async">
                 <tr>
-                  <td colspan="7" style="text-align: center">
+                  <td colspan="9" style="text-align: center">
                     <div class="spinner-border text-primary m-1" role="status">
                       <span class="sr-only">Loading...</span>
                     </div>
@@ -285,7 +239,7 @@
               <div class="text-md-end float-md-end s pagination-rounded">
                 Loading : {{ service.loading$ | async }}
                 <!-- <ngb-pagination [collectionSize]="(total$ | async) || 0" [(page)]="service.page" [pageSize]="service.pageSize" >
-                </ngb-pagination> -->
+                   </ngb-pagination> -->
               </div>
             </div>
             <!-- End Pagination -->

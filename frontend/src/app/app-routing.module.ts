@@ -14,11 +14,11 @@ const routes: Routes = [
   // { path: 'login', component: LoginComponent },
   { path: 'login', component: SignInMainComponent },
   {
-    path: 'admin',
+    path: 'dashboard',
     loadChildren: () => AdminRoutingModule,
     /* component: AdminComponent, */
     canActivate: [AuthGuard],
-    data: { role: 'Admin' },
+    data: { role: ['Admin', 'Assistant'] },
   },
   /* {
     path: 'admin/assistant',
@@ -40,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

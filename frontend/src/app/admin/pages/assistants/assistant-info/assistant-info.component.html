@@ -109,27 +109,24 @@
           </div>
 
           <div class="row">
-            <!-- Password input -->
-            <div class="input-box form-group mb-4 col-lg-6">
-              <label for="password">New Password</label>
-              <input
-                matInput
-                ngModel
-                class="form-control"
-                id="password"
-                name="password"
-                required
-              />
-            </div>
-
             <div class="button-items text-center mt-4">
-              <button mat-raised-button color="primary" type="submit" class="btn btn-primary">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="btn btn-primary"
+              >
                 Update
                 <i class="ri-install-line align-middle ms-2"></i>
               </button>
 
-              <button mat-raised-button type="button" class="btn btn-danger" color="accent"
-                (click)="deletAssistant(assistant.id)">
+              <button
+                mat-raised-button
+                type="button"
+                class="btn btn-danger"
+                color="accent"
+                (click)="deletAssistant(assistant.id)"
+              >
                 Delete
                 <i class="ri-delete-bin-line align-middle ms-2"></i>
               </button>
@@ -188,19 +185,6 @@
                 class="form-control"
                 id="email"
                 name="email"
-                required
-              />
-            </div>
-
-            <!-- Password input -->
-            <div class="input-box form-group mb-4 col-lg-6">
-              <label for="password">Password</label>
-              <input
-                matInput
-                ngModel
-                class="form-control"
-                id="password"
-                name="password"
                 required
               />
             </div>

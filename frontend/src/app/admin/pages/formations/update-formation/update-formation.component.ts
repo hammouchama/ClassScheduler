@@ -34,7 +34,7 @@ export class UpdateFormationComponent implements OnInit {
     private formationService: FormationService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -53,9 +53,9 @@ export class UpdateFormationComponent implements OnInit {
 
     this.getId();
     if (this.formationId && this.formationId >= 0) {
-        this.getFormation(this.formationId);
-    }else{
-      this.router.navigate(['admin/formations/list']);
+      this.getFormation(this.formationId);
+    } else {
+      this.router.navigate(['/dashboard/formations/list']);
     }
 
     /**
@@ -92,7 +92,7 @@ export class UpdateFormationComponent implements OnInit {
       (error: HttpErrorResponse) => {
         console.log('error');
         console.log(error);
-        this.router.navigate(['admin/formations/list']);
+        this.router.navigate(['/dashboard/formations/list']);
       }
     );
   }
@@ -140,7 +140,7 @@ export class UpdateFormationComponent implements OnInit {
         })
       ); */
       // Call your service method to update the new formation
-      this.formationService.updateFormation(this.formationId,formData).subscribe(
+      this.formationService.updateFormation(this.formationId, formData).subscribe(
         (result) => {
           // Handle success
           Swal.fire({
@@ -148,7 +148,7 @@ export class UpdateFormationComponent implements OnInit {
             icon: 'success',
             confirmButtonColor: '#5438dc',
           });
-          this.router.navigate(['/admin/formations/list']);
+          this.router.navigate(['/dashboard/formations/list']);
 
           console.log('Formation Updated successfully:', result);
         },

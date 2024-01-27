@@ -1,57 +1,49 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Company } from 'src/app/model/company.model';
+import { CompanyService } from 'src/app/service/company.service';
+import { CompanyListSortableDirective, SortEvent } from './company-list-sortable.directive';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { CompanyListService } from './company-list.service';
 import { DecimalPipe } from '@angular/common';
 
-import { Observable } from 'rxjs';
-
-import { FormationListService } from './formation-list.service';
-import {
-  FormationListSortableDirective,
-  SortEvent,
-} from './formation-list-sortable.directive';
-import { Formation } from 'src/app/model/formation.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormationService } from 'src/app/service/-formation.service';
-import Swal from 'sweetalert2';
-
 @Component({
-  selector: 'app-formation-list',
-  templateUrl: './formation-list.component.html',
-  styleUrls: ['./formation-list.component.scss'],
-  providers: [FormationListService, DecimalPipe],
+  selector: 'app-company-list',
+  templateUrl: './company-list.component.html',
+  styleUrl: './company-list.component.scss',
+  providers: [CompanyListService, DecimalPipe],
 })
+export class CompanyListComponent implements OnInit {
 
-/**
- * Advanced table component
- */
-export class FormationListComponent implements OnInit {
+
   // bread crum data
   breadCrumbItems!: Array<{}>;
   hideme: boolean[] = [];
 
   // Table data
-  formationData!: Formation[];
+  companyData!: Company[];
 
-  tables$: Observable<Formation[]>;
+  tables$: Observable<Company[]>;
   total$: Observable<number>;
 
-  @ViewChildren(FormationListSortableDirective)
-  headers!: QueryList<FormationListSortableDirective>;
+  @ViewChildren(CompanyListSortableDirective)
+  headers!: QueryList<CompanyListSortableDirective>;
 
   constructor(
-    private formationService: FormationService,
-    public service: FormationListService
+    private companyService: CompanyService,
+    public service: CompanyListService
   ) {
     this.tables$ = service.tables$;
     this.total$ = service.total$;
   }
-  ngOnInit() {
+  ngOnInit(): void {
     this.service.loading = true;
 
     this.breadCrumbItems = [
-      { label: 'Formations' },
-      { label: 'List of Formations', active: true },
+      { label: 'Company' },
+      { label: 'List of Company', active: true },
     ];
-
     /**
      * fetch data
      */
@@ -59,22 +51,18 @@ export class FormationListComponent implements OnInit {
     this.service.loading = false;
   }
 
-  changeValue(i: number) {
-    this.hideme[i] = !this.hideme[i];
-  }
-
   /**
    * fetches the table value
    */
   _fetchData() {
-    this.formationService.getAllFormation().subscribe(
-      (resp: Formation[]) => {
+    this.companyService.getAllCompany().subscribe(
+      (resp: Company[]) => {
         this.service.updateTableData(resp);
-        this.formationData = resp; // Assign data
+        this.companyData = resp; // Assign data
 
         // Initialize hideme with true for each element in formationData
         this.hideme = Array.from(
-          { length: this.formationData?.length },
+          { length: this.companyData?.length },
           () => true
         );
       },
@@ -86,8 +74,8 @@ export class FormationListComponent implements OnInit {
   }
 
 
-  //delet formation
-  public deleteFormation(id: number) {
+  //delet company
+  public deleteCompany(id: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -98,7 +86,7 @@ export class FormationListComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.formationService.deletFormation(id).subscribe(
+        this.companyService.deleteCompany(id).subscribe(
           (respons: any) => {
             if (respons.message) {
               Swal.fire({

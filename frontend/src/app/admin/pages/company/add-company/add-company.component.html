@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <app-pagetitle
+    title="Add New Company"
+    [breadcrumbItems]="breadCrumbItems"
+  ></app-pagetitle>
+
+  <form
+    (ngSubmit)="validSubmit()"
+    [formGroup]="formationForm"
+    enctype="multipart/form-data"
+  >
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Company Information</div>
+            <p class="card-title-desc">
+              Fill in the details for the new company.
+            </p>
+
+            <!-- Other Formation Information -->
+            <div class="form-group mb-4">
+              <label for="name">Name</label>
+              <span class="text-danger">*</span>
+              <input
+                [ngClass]="{ 'is-invalid': submit && form['name'].errors }"
+                type="text"
+                id="name"
+                formControlName="name"
+                class="form-control"
+              />
+              <div
+                *ngIf="submit && form['name'].errors"
+                class="invalid-feedback"
+              >
+                <span *ngIf="form['name'].errors['required']"
+                  >This value is required.</span
+                >
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="address">Address</label>
+              <span class="text-danger">*</span>
+              <input
+                [ngClass]="{ 'is-invalid': submit && form['address'].errors }"
+                type="text"
+                id="address"
+                formControlName="address"
+                class="form-control"
+              />
+              <div
+                *ngIf="submit && form['address'].errors"
+                class="invalid-feedback"
+              >
+                <span *ngIf="form['address'].errors['required']"
+                  >This value is required.</span
+                >
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="url">Url</label>
+              <span class="text-danger">*</span>
+              <input
+                [ngClass]="{ 'is-invalid': submit && form['url'].errors }"
+                type="text"
+                id="url"
+                formControlName="url"
+                class="form-control"
+              />
+              <div
+                *ngIf="submit && form['url'].errors"
+                class="invalid-feedback"
+              >
+                <span *ngIf="form['url'].errors['required']"
+                  >This value is required.</span
+                >
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="phone">Phone</label>
+              <span class="text-danger">*</span>
+              <input
+                [ngClass]="{ 'is-invalid': submit && form['phone'].errors }"
+                type="text"
+                id="phone"
+                formControlName="phone"
+                class="form-control"
+              />
+              <div
+                *ngIf="submit && form['phone'].errors"
+                class="invalid-feedback"
+              >
+                <span *ngIf="form['phone'].errors['required']"
+                  >This value is required.</span
+                >
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="email">Email</label>
+              <span class="text-danger">*</span>
+              <input
+                [ngClass]="{ 'is-invalid': submit && form['email'].errors }"
+                type="text"
+                id="email"
+                formControlName="email"
+                class="form-control"
+              />
+              <div
+                *ngIf="submit && form['email'].errors"
+                class="invalid-feedback"
+              >
+                <span *ngIf="form['email'].errors['required']"
+                  >This value is required.</span
+                >
+              </div>
+            </div>
+
+            <!-- Add other form controls as needed -->
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary">Add Company</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

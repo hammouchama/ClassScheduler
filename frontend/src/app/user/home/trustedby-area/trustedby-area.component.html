@@ -1,38 +1,49 @@
-<section class="testimonial__area testimonial__overlay pt-175 pb-170"
-   [ngStyle]="{background:'url(assets/img/testimonial/testimonial-bg.jpg)',backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundPosition:'center'}">
-   <div class="container p-relative">
-      <div class="col-xxl-12">
-         <div class="testimonial__slider swiper-container">
-            <div class="testimonial__slider-inner ">
-               <swiper class="swiper-wrapper trustedby" [slidesPerView]="2" [spaceBetween]="2" [loop]="true"
-                  [navigation]="{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}" [autoplay]="{
-                    delay: 2500,
-                    disableOnInteraction: true
-                }">
-                  <ng-template swiperSlide>
-                    <img src="assets/img/companies/Cisco.png" alt="Cisco">
-                  </ng-template>
-                  <ng-template swiperSlide>
-                    <img src="assets/img/companies/Hasbro.png" alt="Hasbro">
-                  </ng-template>
-                  <ng-template swiperSlide>
-                    <img src="assets/img/companies/hubspot.png" alt="hubspot">
-                  </ng-template>
-                  <ng-template swiperSlide>
-                    <img src="assets/img/companies/kraft.png" alt="kraft">
-                  </ng-template>
-                  <ng-template swiperSlide>
-                    <img src="assets/img/companies/Nvidia.png" alt="Nvidia">
-                  </ng-template>
-                  <ng-template swiperSlide>
-                    <img src="assets/img/companies/xerox.png" alt="xerox">
-                  </ng-template>
-               </swiper>
-
-            </div>
-            <div class="swiper-button-next swiper-nav"><i class="far fa-arrow-right"></i></div>
-            <div class="swiper-button-prev swiper-nav"><i class="far fa-arrow-left"></i></div>
-         </div>
+<section
+  class="testimonial__area testimonial__overlay pt-95 pb-150"
+  [ngStyle]="{
+    background: 'url(assets/img/testimonial/testimonial-bg.jpg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }"
+>
+  <div class="container p-relative">
+    <div class="row">
+      <div class="section__title-wrapper section__title-wrapper-2 mb-65">
+        <div class="section__title section__title-2 text-center">
+          <h2 class="title__line text-light">Trusted By</h2>
+        </div>
       </div>
-   </div>
+    </div>
+    <div class="col-xxl-12">
+      <div class="testimonial__slider swiper-container">
+        <div class="testimonial__slider-inner">
+          <swiper
+            class="swiper-wrapper trustedby"
+            [slidesPerView]="4"
+            [spaceBetween]="20"
+            [loop]="true"
+            [navigation]="{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }"
+            [autoplay]="{
+              delay: 2500,
+              disableOnInteraction: true
+            }"
+          >
+            <ng-template swiperSlide *ngFor="let logo of companyLogos">
+              <img [src]="logo.src" [alt]="logo.alt" />
+            </ng-template>
+          </swiper>
+        </div>
+        <div class="swiper-button-next swiper-nav">
+          <i class="far fa-arrow-right"></i>
+        </div>
+        <div class="swiper-button-prev swiper-nav">
+          <i class="far fa-arrow-left"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

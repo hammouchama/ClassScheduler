@@ -22,5 +22,4 @@ public class Company {
     private String url;
 
     private String email;
-    //private  String password;
 }

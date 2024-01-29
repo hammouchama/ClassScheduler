@@ -28,12 +28,23 @@ import { BlogComponent } from './home/blog/blog.component';
 import { CtaAreaComponent } from './home/cta-area/cta-area.component';
 import { CompanyAreaComponent } from './common/company-area/company-area.component';
 import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.component';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    HeroAreaComponent,ServiceAreaComponent,CoursesComponent,WhatAreaComponent,WhyAreaComponent,CounterAreaComponent,TestimonialAreaComponent,BlogComponent,CtaAreaComponent,CompanyAreaComponent,TrustedbyAreaComponent,
+    HeroAreaComponent,
+    ServiceAreaComponent,
+    CoursesComponent,
+    WhatAreaComponent,
+    WhyAreaComponent,
+    CounterAreaComponent,
+    TestimonialAreaComponent,
+    BlogComponent,
+    CtaAreaComponent,
+    CompanyAreaComponent,
+    TrustedbyAreaComponent,
     HomeComponent,
     AboutAreaComponent,
     BrandAreaComponent,
@@ -45,7 +56,6 @@ import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.com
     BlogSidebarComponent,
     SignInMainComponent,
     SignInAreaComponent,
-
   ],
   imports: [
     CommonModule,
@@ -53,6 +63,7 @@ import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.com
     MatTabsModule,
     SwiperModule,
     FormsModule,
+    NgbNavModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

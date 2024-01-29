@@ -94,13 +94,12 @@
             <div class="input-box form-group mb-4 col-lg-6">
               <label for="switchStatus" class="col-md-4">Status</label>
               <ui-switch
-                ngModel
                 name="status"
                 class="col-md"
                 id="switchStatus"
                 defaultBoColor="#dfdfdf"
                 color="#00b19d"
-                [checked]="assistant.status === 'ACTIVE'"
+                [checked]="assistant.status == 'ACTIVE'"
                 uncheckedLabel="INACTIVE"
                 checkedLabel="ACTIVE"
                 size="small"
@@ -218,7 +217,7 @@
             </div>
             <!-- Status input -->
             <div class="input-box form-group mb-4 col-lg-6">
-              <label for="switchStatus">Status</label><br/>
+              <label for="switchStatus">Status</label><br />
               <ui-switch
                 ngModel
                 name="status"

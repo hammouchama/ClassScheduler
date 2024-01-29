@@ -21,7 +21,7 @@ export class AddFormationComponent implements OnInit {
 
   imageUrl: string | null = null;
   selectedImage: File | null = null;
-
+  today = new Date().toISOString().split('T')[0]
   selectedForIndividualSwitch: String = 'false';
   /* selectedStatuslSwitch: String = 'ACTIVE'; */
 
@@ -29,7 +29,7 @@ export class AddFormationComponent implements OnInit {
     public formBuilder: UntypedFormBuilder,
     private formationService: FormationService,
     private router: Router
-  ) {}
+  ) { }
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -67,6 +67,8 @@ export class AddFormationComponent implements OnInit {
         ],
         cost: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         capacity: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+        start_registration: ['', [Validators.required]],
+        end_registration: ['', [Validators.required]],
       } /* , {
       validator: MustMatch('password', 'confirmpwd'),} */
     );
@@ -76,6 +78,7 @@ export class AddFormationComponent implements OnInit {
     this.typesubmit = false;
     this.rangesubmit = false; */
   }
+
 
   /**
    * Returns form
@@ -94,9 +97,8 @@ export class AddFormationComponent implements OnInit {
     if (this.formationForm.valid && this.selectedImage) {
       console.log('this.formationForm.value', this.formationForm.value);
       const _Data = JSON.stringify({
-        ...this.formationForm.value,
-        for_individual: this.selectedForIndividualSwitch,
-        /* status: this.selectedStatuslSwitch, */
+        ...this.formationForm.value
+
       });
 
       console.log('_Data', _Data);
@@ -106,12 +108,6 @@ export class AddFormationComponent implements OnInit {
       //append the rest of the data and selectedForIndividualSwitch and selectedStatuslSwitch
       formData.append('data', new Blob([_Data], { type: 'application/json' }));
 
-      /* formData.append(
-        'data',
-        new Blob([JSON.stringify], {
-          type: 'application/json',
-        })
-      ); */
       // Call your service method to add the new formation
       this.formationService.addFormation(formData).subscribe(
         (result) => {
@@ -121,7 +117,7 @@ export class AddFormationComponent implements OnInit {
             icon: 'success',
             confirmButtonColor: '#5438dc',
           });
-          this.router.navigate(['/admin/formations/list']);
+          this.router.navigate(['/dashboard/formations/list']);
 
           console.log('Formation added successfully:', result);
         },
@@ -130,7 +126,7 @@ export class AddFormationComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
+            text: error,
           });
           console.error('Error adding formation:', error);
         }
@@ -158,9 +154,9 @@ export class AddFormationComponent implements OnInit {
     this.imageUrl = URL.createObjectURL(event);
   }
 
-  public onChangeForIndividualSwitch(event: any) {
-    this.selectedForIndividualSwitch = event ? 'true' : 'false';
-  }
+  // public onChangeForIndividualSwitch(event: any) {
+  //   this.selectedForIndividualSwitch = event ? 'true' : 'false';
+
 
   /* public onChangeStatuslSwitch(event: any) {
     this.selectedStatuslSwitch = event?"ACTIVE":"INACTIVE";

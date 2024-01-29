@@ -39,6 +39,7 @@ export class AssistantInfoComponent implements OnInit {
     } else {
       this.isAdd = true;
     }
+    //  console.log("satus", this.assistant.status)
   }
 
   //get assistant details
@@ -48,12 +49,12 @@ export class AssistantInfoComponent implements OnInit {
       (resp: Assistant) => {
         console.log("resp", resp);
         this.assistant = resp;
-        // console.log(this.assistan)
+
       },
       (error: HttpErrorResponse) => {
         console.log('error');
         console.log(error);
-        this.router.navigate(['dashboard/assistant/list']);
+        this.router.navigate(['/dashboard/assistant/list']);
       }
     );
   }
@@ -108,7 +109,7 @@ export class AssistantInfoComponent implements OnInit {
                 text: 'Your file has been deleted.',
                 icon: 'success',
               });
-              this.router.navigate(['dashboard/assistant']);
+              this.router.navigate(['/dashboard/assistant/list']);
             }
           },
           (error: HttpErrorResponse) => {
@@ -135,7 +136,7 @@ export class AssistantInfoComponent implements OnInit {
           text: respon.message,
           icon: 'success',
         });
-        this.router.navigate(['dashboard/assistant/list']);
+        this.router.navigate(['/dashboard/assistant/list']);
       },
       (error: any) => {
         console.log(error)

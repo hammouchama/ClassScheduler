@@ -22,7 +22,7 @@ export class UpdateFormationComponent implements OnInit {
   formationId: any;
 
   cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
-
+  today = new Date().toISOString().split('T')[0]
   imageUrl: string | null = null;
   selectedImage: File | null = null;
 
@@ -71,6 +71,8 @@ export class UpdateFormationComponent implements OnInit {
         description: ['', [Validators.required]],
         cost: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         capacity: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+        start_registration: ['', [Validators.required]],
+        end_registration: ['', [Validators.required]],
       } /* , {
       validator: MustMatch('password', 'confirmpwd'),} */
     );
@@ -122,7 +124,7 @@ export class UpdateFormationComponent implements OnInit {
       console.log('this.formationForm.value', this.formationForm.value);
       const _Data = JSON.stringify({
         ...this.formationForm.value,
-        for_individual: this.selectedForIndividualSwitch,
+        // for_individual: this.selectedForIndividualSwitch,
         /* status: this.selectedStatuslSwitch, */
       });
 

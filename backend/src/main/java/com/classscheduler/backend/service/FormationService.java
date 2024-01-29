@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,19 +36,27 @@ public class FormationService {
         try {
             if (jwtFilter.isAdmin()) {
                 if (isValidData(requestyMap)) {
-                    Formation formation = new Formation();
-                    // extract photo
-                    if (image != null) {
-                        ImagesModel imagesModel = new ImagesModel();
-                        imagesModel.setName(image.getName());
-                        imagesModel.setType(image.getContentType());
-                        imagesModel.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));
-                        imagesModel = imageModelRepository.save(imagesModel);
-                        formation.setPhoto(imagesModel);
+                    Formation formationExist=formationRepository.findFormationByTitleAndCity(requestyMap.get("title"),requestyMap.get("city"));
+                    if (Objects.isNull(formationExist)){
+                        Formation formation = new Formation();
+                        formation =extractFormationInfo(requestyMap, formation);
+                        if (formation.getStart_registration().compareTo(formation.getEnd_registration())<0){
+                            // extract photo
+                            if (image != null) {
+                                ImagesModel imagesModel = new ImagesModel();
+                                imagesModel.setName(image.getName());
+                                imagesModel.setType(image.getContentType());
+                                imagesModel.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));
+                                imagesModel = imageModelRepository.save(imagesModel);
+                                formation.setPhoto(imagesModel);
+                            }
+                            // #################################*/
+                            formationRepository.save(formation);
+                            return Helpers.getResponseEntity("Successfully Registered", HttpStatus.OK);
+                        }
+                        return Helpers.getResponseEntity("end registration date must be grater than end start registration date",HttpStatus.BAD_REQUEST);
                     }
-                    // #################################*/
-                    formationRepository.save(extractFormationInfo(requestyMap, formation));
-                    return Helpers.getResponseEntity("Successfully Registered", HttpStatus.OK);
+                    return Helpers.getResponseEntity("This Formation are ready exist",HttpStatus.BAD_REQUEST);
                 }
                 return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
             }
@@ -66,8 +75,9 @@ public class FormationService {
                 && requestyMap.containsKey("objective")
                 && requestyMap.containsKey("description")
                 && requestyMap.containsKey("cost")
-                && requestyMap.containsKey("for_individual")
-                && requestyMap.containsKey("capacity")) {
+                && requestyMap.containsKey("capacity")
+                && requestyMap.containsKey("start_registration")
+                && requestyMap.containsKey("end_registration")) {
             return true;
         }
         return false;
@@ -84,9 +94,9 @@ public class FormationService {
         formation.setDescription(requestyMap.get("description"));
         formation.setObjective(requestyMap.get("objective"));
         formation.setNb_hours(Integer.parseInt(requestyMap.get("nb_hours")));
-        formation.setFor_individual(requestyMap.get("for_individual"));
         formation.setCapacity(Integer.parseInt(requestyMap.get("capacity")));
-
+        formation.setStart_registration(LocalDate.parse(requestyMap.get("start_registration")));
+        formation.setEnd_registration(LocalDate.parse(requestyMap.get("end_registration")));
         return formation;
     }
 
@@ -145,18 +155,23 @@ public class FormationService {
         try {
             if (jwtFilter.isAdmin()) {
                 if (isValidData(requestMap)) {
-                    Formation formation = formationRepository.findById(id).orElse(null);
-                    if (!Objects.isNull(formation)) {
-                        ImagesModel photo = formation.getPhoto();
-                        if (image != null) {
-                            photo.setName(image.getName());
-                            photo.setType(image.getContentType());
-                            photo.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));
-                            formation.setPhoto(photo);
-                        }
+                    Formation formationOld = formationRepository.findById(id).orElse(null);
+                    if (!Objects.isNull(formationOld)) {
+                        Formation formation =new Formation();
                         formation = extractFormationInfo(requestMap, formation);
-                        formationRepository.save(formation);
-                        return Helpers.getResponseEntity("Formation has update successfully", HttpStatus.OK);
+                        if(formation.getStart_registration().compareTo(formation.getEnd_registration())<0){
+                            ImagesModel photo = formation.getPhoto();
+                            if (image != null) {
+                                photo.setName(image.getName());
+                                photo.setType(image.getContentType());
+                                photo.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));
+                                formation.setPhoto(photo);
+                            }
+
+                            formationRepository.save(formation);
+                            return Helpers.getResponseEntity("Formation has update successfully", HttpStatus.OK);
+                        }
+                        return Helpers.getResponseEntity("end registration date must be grater than end start registration date",HttpStatus.BAD_REQUEST);
                     }
                     return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
                 }

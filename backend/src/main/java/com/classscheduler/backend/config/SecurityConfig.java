@@ -48,7 +48,9 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable()
                 )
                 .authorizeRequests(auth->
-                        auth.requestMatchers("/login","/public/**","/forgotPassword","/static/**","/images/**")
+                        auth.requestMatchers("/login","/public/**","/forgotPassword","/static/**")
+                                .permitAll()
+                                .requestMatchers("/images/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

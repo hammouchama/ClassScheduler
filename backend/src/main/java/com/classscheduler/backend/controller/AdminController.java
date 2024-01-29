@@ -82,4 +82,15 @@ public class AdminController {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // reset password
+    @GetMapping("/assistant/resetPassword/{id}")
+    public ResponseEntity<String> resetPassword(@PathVariable long id){
+        try {
+            return adminService.resetPassword(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

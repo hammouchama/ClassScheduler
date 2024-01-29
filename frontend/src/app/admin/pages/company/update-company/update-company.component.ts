@@ -8,10 +8,8 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-company',
-  standalone: true,
-  imports: [],
   templateUrl: './update-company.component.html',
-  styleUrl: './update-company.component.scss'
+  styleUrl: './update-company.component.scss',
 })
 export class UpdateCompanyComponent implements OnInit {
 
@@ -41,7 +39,7 @@ export class UpdateCompanyComponent implements OnInit {
     if (this.companyId && this.companyId >= 0) {
       this.getCompany(this.companyId);
     } else {
-      this.router.navigate(['dashboard/Companys/list']);
+      this.router.navigate(['/dashboard/company/list']);
     }
 
     /**
@@ -79,7 +77,7 @@ export class UpdateCompanyComponent implements OnInit {
       (error: HttpErrorResponse) => {
         console.log('error');
         console.log(error);
-        this.router.navigate(['/dashboard/formations/list']);
+        this.router.navigate(['/dashboard/company/list']);
       }
     );
   }
@@ -117,7 +115,7 @@ export class UpdateCompanyComponent implements OnInit {
             icon: 'success',
             confirmButtonColor: '#5438dc',
           });
-          this.router.navigate(['/dashboard/companys/list']);
+          this.router.navigate(['/dashboard/company/list']);
 
           console.log('Company Updated successfully:', result);
         },

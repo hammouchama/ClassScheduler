@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
  * Advanced table component
  */
 export class AssistantListComponent implements OnInit {
+
   // bread crum data
   breadCrumbItems!: Array<{}>;
   hideme: boolean[] = [];
@@ -45,7 +46,7 @@ export class AssistantListComponent implements OnInit {
     this.total$ = service.total$;
   }
   ngOnInit() {
-    this.service.loading=true;
+    this.service.loading = true;
 
     this.breadCrumbItems = [
       { label: 'Assistants' },
@@ -119,6 +120,43 @@ export class AssistantListComponent implements OnInit {
         );
       }
     });
+  }
+
+  //reset password 
+  public resetPassword(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "you want to proceed?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, reset it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.assistantService.resetPassword(id).subscribe(
+          (respons: any) => {
+            if (respons.message) {
+              Swal.fire({
+                title: 'Reseted!',
+                text: 'the password has been reseted.',
+                icon: 'success',
+              });
+              this._fetchData();
+            }
+          },
+          (error: HttpErrorResponse) => {
+            console.log('error: ', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          }
+        );
+      }
+    });
+
   }
 
   /**

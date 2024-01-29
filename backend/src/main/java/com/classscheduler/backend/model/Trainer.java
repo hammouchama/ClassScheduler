@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NamedQuery(name = "Trainer.getTrainerNotAccepted", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.url,t.formation.title) from Trainer t where t.accepted='false'")
+import java.util.ArrayList;
+import java.util.List;
+
+@NamedQuery(name = "Trainer.getTrainerNotAccepted", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.url,t.formation) from Trainer t where t.accepted='false'")
 @Entity
 @Data
 @AllArgsConstructor
@@ -26,9 +29,9 @@ public class Trainer {
     private String skills;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "formation_id")
-    private Formation formation;
+    @ManyToMany
+    //@JoinColumn(name = "formation_id")
+    private List<Formation> formation=new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")

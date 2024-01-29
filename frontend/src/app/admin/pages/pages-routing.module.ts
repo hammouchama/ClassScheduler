@@ -3,16 +3,33 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { AuthGuard } from 'src/app/auth/auth.guard';
 /* import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { KanbanComponent } from './kanban/kanban.component'; */
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
-    { path: 'calendar', component: CalendarComponent },
-    { path: 'assistants', loadChildren: () => import('./assistants/assistants.module').then(m => m.AssistantsModule) },
-    { path: 'formations', loadChildren: () => import('./formations/formations.module').then(m => m.FormationsModule) },
-    { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) },
+    {
+        path: 'calendar', component: CalendarComponent,
+        canActivate: [AuthGuard],
+        data: { role: ['Admin', 'Assistant'] },
+    },
+    {
+        path: 'assistants', loadChildren: () => import('./assistants/assistants.module').then(m => m.AssistantsModule),
+        canActivate: [AuthGuard],
+        data: { role: ['Admin'] },
+    },
+    {
+        path: 'formations', loadChildren: () => import('./formations/formations.module').then(m => m.FormationsModule),
+        canActivate: [AuthGuard],
+        data: { role: ['Admin'] },
+    },
+    {
+        path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule),
+        canActivate: [AuthGuard],
+        data: { role: ['Admin', 'Assistant'] },
+    },
     //  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UIModule) },
     //  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     /*{ path: 'chat', component: ChatComponent },

@@ -1,9 +1,12 @@
 package com.classscheduler.backend.dto;
 
+import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.model.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +23,7 @@ public class TrainerDTO {
 
     private String photo;
 
-    private String formationName;
+    private List<Formation> formations;
 
     public TrainerDTO(Long id,
                       String firstName,
@@ -31,7 +34,7 @@ public class TrainerDTO {
                       String skills,
                       String description,
                       String photo,
-                      String formationName) {
+                      List<Formation> formationName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +44,7 @@ public class TrainerDTO {
         this.skills = skills;
         this.description = description;
         this.photo = photo;
-        this.formationName = formationName;
+        this.formations = formationName;
     }
    public static TrainerDTO fromTrainerToTrainerTDO(Trainer trainer){
         TrainerDTO trainerDTO=new TrainerDTO();
@@ -54,7 +57,7 @@ public class TrainerDTO {
         trainerDTO.setDescription(trainer.getDescription());
         trainerDTO.setSkills(trainer.getSkills());
         trainerDTO.setPhoto(trainer.getPhoto().getUrl());
-        trainerDTO.setFormationName(trainer.getFormation().getTitle());
+        trainerDTO.setFormations(trainer.getFormation());
         return trainerDTO;
    }
 

@@ -54,8 +54,10 @@ function matches(tables: Formation, term: string, pipe: PipeTransform) {
     || tables.city.toLowerCase().includes(term.toLowerCase())
     || tables.nb_hours.toString().includes(term.toLowerCase())
     || tables.cost.toString().includes(term.toLowerCase())
-    || tables.for_individual.toLowerCase().includes(term.toLowerCase())
+    // || tables.for_individual.toLowerCase().includes(term.toLowerCase())
     || tables.status.toLowerCase().includes(term.toLowerCase())
+    || tables.end_registration.toString().includes(term)
+    || tables.start_registration.toString().includes(term)
 }
 
 @Injectable({

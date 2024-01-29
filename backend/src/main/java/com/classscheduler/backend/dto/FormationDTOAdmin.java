@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @Data
 public class FormationDTOAdmin {
@@ -18,12 +20,13 @@ public class FormationDTOAdmin {
     private String description;
     private String status;
     private float cost;
-    private String for_individual;
     private int capacity;
     private ImagesModel photo;
+    private LocalDate start_registration;
+    private LocalDate end_registration;
 
     public FormationDTOAdmin(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description, String status, float cost, String for_individual, int capacity, ImagesModel photo) {
+            String description, String status, float cost, int capacity, ImagesModel photo ,LocalDate start_registration,LocalDate end_registration) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -33,9 +36,12 @@ public class FormationDTOAdmin {
         this.description = description;
         this.status = status;
         this.cost = cost;
-        this.for_individual = for_individual;
         this.photo = photo;
         this.capacity = capacity;
+
+        this.start_registration=start_registration;
+        this.end_registration=end_registration;
+
 
     }
 

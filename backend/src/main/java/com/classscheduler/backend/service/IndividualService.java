@@ -32,7 +32,8 @@ public class IndividualService {
 
             // Check if the provided information is valid, formation exists, and it's for individuals
             if (isValidInfo(requestMap)
-                    || !Objects.isNull(formation) || "true".equals(formation.getFor_individual())) {
+                    || !Objects.isNull(formation)
+            ) {
 
                 // Retrieve the number of groups for the given formation
                 int numberOfGroups = groupRepository.countGroupsByFormationAndIsOldFalse(formation);

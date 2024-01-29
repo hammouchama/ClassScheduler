@@ -19,8 +19,8 @@ public class Scheduling {
     private String title;
     private String description;
     private LocalDate date;
-    private LocalTime time;
-
+    private LocalTime start_time;
+    private LocalTime end_time;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "formation")
     private Formation formation;

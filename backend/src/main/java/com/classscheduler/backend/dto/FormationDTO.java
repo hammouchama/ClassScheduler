@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @Data
 public class FormationDTO {
@@ -15,11 +17,12 @@ public class FormationDTO {
     private int nb_hours;
     private String objective;
     private String description;
-    private String for_individual;
     private String photo;
+    private LocalDate start_registration;
+    private LocalDate end_registration;
 
     public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description, String for_individual,String photo) {
+            String description,String photo,LocalDate start_registration ,LocalDate end_registration ) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -27,8 +30,9 @@ public class FormationDTO {
         this.nb_hours = nb_hours;
         this.objective = objective;
         this.description = description;
-        this.for_individual = for_individual;
         this.photo = photo;
+        this.start_registration=start_registration;
+        this.end_registration=end_registration;
     }
 
     public FormationDTO fromFormation(Formation formation) {

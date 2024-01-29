@@ -9,8 +9,9 @@ export interface Formation {
   objective: string;
   description: string;
   status: string;
-  for_individual: string;
   cost: number;
   capacity: number;
   photo?: ImagesModel;
+  start_registration: Date;
+  end_registration: Date;
 }

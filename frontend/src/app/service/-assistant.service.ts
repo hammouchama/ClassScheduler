@@ -8,6 +8,7 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root'
 })
 export class AssistantService {
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -25,5 +26,8 @@ export class AssistantService {
   }
   public addAssistant(data: any) {
     return this.httpClient.post(environment.apiEndpoint + "/admin/addAssistant", data);
+  }
+  public resetPassword(id: number) {
+    return this.httpClient.get(environment.apiEndpoint + `/admin/assistant/resetPassword/${id}`)
   }
 }

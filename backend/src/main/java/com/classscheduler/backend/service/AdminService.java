@@ -88,8 +88,8 @@ public class AdminService {
                     if(validateAssistantInfoFromMap(requestyMap)){
                         userRepository.save(getAssistantFromMap(requestyMap,user));
                         // send an email to assistant
-                        String fullname=user.getFirstName()+" "+user.getLastName();
-                        emailHelper.sendLoginInfoEmail(requestyMap.get("email"),requestyMap.get("password"),fullname,"Assistant");
+                      //  String fullname=user.getFirstName()+" "+user.getLastName();
+                       // emailHelper.sendLoginInfoEmail(requestyMap.get("email"),requestyMap.get("password"),fullname,"Assistant");
                       return Helpers.getResponseEntity("Assistant has updated successfully",HttpStatus.OK);
 
                     }
@@ -110,7 +110,7 @@ public class AdminService {
                 && reqMap.containsKey("lastName")
                 && reqMap.containsKey("address")
                 && reqMap.containsKey("email")
-                &&reqMap.containsKey("password")
+               // && reqMap.containsKey("password")
                 && reqMap.containsKey("phone")
                 && reqMap.containsKey("status");
     }
@@ -131,4 +131,27 @@ public class AdminService {
         return user;
     }
 
+    public ResponseEntity<String> resetPassword(long id) {
+        try {
+            if (jwtFilter.isAdmin()){
+                User user=userRepository.findAssistantById(id);
+                if (!Objects.isNull(user)){
+                    String password=Helpers.generatePassword();
+                    user.setPassword(passwordEncoder.encode(password));
+                    userRepository.save(user);
+                    String fullname = user.getFirstName() + " " + user.getLastName();
+                    emailHelper.sendLoginInfoEmail(user.getEmail(), password, fullname,
+                            "Assistant");
+                    return Helpers.getResponseEntity("Successfully Registered", HttpStatus.OK);
+
+                }
+                else return Helpers.getResponseEntity("Invalid Assistant id",HttpStatus.BAD_REQUEST);
+            }
+            return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS,HttpStatus.UNAUTHORIZED);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

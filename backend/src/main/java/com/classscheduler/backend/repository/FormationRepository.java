@@ -11,4 +11,6 @@ import java.util.List;
 public interface FormationRepository extends JpaRepository<Formation,Long> {
 
     List<FormationDTO> getAllActiveFormation();
+
+    Formation findFormationByTitleAndCity(String title, String city);
 }

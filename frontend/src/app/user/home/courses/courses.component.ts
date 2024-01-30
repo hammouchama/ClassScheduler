@@ -30,7 +30,49 @@ export class CoursesComponent implements OnInit {
     '#f2277e',
   ];
 
-  formationData: Formation[] = [];
+  /* formationData: Formation[] = []; */
+  formationData: Formation[] = [
+    {
+      id: 1,
+      title: 'TestTitle',
+      category: 'Design',
+      city: 'Tetouan',
+      nb_hours: 12,
+      objective: 'fsfsfesf\nsefsefsef',
+      description: 'efsfes\nfsef\nsef',
+      status: 'ACTIVE',
+      cost: 122,
+      capacity: 12,
+      start_registration: '2024-01-29',
+      end_registration: '2024-02-11',
+      photo: {
+        id: 1,
+        name: 'image',
+        type: 'image/jpeg',
+        url: 'http://localhost:8080/images/formation/1706538372576_diffuse-texture.jpg',
+      },
+    },
+    {
+      id: 2,
+      title: 'TestTitle2',
+      category: 'Development',
+      city: 'Tanger',
+      nb_hours: 13,
+      objective: 'dzqdqzd\nqzdqzdqdqsf',
+      description: 'fsef\nsfesfsefsf',
+      status: 'ACTIVE',
+      cost: 1221210,
+      capacity: 1252,
+      start_registration: '2024-02-02',
+      end_registration: '2024-02-04',
+      photo: {
+        id: 2,
+        name: 'image',
+        type: 'image/png',
+        url: 'http://localhost:8080/images/formation/1706538432063_2.png',
+      },
+    },
+  ];
 
   courseData = [
     {
@@ -162,7 +204,7 @@ export class CoursesComponent implements OnInit {
   constructor(private formationService: FormationService) {}
 
   ngOnInit(): void {
-    this._fetchData();
+    /* this._fetchData(); */
   }
 
   /**

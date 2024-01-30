@@ -42,9 +42,10 @@
                       <img src="{{ formation.photo }}" alt="" />
                     </a>
                     <div class="course__tag">
-                      <a href="#" [style]="{'background-color':categoryColors[formation.category]}">{{
-                        formation.category
-                      }}</a>
+                      <a href="#" [ngStyle]="{'background-color': categoryColors[formation.category], 'color': '#fff'}">
+                        {{ formation.category }}
+                      </a>
+
                     </div>
                   </div>
                   <div class="course__content">

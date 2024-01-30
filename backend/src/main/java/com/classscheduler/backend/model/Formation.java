@@ -35,4 +35,5 @@ public class Formation {
     @JoinColumn(name = "image_id")
     private ImagesModel photo;
 
+    private String slug;
 }

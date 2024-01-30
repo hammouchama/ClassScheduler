@@ -63,13 +63,26 @@ export const MENU: MenuItem[] = [
         id: 10,
         label: 'List of Company',
         link: '/dashboard/company/list',
-        parentId: 6,
+        parentId: 9,
       },
       {
         id: 11,
         label: 'Add new Company',
         link: '/dashboard/company/new',
-        parentId: 6,
+        parentId: 9,
+      },
+    ],
+  },
+  {
+    id: 10,
+    label: 'Trainer',
+    icon: 'ri-user-settings-line',
+    subItems: [
+      {
+        id: 11,
+        label: 'List of Trainers',
+        link: '/dashboard/trainer/list',
+        parentId: 10,
       },
     ],
   },

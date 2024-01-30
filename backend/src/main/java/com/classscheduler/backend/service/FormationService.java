@@ -116,15 +116,14 @@ public class FormationService {
     @Transactional
     public ResponseEntity<Object> getFormation(long id) {
         try {
-            Formation formation = formationRepository.findById(id).orElse(null);
-            if (!Objects.isNull(formation)) {
-                if (jwtFilter.isAdmin()) {
+            if (jwtFilter.isAdmin()) {
+                Formation formation = formationRepository.findById(id).orElse(null);
+                if (!Objects.isNull(formation)) {
                     return new ResponseEntity<>(modelMapper.map(formation, FormationDTOAdmin.class), HttpStatus.OK);
                 }
-                return new ResponseEntity<>(modelMapper.map(formation, FormationDTO.class), HttpStatus.OK);
-
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -182,5 +181,27 @@ public class FormationService {
             e.printStackTrace();
         }
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<List<FormationDTO>> getAllPublicFormation() {
+        try {
+            return new ResponseEntity<>(formationRepository.getAllActiveFormation(),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<FormationDTO> getPublicFormation(long id) {
+        try {
+            Formation f=formationRepository.findById(id).orElse(null);
+            if (!Objects.isNull(f)){
+              return new ResponseEntity<>(formationRepository.getPublicFormationById(id),HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

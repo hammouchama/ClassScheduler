@@ -76,4 +76,25 @@ public class FormationController {
         }
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    //get All formation public
+    @GetMapping("/public/formation/get")
+    public ResponseEntity<List<FormationDTO>> getAllPublicFormation(){
+        try {
+            return formationService.getAllPublicFormation();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    //get formation public by id
+    @GetMapping("/public/formation/get/{id}")
+    public ResponseEntity<FormationDTO> getPublicFormation(@PathVariable long id){
+        try {
+            return formationService.getPublicFormation(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

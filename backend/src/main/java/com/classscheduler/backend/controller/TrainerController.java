@@ -16,14 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/public/trainer")
 @AllArgsConstructor
 public class TrainerController {
 
    TrainerService trainerService;
 
     //register new trainer
-    @PostMapping("/register")
+    @PostMapping("/public/trainer/register")
     public ResponseEntity<String> registerTrainer(@RequestPart("image")
                                                       MultipartFile image,
                                                   @RequestPart("data") Map<String,String> requestMap){
@@ -37,7 +36,7 @@ public class TrainerController {
     }
     //get all trainers not accepted yet
     //this end point return the trainers who are applied to make formation an is not accepted yet
-    @GetMapping("/get")
+    @GetMapping("/trainer/get")
     public ResponseEntity<List<TrainerDTO>> getTrainers(){
       try {
           return trainerService.getTrainersNotAccepted();

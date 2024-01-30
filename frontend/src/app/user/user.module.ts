@@ -29,6 +29,8 @@ import { CtaAreaComponent } from './home/cta-area/cta-area.component';
 import { CompanyAreaComponent } from './common/company-area/company-area.component';
 import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { CountUpModule } from 'ngx-countup';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     SwiperModule,
     FormsModule,
     NgbNavModule,
+    CountUpModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

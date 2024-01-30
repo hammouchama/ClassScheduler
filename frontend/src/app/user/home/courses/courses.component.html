@@ -46,10 +46,10 @@
                 <div class="course__item white-bg mb-30 fix shadow-none">
                   <div class="course__thumb w-img p-relative fix">
                     <a [routerLink]="['/course-details']">
-                      <div *ngIf="formation.photo">
+                      <div *ngIf="formation.photo" class="thumbnail">
                         <img src="{{ formation.photo }}" alt="" />
                       </div>
-                      <div *ngIf="!formation.photo">
+                      <div *ngIf="!formation.photo" class="thumbnail">
                         <img [src]="'assets/img/course/' + formation.category + '.jpg'" [alt]="formation.category" />
                       </div>
                     </a>

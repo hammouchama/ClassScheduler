@@ -30,8 +30,8 @@ export class CoursesComponent implements OnInit {
     '#f2277e',
   ];
 
-  /* formationData: Formation[] = []; */
-  formationData: Formation[] = [
+  formationData: Formation[] = [];
+  /* formationData: Formation[] = [
     {
       id: 1,
       title: 'TestTitle',
@@ -72,7 +72,7 @@ export class CoursesComponent implements OnInit {
         url: 'http://localhost:8080/images/formation/1706538432063_2.png',
       },
     },
-  ];
+  ]; */
 
   courseData = [
     {
@@ -204,14 +204,14 @@ export class CoursesComponent implements OnInit {
   constructor(private formationService: FormationService) {}
 
   ngOnInit(): void {
-    /* this._fetchData(); */
+    this._fetchData();
   }
 
   /**
    * fetches the table value
    */
   _fetchData() {
-    this.formationService.getAllFormation().subscribe(
+    this.formationService.getAllPublicFormation().subscribe(
       (resp: Formation[]) => {
         this.formationData = resp; // Assign data
       },

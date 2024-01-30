@@ -42,13 +42,12 @@
             <div class="form-group mb-4">
               <label for="category">Category</label>
               <span class="text-danger">*</span>
-              <input
+              <ng-select
                 [ngClass]="{ 'is-invalid': submit && form['category'].errors }"
-                type="text"
                 id="category"
+                [items]="categories"
                 formControlName="category"
-                class="form-control"
-              />
+              ></ng-select>
               <div
                 *ngIf="submit && form['category'].errors"
                 class="invalid-feedback"

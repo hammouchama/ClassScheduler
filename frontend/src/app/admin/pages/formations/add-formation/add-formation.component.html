@@ -46,6 +46,8 @@
                 [ngClass]="{ 'is-invalid': submit && form['category'].errors }"
                 id="category"
                 [items]="categories"
+                [addTag]="true"
+                addTagText="Add New Category"
                 formControlName="category"
               ></ng-select>
               <div

@@ -19,26 +19,76 @@
                       <nav id="mobile-menu" class="d-none d-xl-block">
                          <ul>
                             <li>
-                              <a [routerLink]="['/']">Home</a>
+                              <a [routerLink]="['/']" routerLinkActive="active">Home</a>
                             </li>
                             <li class="has-dropdown">
-                              <a [routerLink]="['/formations']">Formations</a>
+                              <a [routerLink]="['/formations']" routerLinkActive="active">Formations</a>
                               <ul class="submenu">
-                                <li><a [routerLink]="['/Development']">Development</a></li>
-                                <li><a [routerLink]="['/Design']">Design</a></li>
-                                <li><a [routerLink]="['/Data_Science']">Data Science</a></li>
-                                <li><a [routerLink]="['/Business']">Business</a></li>
-                                <li><a [routerLink]="['/IT_Software']">IT & Software</a></li>
+                                <li><a [routerLink]="['/Development']" routerLinkActive="active">Development</a></li>
+                                <li><a [routerLink]="['/Design']" routerLinkActive="active">Design</a></li>
+                                <li><a [routerLink]="['/Data_Science']" routerLinkActive="active">Data Science</a></li>
+                                <li><a [routerLink]="['/Business']" routerLinkActive="active">Business</a></li>
+                                <li><a [routerLink]="['/IT_Software']" routerLinkActive="active">IT & Software</a></li>
                               </ul>
                             </li>
-                           <li><a [routerLink]="['apply-trainer']">Become a Trainer</a></li>
-                           <li><a [routerLink]="['/contact']">Contact</a></li>
+                           <li><a [routerLink]="['/apply-trainer']" routerLinkActive="active">Become a Trainer</a></li>
+                           <li><a [routerLink]="['/contact']" routerLinkActive="active">Contact</a></li>
                          </ul>
                       </nav>
                    </div>
-                   <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
+
+                   <!-- For Visitors -->
+
+                   <ng-container *ngIf="!isLoggedIn">
+                    <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
                       <a [routerLink]="['/login']" class="e-btn">Login</a>
-                   </div>
+                    </div>
+                  </ng-container>
+
+                  <!-- For Admin -->
+                  <ng-container *ngIf="isLoggedIn && isAdmin">
+                    <div class="dropdown d-inline-block user-dropdown" ngbDropdown>
+        <button
+          type="button"
+          ngbDropdownToggle
+          class="btn header-item waves-effect ml-40"
+          id="page-header-user-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="rounded-circle header-profile-user"
+            src="assets/images/users/avatar.png"
+            alt="Header Avatar"
+          />
+          <span class="d-none d-xl-inline-block ms-1">{{ username }}</span>
+          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+
+
+        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+          <a
+            class="dropdown-item"
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            ><i class="ri-dashboard-line align-middle me-1"></i>
+            Dashboard</a>
+          <a
+            class="dropdown-item text-danger"
+            href="javascript: void(0);"
+            (click)="logout()"
+            ><i class="ri-shut-down-line align-middle me-1 text-danger"></i>
+            Logout</a>
+        </div>
+      </div>
+                  </ng-container>
+
+                  <!-- For Trainer -->
+                  <ng-container *ngIf="isLoggedIn && !isAdmin">
+                  </ng-container>
+
+
                    <div class="sidebar__menu d-xl-none">
                       <div (click)="handleSidebar()" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
                           <span class="line"></span>

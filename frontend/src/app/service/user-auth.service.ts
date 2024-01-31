@@ -24,10 +24,10 @@ export class UserAuthService {
   }
 
   public isLoggedIn() {
-    return this.getRole() && this.getToken()
+    return !!this.getRole() && !!this.getToken()
   }
   public isAdmmin() {
-    return this.getRole() && this.getRole() === "Admin";
+    return !!this.getRole() && this.getRole() === "Admin";
   }
 
   public roleMatch(allowedRoles: string[]): boolean {

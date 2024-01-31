@@ -110,14 +110,20 @@
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>
 
+
         <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+          <a
+            class="dropdown-item"
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            ><i class="ri-dashboard-line align-middle me-1"></i>
+            Dashboard</a>
           <a
             class="dropdown-item text-danger"
             href="javascript: void(0);"
             (click)="logout()"
             ><i class="ri-shut-down-line align-middle me-1 text-danger"></i>
-            Logout</a
-          >
+            Logout</a>
         </div>
       </div>
     </div>

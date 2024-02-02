@@ -28,14 +28,21 @@ import { BlogComponent } from './home/blog/blog.component';
 import { CtaAreaComponent } from './home/cta-area/cta-area.component';
 import { CompanyAreaComponent } from './common/company-area/company-area.component';
 import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.component';
-import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountUpModule } from 'ngx-countup';
 import { ApplyTrainerMainComponent } from './apply-trainer/apply-trainer-main/apply-trainer-main.component';
 import { ApplyTrainerAreaComponent } from './apply-trainer/apply-trainer-area/apply-trainer-area.component';
 import { ArchwizardModule } from '@nubebytes/angular-archwizard';
-import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
+import {
+  DROPZONE_CONFIG,
+  DropzoneConfigInterface,
+  DropzoneModule,
+} from 'ngx-dropzone-wrapper';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { FormationListMainComponent } from './formation-list/formation-list-main/formation-list-main.component';
+import { FormationDetailsComponent } from './formation-details/formation-details-main/formation-details.component';
+import { FormationListAreaComponent } from './formation-list/formation-list-area/formation-list-area.component';
+import { FormationDetailsAreaComponent } from './formation-details/formation-details-area/formation-details-area.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -81,6 +88,10 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     SignInAreaComponent,
     ApplyTrainerMainComponent,
     ApplyTrainerAreaComponent,
+    FormationListMainComponent,
+    FormationDetailsComponent,
+    FormationListAreaComponent,
+    FormationDetailsAreaComponent,
   ],
   imports: [
     CommonModule,
@@ -95,6 +106,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     ArchwizardModule,
     DropzoneModule,
     NgSelectModule,
+    NgbCollapseModule,
   ],
   providers: [
     {

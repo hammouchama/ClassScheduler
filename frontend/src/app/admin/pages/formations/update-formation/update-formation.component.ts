@@ -22,19 +22,28 @@ export class UpdateFormationComponent implements OnInit {
   formationId: any;
 
   cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
-  today = new Date().toISOString().split('T')[0]
+  categories = [
+    'Development',
+    'Design',
+    'Data Science',
+    'Business',
+    'IT & Software',
+  ];
+  today = new Date().toISOString().split('T')[0];
   imageUrl: string | null = null;
   selectedImage: File | null = null;
 
   selectedForIndividualSwitch: String = 'false';
   /* selectedStatuslSwitch: String = 'ACTIVE'; */
 
+  currentUrl: string = 'localhost';
+
   constructor(
     public formBuilder: UntypedFormBuilder,
     private formationService: FormationService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -50,6 +59,8 @@ export class UpdateFormationComponent implements OnInit {
       { label: 'Update new Formation', active: true },
     ];
 
+    const { hostname, port } = window.location;
+    this.currentUrl = `${hostname}${port ? `:${port}` : ''}`;
 
     this.getId();
     if (this.formationId && this.formationId >= 0) {
@@ -73,6 +84,7 @@ export class UpdateFormationComponent implements OnInit {
         capacity: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         start_registration: ['', [Validators.required]],
         end_registration: ['', [Validators.required]],
+        slug: ['', [Validators.required]],
       } /* , {
       validator: MustMatch('password', 'confirmpwd'),} */
     );
@@ -120,7 +132,7 @@ export class UpdateFormationComponent implements OnInit {
     this.submit = true;
     console.log(this.formationForm.value);
     console.log(this.formationForm.valid);
-    if (this.formationForm.valid && this.selectedImage) {
+    if (this.formationForm.valid && (this.selectedImage || this.imageUrl)) {
       console.log('this.formationForm.value', this.formationForm.value);
       const _Data = JSON.stringify({
         ...this.formationForm.value,
@@ -131,7 +143,7 @@ export class UpdateFormationComponent implements OnInit {
       console.log('_Data', _Data);
       // Create a FormData object to send form data
       const formData = new FormData();
-      formData.append('image', this.selectedImage);
+      if (this.selectedImage) formData.append('image', this.selectedImage);
       //append the rest of the data and selectedForIndividualSwitch and selectedStatuslSwitch
       formData.append('data', new Blob([_Data], { type: 'application/json' }));
 
@@ -142,28 +154,30 @@ export class UpdateFormationComponent implements OnInit {
         })
       ); */
       // Call your service method to update the new formation
-      this.formationService.updateFormation(this.formationId, formData).subscribe(
-        (result) => {
-          // Handle success
-          Swal.fire({
-            title: 'Formation Updated successfully',
-            icon: 'success',
-            confirmButtonColor: '#5438dc',
-          });
-          this.router.navigate(['/dashboard/formations/list']);
+      this.formationService
+        .updateFormation(this.formationId, formData)
+        .subscribe(
+          (result) => {
+            // Handle success
+            Swal.fire({
+              title: 'Formation Updated successfully',
+              icon: 'success',
+              confirmButtonColor: '#5438dc',
+            });
+            this.router.navigate(['/dashboard/formations/list']);
 
-          console.log('Formation Updated successfully:', result);
-        },
-        (error) => {
-          // Handle error
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
-          console.error('Error while Updating formation:', error);
-        }
-      );
+            console.log('Formation Updated successfully:', result);
+          },
+          (error) => {
+            // Handle error
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+            console.error('Error while Updating formation:', error);
+          }
+        );
     }
   }
 
@@ -190,7 +204,16 @@ export class UpdateFormationComponent implements OnInit {
     this.selectedForIndividualSwitch = event ? 'true' : 'false';
   }
 
-  /* public onChangeStatuslSwitch(event: any) {
-    this.selectedStatuslSwitch = event?"ACTIVE":"INACTIVE";
-  } */
+  public onTitleChange() {
+    if (this.form['slug'].value.length == 0)
+      this.form['slug'].setValue(
+        this.form['title'].value.toLowerCase().replace(/ /g, '-')
+      );
+  }
+
+  public onSlugChange() {
+    this.form['slug'].setValue(
+      this.form['slug'].value.toLowerCase().replace(/ /g, '-')
+    );
+  }
 }

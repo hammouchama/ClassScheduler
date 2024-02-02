@@ -59,7 +59,7 @@
                   <th></th>
                   <th sortable="title" (sort)="onSort($event)">
                     Title
-                    <ng-container *ngIf="headers">
+                    <ng-container *ngIf="headers.length">
                       <i
                         *ngIf="headers.get(0)?.direction === 'asc'"
                         class="fas fa-arrow-up"

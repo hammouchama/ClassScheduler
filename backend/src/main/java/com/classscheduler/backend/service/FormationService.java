@@ -12,6 +12,7 @@ import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -61,10 +62,18 @@ public class FormationService {
                 return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
             }
             return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS, HttpStatus.UNAUTHORIZED);
+        } catch (DataIntegrityViolationException e) {
+            // Handle unique constraint violation
+            if (e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
+                return Helpers.getResponseEntity("Unique constraint violation: " + e.getRootCause().getMessage(), HttpStatus.BAD_REQUEST);
+            }
+
+            // Handle other exceptions if needed
+            return Helpers.getResponseEntity("An error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             e.printStackTrace();
+            return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private boolean isValidData(Map<String, String> requestyMap) {
@@ -160,7 +169,11 @@ public class FormationService {
                         formation = extractFormationInfo(requestMap, formation);
                         if(formation.getStart_registration().compareTo(formation.getEnd_registration())<0){
                             ImagesModel photo = formation.getPhoto();
+
                             if (image != null) {
+                                if(photo==null){
+                                    photo = new ImagesModel();
+                                }
                                 photo.setName(image.getName());
                                 photo.setType(image.getContentType());
                                 photo.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));

@@ -18,7 +18,7 @@ export class CoursesComponent implements OnInit {
     Business: '#3b60ff',
     'IT & Software': '#f5a31a',
   };
-  colors = [
+ /*  colors = [
     '#b128ff',
     '#0fa0dd',
     '#30a820',
@@ -28,7 +28,7 @@ export class CoursesComponent implements OnInit {
     '#b128ff',
     '#fa7919',
     '#f2277e',
-  ];
+  ]; */
 
   formationData: Formation[] = [];
   /* formationData: Formation[] = [

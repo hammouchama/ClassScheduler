@@ -68,7 +68,8 @@ public class FormationController {
 
     //update formation
     @PutMapping("/formation/update/{id}")
-    public ResponseEntity<String> updateFormation(@PathVariable long id,@RequestPart("data") Map<String,String> requestMap,@RequestPart("image") MultipartFile image ){
+    public ResponseEntity<String> updateFormation(@PathVariable long id,@RequestPart("data") Map<String,String> requestMap,
+                                                  @RequestPart(value = "image", required = false) MultipartFile image ){
         try {
             return formationService.updateFormation(id,requestMap,image);
         }catch (Exception e){

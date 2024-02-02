@@ -32,6 +32,8 @@ export class AddFormationComponent implements OnInit {
   selectedForIndividualSwitch: String = 'false';
   /* selectedStatuslSwitch: String = 'ACTIVE'; */
 
+  currentUrl: string = 'localhost';
+
   constructor(
     public formBuilder: UntypedFormBuilder,
     private formationService: FormationService,
@@ -51,6 +53,9 @@ export class AddFormationComponent implements OnInit {
       { label: 'Formations' },
       { label: 'Add new Formation', active: true },
     ];
+
+    const { hostname, port } = window.location;
+    this.currentUrl = `${hostname}${port ? `:${port}` : ''}`;
 
     /**
      * Bootstrap validation form data
@@ -150,15 +155,18 @@ export class AddFormationComponent implements OnInit {
     this.imageUrl = URL.createObjectURL(event);
   }
 
-  public onTitleChange(){
-    if(this.form['slug'].value.length == 0)
-      this.form['slug'].setValue(this.form['title'].value.toLowerCase().replace(/ /g, '-'));
-  };
+  public onTitleChange() {
+    if (this.form['slug'].value.length == 0)
+      this.form['slug'].setValue(
+        this.form['title'].value.toLowerCase().replace(/ /g, '-')
+      );
+  }
 
-  public onSlugChange(){
-    this.form['slug'].setValue(this.form['slug'].value.toLowerCase().replace(/ /g, '-'));
-  };
-
+  public onSlugChange() {
+    this.form['slug'].setValue(
+      this.form['slug'].value.toLowerCase().replace(/ /g, '-')
+    );
+  }
 
   // public onChangeForIndividualSwitch(event: any) {
   //   this.selectedForIndividualSwitch = event ? 'true' : 'false';

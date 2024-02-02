@@ -14,4 +14,5 @@ public interface FormationRepository extends JpaRepository<Formation,Long> {
     List<FormationDTO> getAllActiveFormation();
     FormationDTO getPublicFormationById(@Param("id") long id);
     Formation findFormationByTitleAndCity(String title, String city);
+    Formation findFormationBySlug(String slug);
 }

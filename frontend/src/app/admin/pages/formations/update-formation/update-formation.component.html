@@ -304,15 +304,29 @@
             <h4 class="card-title">Formation Slug (URL)</h4>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="slugPrepend">{{currentUrl}}/</span>
+                <span class="input-group-text" id="slugPrepend"
+                  >{{ currentUrl }}/</span
+                >
               </div>
-              <input type="text" class="form-control" id="slug" formControlName="slug"
-                placeholder="" aria-describedby="slugPrepend"
-                [ngClass]="{'is-invalid': submit && form['slug'].errors}"
-                (blur)="onSlugChange()">
+              <input
+                type="text"
+                class="form-control"
+                id="slug"
+                formControlName="slug"
+                placeholder=""
+                aria-describedby="slugPrepend"
+                [ngClass]="{ 'is-invalid': submit && form['slug'].errors }"
+                [(ngModel)]="formation.slug"
+                (blur)="onSlugChange()"
+              />
 
-              <div *ngIf="submit && form['slug'].errors" class="invalid-tooltip">
-                <span *ngIf="form['slug'].errors['required']">Please choose a unique and valid slug.</span>
+              <div
+                *ngIf="submit && form['slug'].errors"
+                class="invalid-tooltip"
+              >
+                <span *ngIf="form['slug'].errors['required']"
+                  >Please choose a unique and valid slug.</span
+                >
               </div>
             </div>
           </div>

@@ -86,7 +86,8 @@ public class FormationService {
                 && requestyMap.containsKey("cost")
                 && requestyMap.containsKey("capacity")
                 && requestyMap.containsKey("start_registration")
-                && requestyMap.containsKey("end_registration")) {
+                && requestyMap.containsKey("end_registration")
+                && requestyMap.containsKey("slug")) {
             return true;
         }
         return false;
@@ -106,6 +107,7 @@ public class FormationService {
         formation.setCapacity(Integer.parseInt(requestyMap.get("capacity")));
         formation.setStart_registration(LocalDate.parse(requestyMap.get("start_registration")));
         formation.setEnd_registration(LocalDate.parse(requestyMap.get("end_registration")));
+        formation.setSlug(requestyMap.get("slug"));
         return formation;
     }
 

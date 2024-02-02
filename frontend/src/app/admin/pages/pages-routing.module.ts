@@ -30,6 +30,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { role: ['Admin', 'Assistant'] },
     },
+    {
+        path: 'trainer', loadChildren: () => import('./trainer/trainer.module').then(m => m.TrainerModule),
+        canActivate: [AuthGuard],
+        data: { role: ['Admin', 'Assistant'] },
+    },
     //  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UIModule) },
     //  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     /*{ path: 'chat', component: ChatComponent },

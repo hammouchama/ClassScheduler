@@ -1,4 +1,4 @@
-import { Formation } from "./formation.model";
+
 
 export interface Trainer {
      id: number;
@@ -12,7 +12,7 @@ export interface Trainer {
      description: string;
 
      photo: string;
+     accepted: string;
 
-     formations: Array<Formation>;
 
 }

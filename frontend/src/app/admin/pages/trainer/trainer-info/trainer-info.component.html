@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <app-pagetitle
+    title="Trainer information"
+    [breadcrumbItems]="breadCrumbItems"
+  ></app-pagetitle>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">Trainer Information</div>
+
+          <!-- Other Formation Information -->
+          <div class="form-group mb-4">
+            <h5>Name</h5>
+            <p>{{ trainer.firstName + " " + trainer.lastName }}</p>
+          </div>
+
+          <div class="form-group mb-4">
+            <h5>Email</h5>
+            <p>{{ trainer.email }}</p>
+          </div>
+
+          <div class="form-group mb-4">
+            <h5>Address</h5>
+            <p>{{ trainer.address }}</p>
+          </div>
+
+          <div class="form-group mb-4">
+            <h5>Phone</h5>
+            <p>{{ trainer.phone }}</p>
+          </div>
+
+          <div class="form-group mb-4">
+            <h5>Skills</h5>
+            <p>{{ trainer.skills }}</p>
+          </div>
+
+          <div class="form-group mb-4">
+            <h5>Description</h5>
+            <p>{{ trainer.description }}</p>
+          </div>
+
+          <div *ngIf="trainer.accepted == 'false'" class="text-center mt-4">
+            <button (click)="acceptTrainer(trainer.id)" class="btn btn-primary">
+              Accepter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="dropzone-preview">
+            <img class="w-100" [src]="imageUrl" alt="Selected Image" />
+          </div>
+          <!-- <input
+                 type="file"
+                 formControlName="image"
+                 [ngStyle]="{ display: 'none' }"
+               /> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

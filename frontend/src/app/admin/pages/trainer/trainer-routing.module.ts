@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TrainerListComponent } from './trainer-list/trainer-list.component';
 import { AuthGuard } from 'src/app/auth/auth.guard';
+import { TrainerInfoComponent } from './trainer-info/trainer-info.component';
 const routes: Routes = [
   {
     path: 'list',
@@ -15,12 +16,12 @@ const routes: Routes = [
   //   canActivate: [AuthGuard],
   //   data: { role: ['Admin', 'Assistant'] },
   // },
-  // {
-  //   path: 'update/:id',
-  //   component: UpdateTrainerComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { role: ['Admin', 'Assistant'] },
-  // },
+  {
+    path: 'view/:id',
+    component: TrainerInfoComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['Admin', 'Assistant'] },
+  },
 
 ];
 

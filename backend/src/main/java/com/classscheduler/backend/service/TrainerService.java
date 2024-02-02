@@ -19,10 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -38,9 +35,7 @@ public class TrainerService {
     public ResponseEntity<String> registerTrainer(Map<String, String> requestMap , MultipartFile image) {
         try{
            if (isValidInfo(requestMap)){
-               Formation formation=formationRepository.findById(Long.parseLong(requestMap.get("formation_id"))).orElse(null);
-               if (!Objects.isNull(formation)){
-                   Trainer trainer =new Trainer();
+               Trainer trainer =new Trainer();
                    //###############photo###############
                   if (image!=null){
                       ImagesModel photo=new ImagesModel();
@@ -52,15 +47,10 @@ public class TrainerService {
                   }
                    //##############################
                    extractTrainerInfo(requestMap,trainer);
-                  List<Formation> listOfFormation=new ArrayList<>();
-                  listOfFormation.add(formation);
-                   trainer.setFormation(listOfFormation);
 
                    trainerRepository.save(trainer);
                    return Helpers.getResponseEntity("Register successfully",HttpStatus.OK);
                }
-               return Helpers.getResponseEntity(ProjectConst.INVALID_DATA,HttpStatus.BAD_REQUEST);
-           }
            return Helpers.getResponseEntity(ProjectConst.INVALID_DATA,HttpStatus.BAD_REQUEST);
         }catch (Exception e){
             e.printStackTrace();
@@ -88,7 +78,6 @@ public class TrainerService {
                 && requestMap.containsKey("email")
                 && requestMap.containsKey("skills")
                 && requestMap.containsKey("description")
-                && requestMap.containsKey("formation_id")
         ){
             return  true;
         }
@@ -99,7 +88,7 @@ public class TrainerService {
     public ResponseEntity<List<TrainerDTO>> getTrainersNotAccepted() {
       try {
          if (jwtFilter.isAdmin() || jwtFilter.isAssistant()){
-             return new ResponseEntity<>(trainerRepository.getTrainerNotAccepted(),HttpStatus.OK);
+             return new ResponseEntity<>(trainerRepository.getTrainer(),HttpStatus.OK);
          }
          return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
       }catch (Exception e){
@@ -113,7 +102,7 @@ public class TrainerService {
              if (jwtFilter.isAdmin()|| jwtFilter.isAssistant()){
                  Trainer trainer=trainerRepository.findById(id).orElse(null);
                  if (!Objects.isNull(trainer)){
-                     return new ResponseEntity<>(TrainerDTO.fromTrainerToTrainerTDO(trainer),HttpStatus.UNAUTHORIZED);
+                     return new ResponseEntity<>(TrainerDTO.fromTrainerToTrainerTDO(trainer),HttpStatus.OK);
                  }
                  return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
              }
@@ -127,11 +116,12 @@ public class TrainerService {
     public ResponseEntity<String> acceptTrainer(long id) {
         try {
             if (jwtFilter.isAssistant()|| jwtFilter.isAdmin()){
-                Trainer trainer=trainerRepository.findById(id).orElse(null);
-                if(!Objects.isNull(trainer)){
+                Optional<Trainer> trainer1=trainerRepository.findById(id);
+                if(!Objects.isNull(trainer1.get())){
+                    Trainer trainer=trainer1.get();
                     String password=Helpers.generatePassword();
                     String username=trainer.getFirstName()+" "+trainer.getLastName();
-                    trainerRepository.deleteById(id);
+                   // trainerRepository.deleteById(id);
                     trainer.setPassword(passwordEncoder.encode(password));
                     trainer.setAccepted("true");
                     trainerRepository.save(trainer);

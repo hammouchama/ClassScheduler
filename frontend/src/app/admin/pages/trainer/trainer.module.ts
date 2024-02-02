@@ -5,12 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbNavModule, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerRoutingModule } from './trainer-routing.module';
+import { TrainerListComponent } from './trainer-list/trainer-list.component';
+import { TrainerListSortableDirective } from './trainer-list/trainer-list-sortable.directive';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
 
 
 
 @NgModule({
   declarations: [
-
+    TrainerListComponent,
+    TrainerListSortableDirective
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { TrainerRoutingModule } from './trainer-routing.module';
     NgbNavModule,
     NgbDropdownModule,
     NgbTooltipModule,
-    NgbModule
+    NgbModule,
+    DropzoneModule,
+    UiModule
 
   ],
   providers: [

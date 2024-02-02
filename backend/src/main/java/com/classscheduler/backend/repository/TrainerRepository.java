@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TrainerRepository extends JpaRepository<Trainer,Long> {
 
-    List<TrainerDTO> getTrainerNotAccepted();
+    List<TrainerDTO> getTrainer();
 }

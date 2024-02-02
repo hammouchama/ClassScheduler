@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(name = "Trainer.getTrainerNotAccepted", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.url,t.formation) from Trainer t where t.accepted='false'")
+@NamedQuery(name = "Trainer.getTrainer", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.url,t.accepted) from Trainer t")
 @Entity
 @Data
 @AllArgsConstructor
@@ -28,10 +28,6 @@ public class Trainer {
     private String accepted = "false";
     private String skills;
     private String description;
-
-    @ManyToMany
-    //@JoinColumn(name = "formation_id")
-    private List<Formation> formation=new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")

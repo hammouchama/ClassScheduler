@@ -22,8 +22,9 @@ public class TrainerDTO {
     private String description;
 
     private String photo;
+    private String accepted;
 
-    private List<Formation> formations;
+
 
     public TrainerDTO(Long id,
                       String firstName,
@@ -34,7 +35,7 @@ public class TrainerDTO {
                       String skills,
                       String description,
                       String photo,
-                      List<Formation> formationName) {
+                      String accepted) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +45,8 @@ public class TrainerDTO {
         this.skills = skills;
         this.description = description;
         this.photo = photo;
-        this.formations = formationName;
+        this.accepted=accepted;
+
     }
    public static TrainerDTO fromTrainerToTrainerTDO(Trainer trainer){
         TrainerDTO trainerDTO=new TrainerDTO();
@@ -57,7 +59,8 @@ public class TrainerDTO {
         trainerDTO.setDescription(trainer.getDescription());
         trainerDTO.setSkills(trainer.getSkills());
         trainerDTO.setPhoto(trainer.getPhoto().getUrl());
-        trainerDTO.setFormations(trainer.getFormation());
+        trainerDTO.setAccepted(trainer.getAccepted());
+
         return trainerDTO;
    }
 

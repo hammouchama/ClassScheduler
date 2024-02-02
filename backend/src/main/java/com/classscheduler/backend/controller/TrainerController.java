@@ -26,7 +26,6 @@ public class TrainerController {
     public ResponseEntity<String> registerTrainer(@RequestPart("image")
                                                       MultipartFile image,
                                                   @RequestPart("data") Map<String,String> requestMap){
-        System.out.println("hi");
         try {
           return  trainerService.registerTrainer(requestMap,image);
         }catch (Exception e){
@@ -48,7 +47,7 @@ public class TrainerController {
     //get all accepted trainer
 
     //get trainer by id
-    @GetMapping("/get/{id}")
+    @GetMapping("/trainer/get/{id}")
     public ResponseEntity<TrainerDTO> getTrainer(@PathVariable long id){
         try {
             return trainerService.getTrainerById(id);
@@ -58,7 +57,7 @@ public class TrainerController {
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
     //accept trainer
-    @GetMapping("/accept/{id}")
+    @GetMapping("/trainer/accept/{id}")
     public ResponseEntity<String> acceptTrainer(@PathVariable long id){
         try {
             return trainerService.acceptTrainer(id);
@@ -68,7 +67,7 @@ public class TrainerController {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
     //update trainer
-    @PutMapping("/update/{id}")
+    @PutMapping("/trainer/update/{id}")
     public ResponseEntity<String> updateTrainerInfo(@PathVariable long id,@RequestBody Map<String ,String> requestMap){
         try {
             return trainerService.updateTrainer(id,requestMap);
@@ -79,7 +78,7 @@ public class TrainerController {
     }
 
     //delete trainer
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/trainer/delete/{id}")
     public ResponseEntity<String> deleteTrainer(@PathVariable long id){
         try {
              return trainerService.deleteTrainer(id);

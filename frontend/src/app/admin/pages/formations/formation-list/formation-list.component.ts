@@ -29,13 +29,13 @@ export class FormationListComponent implements OnInit {
   hideme: boolean[] = [];
 
   // Table data
-  formationData!: Formation[];
+  formationData: Formation[]= [];
 
   tables$: Observable<Formation[]>;
   total$: Observable<number>;
 
   @ViewChildren(FormationListSortableDirective)
-  headers!: QueryList<FormationListSortableDirective>;
+  headers: QueryList<FormationListSortableDirective> = new QueryList<FormationListSortableDirective>();
 
   constructor(
     private formationService: FormationService,
@@ -45,6 +45,7 @@ export class FormationListComponent implements OnInit {
     this.total$ = service.total$;
   }
   ngOnInit() {
+    console.log('headers', this.headers);
     this.service.loading = true;
 
     this.breadCrumbItems = [
@@ -57,6 +58,7 @@ export class FormationListComponent implements OnInit {
      */
     this._fetchData();
     this.service.loading = false;
+    console.log('headers', this.headers);
   }
 
   changeValue(i: number) {

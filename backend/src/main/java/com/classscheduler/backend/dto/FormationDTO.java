@@ -1,6 +1,7 @@
 package com.classscheduler.backend.dto;
 
 import com.classscheduler.backend.model.Formation;
+import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -18,12 +19,14 @@ public class FormationDTO {
     private String objective;
     private String description;
     private String photo;
+    @Column(unique = true)
+    private String slug;
     private float cost;
     private LocalDate start_registration;
     private LocalDate end_registration;
 
     public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description,String photo,LocalDate start_registration ,LocalDate end_registration, float cost ) {
+            String description,String photo,LocalDate start_registration ,LocalDate end_registration, float cost, String slug) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -35,6 +38,7 @@ public class FormationDTO {
         this.start_registration=start_registration;
         this.end_registration=end_registration;
         this.cost = cost;
+        this.slug = slug;
     }
 
     public FormationDTO fromFormation(Formation formation) {

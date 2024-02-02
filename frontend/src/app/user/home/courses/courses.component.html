@@ -4,9 +4,8 @@
       <div class="col-xxl-5 col-xl-6 col-lg-6">
         <div class="section__title-wrapper mb-60">
           <h2 class="section__title">
-            Find the Right<br /><span class="yellow-bg yellow-bg-big"
-              >Course<img src="assets/img/shape/yellow-bg.png" alt=""
-            /></span>
+            Find the Right<br /><span class="yellow-bg yellow-bg-big">Course<img src="assets/img/shape/yellow-bg.png"
+                alt="" /></span>
             for you
           </h2>
           <p>
@@ -27,10 +26,7 @@
     <div class="course_wrapper">
       <div class="row">
         <!-- Start Tab -->
-        <div
-          *ngFor="let formation of formationData.slice(0, 6)"
-          class="col-xxl-4 col-xl-4 col-lg-4 col-md-6"
-        >
+        <div *ngFor="let formation of formationData.slice(0, 6)" class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
           <div class="course__item white-bg mb-30 fix shadow-none">
             <div class="course__thumb w-img p-relative fix">
               <a [routerLink]="['/course-details']">
@@ -38,33 +34,23 @@
                   <img src="{{ formation.photo }}" alt="" />
                 </div>
                 <div *ngIf="!formation.photo" class="thumbnail">
-                  <img
-                    [src]="'assets/img/course/' + formation.category + '.jpg'"
-                    [alt]="formation.category"
-                  />
+                  <img [src]="'assets/img/course/' + formation.category + '.jpg'" [alt]="formation.category" />
                 </div>
               </a>
               <div class="course__tag">
-                <a
-                  href="#"
-                  [ngStyle]="{
+                <a href="#" [ngStyle]="{
                     'background-color': categoryColors[formation.category],
                     color: '#fff'
-                  }"
-                >
+                  }">
                   {{ formation.category }}
                 </a>
               </div>
             </div>
             <div class="course__content">
-              <div
-                class="course__meta d-flex align-items-center justify-content-between"
-              >
+              <div class="course__meta d-flex align-items-center justify-content-between">
                 <div class="course__nb_hours">
-                  <span
-                    ><i class="ri-time-line"></i>
-                    {{ formation.nb_hours }} Hours</span
-                  >
+                  <span><i class="ri-time-line"></i>
+                    {{ formation.nb_hours }} Hours</span>
                 </div>
                 <!-- <div class="course__rating">
                         <span
@@ -74,9 +60,8 @@
                       </div> -->
               </div>
               <h3 class="course__title">
-                <a [routerLink]="['/formations/title/', formation.slug]">
-                  {{ formation.title }}</a
-                >
+                <a [routerLink]="['/formation/', formation.slug]">
+                  {{ formation.title }}</a>
               </h3>
               <!-- <div class="course__teacher d-flex align-items-center">
                       <div class="course__teacher-thumb mr-15">
@@ -89,17 +74,13 @@
                       </h6>
                     </div> -->
             </div>
-            <div
-              class="course__more d-flex justify-content-between align-items-center"
-            >
+            <div class="course__more d-flex justify-content-between align-items-center">
               <div class="course__status d-flex align-items-center">
-                <span [style]="{ color: categoryColors[formation.category] }"
-                  >{{ formation.cost }} DH</span
-                >
+                <span [style]="{ color: categoryColors[formation.category] }">{{ formation.cost }} DH</span>
                 <!-- <span *ngIf="formation.oldPrice" class="old-price">${{ formation.oldPrice }}</span> -->
               </div>
               <div class="course__btn">
-                <a [routerLink]="['/course-details']" class="link-btn">
+                <a [routerLink]="['/formation/'+formation.slug]" class="link-btn">
                   Know Details
                   <i class="far fa-arrow-right"></i>
                   <i class="far fa-arrow-right"></i>

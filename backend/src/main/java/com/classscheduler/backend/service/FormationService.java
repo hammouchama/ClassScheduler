@@ -219,4 +219,17 @@ public class FormationService {
         }
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public ResponseEntity<FormationDTO> getFormationBySlug(String slug) {
+        try {
+            Formation formation=formationRepository.findFormationBySlug(slug);
+            if (!Objects.isNull(formation)){
+                return new ResponseEntity<>(modelMapper.map(formation,FormationDTO.class),HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

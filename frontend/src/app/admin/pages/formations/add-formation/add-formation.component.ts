@@ -18,7 +18,13 @@ export class AddFormationComponent implements OnInit {
   formationForm!: UntypedFormGroup; // bootstrap validation form
 
   cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
-  categories= ['Development', 'Design', 'Data Science', 'Business', 'IT & Software'];
+  categories = [
+    'Development',
+    'Design',
+    'Data Science',
+    'Business',
+    'IT & Software',
+  ];
 
   imageUrl: string | null = null;
   selectedImage: File | null = null;
@@ -61,6 +67,7 @@ export class AddFormationComponent implements OnInit {
         capacity: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         start_registration: ['', [Validators.required]],
         end_registration: ['', [Validators.required]],
+        slug: ['', [Validators.required]],
       } /* , {
       validator: MustMatch('password', 'confirmpwd'),} */
     );
@@ -142,6 +149,16 @@ export class AddFormationComponent implements OnInit {
     this.selectedImage = event;
     this.imageUrl = URL.createObjectURL(event);
   }
+
+  public onTitleChange(){
+    if(this.form['slug'].value.length == 0)
+      this.form['slug'].setValue(this.form['title'].value.toLowerCase().replace(/ /g, '-'));
+  };
+
+  public onSlugChange(){
+    this.form['slug'].setValue(this.form['slug'].value.toLowerCase().replace(/ /g, '-'));
+  };
+
 
   // public onChangeForIndividualSwitch(event: any) {
   //   this.selectedForIndividualSwitch = event ? 'true' : 'false';

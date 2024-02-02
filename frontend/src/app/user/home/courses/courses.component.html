@@ -23,65 +23,62 @@
         </a>
       </div>
     </div>
-    <ul
-      ngbNav
-      #customNav="ngbNav"
-      [activeId]="1"
-      class="nav-tabs nav-tabs-custom nav-justified mb-30"
-    >
-      <li [ngbNavItem]="1">
-        <a ngbNavLink>
-          <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-          <span class="d-none d-sm-block"
-            >See All <span class="tag">new</span></span
-          >
-        </a>
-        <ng-template ngbNavContent>
-          <div class="course_wrapper">
-            <div class="row">
-              <!-- Start Tab -->
-              <div
-                *ngFor="let formation of formationData.slice(0, 6)"
-                class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="course__item white-bg mb-30 fix shadow-none">
-                  <div class="course__thumb w-img p-relative fix">
-                    <a [routerLink]="['/course-details']">
-                      <div *ngIf="formation.photo" class="thumbnail">
-                        <img src="{{ formation.photo }}" alt="" />
-                      </div>
-                      <div *ngIf="!formation.photo" class="thumbnail">
-                        <img [src]="'assets/img/course/' + formation.category + '.jpg'" [alt]="formation.category" />
-                      </div>
-                    </a>
-                    <div class="course__tag">
-                      <a href="#" [ngStyle]="{'background-color': categoryColors[formation.category], 'color': '#fff'}">
-                        {{ formation.category }}
-                      </a>
 
-                    </div>
-                  </div>
-                  <div class="course__content">
-                    <div
-                      class="course__meta d-flex align-items-center justify-content-between"
-                    >
-                      <div class="course__nb_hours">
-                        <span
-                          ><i class="ri-time-line"></i>
-                          {{ formation.nb_hours }} Hours</span
-                        >
-                      </div>
-                      <!-- <div class="course__rating">
+    <div class="course_wrapper">
+      <div class="row">
+        <!-- Start Tab -->
+        <div
+          *ngFor="let formation of formationData.slice(0, 6)"
+          class="col-xxl-4 col-xl-4 col-lg-4 col-md-6"
+        >
+          <div class="course__item white-bg mb-30 fix shadow-none">
+            <div class="course__thumb w-img p-relative fix">
+              <a [routerLink]="['/course-details']">
+                <div *ngIf="formation.photo" class="thumbnail">
+                  <img src="{{ formation.photo }}" alt="" />
+                </div>
+                <div *ngIf="!formation.photo" class="thumbnail">
+                  <img
+                    [src]="'assets/img/course/' + formation.category + '.jpg'"
+                    [alt]="formation.category"
+                  />
+                </div>
+              </a>
+              <div class="course__tag">
+                <a
+                  href="#"
+                  [ngStyle]="{
+                    'background-color': categoryColors[formation.category],
+                    color: '#fff'
+                  }"
+                >
+                  {{ formation.category }}
+                </a>
+              </div>
+            </div>
+            <div class="course__content">
+              <div
+                class="course__meta d-flex align-items-center justify-content-between"
+              >
+                <div class="course__nb_hours">
+                  <span
+                    ><i class="ri-time-line"></i>
+                    {{ formation.nb_hours }} Hours</span
+                  >
+                </div>
+                <!-- <div class="course__rating">
                         <span
                           ><i class="icon_star"></i
                           >{{ course.rating }} (44)</span
                         >
                       </div> -->
-                    </div>
-                    <h3 class="course__title">
-                      <a [routerLink]="['/formations/title/',formation.slug]">
-                        {{ formation.title }}</a>
-                    </h3>
-                    <!-- <div class="course__teacher d-flex align-items-center">
+              </div>
+              <h3 class="course__title">
+                <a [routerLink]="['/formations/title/', formation.slug]">
+                  {{ formation.title }}</a
+                >
+              </h3>
+              <!-- <div class="course__teacher d-flex align-items-center">
                       <div class="course__teacher-thumb mr-15">
                         <img src="{{ course.teacherImg }}" alt="" />
                       </div>
@@ -91,350 +88,28 @@
                         }}</a>
                       </h6>
                     </div> -->
-                  </div>
-                  <div
-                    class="course__more d-flex justify-content-between align-items-center"
-                  >
-                    <div class="course__status d-flex align-items-center">
-                      <span [style]="{'color': categoryColors[formation.category]}">{{ formation.cost }} DH</span>
-                      <!-- <span *ngIf="formation.oldPrice" class="old-price">${{ formation.oldPrice }}</span> -->
-                    </div>
-                    <div class="course__btn">
-                      <a [routerLink]="['/course-details']" class="link-btn">
-                        Know Details
-                        <i class="far fa-arrow-right"></i>
-                        <i class="far fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div
+              class="course__more d-flex justify-content-between align-items-center"
+            >
+              <div class="course__status d-flex align-items-center">
+                <span [style]="{ color: categoryColors[formation.category] }"
+                  >{{ formation.cost }} DH</span
+                >
+                <!-- <span *ngIf="formation.oldPrice" class="old-price">${{ formation.oldPrice }}</span> -->
               </div>
-              <!-- End Tab -->
+              <div class="course__btn">
+                <a [routerLink]="['/course-details']" class="link-btn">
+                  Know Details
+                  <i class="far fa-arrow-right"></i>
+                  <i class="far fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
-        </ng-template>
-      </li>
-
-      <li [ngbNavItem]="2">
-        <a ngbNavLink>
-          <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-          <span class="d-none d-sm-block">Popularity</span>
-        </a>
-        <ng-template ngbNavContent>
-          <div class="course_wrapper">
-            <div class="row">
-              <!-- Start Tab -->
-              <div
-                *ngFor="let course of courseData.slice(1, 3)"
-                class="col-xxl-4 col-xl-4 col-lg-4 col-md-6"
-              >
-                <div class="course__item white-bg mb-30 fix shadow-none">
-                  <div class="course__thumb w-img p-relative fix">
-                    <a [routerLink]="['/course-details']">
-                      <img src="{{ course.courseImage }}" alt="" />
-                    </a>
-                    <div class="course__tag">
-                      <a href="#" [class]="course.color">{{
-                        course.category
-                      }}</a>
-                    </div>
-                  </div>
-                  <div class="course__content">
-                    <div
-                      class="course__meta d-flex align-items-center justify-content-between"
-                    >
-                      <div class="course__nb_hours">
-                        <span
-                          ><i class="far fa-book-alt"></i>
-                          {{ course.nb_hours }} Lesson</span
-                        >
-                      </div>
-                      <div class="course__rating">
-                        <span
-                          ><i class="icon_star"></i
-                          >{{ course.rating }} (44)</span
-                        >
-                      </div>
-                    </div>
-                    <h3 class="course__title m-0">
-                      <a [routerLink]="['/course-details']">
-                        {{ course.title }}</a
-                      >
-                    </h3>
-                    <div class="course__teacher d-flex align-items-center">
-                      <div class="course__teacher-thumb mr-15">
-                        <img src="{{ course.teacherImg }}" alt="" />
-                      </div>
-                      <h6>
-                        <a [routerLink]="['/instructor-details']">{{
-                          course.teacherName
-                        }}</a>
-                      </h6>
-                    </div>
-                  </div>
-                  <div
-                    class="course__more d-flex justify-content-between align-items-center"
-                  >
-                    <div class="course__status d-flex align-items-center">
-                      <span [class]="course.color">${{ course.price }}</span>
-                      <span class="old-price">${{ course.oldPrice }}</span>
-                    </div>
-                    <div class="course__btn">
-                      <a [routerLink]="['/course-details']" class="link-btn">
-                        Know Details
-                        <i class="far fa-arrow-right"></i>
-                        <i class="far fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Tab -->
-            </div>
-          </div>
-        </ng-template>
-      </li>
-
-      <li [ngbNavItem]="3">
-        <a ngbNavLink>
-          <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-          <span class="d-none d-sm-block">Popularity</span>
-        </a>
-        <ng-template ngbNavContent>
-          <div class="course_wrapper">
-            <div class="row">
-              <!-- Start Tab -->
-              <div
-                *ngFor="let course of courseData.slice(2, 5)"
-                class="col-xxl-4 col-xl-4 col-lg-4 col-md-6"
-              >
-                <div class="course__item white-bg mb-30 fix shadow-none">
-                  <div class="course__thumb w-img p-relative fix">
-                    <a [routerLink]="['/course-details']">
-                      <img src="{{ course.courseImage }}" alt="" />
-                    </a>
-                    <div class="course__tag">
-                      <a href="#" [class]="course.color">{{
-                        course.category
-                      }}</a>
-                    </div>
-                  </div>
-                  <div class="course__content">
-                    <div
-                      class="course__meta d-flex align-items-center justify-content-between"
-                    >
-                      <div class="course__nb_hours">
-                        <span class="d-flex align-items-center"
-                          ><i class="far fa-book-alt"></i>
-                          {{ course.nb_hours }} Lesson</span
-                        >
-                      </div>
-                      <div class="course__rating">
-                        <span
-                          ><i class="icon_star"></i
-                          >{{ course.rating }} (44)</span
-                        >
-                      </div>
-                    </div>
-                    <h3 class="course__title">
-                      <a [routerLink]="['/course-details']">
-                        {{ course.title }}</a
-                      >
-                    </h3>
-                    <div class="course__teacher d-flex align-items-center">
-                      <div class="course__teacher-thumb mr-15">
-                        <img src="{{ course.teacherImg }}" alt="" />
-                      </div>
-                      <h6>
-                        <a [routerLink]="['/instructor-details']">{{
-                          course.teacherName
-                        }}</a>
-                      </h6>
-                    </div>
-                  </div>
-                  <div
-                    class="course__more d-flex justify-content-between align-items-center"
-                  >
-                    <div class="course__status d-flex align-items-center">
-                      <span [class]="course.color">${{ course.price }}</span>
-                      <span class="old-price">${{ course.oldPrice }}</span>
-                    </div>
-                    <div class="course__btn">
-                      <a [routerLink]="['/course-details']" class="link-btn">
-                        Know Details
-                        <i class="far fa-arrow-right"></i>
-                        <i class="far fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Tab -->
-            </div>
-          </div>
-        </ng-template>
-      </li>
-
-      <li [ngbNavItem]="4">
-        <a ngbNavLink>
-          <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-          <span class="d-none d-sm-block">Popularity</span>
-        </a>
-        <ng-template ngbNavContent>
-          <div class="course_wrapper">
-            <div class="row">
-              <!-- Start Tab -->
-              <div
-                *ngFor="let course of courseData.slice(4, 6)"
-                class="col-xxl-4 col-xl-4 col-lg-4 col-md-6"
-              >
-                <div class="course__item white-bg mb-30 fix shadow-none">
-                  <div class="course__thumb w-img p-relative fix">
-                    <a [routerLink]="['/course-details']">
-                      <img src="{{ course.courseImage }}" alt="" />
-                    </a>
-                    <div class="course__tag">
-                      <a href="#" [class]="course.color">{{
-                        course.category
-                      }}</a>
-                    </div>
-                  </div>
-                  <div class="course__content">
-                    <div
-                      class="course__meta d-flex align-items-center justify-content-between"
-                    >
-                      <div class="course__nb_hours">
-                        <span
-                          ><i class="far fa-book-alt"></i>
-                          {{ course.nb_hours }} Lesson</span
-                        >
-                      </div>
-                      <div class="course__rating">
-                        <span
-                          ><i class="icon_star"></i
-                          >{{ course.rating }} (44)</span
-                        >
-                      </div>
-                    </div>
-                    <h3 class="course__title">
-                      <a [routerLink]="['/course-details']">
-                        {{ course.title }}</a
-                      >
-                    </h3>
-                    <div class="course__teacher d-flex align-items-center">
-                      <div class="course__teacher-thumb mr-15">
-                        <img src="{{ course.teacherImg }}" alt="" />
-                      </div>
-                      <h6>
-                        <a [routerLink]="['/instructor-details']">{{
-                          course.teacherName
-                        }}</a>
-                      </h6>
-                    </div>
-                  </div>
-                  <div
-                    class="course__more d-flex justify-content-between align-items-center"
-                  >
-                    <div class="course__status d-flex align-items-center">
-                      <span [class]="course.color">${{ course.price }}</span>
-                      <span class="old-price">${{ course.oldPrice }}</span>
-                    </div>
-                    <div class="course__btn">
-                      <a [routerLink]="['/course-details']" class="link-btn">
-                        Know Details
-                        <i class="far fa-arrow-right"></i>
-                        <i class="far fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Tab -->
-            </div>
-          </div>
-        </ng-template>
-      </li>
-
-      <li [ngbNavItem]="5">
-        <a ngbNavLink>
-          <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-          <span class="d-none d-sm-block">Popularity</span>
-        </a>
-        <ng-template ngbNavContent>
-          <div class="course_wrapper">
-            <div class="row">
-              <!-- Start Tab -->
-              <div
-                *ngFor="let course of courseData.slice(1, 4)"
-                class="col-xxl-4 col-xl-4 col-lg-4 col-md-6"
-              >
-                <div class="course__item white-bg mb-30 fix shadow-none">
-                  <div class="course__thumb w-img p-relative fix">
-                    <a [routerLink]="['/course-details']">
-                      <img src="{{ course.courseImage }}" alt="" />
-                    </a>
-                    <div class="course__tag">
-                      <a href="#" [class]="course.color">{{
-                        course.category
-                      }}</a>
-                    </div>
-                  </div>
-                  <div class="course__content">
-                    <div
-                      class="course__meta d-flex align-items-center justify-content-between"
-                    >
-                      <div class="course__nb_hours">
-                        <span
-                          ><i class="far fa-book-alt"></i>
-                          {{ course.nb_hours }} Lesson</span
-                        >
-                      </div>
-                      <div class="course__rating">
-                        <span
-                          ><i class="icon_star"></i
-                          >{{ course.rating }} (44)</span
-                        >
-                      </div>
-                    </div>
-                    <h3 class="course__title">
-                      <a [routerLink]="['/course-details']">
-                        {{ course.title }}</a
-                      >
-                    </h3>
-                    <div class="course__teacher d-flex align-items-center">
-                      <div class="course__teacher-thumb mr-15">
-                        <img src="{{ course.teacherImg }}" alt="" />
-                      </div>
-                      <h6>
-                        <a [routerLink]="['/instructor-details']">
-                          {{ course.teacherName }}</a
-                        >
-                      </h6>
-                    </div>
-                  </div>
-                  <div
-                    class="course__more d-flex justify-content-between align-items-center"
-                  >
-                    <div class="course__status d-flex align-items-center">
-                      <span [class]="course.color">${{ course.price }}</span>
-                      <span class="old-price">${{ course.oldPrice }}</span>
-                    </div>
-                    <div class="course__btn">
-                      <a [routerLink]="['/course-details']" class="link-btn">
-                        Know Details
-                        <i class="far fa-arrow-right"></i>
-                        <i class="far fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Tab -->
-            </div>
-          </div>
-        </ng-template>
-      </li>
-    </ul>
-    <div [ngbNavOutlet]="customNav"></div>
+        </div>
+        <!-- End Tab -->
+      </div>
+    </div>
   </div>
 </section>

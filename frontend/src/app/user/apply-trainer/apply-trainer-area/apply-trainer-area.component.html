@@ -31,7 +31,10 @@
                 <ng-template awWizardStepSymbol>
                   <i class="fas fa-user"></i>
                 </ng-template>
-                <form [formGroup]="trainerForm1">
+                <form
+                  [formGroup]="trainerForm1"
+                  (ngSubmit)="submitForm1(trainerForm1)"
+                >
                   <div class="row">
                     <div class="sign__input-wrapper mb-25">
                       <h5>First Name<span class="text-danger">*</span></h5>
@@ -151,7 +154,12 @@
                   </div>
                   <ul class="list-inline wizard mb-0 mt-20">
                     <li class="next list-inline-item float-end">
-                      <button class="px-3 py-2 btn btn-primary" type="submit" awNextStep>
+                      <button
+                        class="px-3 py-2 btn btn-primary"
+                        type="submit"
+                        awNextStep
+                        [disabled]="!trainerForm1.valid"
+                      >
                         Next
                       </button>
                     </li>
@@ -164,7 +172,10 @@
                 <ng-template awWizardStepSymbol>
                   <i class="fas fa-user"></i>
                 </ng-template>
-                <form [formGroup]="trainerForm2">
+                <form
+                  [formGroup]="trainerForm2"
+                  (ngSubmit)="submitForm2(trainerForm2)"
+                >
                   <div class="sign__input-wrapper mb-10">
                     <h5>Skills<span class="text-danger">*</span></h5>
                     <div class="">
@@ -213,12 +224,20 @@
                   </div>
                   <ul class="list-inline wizard mb-0 mt-20">
                     <li class="previous list-inline-item">
-                      <button class="btn btn-secondary px-3 py-2" awPreviousStep>
+                      <button
+                        class="btn btn-secondary px-3 py-2"
+                        awPreviousStep
+                      >
                         Previous
                       </button>
                     </li>
                     <li class="next list-inline-item float-end">
-                      <button class="px-3 py-2 btn btn-primary" type="submit" awNextStep>
+                      <button
+                        class="px-3 py-2 btn btn-primary"
+                        type="submit"
+                        awNextStep
+                        [disabled]="!trainerForm2.valid"
+                      >
                         Next
                       </button>
                     </li>
@@ -254,7 +273,7 @@
 
                 <ul class="list-inline wizard mb-0 mt-20">
                   <li class="previous list-inline-item">
-                    <button class=" btn btn-secondary px-3 py-2" awPreviousStep>
+                    <button class="btn btn-secondary px-3 py-2" awPreviousStep>
                       Previous
                     </button>
                   </li>

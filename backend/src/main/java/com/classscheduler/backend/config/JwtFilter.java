@@ -25,8 +25,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private String userName=null;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-            if(request.getServletPath().matches("/login|/forgotPassword|/|/trainer/register")
+            if(request.getServletPath().matches("/login|/forgotPassword|/|/public/trainer/register")
                     ||request.getServletPath().matches("^/images/.*\\.(png|jpg|jpeg)$")
                     ||request.getServletPath().startsWith("/public/")){
                 filterChain.doFilter(request,response);

@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./apply-trainer-area.component.scss'],
 })
 export class ApplyTrainerAreaComponent implements OnInit {
+
+
   trainerForm1!: UntypedFormGroup; // bootstrap validation form
   trainerForm2!: UntypedFormGroup; // bootstrap validation form
 
@@ -23,7 +25,7 @@ export class ApplyTrainerAreaComponent implements OnInit {
     public formBuilder: UntypedFormBuilder,
     private trainerService: TrainerService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     /**
@@ -43,7 +45,7 @@ export class ApplyTrainerAreaComponent implements OnInit {
         lastName: ['', [Validators.required]],
         address: ['', [Validators.required]],
         phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-        email: ['', [Validators.required], [Validators.email]],
+        email: ['', [Validators.required, Validators.email]],
       }
     );
     this.trainerForm2 = this.formBuilder.group(
@@ -54,6 +56,13 @@ export class ApplyTrainerAreaComponent implements OnInit {
     );
 
     this.submit = false;
+  }
+  submitForm1(trainerForm1: UntypedFormGroup) {
+    console.log("part1", trainerForm1.value)
+  }
+  submitForm2(trainerForm2: UntypedFormGroup) {
+    console.log("part2", trainerForm2.value)
+
   }
   /**
    * Returns form
@@ -69,20 +78,30 @@ export class ApplyTrainerAreaComponent implements OnInit {
   validSubmit() {
 
     this.submit = true;
-    console.log(this.form['value']);
-    console.log(this.form['valid']);
-    if (this.form['valid'] && this.selectedImage) {
-      console.log('this.form["value"]', this.form["value"]);
-      const _Data = JSON.stringify({
-        ...this.form["value"],
-      });
+    console.log(this.trainerForm1);
+    console.log(this.trainerForm2);
+    if (this.trainerForm2.valid && this.selectedImage) {
 
+      const skillsAsString = this.trainerForm2.get('skills')?.value.join(', ');
+      const desc = this.trainerForm2.get("description")?.value
+      console.log(skillsAsString)
+      // Extract values from the form groups
+      const trainerForm1Value = this.extractFormValues(this.trainerForm1);
+
+      // Merge form values
+      const _Data = {
+        ...trainerForm1Value,
+        skills: skillsAsString,
+        description: desc
+      };
       console.log('_Data', _Data);
+      // Convert _Data to a JSON string
+      const jsonData = JSON.stringify(_Data);
       // Create a FormData object to send form data
-      const formData = new FormData();
+      let formData = new FormData();
       formData.append('image', this.selectedImage);
       //append the rest of the data and selectedForIndividualSwitch and selectedStatuslSwitch
-      formData.append('data', new Blob([_Data], { type: 'application/json' }));
+      formData.append('data', new Blob([jsonData], { type: 'application/json' }));
 
       // Call your service method to add the new trainer
       this.trainerService.registerTrainer(formData).subscribe(
@@ -94,17 +113,17 @@ export class ApplyTrainerAreaComponent implements OnInit {
             icon: 'success',
             confirmButtonColor: '#5438dc',
           });
-
+          this.router.navigate(['/'])
           console.log('Trainer added successfully:', result);
         },
-        (error) => {
+        (error: any) => {
           // Handle error
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: error,
           });
-          console.error('Error adding trainer:', error);
+          console.log('Error adding trainer:', error);
         }
       );
     }
@@ -119,5 +138,25 @@ export class ApplyTrainerAreaComponent implements OnInit {
     console.log('File uploaded successfully', event);
     this.selectedImage = event;
     this.imageUrl = URL.createObjectURL(event);
+  }
+
+
+  // Function to extract form values
+  private extractFormValues(formGroup: UntypedFormGroup): any {
+    const formValues: { [key: string]: any } = {};
+
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+
+      if (control instanceof UntypedFormGroup) {
+        // Recursively extract values for nested form groups
+        formValues[key] = this.extractFormValues(control);
+      } else {
+        // Extract the value from the form control
+        formValues[key] = control?.value;
+      }
+    });
+
+    return formValues;
   }
 }

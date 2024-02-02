@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/envi';
 import { Trainer } from '../model/trainer.model';
@@ -7,6 +7,10 @@ import { Trainer } from '../model/trainer.model';
   providedIn: 'root',
 })
 export class TrainerService {
+
+  requestHeader = new HttpHeaders(
+    { "NO-Auth": "True" }
+  );
   constructor(private httpClient: HttpClient) { }
 
   public getAllTrainer() {
@@ -15,19 +19,19 @@ export class TrainerService {
     );
   }
   public deleteTrainer(id: number) {
-    return this.httpClinet.delete(environment.apiEndpoint + `/trainer/delete/${id}`)
+    return this.httpClient.delete(environment.apiEndpoint + `/trainer/delete/${id}`)
   }
   public getTrainer(id: number) {
-    return this.httpClinet.get<Trainer>(environment.apiEndpoint + `/trainer/get/${id}`)
+    return this.httpClient.get<Trainer>(environment.apiEndpoint + `/trainer/get/${id}`)
   }
 
   public acceptTrainer(id: number) {
-    return this.httpClinet.get(environment.apiEndpoint + `/trainer/accept/${id}`)
+    return this.httpClient.get(environment.apiEndpoint + `/trainer/accept/${id}`)
   }
   public registerTrainer(data: any) {
     return this.httpClient.post(
       environment.apiEndpoint + '/public/trainer/register',
-      data
+      data, { headers: this.requestHeader }
     );
   }
 }

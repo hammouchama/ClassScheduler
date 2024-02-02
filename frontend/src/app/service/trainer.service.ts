@@ -4,15 +4,15 @@ import { environment } from '../environments/envi';
 import { Trainer } from '../model/trainer.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TrainerService {
-
-  constructor(private httpClinet: HttpClient) { }
-
+  constructor(private httpClient: HttpClient) { }
 
   public getAllTrainer() {
-    return this.httpClinet.get<Trainer[]>(environment.apiEndpoint + "/trainer/get")
+    return this.httpClient.get<Trainer[]>(
+      environment.apiEndpoint + '/trainer/get'
+    );
   }
   public deleteTrainer(id: number) {
     return this.httpClinet.delete(environment.apiEndpoint + `/trainer/delete/${id}`)
@@ -24,5 +24,10 @@ export class TrainerService {
   public acceptTrainer(id: number) {
     return this.httpClinet.get(environment.apiEndpoint + `/trainer/accept/${id}`)
   }
-
+  public registerTrainer(data: any) {
+    return this.httpClient.post(
+      environment.apiEndpoint + '/public/trainer/register',
+      data
+    );
+  }
 }

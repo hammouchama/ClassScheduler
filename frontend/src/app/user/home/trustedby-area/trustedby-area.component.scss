@@ -1,14 +1,20 @@
-.swiper-wrapper.trustedby{
-  background-color: black;
-  padding: 100px;
+.swiper-wrapper{
+
+  align-items: center;
+  div{
+    align-items: center;
+  }
+  img{
+    max-width: 80%;
+    height: auto;
+  }
   .swiper-slide{
-    max-width: 100px;
-    position: relative;
-    img{
-      max-width: 100%;
-      height: auto;
-      width: 100px;
-    }
+    text-align: center;
   }
 
+
+}
+
+.swiper-android .swiper-slide, .swiper-wrapper {
+  align-items: center;
 }

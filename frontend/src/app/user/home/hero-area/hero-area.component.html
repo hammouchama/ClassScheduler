@@ -56,7 +56,8 @@
                             </span>
                          </div>
                          <div class="hero__promotion-text">
-                            <h5><span class="counter">20</span>+</h5>
+
+                            <h5><span class="counter" [countUp]="20" [options]="{ enableScrollSpy: true }">2</span>+</h5>
                             <p>Course Topics</p>
                          </div>
                       </div>
@@ -72,7 +73,7 @@
                             </span>
                          </div>
                          <div class="hero__promotion-text">
-                            <h5><span class="counter">400</span>K</h5>
+                            <h5><span class="counter" [countUp]="400" [options]="{ enableScrollSpy: true }">20</span>K</h5>
                             <p>Assisted Student</p>
                          </div>
                       </div>
@@ -81,7 +82,7 @@
                             <img src="assets/img/hero/hero-2/hero-sm.jpg" alt="">
                          </div>
                          <div class="hero__class-text">
-                            <h5>60+</h5>
+                            <h5><span class="counter" [countUp]="60" [options]="{ enableScrollSpy: true }">15</span>+</h5>
                             <p>Expert Instructors</p>
                             <!-- <a [routerLink]="['/contact']">Join Now</a> -->
                          </div>

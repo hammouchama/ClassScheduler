@@ -28,6 +28,7 @@
                 id="title"
                 formControlName="title"
                 class="form-control"
+                (blur)="onTitleChange()"
               />
               <div
                 *ngIf="submit && form['title'].errors"
@@ -42,13 +43,14 @@
             <div class="form-group mb-4">
               <label for="category">Category</label>
               <span class="text-danger">*</span>
-              <input
+              <ng-select
                 [ngClass]="{ 'is-invalid': submit && form['category'].errors }"
-                type="text"
                 id="category"
+                [items]="categories"
+                [addTag]="true"
+                addTagText="Add New Category"
                 formControlName="category"
-                class="form-control"
-              />
+              ></ng-select>
               <div
                 *ngIf="submit && form['category'].errors"
                 class="invalid-feedback"
@@ -287,6 +289,24 @@
               formControlName="image"
               [ngStyle]="{ display: 'none' }"
             /> -->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Formation Slug (URL)</h4>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="slugPrepend">localhost:4000/</span>
+              </div>
+              <input type="text" class="form-control" id="slug" formControlName="slug"
+                placeholder="" aria-describedby="slugPrepend"
+                [ngClass]="{'is-invalid': submit && form['slug'].errors}"
+                (blur)="onSlugChange()">
+
+              <div *ngIf="submit && form['slug'].errors" class="invalid-tooltip">
+                <span *ngIf="form['slug'].errors['required']">Please choose a unique and valid slug.</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

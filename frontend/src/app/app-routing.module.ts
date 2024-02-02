@@ -7,16 +7,14 @@ import { AuthGuard } from './auth/auth.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { SignInMainComponent } from './user/sign-in/sign-in-main/sign-in-main.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
+import { UserRoutingModule } from './user/user-routing.module';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', component: HomeComponent },
-  // { path: 'login', component: LoginComponent },
+  { path: '', loadChildren: () => UserRoutingModule },
   { path: 'login', component: SignInMainComponent },
   {
     path: 'dashboard',
     loadChildren: () => AdminRoutingModule,
-    /* component: AdminComponent, */
     canActivate: [AuthGuard],
     data: { role: ['Admin', 'Assistant'] },
   },
@@ -37,7 +35,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

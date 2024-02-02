@@ -24,7 +24,6 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "node_modules/angular-archwizard/styles/archwizard.css",
               "./node_modules/ngx-ui-switch/ui-switch.component.css",
               "src/assets/scss/bootstrap.scss",
               "src/assets/scss/app.scss",

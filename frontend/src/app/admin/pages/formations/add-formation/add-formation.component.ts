@@ -18,10 +18,17 @@ export class AddFormationComponent implements OnInit {
   formationForm!: UntypedFormGroup; // bootstrap validation form
 
   cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
+  categories = [
+    'Development',
+    'Design',
+    'Data Science',
+    'Business',
+    'IT & Software',
+  ];
 
   imageUrl: string | null = null;
   selectedImage: File | null = null;
-  today = new Date().toISOString().split('T')[0]
+  today = new Date().toISOString().split('T')[0];
   selectedForIndividualSwitch: String = 'false';
   /* selectedStatuslSwitch: String = 'ACTIVE'; */
 
@@ -29,7 +36,7 @@ export class AddFormationComponent implements OnInit {
     public formBuilder: UntypedFormBuilder,
     private formationService: FormationService,
     private router: Router
-  ) { }
+  ) {}
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -51,24 +58,16 @@ export class AddFormationComponent implements OnInit {
     this.formationForm = this.formBuilder.group(
       {
         title: ['', [Validators.required]],
-        category: [
-          '',
-          [Validators.required],
-        ],
+        category: ['', [Validators.required]],
         city: ['', [Validators.required]],
         nb_hours: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-        objective: [
-          '',
-          [Validators.required],
-        ],
-        description: [
-          '',
-          [Validators.required],
-        ],
+        objective: ['', [Validators.required]],
+        description: ['', [Validators.required]],
         cost: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         capacity: ['', [Validators.required, Validators.pattern('[0-9]+')]],
         start_registration: ['', [Validators.required]],
         end_registration: ['', [Validators.required]],
+        slug: ['', [Validators.required]],
       } /* , {
       validator: MustMatch('password', 'confirmpwd'),} */
     );
@@ -78,7 +77,6 @@ export class AddFormationComponent implements OnInit {
     this.typesubmit = false;
     this.rangesubmit = false; */
   }
-
 
   /**
    * Returns form
@@ -97,8 +95,7 @@ export class AddFormationComponent implements OnInit {
     if (this.formationForm.valid && this.selectedImage) {
       console.log('this.formationForm.value', this.formationForm.value);
       const _Data = JSON.stringify({
-        ...this.formationForm.value
-
+        ...this.formationForm.value,
       });
 
       console.log('_Data', _Data);
@@ -134,7 +131,6 @@ export class AddFormationComponent implements OnInit {
     }
   }
 
-
   // dropzone upload function
 
   /* public onUploadSuccess(event: any): void {
@@ -154,9 +150,18 @@ export class AddFormationComponent implements OnInit {
     this.imageUrl = URL.createObjectURL(event);
   }
 
+  public onTitleChange(){
+    if(this.form['slug'].value.length == 0)
+      this.form['slug'].setValue(this.form['title'].value.toLowerCase().replace(/ /g, '-'));
+  };
+
+  public onSlugChange(){
+    this.form['slug'].setValue(this.form['slug'].value.toLowerCase().replace(/ /g, '-'));
+  };
+
+
   // public onChangeForIndividualSwitch(event: any) {
   //   this.selectedForIndividualSwitch = event ? 'true' : 'false';
-
 
   /* public onChangeStatuslSwitch(event: any) {
     this.selectedStatuslSwitch = event?"ACTIVE":"INACTIVE";

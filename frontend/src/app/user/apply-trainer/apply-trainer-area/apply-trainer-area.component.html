@@ -1,0 +1,285 @@
+<section class="signup__area po-rel-z1 pt-100 pb-145">
+  <div class="sign__shape">
+    <img class="man-1" src="assets/img/icon/sign/man-3.png" alt="" />
+    <img class="man-2 man-22" src="assets/img/icon/sign/man-2.png" alt="" />
+    <img class="circle" src="assets/img/icon/sign/circle.png" alt="" />
+    <img class="zigzag" src="assets/img/icon/sign/zigzag.png" alt="" />
+    <img class="dot" src="assets/img/icon/sign/dot.png" alt="" />
+    <img class="bg" src="assets/img/icon/sign/sign-up.png" alt="" />
+    <img class="flower" src="assets/img/icon/sign/flower.png" alt="" />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
+        <div class="section__title-wrapper text-center mb-55">
+          <h2 class="section__title">
+            Apply to become <br />
+            a Trainer
+          </h2>
+          <!-- <p>I'm a subhead that goes with a story.</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1"
+      >
+        <div class="sign__wrapper white-bg">
+          <div class="sign__form">
+            <aw-wizard [navBarLayout]="'large-empty-symbols'">
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="fas fa-user"></i>
+                </ng-template>
+                <form [formGroup]="trainerForm1">
+                  <div class="row">
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>First Name<span class="text-danger">*</span></h5>
+                      <div class="sign__input">
+                        <input
+                          type="text"
+                          [ngClass]="{
+                            'is-invalid': submit && form['firstName'].errors
+                          }"
+                          id="firstName"
+                          formControlName="firstName"
+                          placeholder="First name"
+                        />
+                        <i class="fal fa-user"></i>
+                      </div>
+                      <div
+                        *ngIf="submit && form['firstName'].errors"
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="form['firstName'].errors['required']"
+                          >This value is required.</span
+                        >
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>Last Name<span class="text-danger">*</span></h5>
+                      <div class="sign__input">
+                        <input
+                          type="text"
+                          placeholder="Last Name"
+                          [ngClass]="{
+                            'is-invalid': submit && form['lastName'].errors
+                          }"
+                          id="lastName"
+                          formControlName="lastName"
+                        />
+                        <i class="fal fa-envelope"></i>
+                      </div>
+                      <div
+                        *ngIf="submit && form['lastName'].errors"
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="form['lastName'].errors['required']"
+                          >This value is required.</span
+                        >
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>Address<span class="text-danger">*</span></h5>
+                      <div class="sign__input">
+                        <input
+                          type="text"
+                          placeholder="Address"
+                          [ngClass]="{
+                            'is-invalid': submit && form['address'].errors
+                          }"
+                          id="address"
+                          formControlName="address"
+                        />
+                        <i class="fal fa-lock"></i>
+                      </div>
+                      <div
+                        *ngIf="submit && form['address'].errors"
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="form['address'].errors['required']"
+                          >This value is required.</span
+                        >
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-10">
+                      <h5>Phone number<span class="text-danger">*</span></h5>
+                      <div class="sign__input">
+                        <input
+                          type="text"
+                          placeholder="0612345678"
+                          [ngClass]="{
+                            'is-invalid': submit && form['phone'].errors
+                          }"
+                          id="phone"
+                          formControlName="phone"
+                        />
+                        <i class="fal fa-lock"></i>
+                      </div>
+                      <div
+                        *ngIf="submit && form['phone'].errors"
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="form['phone'].errors['required']"
+                          >This value is required.</span
+                        >
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-10">
+                      <h5>Work email<span class="text-danger">*</span></h5>
+                      <div class="sign__input">
+                        <input
+                          type="email"
+                          placeholder="e-mail address"
+                          [ngClass]="{
+                            'is-invalid': submit && form['email'].errors
+                          }"
+                          id="email"
+                          formControlName="email"
+                        />
+                        <i class="fal fa-lock"></i>
+                      </div>
+                      <div
+                        *ngIf="submit && form['email'].errors"
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="form['email'].errors['required']"
+                          >This value is required.</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="list-inline wizard mb-0 mt-20">
+                    <li class="next list-inline-item float-end">
+                      <button class="px-3 py-2 btn btn-primary" type="submit" awNextStep>
+                        Next
+                      </button>
+                    </li>
+                  </ul>
+                </form>
+              </aw-wizard-step>
+              <!-- end step -->
+
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="fas fa-user"></i>
+                </ng-template>
+                <form [formGroup]="trainerForm2">
+                  <div class="sign__input-wrapper mb-10">
+                    <h5>Skills<span class="text-danger">*</span></h5>
+                    <div class="">
+                      <ng-select
+                        [ngClass]="{
+                          'is-invalid': submit && form['skills'].errors
+                        }"
+                        id="skills"
+                        [items]="listSkills"
+                        [addTag]="true"
+                        addTagText="Add New Skill"
+                        formControlName="skills"
+                        [multiple]="true"
+                      ></ng-select>
+                    </div>
+                    <div
+                      *ngIf="submit && form['skills'].errors"
+                      class="invalid-feedback"
+                    >
+                      <span *ngIf="form['skills'].errors['required']"
+                        >This value is required.</span
+                      >
+                    </div>
+                  </div>
+                  <div class="sign__input-wrapper mb-10">
+                    <h5>Description<span class="text-danger">*</span></h5>
+                    <div class="form-group">
+                      <textarea
+                        [ngClass]="{
+                          'is-invalid': submit && form['description'].errors,
+                          'form-control': true
+                        }"
+                        rows="5"
+                        id="description"
+                        formControlName="description"
+                      ></textarea>
+                    </div>
+                    <div
+                      *ngIf="submit && form['description'].errors"
+                      class="invalid-feedback"
+                    >
+                      <span *ngIf="form['description'].errors['required']"
+                        >This value is required.</span
+                      >
+                    </div>
+                  </div>
+                  <ul class="list-inline wizard mb-0 mt-20">
+                    <li class="previous list-inline-item">
+                      <button class="btn btn-secondary px-3 py-2" awPreviousStep>
+                        Previous
+                      </button>
+                    </li>
+                    <li class="next list-inline-item float-end">
+                      <button class="px-3 py-2 btn btn-primary" type="submit" awNextStep>
+                        Next
+                      </button>
+                    </li>
+                  </ul>
+                </form>
+              </aw-wizard-step>
+              <!-- end step -->
+
+              <aw-wizard-step>
+                <ng-template awWizardStepSymbol>
+                  <i class="fas fa-user"></i>
+                </ng-template>
+
+                <div *ngIf="!imageUrl">
+                  <dropzone
+                    [ngClass]="{ 'is-invalid': submit && !imageUrl }"
+                    class="dropzone"
+                    [message]="'Click or drag image here to upload'"
+                    (success)="onUploadSuccess($event)"
+                    (addedFile)="onUploadSuccess($event)"
+                  ></dropzone>
+                  <div *ngIf="submit && !imageUrl" class="invalid-feedback">
+                    <span>This value is required.</span>
+                  </div>
+                </div>
+
+                <div *ngIf="imageUrl" class="dropzone-preview">
+                  <img class="w-100" [src]="imageUrl" alt="Selected Image" />
+                  <div class="cancel">
+                    <i class="ri-close-fill" (click)="removeImage()"></i>
+                  </div>
+                </div>
+
+                <ul class="list-inline wizard mb-0 mt-20">
+                  <li class="previous list-inline-item">
+                    <button class=" btn btn-secondary px-3 py-2" awPreviousStep>
+                      Previous
+                    </button>
+                  </li>
+                  <li class="next list-inline-item float-end">
+                    <button
+                      class="px-3 py-2 btn btn-primary"
+                      type="submit"
+                      (click)="validSubmit()"
+                    >
+                      Submit
+                    </button>
+                  </li>
+                </ul>
+              </aw-wizard-step>
+              <!-- end step -->
+            </aw-wizard>
+            <div class="sign__new text-center mt-20">
+              <p>
+                Already have an account ?
+                <a [routerLink]="['/login']"> Login</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IndividualRepository extends JpaRepository<Individual,Long> {
 
-    @Query("SELECT COUNT(i) FROM Individual i WHERE i.group.id = :groupId")
-    Long countIndividualsByGroupId(@Param("groupId") Long groupId);
+    @Query("SELECT COUNT(i) FROM Individual i WHERE i.formation.id = :formationId and i.is_archived=false")
+    Long countIndividualsByFormationId(@Param("formationId") Long formationId);
 
 }

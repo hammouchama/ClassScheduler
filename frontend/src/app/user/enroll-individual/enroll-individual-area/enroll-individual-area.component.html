@@ -21,12 +21,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      <div
+        class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1"
+      >
         <div class="sign__wrapper white-bg">
           <div class="sign__form">
             <div class="course__item white-bg mb-30 fix">
               <!-- Loading -->
-              <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+              <div
+                *ngIf="loading"
+                class="d-flex justify-content-center align-items-center"
+                style="height: 200px"
+              >
                 <div class="spinner-border text-primary" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
@@ -34,18 +40,34 @@
 
               <div class="row gx-0" *ngIf="!loading">
                 <div class="col-xxl-4 col-xl-4 col-lg-4">
-                  <div class="course__thumb course__thumb-list w-img p-relative fix">
-                    <a [routerLink]="['/formation/'+formation?.slug]">
+                  <div
+                    class="course__thumb course__thumb-list w-img p-relative fix"
+                  >
+                    <a [routerLink]="['/formation/' + formation.slug]">
                       <div *ngIf="formation.photo?.url" class="thumbnail">
-                        <img src="{{ formation.photo?.url }}" [alt]="formation.category" />
+                        <img
+                          src="{{ formation.photo?.url }}"
+                          [alt]="formation.category"
+                        />
                       </div>
                       <div *ngIf="!formation.photo?.url" class="thumbnail">
-                        <img [src]="'assets/img/course/thumbnail/' + formation.category + '.jpg'"
-                          [alt]="formation.category" />
+                        <img
+                          [src]="
+                            'assets/img/course/thumbnail/' +
+                            formation.category +
+                            '.jpg'
+                          "
+                          [alt]="formation.category"
+                        />
                       </div>
                     </a>
                     <div class="course__tag">
-                      <a href="#" [ngStyle]="{'background-color': categoryColors[formation.category]}">
+                      <a
+                        href="#"
+                        [ngStyle]="{
+                          'background-color': categoryColors[formation.category]
+                        }"
+                      >
                         {{ formation.category }}
                       </a>
                     </div>
@@ -56,128 +78,194 @@
                     <div class="course__content course__content-4 pb-20">
                       <div class="course__meta d-flex align-items-center">
                         <div class="course__nb_hours mr-20">
-                          <span class="d-flex"><i class="ri-time-line"></i>
-                            {{ formation.nb_hours }} Hours</span>
+                          <span class="d-flex"
+                            ><i class="ri-time-line"></i>
+                            {{ formation.nb_hours }} Hours</span
+                          >
                         </div>
-
                       </div>
                       <h3 class="course__title">
                         <a [routerLink]="['/formation/', formation.slug]">
-                          {{ formation.title }}</a>
+                          {{ formation.title }}</a
+                        >
                       </h3>
-
                     </div>
                     <div
-                      class="course__more course__more-2 course__more-3 d-flex justify-content-end align-items-center">
+                      class="course__more course__more-2 course__more-3 d-flex justify-content-end align-items-center"
+                    >
                       <div class="course__status d-flex align-items-center">
-                        <span [style]="{ color: categoryColors[formation.category] }">{{ formation.cost }} DH</span>
+                        <span
+                          [style]="{
+                            color: categoryColors[formation.category]
+                          }"
+                          >{{ formation.cost }} DH</span
+                        >
                         <!-- <span class="old-price">${{course.oldPrice}}</span> -->
                       </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-
-
-
-            <form [formGroup]="individualForm" (ngSubmit)="validSubmit()">
+            <form
+              [formGroup]="individualForm"
+              (ngSubmit)="validSubmit()"
+              *ngIf="!loading"
+            >
               <div class="row">
                 <div class="sign__input-wrapper mb-25">
                   <h5>Full Name<span class="text-danger">*</span></h5>
                   <div class="sign__input">
-                    <input class="form-control" type="text" [ngClass]="{
-                            'is-invalid': submit && form['name'].errors
-                          }" id="name" formControlName="name" placeholder="Full name" />
+                    <input
+                      class="form-control"
+                      type="text"
+                      [ngClass]="{
+                        'is-invalid': submit && form['name'].errors
+                      }"
+                      id="name"
+                      formControlName="name"
+                      placeholder="Full name"
+                    />
                     <i class="fal fa-user"></i>
                   </div>
-                  <div *ngIf="submit && form['name'].errors" class="invalid-feedback">
-                    <span *ngIf="form['name'].errors['required']">This value is required.</span>
+                  <div
+                    *ngIf="submit && form['name'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['name'].errors['required']"
+                      >This value is required.</span
+                    >
                   </div>
                 </div>
-
 
                 <div class="sign__input-wrapper mb-10">
                   <h5>Phone number<span class="text-danger">*</span></h5>
                   <div class="sign__input">
-                    <input class="form-control" type="text" placeholder="0612345678" [ngClass]="{
-                            'is-invalid': submit && form['phone'].errors
-                          }" id="phone" formControlName="phone" />
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="0612345678"
+                      [ngClass]="{
+                        'is-invalid': submit && form['phone'].errors
+                      }"
+                      id="phone"
+                      formControlName="phone"
+                    />
                     <i class="fal fa-lock"></i>
                   </div>
-                  <div *ngIf="submit && form['phone'].errors" class="invalid-feedback">
-                    <span *ngIf="form['phone'].errors['required']">This value is required.</span>
+                  <div
+                    *ngIf="submit && form['phone'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['phone'].errors['required']"
+                      >This value is required.</span
+                    >
                   </div>
-                  <div *ngIf="submit && form['phone'].errors" class="invalid-feedback">
-                    <span *ngIf="form['phone'].errors['pattern']">Invalid phone number.</span>
-
+                  <div
+                    *ngIf="submit && form['phone'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['phone'].errors['pattern']"
+                      >Invalid phone number.</span
+                    >
                   </div>
                 </div>
-
 
                 <div class="sign__input-wrapper mb-10">
                   <h5>Work email<span class="text-danger">*</span></h5>
                   <div class="sign__input">
-                    <input class="form-control" type="email" placeholder="e-mail address" [ngClass]="{
-                            'is-invalid': submit && form['email'].errors
-                          }" id="email" formControlName="email" />
+                    <input
+                      class="form-control"
+                      type="email"
+                      placeholder="e-mail address"
+                      [ngClass]="{
+                        'is-invalid': submit && form['email'].errors
+                      }"
+                      id="email"
+                      formControlName="email"
+                    />
                     <i class="fal fa-lock"></i>
                   </div>
-                  <div *ngIf="submit && form['email'].errors" class="invalid-feedback">
-                    <span *ngIf="form['email'].errors['required']">This value is required.</span>
+                  <div
+                    *ngIf="submit && form['email'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['email'].errors['required']"
+                      >This value is required.</span
+                    >
                   </div>
 
-                  <div *ngIf="submit && form['email'].errors" class="invalid-feedback">
-                    <span *ngIf="form['email'].errors['pattern']">Invalid email.</span>
-
+                  <div
+                    *ngIf="submit && form['email'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['email'].errors['pattern']"
+                      >Invalid email.</span
+                    >
                   </div>
                 </div>
-
 
                 <div class="sign__input-wrapper mb-25">
                   <h5>City<span class="text-danger">*</span></h5>
                   <div class="">
-                    <ng-select class="form-control" [ngClass]="{ 'is-invalid': submit && form['city'].errors }"
-                      id="city" [items]="cities" formControlName="city" [addTag]="true"
-                      addTagText="Add Another City"></ng-select>
+                    <ng-select
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': submit && form['city'].errors
+                      }"
+                      id="city"
+                      [items]="cities"
+                      formControlName="city"
+                      [addTag]="true"
+                      addTagText="Add Another City"
+                    ></ng-select>
                   </div>
-                  <div *ngIf="submit && form['city'].errors" class="invalid-feedback">
-                    <span *ngIf="form['city'].errors['required']">This value is required.</span>
+                  <div
+                    *ngIf="submit && form['city'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['city'].errors['required']"
+                      >This value is required.</span
+                    >
                   </div>
                 </div>
-
-
 
                 <div class="sign__input-wrapper mb-10 birthDate">
                   <h5>Birth Date<span class="text-danger">*</span></h5>
                   <div class="sign__input">
                     <div class="input-group">
-                      <input ngbInput [(ngModel)]="form['birth_date']" ngbDatepicker class="form-control"
-                        placeholder="yyyy-mm-dd" #d="ngbDatepicker" [ngClass]="{
-                              'is-invalid': submit && form['birth_date'].errors
-                            }" formControlName="birth_date">
-                      <div class="input-group-append" (click)="d.toggle()">
-                        <span class="input-group-text"><i class="mdi mdi-calendar icon"></i></span>
-                      </div>
+                      <input
+                        ngbInput
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        type="date"
+                        [ngClass]="{
+                          'is-invalid': submit && form['birth_date'].errors
+                        }"
+                        formControlName="birth_date"
+                      />
+                      <!-- <div class="input-group-append" (click)="d.toggle()">
+                        <span class="input-group-text"
+                          ><i class="mdi mdi-calendar icon"></i
+                        ></span>
+                      </div> -->
                     </div>
                   </div>
-                  <div *ngIf="submit && form['birth_date'].errors" class="invalid-feedback">
-                    <span *ngIf="form['birth_date'].errors['required']">This value is required.</span>
+                  <div
+                    *ngIf="submit && form['birth_date'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['birth_date'].errors['required']"
+                      >This value is required.</span
+                    >
                   </div>
                 </div>
-
-
-
-
-
-
               </div>
               <ul class="list-inline mt-20 mb-40">
                 <li class="next list-inline-item float-end">
                   <button class="px-3 py-2 btn btn-primary" type="submit">
-                    Submit
+                    Register
                   </button>
                 </li>
               </ul>

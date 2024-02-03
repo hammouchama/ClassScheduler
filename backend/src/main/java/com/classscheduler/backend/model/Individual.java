@@ -27,8 +27,10 @@ public class Individual {
 
     private LocalDate birth_date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "group_id")
-    private Group group;
+    private boolean is_archived;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
 
 }

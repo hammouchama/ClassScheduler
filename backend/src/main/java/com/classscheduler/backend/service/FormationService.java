@@ -165,9 +165,9 @@ public class FormationService {
         try {
             if (jwtFilter.isAdmin()) {
                 if (isValidData(requestMap)) {
-                    Formation formationOld = formationRepository.findById(id).orElse(null);
-                    if (!Objects.isNull(formationOld)) {
-                        Formation formation =new Formation();
+                    Formation formation = formationRepository.findById(id).orElse(null);
+                    if (!Objects.isNull(formation)) {
+                        formation=formationRepository.findById(id).get();
                         formation = extractFormationInfo(requestMap, formation);
                         if(formation.getStart_registration().compareTo(formation.getEnd_registration())<0){
                             ImagesModel photo = formation.getPhoto();

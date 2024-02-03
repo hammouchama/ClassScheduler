@@ -33,7 +33,7 @@ export class EnrollIndividualAreaComponent implements OnInit {
     private formationService: FormationService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     /**
@@ -55,7 +55,7 @@ export class EnrollIndividualAreaComponent implements OnInit {
       birth_date: [
         '',
         [Validators.required],
-        Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),
+
       ],
     });
 
@@ -106,22 +106,22 @@ export class EnrollIndividualAreaComponent implements OnInit {
     console.log(this.individualForm);
     console.log(this.individualForm.valid);
     if (this.individualForm.valid) {
-      // Merge form values
-      const _Data = this.form['value'];
-      console.log('_Data', _Data);
-      // Convert _Data to a JSON string
-      const jsonData = JSON.stringify(_Data);
-      // Create a FormData object to send form data
-      let formData = new FormData();
-      //append the rest of the data and selectedForIndividualSwitch and selectedStatuslSwitch
-      formData.append(
-        'data',
-        new Blob([jsonData], { type: 'application/json' })
-      );
+      // // Merge form values
+      // const _Data = this.form['value'];
+      // console.log('_Data', _Data);
+      // // Convert _Data to a JSON string
+      // const jsonData = JSON.stringify(_Data);
+      // // Create a FormData object to send form data
+      // let formData = new FormData();
+      // //append the rest of the data and selectedForIndividualSwitch and selectedStatuslSwitch
+      // formData.append(
+      //   'data',
+      //   new Blob([jsonData], { type: 'application/json' })
+      // );
 
       // Call your service method to add the new individual
       this.individualService
-        .registerToFormation(this.formation.id, formData)
+        .registerToFormation(this.formation.id, this.individualForm.value)
         .subscribe(
           (result) => {
             // Handle success

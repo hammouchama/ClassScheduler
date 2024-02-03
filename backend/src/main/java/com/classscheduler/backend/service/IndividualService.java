@@ -23,7 +23,6 @@ import java.util.Objects;
 public class IndividualService {
     IndividualRepository individualRepository;
     FormationRepository formationRepository;
-    GroupRepository groupRepository;
 
     public ResponseEntity<String> register(long id, Map<String, String> requestMap) {
         try {
@@ -34,39 +33,14 @@ public class IndividualService {
             if (isValidInfo(requestMap)
                     || !Objects.isNull(formation)
             ) {
-
-                // Retrieve the number of groups for the given formation
-                int numberOfGroups = groupRepository.countGroupsByFormationAndIsOldFalse(formation);
-
-                // Extract individual data from the provided map
-                Individual individual = extractData(requestMap);
-
-                // Retrieve all groups associated with the formation
-                List<Group> groups = groupRepository.findAllByFormation(formation);
-
-                // Generate a group name based on the number of groups
-                String groupName = "group_" + numberOfGroups;
-
-                // Check conditions to decide if a new group needs to be created
-                if (numberOfGroups == 0
-                        || individualRepository.countIndividualsByGroupId(groups.get(groups.size() - 1).getId()) == formation.getCapacity()) {
-                    // Create a new group if conditions are met
-                    Group group = new Group();
-                    group.setGroupName(groupName);
-                    group.setFormation(formation);
-                    group = groupRepository.save(group);
-                    individual.setGroup(group);
-                } else {
-                    // Otherwise, assign the individual to the last existing group
-                    individual.setGroup(groups.get(groups.size() - 1));
+                if (formation.getCapacity()>individualRepository.countIndividualsByFormationId(id)){
+                    Individual individual=extractData(requestMap);
+                    individual.setFormation(formation);
+                    individualRepository.save(individual);
+                    return Helpers.getResponseEntity("You are registered successfully", HttpStatus.OK);
                 }
-
-                individualRepository.save(individual);
-
-                return Helpers.getResponseEntity("You are registered successfully", HttpStatus.OK);
+                return Helpers.getResponseEntity("out of seats", HttpStatus.OK);
             }
-
-
             return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             // Print the stack trace in case of an exception

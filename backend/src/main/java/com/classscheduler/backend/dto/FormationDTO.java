@@ -1,6 +1,7 @@
 package com.classscheduler.backend.dto;
 
 import com.classscheduler.backend.model.Formation;
+import com.classscheduler.backend.model.ImagesModel;
 import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class FormationDTO {
     private int nb_hours;
     private String objective;
     private String description;
-    private String photo;
+    private ImagesModel photo;
     @Column(unique = true)
     private String slug;
     private float cost;
@@ -26,7 +27,7 @@ public class FormationDTO {
     private LocalDate end_registration;
 
     public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description,String photo,LocalDate start_registration ,LocalDate end_registration, float cost, String slug) {
+            String description,ImagesModel photo,LocalDate start_registration ,LocalDate end_registration, float cost, String slug) {
         this.id = id;
         this.title = title;
         this.category = category;

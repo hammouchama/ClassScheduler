@@ -4,6 +4,7 @@ import { MustMatch } from './add-formation.mustmatch';
 import { FormationService } from 'src/app/service/-formation.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { cities } from 'src/app/model/formation.model';
 
 @Component({
   selector: 'app-add-formation',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
 export class AddFormationComponent implements OnInit {
   formationForm!: UntypedFormGroup; // bootstrap validation form
 
-  cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];
+  cities = cities;
   categories = [
     'Development',
     'Design',

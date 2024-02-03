@@ -23,7 +23,7 @@ public class Individual {
 
     private String email;
 
-    private String ville;
+    private String city;
 
     private LocalDate birth_date;
 

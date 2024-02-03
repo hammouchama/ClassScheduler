@@ -1,14 +1,7 @@
 <div class="container-fluid">
-  <app-pagetitle
-    title="Add New Formation"
-    [breadcrumbItems]="breadCrumbItems"
-  ></app-pagetitle>
+  <app-pagetitle title="Add New Formation" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
-  <form
-    (ngSubmit)="validSubmit()"
-    [formGroup]="formationForm"
-    enctype="multipart/form-data"
-  >
+  <form (ngSubmit)="validSubmit()" [formGroup]="formationForm" enctype="multipart/form-data">
     <div class="row">
       <div class="col-lg-6">
         <div class="card">
@@ -22,170 +15,84 @@
             <div class="form-group mb-4">
               <label for="title">Title</label>
               <span class="text-danger">*</span>
-              <input
-                [ngClass]="{ 'is-invalid': submit && form['title'].errors }"
-                type="text"
-                id="title"
-                formControlName="title"
-                class="form-control"
-                (blur)="onTitleChange()"
-              />
-              <div
-                *ngIf="submit && form['title'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['title'].errors['required']"
-                  >This value is required.</span
-                >
+              <input [ngClass]="{ 'is-invalid': submit && form['title'].errors }" type="text" id="title"
+                formControlName="title" class="form-control" (blur)="onTitleChange()" />
+              <div *ngIf="submit && form['title'].errors" class="invalid-feedback">
+                <span *ngIf="form['title'].errors['required']">This value is required.</span>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <label for="category">Category</label>
               <span class="text-danger">*</span>
-              <ng-select
-                [ngClass]="{ 'is-invalid': submit && form['category'].errors }"
-                id="category"
-                [items]="categories"
-                [addTag]="true"
-                addTagText="Add New Category"
-                formControlName="category"
-              ></ng-select>
-              <div
-                *ngIf="submit && form['category'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['category'].errors['required']"
-                  >This value is required.</span
-                >
+              <ng-select [ngClass]="{ 'is-invalid': submit && form['category'].errors }" id="category"
+                [items]="categories" [addTag]="true" addTagText="Add New Category"
+                formControlName="category"></ng-select>
+              <div *ngIf="submit && form['category'].errors" class="invalid-feedback">
+                <span *ngIf="form['category'].errors['required']">This value is required.</span>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <label for="city">City</label>
               <span class="text-danger">*</span>
-              <ng-select
-                [ngClass]="{ 'is-invalid': submit && form['city'].errors }"
-                id="city"
-                [items]="cities"
-                formControlName="city"
-              ></ng-select>
-              <div
-                *ngIf="submit && form['city'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['city'].errors['required']"
-                  >This value is required.</span
-                >
+              <ng-select [ngClass]="{ 'is-invalid': submit && form['city'].errors }" id="city" [items]="cities"
+                formControlName="city"></ng-select>
+              <div *ngIf="submit && form['city'].errors" class="invalid-feedback">
+                <span *ngIf="form['city'].errors['required']">This value is required.</span>
               </div>
-              <!-- <select id="city" formControlName="city" class="form-control">
-                <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-              </select> -->
             </div>
 
             <div class="form-group mb-4">
               <label for="nb_hours">Number of Hours</label>
               <span class="text-danger">*</span>
-              <input
-                [ngClass]="{ 'is-invalid': submit && form['nb_hours'].errors }"
-                type="number"
-                id="nb_hours"
-                formControlName="nb_hours"
-                class="form-control"
-              />
-              <div
-                *ngIf="submit && form['nb_hours'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['nb_hours'].errors['required']"
-                  >This value is required.</span
-                >
-                <span *ngIf="form['nb_hours'].errors['pattern']"
-                  >This value should be valid.</span
-                >
+              <input [ngClass]="{ 'is-invalid': submit && form['nb_hours'].errors }" type="number" id="nb_hours"
+                formControlName="nb_hours" class="form-control" />
+              <div *ngIf="submit && form['nb_hours'].errors" class="invalid-feedback">
+                <span *ngIf="form['nb_hours'].errors['required']">This value is required.</span>
+                <span *ngIf="form['nb_hours'].errors['pattern']">This value should be valid.</span>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <label for="objective">Objective</label>
               <span class="text-danger">*</span>
-              <textarea
-                [ngClass]="{ 'is-invalid': submit && form['objective'].errors }"
-                id="objective"
-                formControlName="objective"
-                class="form-control"
-              ></textarea>
-              <div
-                *ngIf="submit && form['objective'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['objective'].errors['required']"
-                  >This value is required.</span
-                >
+              <textarea [ngClass]="{ 'is-invalid': submit && form['objective'].errors }" id="objective"
+                formControlName="objective" class="form-control"></textarea>
+              <div *ngIf="submit && form['objective'].errors" class="invalid-feedback">
+                <span *ngIf="form['objective'].errors['required']">This value is required.</span>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <label for="description">Description</label>
               <span class="text-danger">*</span>
-              <textarea
-                [ngClass]="{
+              <textarea [ngClass]="{
                   'is-invalid': submit && form['description'].errors
-                }"
-                id="description"
-                formControlName="description"
-                class="form-control"
-              ></textarea>
-              <div
-                *ngIf="submit && form['description'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['description'].errors['required']"
-                  >This value is required.</span
-                >
+                }" id="description" formControlName="description" class="form-control"></textarea>
+              <div *ngIf="submit && form['description'].errors" class="invalid-feedback">
+                <span *ngIf="form['description'].errors['required']">This value is required.</span>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <label for="cost">Cost</label>
               <span class="text-danger">*</span>
-              <input
-                [ngClass]="{ 'is-invalid': submit && form['cost'].errors }"
-                type="number"
-                id="cost"
-                formControlName="cost"
-                class="form-control"
-              />
-              <div
-                *ngIf="submit && form['cost'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['cost'].errors['required']"
-                  >This value is required.</span
-                >
-                <span *ngIf="form['cost'].errors['pattern']"
-                  >This value should be valid.</span
-                >
+              <input [ngClass]="{ 'is-invalid': submit && form['cost'].errors }" type="number" id="cost"
+                formControlName="cost" class="form-control" />
+              <div *ngIf="submit && form['cost'].errors" class="invalid-feedback">
+                <span *ngIf="form['cost'].errors['required']">This value is required.</span>
+                <span *ngIf="form['cost'].errors['pattern']">This value should be valid.</span>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <label for="capacity">Capacity</label>
               <span class="text-danger">*</span>
-              <input
-                [ngClass]="{ 'is-invalid': submit && form['capacity'].errors }"
-                type="number"
-                id="capacity"
-                formControlName="capacity"
-                class="form-control"
-              />
-              <div
-                *ngIf="submit && form['capacity'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['capacity'].errors['required']"
-                  >This value is required.</span
-                >
+              <input [ngClass]="{ 'is-invalid': submit && form['capacity'].errors }" type="number" id="capacity"
+                formControlName="capacity" class="form-control" />
+              <div *ngIf="submit && form['capacity'].errors" class="invalid-feedback">
+                <span *ngIf="form['capacity'].errors['required']">This value is required.</span>
               </div>
             </div>
 
@@ -193,46 +100,24 @@
             <div class="form-group mb-4">
               <label for="start_registration">Start Registation Date</label>
               <span class="text-danger">*</span>
-              <input
-                [ngClass]="{
+              <input [ngClass]="{
                   'is-invalid': submit && form['start_registration'].errors
-                }"
-                type="date"
-                id="start_registration"
-                formControlName="start_registration"
-                class="form-control"
-                [min]="today"
-              />
-              <div
-                *ngIf="submit && form['start_registration'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['start_registration'].errors['required']"
-                  >This value is required.</span
-                >
+                }" type="date" id="start_registration" formControlName="start_registration" class="form-control"
+                [min]="today" />
+              <div *ngIf="submit && form['start_registration'].errors" class="invalid-feedback">
+                <span *ngIf="form['start_registration'].errors['required']">This value is required.</span>
               </div>
             </div>
             <!--end date-->
             <div class="form-group mb-4">
               <label for="end_registration">Etart Registation Date</label>
               <span class="text-danger">*</span>
-              <input
-                [ngClass]="{
+              <input [ngClass]="{
                   'is-invalid': submit && form['end_registration'].errors
-                }"
-                type="date"
-                id="end_registration"
-                formControlName="end_registration"
-                class="form-control"
-                [min]="today"
-              />
-              <div
-                *ngIf="submit && form['end_registration'].errors"
-                class="invalid-feedback"
-              >
-                <span *ngIf="form['end_registration'].errors['required']"
-                  >This value is required.</span
-                >
+                }" type="date" id="end_registration" formControlName="end_registration" class="form-control"
+                [min]="today" />
+              <div *ngIf="submit && form['end_registration'].errors" class="invalid-feedback">
+                <span *ngIf="form['end_registration'].errors['required']">This value is required.</span>
               </div>
             </div>
             <!-- <div class="form-group row">
@@ -266,13 +151,9 @@
             <h4 class="card-title">Formation thumbnail</h4>
 
             <div *ngIf="!imageUrl">
-              <dropzone
-                [ngClass]="{ 'is-invalid': submit && !imageUrl }"
-                class="dropzone"
-                [message]="'Click or drag image here to upload'"
-                (success)="onUploadSuccess($event)"
-                (addedFile)="onUploadSuccess($event)"
-              ></dropzone>
+              <dropzone [ngClass]="{ 'is-invalid': submit && !imageUrl }" class="dropzone"
+                [message]="'Click or drag image here to upload'" (success)="onUploadSuccess($event)"
+                (addedFile)="onUploadSuccess($event)"></dropzone>
               <div *ngIf="submit && !imageUrl" class="invalid-feedback">
                 <span>This value is required.</span>
               </div>
@@ -298,9 +179,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="slugPrepend">{{currentUrl}}/</span>
               </div>
-              <input type="text" class="form-control" id="slug" formControlName="slug"
-                placeholder="" aria-describedby="slugPrepend"
-                [ngClass]="{'is-invalid': submit && form['slug'].errors}"
+              <input type="text" class="form-control" id="slug" formControlName="slug" placeholder=""
+                aria-describedby="slugPrepend" [ngClass]="{'is-invalid': submit && form['slug'].errors}"
                 (blur)="onSlugChange()">
 
               <div *ngIf="submit && form['slug'].errors" class="invalid-tooltip">

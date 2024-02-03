@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Formation } from 'src/app/model/formation.model';
+import { Formation, categoryColors } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/service/-formation.service';
 
 @Component({
@@ -14,16 +14,9 @@ export class FormationListAreaComponent implements OnInit {
   collapsedCategories: boolean = false;
   // List of item to collapse
 
-
   loading: boolean = true;
 
-  categoryColors: { [key: string]: string } = {
-    Development: '#b128ff',
-    Design: '#0fa0dd',
-    'Data Science': '#30a820',
-    Business: '#3b60ff',
-    'IT & Software': '#f5a31a',
-  };
+  categoryColors: { [key: string]: string } = categoryColors;
 
   formationData: Formation[] = [];
   constructor(private formationService: FormationService) {}

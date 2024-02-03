@@ -1,0 +1,11 @@
+.sticky-right-block {
+  position: sticky;
+  top: min(120px, 40vh);
+}
+
+// if not mobile
+@media (min-width: 991px) {
+  #rightBlockContainer {
+    margin-top: 100px;
+  }
+}

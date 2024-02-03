@@ -28,7 +28,7 @@ import { BlogComponent } from './home/blog/blog.component';
 import { CtaAreaComponent } from './home/cta-area/cta-area.component';
 import { CompanyAreaComponent } from './common/company-area/company-area.component';
 import { TrustedbyAreaComponent } from './home/trustedby-area/trustedby-area.component';
-import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbDatepicker, NgbDatepickerModule, NgbDropdownModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountUpModule } from 'ngx-countup';
 import { ApplyTrainerMainComponent } from './apply-trainer/apply-trainer-main/apply-trainer-main.component';
 import { ApplyTrainerAreaComponent } from './apply-trainer/apply-trainer-area/apply-trainer-area.component';
@@ -43,6 +43,8 @@ import { FormationListMainComponent } from './formation-list/formation-list-main
 import { FormationDetailsComponent } from './formation-details/formation-details-main/formation-details.component';
 import { FormationListAreaComponent } from './formation-list/formation-list-area/formation-list-area.component';
 import { FormationDetailsAreaComponent } from './formation-details/formation-details-area/formation-details-area.component';
+import { EnrollIndividualMainComponent } from './enroll-individual/enroll-individual-main/enroll-individual-main.component';
+import { EnrollIndividualAreaComponent } from './enroll-individual/enroll-individual-area/enroll-individual-area.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -92,6 +94,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     FormationDetailsComponent,
     FormationListAreaComponent,
     FormationDetailsAreaComponent,
+    EnrollIndividualMainComponent,
+    EnrollIndividualAreaComponent,
   ],
   imports: [
     CommonModule,
@@ -107,6 +111,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     DropzoneModule,
     NgSelectModule,
     NgbCollapseModule,
+    NgbDatepickerModule,
+    NgbDatepicker,
+    NgbModule,
   ],
   providers: [
     {

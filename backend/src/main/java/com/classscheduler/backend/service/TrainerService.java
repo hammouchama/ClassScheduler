@@ -6,13 +6,16 @@ import com.classscheduler.backend.dto.TrainerDTO;
 import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.model.ImagesModel;
 import com.classscheduler.backend.model.Trainer;
+import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.FormationRepository;
 import com.classscheduler.backend.repository.ImageModelRepository;
 import com.classscheduler.backend.repository.TrainerRepository;
+import com.classscheduler.backend.repository.UserRepository;
 import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +33,8 @@ public class TrainerService {
     ImageModelRepository imageModelRepository;
     BCryptPasswordEncoder passwordEncoder;
     EmailHelper emailHelper;
+    ModelMapper modelMapper;
+    UserRepository userRepository;
 
     @Transactional
     public ResponseEntity<String> registerTrainer(Map<String, String> requestMap , MultipartFile image) {
@@ -125,6 +130,10 @@ public class TrainerService {
                     trainer.setPassword(passwordEncoder.encode(password));
                     trainer.setAccepted("true");
                     trainerRepository.save(trainer);
+                    User newuser=modelMapper.map(trainer, User.class);
+                    newuser.setRole("Trainer");
+                    newuser.setStatus("ACTIVE");
+                    userRepository.save(newuser);
                     emailHelper.sendLoginInfoEmail(trainer.getEmail(),password,username,"Trainer");
                     return Helpers.getResponseEntity("Trainer has been accepted successfully",HttpStatus.OK);
                 }

@@ -35,7 +35,7 @@ export class SignInAreaComponent implements OnInit {
           ? this.router.navigate(['/dashboard'])
           : role === 'Assistant'
             ? this.router.navigate(['/dashboard'])
-            : this.router.navigate(['/user']);
+            : this.router.navigate(['/']);
       },
       (error) => {
         this.error = true;

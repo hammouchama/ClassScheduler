@@ -41,4 +41,7 @@ export class UserAuthService {
 
     return false;
   }
+  public isTrainer() {
+    return !!this.getRole() && this.getRole() === "Trainer";
+  }
 }

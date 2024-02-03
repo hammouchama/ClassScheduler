@@ -1,180 +1,247 @@
 <header>
-    <div id="header-sticky" [ngClass]="headerSticky ? 'header__area header__transparent header__padding-2 sticky' : headerShadow ? headerShadow : 'header__area header__transparent header__padding-2' "
-     >
-       <div class="container">
-          <div class="row align-items-center">
-             <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
-                <div class="header__left d-flex">
-                   <div class="logo">
-                      <a [routerLink]="['/']" >
-                         <img src="assets/img/logo/logo.png" alt="logo">
-                      </a>
-                   </div>
+  <div
+    id="header-sticky"
+    [ngClass]="
+      headerSticky
+        ? 'header__area header__transparent header__padding-2 sticky'
+        : headerShadow
+        ? headerShadow
+        : 'header__area header__transparent header__padding-2'
+    "
+  >
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
+          <div class="header__left d-flex">
+            <div class="logo">
+              <a [routerLink]="['/']">
+                <img src="assets/img/logo/logo.png" alt="logo" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
+          <div
+            class="header__right d-flex justify-content-end align-items-center"
+          >
+            <div class="main-menu main-menu-2">
+              <nav id="mobile-menu" class="d-none d-xl-block">
+                <ul>
+                  <li>
+                    <a [routerLink]="['/']" routerLinkActive="active">Home</a>
+                  </li>
+                  <li class="has-dropdown">
+                    <a [routerLink]="['/formations']" routerLinkActive="active"
+                      >Formations</a
+                    >
+                    <ul class="submenu">
+                      <li>
+                        <a
+                          [routerLink]="['/Development']"
+                          routerLinkActive="active"
+                          >Development</a
+                        >
+                      </li>
+                      <li>
+                        <a [routerLink]="['/Design']" routerLinkActive="active"
+                          >Design</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          [routerLink]="['/Data_Science']"
+                          routerLinkActive="active"
+                          >Data Science</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          [routerLink]="['/Business']"
+                          routerLinkActive="active"
+                          >Business</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          [routerLink]="['/IT_Software']"
+                          routerLinkActive="active"
+                          >IT & Software</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a
+                      [routerLink]="['/apply-trainer']"
+                      routerLinkActive="active"
+                      >Become a Trainer</a
+                    >
+                  </li>
+                  <li>
+                    <a [routerLink]="['/contact']" routerLinkActive="active"
+                      >Contact</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
 
+            <!-- For Visitors -->
+
+            <ng-container *ngIf="!isLoggedIn">
+              <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
+                <a [routerLink]="['/login']" class="e-btn">Login</a>
+              </div>
+            </ng-container>
+
+            <!-- For Admin -->
+            <ng-container *ngIf="isLoggedIn">
+              <div class="dropdown d-inline-block user-dropdown" ngbDropdown>
+                <button
+                  type="button"
+                  ngbDropdownToggle
+                  class="btn header-item waves-effect ml-40"
+                  id="page-header-user-dropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    class="rounded-circle header-profile-user"
+                    src="assets/images/users/avatar.png"
+                    alt="Header Avatar"
+                  />
+                  <span class="d-none d-xl-inline-block ms-1">{{
+                    username
+                  }}</span>
+                  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                  <a
+                    *ngIf="isLoggedIn && isAdmin"
+                    class="dropdown-item"
+                    routerLink="/dashboard"
+                    routerLinkActive="active"
+                    ><i class="ri-dashboard-line align-middle me-1"></i>
+                    Dashboard</a
+                  >
+                  <a
+                    class="dropdown-item text-danger"
+                    href="javascript: void(0);"
+                    (click)="logout()"
+                    ><i
+                      class="ri-shut-down-line align-middle me-1 text-danger"
+                    ></i>
+                    Logout</a
+                  >
                 </div>
-             </div>
-             <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
-                <div class="header__right d-flex justify-content-end align-items-center">
-                   <div class="main-menu main-menu-2">
-                      <nav id="mobile-menu" class="d-none d-xl-block">
-                         <ul>
-                            <li>
-                              <a [routerLink]="['/']" routerLinkActive="active">Home</a>
-                            </li>
-                            <li class="has-dropdown">
-                              <a [routerLink]="['/formations']" routerLinkActive="active">Formations</a>
-                              <ul class="submenu">
-                                <li><a [routerLink]="['/Development']" routerLinkActive="active">Development</a></li>
-                                <li><a [routerLink]="['/Design']" routerLinkActive="active">Design</a></li>
-                                <li><a [routerLink]="['/Data_Science']" routerLinkActive="active">Data Science</a></li>
-                                <li><a [routerLink]="['/Business']" routerLinkActive="active">Business</a></li>
-                                <li><a [routerLink]="['/IT_Software']" routerLinkActive="active">IT & Software</a></li>
-                              </ul>
-                            </li>
-                           <li><a [routerLink]="['/apply-trainer']" routerLinkActive="active">Become a Trainer</a></li>
-                           <li><a [routerLink]="['/contact']" routerLinkActive="active">Contact</a></li>
-                         </ul>
-                      </nav>
-                   </div>
+              </div>
+            </ng-container>
 
-                   <!-- For Visitors -->
+            <!-- For Trainer -->
+            <ng-container *ngIf="isLoggedIn && !isAdmin"> </ng-container>
 
-                   <ng-container *ngIf="!isLoggedIn">
-                    <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
-                      <a [routerLink]="['/login']" class="e-btn">Login</a>
-                    </div>
-                  </ng-container>
-
-                  <!-- For Admin -->
-                  <ng-container *ngIf="isLoggedIn && isAdmin">
-                    <div class="dropdown d-inline-block user-dropdown" ngbDropdown>
-        <button
-          type="button"
-          ngbDropdownToggle
-          class="btn header-item waves-effect ml-40"
-          id="page-header-user-dropdown"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <img
-            class="rounded-circle header-profile-user"
-            src="assets/images/users/avatar.png"
-            alt="Header Avatar"
-          />
-          <span class="d-none d-xl-inline-block ms-1">{{ username }}</span>
-          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-        </button>
-
-
-        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-          <a
-            class="dropdown-item"
-            routerLink="/dashboard"
-            routerLinkActive="active"
-            ><i class="ri-dashboard-line align-middle me-1"></i>
-            Dashboard</a>
-          <a
-            class="dropdown-item text-danger"
-            href="javascript: void(0);"
-            (click)="logout()"
-            ><i class="ri-shut-down-line align-middle me-1 text-danger"></i>
-            Logout</a>
+            <div class="sidebar__menu d-xl-none">
+              <div
+                (click)="handleSidebar()"
+                class="sidebar-toggle-btn ml-30"
+                id="sidebar-toggle"
+              >
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-                  </ng-container>
-
-                  <!-- For Trainer -->
-                  <ng-container *ngIf="isLoggedIn && !isAdmin">
-                  </ng-container>
-
-
-                   <div class="sidebar__menu d-xl-none">
-                      <div (click)="handleSidebar()" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
-                          <span class="line"></span>
-                          <span class="line"></span>
-                          <span class="line"></span>
-                      </div>
-                  </div>
-                </div>
-             </div>
-          </div>
-       </div>
     </div>
- </header>
+  </div>
+</header>
 
-
- <!-- sidebar area start -->
+<!-- sidebar area start -->
 <div class="sidebar__area" [class.sidebar-opened]="showSidebar">
   <div class="sidebar__wrapper">
     <div (click)="handleSidebarClose()" class="sidebar__close">
-        <button class="sidebar__close-btn" id="sidebar__close-btn">
+      <button class="sidebar__close-btn" id="sidebar__close-btn">
         <span><i class="fal fa-times"></i></span>
         <span>close</span>
-        </button>
+      </button>
     </div>
     <div class="sidebar__content">
-        <div class="logo mb-40">
-          <a [routerLink]="['/']">
-            <img src="../../assets/img/logo/logo.png" alt="logo">
-          </a>
-        </div>
+      <div class="logo mb-40">
+        <a [routerLink]="['/']">
+          <img src="../../assets/img/logo/logo.png" alt="logo" />
+        </a>
+      </div>
 
-         <div class="side-info-content sidebar-menu mm-menu">
+      <div class="side-info-content sidebar-menu mm-menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/']" class="border-0">Home</a>
+          </li>
 
-            <ul>
+          <li
+            class="menu-item-has-children has-droupdown"
+            [class.active]="showCoursesDropdown"
+          >
+            <a (click)="coursesDropdown()">Formations</a>
+            <ul class="sub-menu" [class.active]="showCoursesDropdown">
               <li>
-                  <a [routerLink]="['/']" class="border-0">Home</a>
+                <a [routerLink]="['/formations']">View All</a>
               </li>
-
-              <li class="menu-item-has-children has-droupdown"
-              [class.active]="showCoursesDropdown">
-                    <a (click)="coursesDropdown()">Formations</a>
-                    <ul class="sub-menu" [class.active]="showCoursesDropdown">
-                          <li>
-                            <a [routerLink]="['/formations']">View All</a>
-                          </li>
-                          <li>
-                            <a [routerLink]="['/formations/category/Development']">Development</a>
-                          </li>
-                          <li>
-                            <a [routerLink]="['/formations/category/Design']">Design</a>
-                          </li>
-                          <li>
-                            <a [routerLink]="['/formations/category/Data_Science']">Data Science</a>
-                          </li>
-                          <li>
-                            <a [routerLink]="['/formations/category/Business']">Business</a>
-                          </li>
-                          <li>
-                            <a [routerLink]="['/formations/category/IT_Software']">IT & Software</a>
-                          </li>
-                    </ul>
-                  </li>
-
-
-
               <li>
-                  <a [routerLink]="['/apply-trainer']" class="border-0">Become a Trainer</a>
+                <a [routerLink]="['/formations/category/Development']"
+                  >Development</a
+                >
               </li>
-
               <li>
-                  <a [routerLink]="['/contact']" class="border-0">Contact</a>
+                <a [routerLink]="['/formations/category/Design']">Design</a>
               </li>
+              <li>
+                <a [routerLink]="['/formations/category/Data_Science']"
+                  >Data Science</a
+                >
+              </li>
+              <li>
+                <a [routerLink]="['/formations/category/Business']">Business</a>
+              </li>
+              <li>
+                <a [routerLink]="['/formations/category/IT_Software']"
+                  >IT & Software</a
+                >
+              </li>
+            </ul>
+          </li>
 
-          </ul>
-        </div>
+          <li *ngIf="!isTrainer">
+            <a [routerLink]="['/apply-trainer']" class="border-0"
+              >Become a Trainer</a
+            >
+          </li>
+          <li *ngIf="isTrainer">
+            <a [routerLink]="['/apply-trainer']" class="border-0">Calendars</a>
+          </li>
+          <li>
+            <a [routerLink]="['/contact']" class="border-0">Contact</a>
+          </li>
+        </ul>
+      </div>
 
-        <div class="sidebar__search p-relative mt-40 ">
-          <form action="#">
-              <input type="text" placeholder="Search...">
-              <button type="submit"><i class="fad fa-search"></i></button>
-          </form>
-        </div>
+      <div class="sidebar__search p-relative mt-40">
+        <form action="#">
+          <input type="text" placeholder="Search..." />
+          <button type="submit"><i class="fad fa-search"></i></button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
-<div (click)="handleSidebarClose()" class="body-overlay"
-[class.opened]="showSidebar"></div>
+<div
+  (click)="handleSidebarClose()"
+  class="body-overlay"
+  [class.opened]="showSidebar"
+></div>
 <!-- sidebar area end -->

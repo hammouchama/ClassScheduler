@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { UserAuthService } from './../../../service/user-auth.service';
-import { Component, HostListener, OnInit,Input } from '@angular/core';
+import { Component, HostListener, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
   username: String = '';
+  isTrainer: boolean = false;
 
   headerSticky: boolean = false;
   showSidebar: boolean = false;
@@ -58,12 +59,13 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userAuthService: UserAuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.userAuthService.isLoggedIn();
     this.isAdmin = this.userAuthService.isAdmmin();
     this.username = this.userAuthService.getRole() || '';
+    this.isTrainer = this.userAuthService.isTrainer()
   }
 
   /**

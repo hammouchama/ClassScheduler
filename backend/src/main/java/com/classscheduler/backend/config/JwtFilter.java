@@ -27,7 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
             if(request.getServletPath().matches("/login|/forgotPassword|/|/public/trainer/register")
                     ||request.getServletPath().matches("^/images/.*\\.(png|jpg|jpeg)$")
-                    ||request.getServletPath().startsWith("/images")
+                    ||request.getServletPath().startsWith("/images/*")
                     ||request.getServletPath().startsWith("/public/")){
                 filterChain.doFilter(request,response);
             }else {

@@ -47,7 +47,7 @@ public class FormationService {
                                 ImagesModel imagesModel = new ImagesModel();
                                 imagesModel.setName(image.getName());
                                 imagesModel.setType(image.getContentType());
-                                imagesModel.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));
+                                imagesModel.setUrl("http://localhost:8080/images/" + Helpers.saveImage(image, true));
                                 imagesModel = imageModelRepository.save(imagesModel);
                                 formation.setPhoto(imagesModel);
                             }
@@ -178,7 +178,7 @@ public class FormationService {
                                 }
                                 photo.setName(image.getName());
                                 photo.setType(image.getContentType());
-                                photo.setUrl("http://localhost:8080/images/formation/" + Helpers.saveImage(image, true));
+                                photo.setUrl("http://localhost:8080/images/" + Helpers.saveImage(image, true));
                                 formation.setPhoto(photo);
                             }
 

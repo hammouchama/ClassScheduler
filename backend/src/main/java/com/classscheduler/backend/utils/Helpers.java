@@ -19,10 +19,7 @@ public class Helpers {
         return new ResponseEntity<>("{\"message\":\""+responseMessage+"\"}",httpStatus);
     }
     public static String saveImage(MultipartFile file,boolean formation ) throws IOException {
-        String uploadDir="src/main/resources/static/";
-        if (formation) {
-            uploadDir +="images/formation";
-        }else uploadDir +="images/trainer";
+        String uploadDir="src/main/resources/static/images";
         // Create the images folder if it doesn't exist
 
         File uploadFolder = new File(uploadDir);

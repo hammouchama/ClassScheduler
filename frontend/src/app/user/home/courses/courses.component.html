@@ -34,7 +34,7 @@
                   <img src="{{ formation.photo }}" alt="" />
                 </div>
                 <div *ngIf="!formation.photo" class="thumbnail">
-                  <img [src]="'assets/img/course/' + formation.category + '.jpg'" [alt]="formation.category" />
+                  <img [src]="'assets/img/course/thumbnail/' + formation.category + '.jpg'" [alt]="formation.category" />
                 </div>
               </a>
               <div class="course__tag">

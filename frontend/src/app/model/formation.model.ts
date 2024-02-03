@@ -16,3 +16,13 @@ export interface Formation {
   end_registration: string;
   slug?: string;
 }
+
+export const categoryColors: { [key: string]: string } = {
+  Development: '#b128ff',
+  Design: '#0fa0dd',
+  'Data Science': '#30a820',
+  Business: '#3b60ff',
+  'IT & Software': '#f5a31a',
+};
+
+export const cities = ['Tetouan', 'Tanger', 'Casa', 'Rabat'];

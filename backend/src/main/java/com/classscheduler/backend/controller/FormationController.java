@@ -99,8 +99,8 @@ public class FormationController {
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
     // get formation by slug
-    @GetMapping("/public/formation/get/{slug}")
-    public ResponseEntity<FormationDTO> getFormationBySug(@PathVariable String slug){
+    @GetMapping("/public/formation/getBySlug/{slug}")
+    public ResponseEntity<FormationDTO> getFormationBySlug(@PathVariable String slug){
         try {
             return formationService.getFormationBySlug(slug);
         }catch (Exception e){

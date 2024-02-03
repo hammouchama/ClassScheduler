@@ -48,4 +48,10 @@ export class FormationService {
       environment.apiEndpoint + `/public/formation/get/${id}`
     );
   }
+
+  public getPublicFormationBySlug(slug: String) {
+    return this.httpClient.get<Formation>(
+      environment.apiEndpoint + `/public/formation/getBySlug/${slug}`
+    );
+  }
 }

@@ -12,22 +12,21 @@ import lombok.NoArgsConstructor;
 public class Remarks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private float note_quality;
-    private float note_rythme;
-    private float note_support_cours;
-    private float note_support_tp;
-    private float note_maitrise;
+    private Long id;
+    private Float note_quality;
+    private Float note_rythme;
+    private Float note_support_cours;
+    private Float note_support_tp;
+    private Float note_maitrise;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "individual_id")
     private Individual individual;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "company_id")
-    private Company company;
-}
+
+    private String token;
+    }

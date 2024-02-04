@@ -120,10 +120,7 @@ public class CompanyService {
                 Company company=companyRepository.findById(id).orElse(null);
                 if(!Objects.isNull(company)){
                    if (isValidCompanyInfo(requestMap)){
-                       Company comp=new Company();
-                       companyRepository.deleteById(id);
-                       company.setId(id);
-                       companyRepository.save(extractCompanyInfo(requestMap,comp));
+                       companyRepository.save(extractCompanyInfo(requestMap,company));
                        return Helpers.getResponseEntity("Company has been updated successfully",HttpStatus.OK);
                    }
                     return Helpers.getResponseEntity(ProjectConst.INVALID_DATA,HttpStatus.BAD_REQUEST);

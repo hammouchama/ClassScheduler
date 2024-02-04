@@ -7,5 +7,6 @@ public class ProjectConst {
     public static final String INVALID_DATA="Invalid Data";
     public static final String  UNAUTHORIZED8ACCESS="Unauthorized Access";
     public static final int EXP_TOKEN_DATE=30*60*60*1000;
+    public static final int EXP_REMARKS_TOKEN_DATE=48*60*60*60*1000;
 
 }

@@ -1,13 +1,16 @@
 package com.classscheduler.backend.service;
 
 import com.classscheduler.backend.config.JwtFilter;
+import com.classscheduler.backend.config.JwtUtil;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.FormationDTO;
 import com.classscheduler.backend.dto.FormationDTOAdmin;
 import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.model.ImagesModel;
+import com.classscheduler.backend.model.Individual;
 import com.classscheduler.backend.repository.FormationRepository;
 import com.classscheduler.backend.repository.ImageModelRepository;
+import com.classscheduler.backend.repository.IndividualRepository;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -28,7 +31,10 @@ import java.util.Objects;
 @AllArgsConstructor
 public class FormationService {
     FormationRepository formationRepository;
+    IndividualRepository individualRepository;
+    RemarksService remarksService;
     JwtFilter jwtFilter;
+    JwtUtil jwtUtil;
     ModelMapper modelMapper;
     ImageModelRepository imageModelRepository;
 
@@ -231,5 +237,38 @@ public class FormationService {
             e.printStackTrace();
         }
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+
+
+    @Transactional
+    public ResponseEntity<String> endFormationAndGenerateTokens(long formationId) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                Formation formation = formationRepository.findById(formationId).orElse(null);
+
+                if (!Objects.isNull(formation)) {
+                    List<Individual> relatedIndividuals = individualRepository.findIndividualsByFormationId(formation.getId());
+
+                    for (Individual individual : relatedIndividuals) {
+                        String remarksToken = jwtUtil.generateRemarksToken(individual.getEmail());
+                        remarksService.createEmptyRemarksWithToken(individual, remarksToken);
+                    }
+
+                    // Additional logic for ending the formation...
+                    // For example, set the formation status to "ENDED"
+
+                    return Helpers.getResponseEntity("Formation ended successfully and tokens generated", HttpStatus.OK);
+                }
+
+                return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
+            }
+
+            return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

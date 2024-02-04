@@ -28,6 +28,9 @@ import { UIModule } from './ui/ui.module';
 import { TablesModule } from './tables/tables.module';
 import { AssistantsModule } from './assistants/assistants.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 // import { MapsModule } from './maps/maps.module';
 
 
@@ -54,6 +57,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NgbDropdownModule,
     NgbTooltipModule,
     SweetAlert2Module,
+    NgbModule,
+    NgbTimepickerModule,
+    DatePipe
   ],
 })
-export class PagesModule {}
+export class PagesModule { }

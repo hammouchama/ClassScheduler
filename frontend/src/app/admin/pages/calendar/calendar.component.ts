@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 
 // Calendar option
@@ -14,24 +14,38 @@ import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms
 
 import { category, calendarEvents, createEventId } from './data';
 import { DatePipe } from '@angular/common';
+import { Formation } from 'src/app/model/formation.model';
+import { FormationService } from 'src/app/service/-formation.service';
+import { Trainer } from 'src/app/model/trainer.model';
+import { TrainerService } from 'src/app/service/trainer.service';
+import { Company } from 'src/app/model/company.model';
+import { CompanyService } from 'src/app/service/company.service';
+import { SchedulingService } from 'src/app/service/scheduling.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
+
 })
 
 /**
  * Calendar Component
  */
 export class CalendarComponent implements OnInit {
+
   // bread crumb items
   breadCrumbItems!: Array<{}>;
+  selectedOption: string = '';
 
   // event form
   formData!: UntypedFormGroup;
   formEditData!: UntypedFormGroup;
 
+  formationList!: Formation[];
+  trainerList: Trainer[] = [];
+  companyList: Company[] = []
   // calendar
   calendarEvents!: any[];
   editEvent: any;
@@ -39,11 +53,23 @@ export class CalendarComponent implements OnInit {
   category!: any[];
   submitted = false;
 
+  time = { hour: 13, minute: 30 };
   @ViewChild('editmodalShow') editmodalShow!: TemplateRef<any>;
   @ViewChild('modalShow') modalShow!: TemplateRef<any>;
+  option: string = "";
 
-  constructor(private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
+  constructor(private modalService: NgbModal,
+    private formBuilder: UntypedFormBuilder,
+    private formationService: FormationService,
+    private trainerService: TrainerService,
+    private companyService: CompanyService,
+    private schedulingService: SchedulingService,
+    private router: Router
+  ) { }
 
+  changeOption(arg0: string) {
+    this.selectedOption = arg0
+  }
   ngOnInit() {
     this.breadCrumbItems = [
       { label: 'ClassScheduler' },
@@ -55,17 +81,52 @@ export class CalendarComponent implements OnInit {
      */
     this.formData = this.formBuilder.group({
       title: ['', [Validators.required]],
-      category: ['', [Validators.required]],
+      formation: ['', [Validators.required]],
+      selectedOption: ['', [Validators.required]],
+      trainer: ['', [Validators.required]],
+      start_time: ['', [Validators.required]],
+      end_time: ['', [Validators.required]],
+      company: ['',],
     });
 
     this._fetchData();
   }
 
   private _fetchData() {
-    // Event category
-    this.category = category;
+    this.formationService.getAllPublicFormation().subscribe(
+      (resp: Formation[]) => {
+        this.formationList = resp
+      }
+    )
+    //trainer
+    this.trainerService.getAllAceptedTrainers().subscribe(
+      (respo: Trainer[]) => {
+        this.trainerList = respo
+      }
+    )
+    //company
+    this.companyService.getAllCompany().subscribe(
+      (resp: Company[]) => {
+        this.companyList = resp;
+      }
+    )
+    this.schedulingService.getAllScheduing().subscribe(
+
+      (res: any) => {
+        this.calendarEvents = res
+        this.calendarOptions.events = this.calendarEvents.map(event => ({
+          title: event.title,
+          start: new Date(event.start_date_time),
+          end: new Date(event.end_date_time),
+          extendedProps: { myCustomData: event }
+
+        }))
+        console.log(res)
+      }
+    )
     // Calender Event Data
-    this.calendarEvents = calendarEvents;
+    // this.calendarEvents = calendarEvents;
+
   }
 
   /**
@@ -113,7 +174,7 @@ export class CalendarComponent implements OnInit {
       // this.formBuilder.group({
       //   editDate: this.newEventDate.date
       // })
-    this.modalService.open(this.modalShow, { centered: true });
+      this.modalService.open(this.modalShow, { centered: true });
   }
 
   /**
@@ -122,10 +183,21 @@ export class CalendarComponent implements OnInit {
    * @param event calendar event
    */
   openEditModal(clickInfo: EventClickArg) {
+
     this.editEvent = clickInfo.event;
+    this.option = "individual"
+    if (this.editEvent.extendedProps.myCustomData.for_company == true) {
+      this.option = "company"
+    }
     this.formEditData = this.formBuilder.group({
-      editTitle: clickInfo.event.title,
-      editCategory: clickInfo.event.classNames[clickInfo.event.classNames.length - 1],
+      title: this.editEvent.title,
+      formation: this.editEvent.extendedProps.myCustomData.formation.id,
+      trainer: this.editEvent.extendedProps.myCustomData.trainer.id,
+      start_time: this.editEvent.extendedProps.myCustomData.start_date_time.split("T")[1],
+      end_time: this.editEvent.extendedProps.myCustomData.end_date_time.split("T")[1],
+      company: this.editEvent.extendedProps.myCustomData.company != null ? this.editEvent.extendedProps.myCustomData.company : "",
+      selectedOption: this.option,
+
     });
     this.modalService.open(this.editmodalShow, { centered: true });
   }
@@ -168,33 +240,60 @@ export class CalendarComponent implements OnInit {
    * Upldated event title save in calendar
    */
   editEventSave() {
-    const editTitle = this.formEditData.get('editTitle')?.value;
-    const editCategory = this.formEditData.get('editCategory')?.value;
-    const editId = this.calendarEvents.findIndex(x => x.id + '' === this.editEvent.id + '');
+    if (this.formEditData.valid) {
+      console.log(this.formEditData.value)
+      console.log(this.editEvent.start)
+      const _data = {
+        ...this.formEditData.value,
+        start_dateTime: this.editEvent.start.setHours(this.formEditData.value["start_time"].split(":")[0], this.formEditData.value["start_time"].split(":")[1], 0),
+        end_dateTime: this.editEvent.end.setHours(this.formEditData.value["end_time"].split(":")[0], this.formEditData.value["end_time"].split(":")[1], 0)
+      }
+      this.schedulingService.updateScheduling(this.editEvent.extendedProps.myCustomData.id, _data).subscribe(
+        (resp) => {
 
-    this.editEvent.setProp('title', editTitle);
-    this.editEvent.setProp('classNames', editCategory);
+          this.Editposition();
+          this.formEditData = this.formBuilder.group({
+            title: '',
+            formation: '',
+            selectedOption: '',
+            trainer: '',
+            start_time: '',
+            end_time: '',
+            company: '',
+          });
+          this.modalService.dismissAll();
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error,
+          });
+        }
+      )
+    }
 
-    this.calendarEvents[editId] = {
-      ...this.editEvent,
-      title: editTitle,
-      id:this.editEvent.id,
-      className: editCategory
-    };
-    this.Editposition();
-    this.formEditData = this.formBuilder.group({
-      editTitle: '',
-      editCategory: '',
-    });
-    this.modalService.dismissAll();
   }
 
   /**
    * Delete the event from calendar
    */
   deleteEventData() {
-    this.editEvent.remove();
-    this.modalService.dismissAll();
+    console.log(this.editEvent.extendedProps.myCustomData.id)
+    this.schedulingService.deleteScheduling(this.editEvent.extendedProps.myCustomData.id).subscribe(
+      (response) => {
+        this.editEvent.remove();
+        this.modalService.dismissAll();
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error,
+        });
+      }
+    )
+
   }
 
   /**
@@ -202,24 +301,41 @@ export class CalendarComponent implements OnInit {
    */
   saveEvent() {
     if (this.formData.valid) {
-      const title = this.formData.get('title')!.value;
-      const category = this.formData.get('category')!.value;
+      console.log(this.formData.value)
+      const _data = {
+        ...this.formData.value,
+        start_dateTime: this.newEventDate.start.setHours(this.formData.value["start_time"].split(":")[0], this.formData.value["start_time"].split(":")[1], 0),
+        end_dateTime: this.newEventDate.end.setHours(this.formData.value["end_time"].split(":")[0], this.formData.value["end_time"].split(":")[1], 0)
+      }
 
-      const calendarApi = this.newEventDate.view.calendar;
 
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        className: category + ' ' + 'text-white',
-        start: this.newEventDate.start,
-        end: this.newEventDate.end
-      });
-      this.position();
-      this.formData = this.formBuilder.group({
-        title: '',
-        category: ''
-      });
-      this.modalService.dismissAll();
+      this.schedulingService.addScheduing(_data).subscribe(
+        (resp: any) => {
+
+          this.position();
+          this.formData = this.formBuilder.group({
+            title: '',
+            formation: '',
+            selectedOption: '',
+            trainer: '',
+            start_time: '',
+            end_time: '',
+            company: '',
+          });
+          this.modalService.dismissAll();
+          this.router.navigate(["/dashboard/calendar"])
+
+        },
+        (error: any) => {
+          console.log("err", error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error,
+          });
+        }
+      )
+
     }
     this.submitted = true;
   }
@@ -249,7 +365,12 @@ export class CalendarComponent implements OnInit {
   closeEventModal() {
     this.formData = this.formBuilder.group({
       title: '',
-      category: ''
+      formation: '',
+      selectedOption: '',
+      trainer: '',
+      start_time: '',
+      end_time: '',
+      company: '',
     });
     this.modalService.dismissAll();
   }

@@ -7,7 +7,10 @@
         <div class="card-body">
           <div class="app-calendar">
             <!-- calendar -->
-            <full-calendar [options]="calendarOptions"></full-calendar>
+            <full-calendar
+              [options]="calendarOptions"
+              class="full-calender"
+            ></full-calendar>
           </div>
         </div>
       </div>
@@ -18,7 +21,7 @@
 <!-- Event Modal -->
 <ng-template #modalShow let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Add New Event</h5>
+    <h5 class="modal-title">Add New Scheduling</h5>
     <button
       type="button"
       class="btn-close"
@@ -31,10 +34,10 @@
       <div class="row">
         <div class="col-12">
           <div class="form-group">
-            <label class="control-label">Event Name</label>
+            <label class="control-label">scheduling Name</label>
             <input
               class="form-control"
-              placeholder="Insert Event Name"
+              placeholder="Insert scheduling Name"
               type="text"
               name="title"
               formControlName="title"
@@ -52,31 +55,166 @@
         </div>
         <div class="col-12">
           <div class="form-group">
-            <label class="control-label">Category</label>
+            <label class="control-label">Formations</label>
             <select
               class="form-control"
-              name="category"
-              formControlName="category"
-              [ngClass]="{ 'is-invalid': submitted && form['category'].errors }"
+              name="formation"
+              formControlName="formation"
+              [ngClass]="{
+                'is-invalid': submitted && form['formation'].errors
+              }"
               id="event-category"
             >
               <option
-                *ngFor="let option of category"
-                value="{{ option.value }}"
+                *ngFor="let formation of formationList"
+                value="{{ formation.id }}"
               >
-                {{ option.name }}
+                {{ formation.title }}
               </option>
             </select>
             <div
-              *ngIf="submitted && form['category'].errors"
+              *ngIf="submitted && form['formation'].errors"
               class="invalid-feedback"
             >
-              <div *ngIf="form['category'].errors['required']">
+              <div *ngIf="form['formation'].errors['required']">
                 This value is required
               </div>
             </div>
           </div>
         </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Trainer</label>
+            <select
+              class="form-control"
+              formControlName="trainer"
+              [ngClass]="{
+                'is-invalid': submitted && form['trainer'].errors
+              }"
+              id="event-category"
+            >
+              <option
+                *ngFor="let trainer of trainerList"
+                value="{{ trainer.id }}"
+              >
+                {{ trainer.firstName + " " + trainer.lastName }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && form['trainer'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['trainer'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Hour of start</label>
+            <input
+              class="form-control"
+              type="time"
+              formControlName="start_time"
+            />
+            <!-- <ngb-timepicker [(ngModel)]="time" /> -->
+            <div
+              *ngIf="submitted && form['start_time'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['start_time'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Hour of end</label>
+            <input
+              class="form-control"
+              type="time"
+              formControlName="end_time"
+            />
+            <!-- <ngb-timepicker [(ngModel)]="time" /> -->
+            <div
+              *ngIf="submitted && form['end_time'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['end_time'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--radio-->
+        <br />
+        <br />
+        <div class="col-12">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="selectedOption"
+              name="selectedOption"
+              id="flexRadioDefault1"
+              value="company"
+              (change)="changeOption('company')"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              For Company
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="selectedOption"
+              name="selectedOption"
+              id="flexRadioDefault2"
+              checked
+              value="individual"
+              (change)="changeOption('individual')"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              For Indivdual
+            </label>
+          </div>
+        </div>
+        <!--radio-->
+        <!--company-->
+        <div class="col-12" *ngIf="selectedOption == 'company'">
+          <div class="form-group">
+            <label class="control-label">Company</label>
+            <select
+              class="form-control"
+              name="company"
+              formControlName="company"
+              [ngClass]="{
+                'is-invalid': submitted && form['company'].errors
+              }"
+              id="event-category"
+            >
+              <option
+                *ngFor="let company of companyList"
+                value="{{ company.id }}"
+              >
+                {{ company.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && form['formation'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['formation'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
       </div>
 
       <div class="text-end pt-4">
@@ -94,7 +232,7 @@
 <!-- Edit event modal -->
 <ng-template #editmodalShow let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Edit Event</h5>
+    <h5 class="modal-title">Edit Scheduling</h5>
     <button
       type="button"
       class="close"
@@ -106,21 +244,190 @@
   </div>
   <div class="modal-body p-3">
     <form [formGroup]="formEditData" (ngSubmit)="editEventSave()">
-      <label>Change event name</label>
-      <div class="input-group m-b-15">
-        <input class="form-control" type="text" formControlName="editTitle" />
-      </div>
-      <label class="mt-2">Change event category</label>
-      <div class="input-group m-b-15">
-        <select
-          class="form-control"
-          name="ecategory"
-          formControlName="editCategory"
-        >
-          <option *ngFor="let option of category" value="{{ option.value }}">
-            {{ option.name }}
-          </option>
-        </select>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">scheduling Name</label>
+            <input
+              class="form-control"
+              placeholder="Insert scheduling Name"
+              type="text"
+              name="title"
+              formControlName="title"
+              [ngClass]="{ 'is-invalid': submitted && form['title'].errors }"
+            />
+            <div
+              *ngIf="submitted && form['title'].errors"
+              class="invalid-feedback"
+            >
+              <span *ngIf="form['title'].errors['required']"
+                >This value is required.</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Formations</label>
+            <select
+              class="form-control"
+              name="formation"
+              formControlName="formation"
+              [ngClass]="{
+                'is-invalid': submitted && form['formation'].errors
+              }"
+              id="event-category"
+            >
+              <option
+                *ngFor="let formation of formationList"
+                value="{{ formation.id }}"
+              >
+                {{ formation.title }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && form['formation'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['formation'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Trainer</label>
+            <select
+              class="form-control"
+              formControlName="trainer"
+              [ngClass]="{
+                'is-invalid': submitted && form['trainer'].errors
+              }"
+              id="event-category"
+            >
+              <option
+                *ngFor="let trainer of trainerList"
+                value="{{ trainer.id }}"
+              >
+                {{ trainer.firstName + " " + trainer.lastName }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && form['trainer'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['trainer'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Hour of start</label>
+            <input
+              class="form-control"
+              type="time"
+              formControlName="start_time"
+            />
+            <!-- <ngb-timepicker [(ngModel)]="time" /> -->
+            <div
+              *ngIf="submitted && form['start_time'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['start_time'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label class="control-label">Hour of end</label>
+            <input
+              class="form-control"
+              type="time"
+              formControlName="end_time"
+            />
+            <!-- <ngb-timepicker [(ngModel)]="time" /> -->
+            <div
+              *ngIf="submitted && form['end_time'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['end_time'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--radio-->
+        <br />
+        <br />
+        <div class="col-12">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="selectedOption"
+              name="selectedOption"
+              id="flexRadioDefault1"
+              value="company"
+              (change)="changeOption('company')"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              For Company
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="selectedOption"
+              name="selectedOption"
+              id="flexRadioDefault2"
+              checked
+              value="individual"
+              (change)="changeOption('individual')"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              For Indivdual
+            </label>
+          </div>
+        </div>
+        <!--radio-->
+        <!--company-->
+        <div class="col-12" *ngIf="selectedOption == 'company'">
+          <div class="form-group">
+            <label class="control-label">Company</label>
+            <select
+              class="form-control"
+              name="company"
+              formControlName="company"
+              [ngClass]="{
+                'is-invalid': submitted && form['company'].errors
+              }"
+              id="event-category"
+            >
+              <option
+                *ngFor="let company of companyList"
+                value="{{ company.id }}"
+              >
+                {{ company.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && form['formation'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="form['formation'].errors['required']">
+                This value is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
       </div>
     </form>
   </div>

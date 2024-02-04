@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { UserModule } from './user/user.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { UserModule } from './user/user.module';
     FormsModule,
     UserModule,
     ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     AuthGuard,

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RemarksRepository extends JpaRepository<Remarks,Long> {
+    Remarks findByToken(String remarksToken);
 }

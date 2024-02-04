@@ -1,6 +1,6 @@
 <section class="course__area pt-120 pb-120">
   <div class="container">
-    <div class="row">
+    <div class="row mainSections">
       <div  class="col-xxl-8 col-xl-8 col-lg-8">
         <div class="course__tab-inner grey-bg-2 mb-50 d-sm-flex justify-content-between align-items-center">
           <div class="course__tab-wrapper d-flex align-items-center">
@@ -38,7 +38,7 @@
               </ul>
             </div>
             <div class="course__view">
-              <h4>Showing 1 - 9 of 84</h4>
+              <h4>Showing {{ service.startIndex }} - {{ service.endIndex }} of {{ service.totalRecords }}</h4>
             </div>
           </div>
           <div class="course__sort d-flex justify-content-sm-end">
@@ -58,20 +58,24 @@
 
 
         <!-- Loading -->
-        <div *ngIf="loading" class="d-flex justify-content-center align-items-center w-100">
+        <div *ngIf="(service.loading$ | async)" class="d-flex justify-content-center align-items-center w-100">
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-        <div *ngIf="!loading" class="course__tab-conent">
+        <div *ngIf="!(service.loading$ | async)" class="course__tab-conent">
           <div class="" id="courseTabContent">
             <div *ngIf="activeTab === 'grid'" class="tab-pane fade show active" id="grid" role="tabpanel"
               aria-labelledby="grid-tab">
 
 
               <div class="row">
+                <div *ngIf="(tables$ | async)?.length === 0 && !(service.loading$ | async)" style="text-align: center">
+                  No formation found<br>
+                  <a href="javascript: void(0);" (click)="service.resetFilters()">Reset filters?</a>
+                </div>
 
-                <div *ngFor="let formation of formationData" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                <div *ngFor="let formation of tables$ | async" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
                   <div class="course__item white-bg mb-30 fix">
                     <div class="course__thumb w-img p-relative fix">
                       <a [routerLink]="['/formation/'+formation.slug]">
@@ -120,7 +124,7 @@
             <div *ngIf="activeTab === 'list'" class="tab-pane fade show active" id="list" role="tabpanel"
               aria-labelledby="list-tab">
               <div class="row">
-                <div *ngFor="let formation of formationData" class="col-xxl-12">
+                <div *ngFor="let formation of tables$ | async" class="col-xxl-12">
                   <div class="course__item white-bg mb-30 fix">
                     <div class="row gx-0">
                       <div class="col-xxl-4 col-xl-4 col-lg-4">
@@ -189,10 +193,17 @@
 
 
       <div class="col-xxl-4 col-xl-4 col-lg-4">
-        <div class="course__sidebar pl-70">
+        <div class="course__sidebar pl-70 mb-50">
           <div class="course__sidebar-search mb-50">
             <form action="#">
-              <input type="text" placeholder="Search for courses...">
+              <input
+                    type="text"
+                    name="searchTerm"
+                    class="form-control form-control-sm ms-2"
+                    aria-controls="tickets-table"
+                    [(ngModel)]="service.searchTerm"
+                    placeholder="Search for courses..."
+                />
               <button type="submit">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                   y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;" xml:space="preserve">
@@ -220,40 +231,45 @@
               </h3>
 
               <ul [ngbCollapse]="collapsedCategories" class="pt-20">
-                <li>
+                <li *ngFor="let category of categories">
                   <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-eng">
-                    <label class="m-check-label" for="m-eng">Development</label>
+                    <input
+                      class="m-check-input"
+                      type="checkbox"
+                      [id]="'m-' + category"
+                      [checked]="service.selectedCategories.includes(category)"
+                      (change)="toggleCategory(category, $event)"
+
+                    />
+                    <label class="m-check-label" [for]="'m-' + category">{{ category }} ({{ service.categoryCounts[category] || 0 }})</label>
                   </div>
                 </li>
-                <li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="course__sidebar-widget grey-bg">
+            <div class="course__sidebar-info">
+              <h3 class="course__sidebar-title m-0">
+                <a (click)="collapsedCities = !collapsedCities" [attr.aria-expanded]="!collapsedCities"
+                  class="text-dark d-block">
+                  City <i class="mdi float-end"
+                    [ngClass]="{'mdi-minus': !collapsedCities, 'mdi-plus': collapsedCities}"></i>
+                </a>
+              </h3>
+
+              <ul [ngbCollapse]="collapsedCities" class="pt-20">
+                <li *ngFor="let city of cities">
                   <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-edu">
-                    <label class="m-check-label" for="m-edu">Design</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-bus">
-                    <label class="m-check-label" for="m-bus">Data Science</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-design">
-                    <label class="m-check-label" for="m-design">Business</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-math">
-                    <label class="m-check-label" for="m-math">IT & Software</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="course__sidebar-check mb-10 d-flex align-items-center">
-                    <input class="m-check-input" type="checkbox" id="m-math">
-                    <label class="m-check-label" for="m-math">Others</label>
+                    <input
+                      class="m-check-input"
+                      type="checkbox"
+                      [id]="'m-' + city"
+                      [checked]="service.selectedCities.includes(city)"
+                      (change)="toggleCity(city, $event)"
+
+                    />
+                    <label class="m-check-label" [for]="'m-' + city">{{ city }} ({{ service.cityCounts[city] || 0 }})</label>
                   </div>
                 </li>
               </ul>

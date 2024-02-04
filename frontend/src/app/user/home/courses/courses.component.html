@@ -29,7 +29,7 @@
         <div *ngFor="let formation of formationData.slice(0, 6)" class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
           <div class="course__item white-bg mb-30 fix shadow-none">
             <div class="course__thumb w-img p-relative fix">
-              <a [routerLink]="['/course-details']">
+              <a [routerLink]="['/formation/', formation.slug]">
                 <div *ngIf="formation.photo" class="thumbnail">
                   <img src="{{ formation.photo }}" alt="" />
                 </div>

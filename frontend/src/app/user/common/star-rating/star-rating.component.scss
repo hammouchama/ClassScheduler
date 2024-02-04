@@ -1,0 +1,22 @@
+.rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  cursor: pointer;
+  font-size: 24px;
+  color: #ddd;
+}
+
+.stars .fa-star.filled {
+  color: #f8ce0b;
+}
+
+.stars .fa-star.highlighted {
+  color: #ffcc00;
+}
+
+.rating-label {
+  margin-left: 10px;
+}

@@ -46,7 +46,7 @@ public class TrainerService {
                       ImagesModel photo=new ImagesModel();
                       photo.setName(image.getName());
                       photo.setType(image.getContentType());
-                      photo.setUrl("http://localhost:8080/images/"+Helpers.saveImage(image,false));
+                      photo.setBytes(image.getBytes());
                       photo=imageModelRepository.save(photo);
                       trainer.setPhoto(photo);
                   }

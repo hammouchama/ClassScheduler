@@ -93,7 +93,7 @@ export class CalendarComponent implements OnInit {
   }
 
   private _fetchData() {
-    this.formationService.getAllPublicFormation().subscribe(
+    this.formationService.getAllByCityFormation().subscribe(
       (resp: Formation[]) => {
         this.formationList = resp
       }

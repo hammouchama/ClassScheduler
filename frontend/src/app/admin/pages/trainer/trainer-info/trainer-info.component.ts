@@ -46,6 +46,7 @@ export class TrainerInfoComponent implements OnInit {
     console.log('id', id);
     this.trainerService.getTrainer(id).subscribe(
       (resp: Trainer) => {
+        resp.photo = 'data:image/jpeg;base64,' + resp.photo
         console.log('resp', resp);
         this.trainer = resp;
         this.imageUrl = this.trainer.photo || null;

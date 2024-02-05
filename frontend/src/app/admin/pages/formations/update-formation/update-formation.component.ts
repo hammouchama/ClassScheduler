@@ -43,7 +43,7 @@ export class UpdateFormationComponent implements OnInit {
     private formationService: FormationService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
   // bread crumb items
   breadCrumbItems!: Array<{}>;
 
@@ -99,9 +99,10 @@ export class UpdateFormationComponent implements OnInit {
     console.log('id', id);
     this.formationService.getFormation(id).subscribe(
       (resp: Formation) => {
+        resp.photo = 'data:image/jpeg;base64,' + resp.photo
         console.log('resp', resp);
         this.formation = resp;
-        this.imageUrl = this.formation.photo?.url || null;
+        this.imageUrl = this.formation.photo || null;
       },
       (error: HttpErrorResponse) => {
         console.log('error');

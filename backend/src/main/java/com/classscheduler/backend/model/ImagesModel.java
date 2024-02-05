@@ -16,6 +16,7 @@ public class ImagesModel {
     private Long id;
     private String name;
     private String type;
-    private String url;
+    @Column(length = 5000000)
+    private byte[] bytes;
 
 }

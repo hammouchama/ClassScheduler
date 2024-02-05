@@ -16,9 +16,9 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 export class FormationListAreaComponent implements OnInit {
   activeTab: string = 'grid'; // Initial active tab
 
-  categories: string[] = [...Object.keys(categoryColors),'Others'];
+  categories: string[] = [...Object.keys(categoryColors), 'Others'];
 
-  cities: string[] = [...cities,'Others'];
+  cities: string[] = [...cities, 'Others'];
 
   collapsedCategories: boolean = false;
   collapsedCities: boolean = false;
@@ -44,7 +44,7 @@ export class FormationListAreaComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to route parameter changes
     this.route.queryParams.subscribe((params) => {
-      if(params['category']){
+      if (params['category']) {
         this.service.selectedCategories = [params['category']];
       }
     });
@@ -77,6 +77,7 @@ export class FormationListAreaComponent implements OnInit {
   _fetchData() {
     this.formationService.getAllPublicFormation().subscribe(
       (resp: Formation[]) => {
+        resp.map(e => { e.photo = 'data:image/jpeg;base64,' + e.photo })
         this.service.updateTableData(resp);
 
       },

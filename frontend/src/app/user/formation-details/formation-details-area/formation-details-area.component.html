@@ -1,8 +1,20 @@
 <section class="page__title-area pt-120 pb-90">
   <div class="page__title-shape">
-    <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="" />
-    <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="" />
-    <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="" />
+    <img
+      class="page-title-shape-5 d-none d-sm-block"
+      src="assets/img/page-title/page-title-shape-1.png"
+      alt=""
+    />
+    <img
+      class="page-title-shape-6"
+      src="assets/img/page-title/page-title-shape-6.png"
+      alt=""
+    />
+    <img
+      class="page-title-shape-7"
+      src="assets/img/page-title/page-title-shape-4.png"
+      alt=""
+    />
   </div>
   <div class="container" *ngIf="formation">
     <div class="row">
@@ -12,21 +24,29 @@
             <div class="page__title-breadcrumb">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+                  <li class="breadcrumb-item">
+                    <a [routerLink]="['/']">Home</a>
+                  </li>
                   <li class="breadcrumb-item">
                     <a [routerLink]="['/formations']">Formations</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    {{formation.title}}
+                    {{ formation.title }}
                   </li>
                 </ol>
               </nav>
             </div>
-            <a href="#" class="page__title-pre" [ngStyle]="{'background-color': categoryColors[formation.category]}">
+            <a
+              href="#"
+              class="page__title-pre"
+              [ngStyle]="{
+                'background-color': categoryColors[formation.category]
+              }"
+            >
               {{ formation.category }}
             </a>
             <h5 class="page__title-3">
-              {{formation.title}}
+              {{ formation.title }}
             </h5>
           </div>
           <!-- <div class="course__meta-2 d-sm-flex mb-30">
@@ -70,51 +90,71 @@
             </div>
           </div> -->
           <div class="course__img w-img mb-30">
-            <div *ngIf="formation.photo?.url" class="thumbnail">
-              <img src="{{ formation.photo?.url }}" alt="" />
+            <div *ngIf="formation.photo" class="thumbnail">
+              <img src="{{ formation.photo }}" alt="" />
             </div>
-            <div *ngIf="!formation.photo?.url" class="thumbnail">
-              <img [src]="'assets/img/course/thumbnail/' + formation.category + '.jpg'" [alt]="formation.category" />
+            <div *ngIf="!formation.photo" class="thumbnail">
+              <img
+                [src]="
+                  'assets/img/course/thumbnail/' + formation.category + '.jpg'
+                "
+                [alt]="formation.category"
+              />
             </div>
           </div>
           <div class="course__tab-content mb-95">
             <div class="course__description">
               <h3>Course Overview</h3>
               <p>
-                {{formation.description}}
+                {{ formation.description }}
               </p>
 
               <div class="course__description-list mb-45">
                 <h4>Objectifs</h4>
                 <ul *ngFor="let obj of formation.objective?.split('\n')">
-                  <li>
-                    <i class="icon_check"></i> {{obj}}
-                  </li>
+                  <li><i class="icon_check"></i> {{ obj }}</li>
                 </ul>
               </div>
 
               <div class="course__instructor mb-45">
                 <h3>Trainers</h3>
-                <div class="course__instructor-wrapper d-md-flex align-items-center">
-                  <div class="course__instructor-item d-flex align-items-center mr-70">
+                <div
+                  class="course__instructor-wrapper d-md-flex align-items-center"
+                >
+                  <div
+                    class="course__instructor-item d-flex align-items-center mr-70"
+                  >
                     <div class="course__instructor-thumb mr-20">
-                      <img src="assets/img/course/teacher/teacher-3.jpg" alt="" />
+                      <img
+                        src="assets/img/course/teacher/teacher-3.jpg"
+                        alt=""
+                      />
                     </div>
                     <div class="course__instructor-content">
                       <h3>Eleanor Fant</h3>
                     </div>
                   </div>
-                  <div class="course__instructor-item d-flex align-items-center mr-70">
+                  <div
+                    class="course__instructor-item d-flex align-items-center mr-70"
+                  >
                     <div class="course__instructor-thumb mr-20">
-                      <img src="assets/img/course/teacher/teacher-2.jpg" alt="" />
+                      <img
+                        src="assets/img/course/teacher/teacher-2.jpg"
+                        alt=""
+                      />
                     </div>
                     <div class="course__instructor-content">
                       <h3>Lauren Stamps</h3>
                     </div>
                   </div>
-                  <div class="course__instructor-item d-flex align-items-center mr-70">
+                  <div
+                    class="course__instructor-item d-flex align-items-center mr-70"
+                  >
                     <div class="course__instructor-thumb mr-20">
-                      <img src="assets/img/course/teacher/teacher-1.jpg" alt="" />
+                      <img
+                        src="assets/img/course/teacher/teacher-1.jpg"
+                        alt=""
+                      />
                     </div>
                     <div class="course__instructor-content">
                       <h3>Jonquil Von</h3>
@@ -146,8 +186,9 @@
                 <div class="section__title-wrapper mb-40">
                   <h2 class="section__title">
                     Related
-                    <span class="yellow-bg yellow-bg-big">Course<img src="assets/img/shape/yellow-bg.png"
-                        alt="" /></span>
+                    <span class="yellow-bg yellow-bg-big"
+                      >Course<img src="assets/img/shape/yellow-bg.png" alt=""
+                    /></span>
                   </h2>
                   <p>
                     You don't have to struggle alone, you've got our assistance
@@ -161,13 +202,20 @@
               <div class="col-xxl-12">
                 <div class="course__slider swiper-container pb-60">
                   <div class="swiper-wrapper">
-                    <swiper class="pb-60" [slidesPerView]="1" [spaceBetween]="30" [loop]="true" [autoplay]="{
+                    <swiper
+                      class="pb-60"
+                      [slidesPerView]="1"
+                      [spaceBetween]="30"
+                      [loop]="true"
+                      [autoplay]="{
                         delay: 2500,
                         disableOnInteraction: false
-                      }" [pagination]="{
+                      }"
+                      [pagination]="{
                         clickable: true,
                         el: '.swiper-pagination'
-                      }" [breakpoints]="{
+                      }"
+                      [breakpoints]="{
                         '280': {
                           slidesPerView: 1,
                           spaceBetween: 30
@@ -180,7 +228,8 @@
                           slidesPerView: 2,
                           spaceBetween: 30
                         }
-                      }">
+                      }"
+                    >
                       <!-- <ng-template *ngFor="let formation of formation" swiperSlide>
                         <div class="course__item course__item-3 swiper-slide white-bg mb-30 fix">
                           <div class="course__thumb w-img p-relative fix">
@@ -234,7 +283,6 @@
                     <!-- Add Pagination -->
                     <div class="swiper-pagination"></div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -243,12 +291,23 @@
       </div>
 
       <div class="col-xxl-4 col-xl-4 col-lg-4">
-        <div class="course__sidebar pl-70 p-relative" id="rightBlockContainer" [ngClass]="{'sticky-right-block': isSticky}">
+        <div
+          class="course__sidebar pl-70 p-relative"
+          id="rightBlockContainer"
+          [ngClass]="{ 'sticky-right-block': isSticky }"
+        >
           <div class="course__sidebar-widget-2 white-bg mb-20">
             <div class="course__video">
-              <div class="course__video-meta mb-25 d-flex align-items-center justify-content-between">
+              <div
+                class="course__video-meta mb-25 d-flex align-items-center justify-content-between"
+              >
                 <div class="course__video-price">
-                  <h5>{{formation.cost.toFixed(0)}}.<span>{{(formation.cost % 1).toFixed(2).slice(2)}}</span> DH</h5>
+                  <h5>
+                    {{ formation.cost.toFixed(0) }}.<span>{{
+                      (formation.cost % 1).toFixed(2).slice(2)
+                    }}</span>
+                    DH
+                  </h5>
                   <!-- <h5 class="old-price">$129.00</h5> -->
                 </div>
                 <!-- <div class="course__video-discount">
@@ -259,45 +318,79 @@
                 <ul>
                   <li class="d-flex align-items-center">
                     <div class="course__video-icon">
-                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        x="0px" y="0px" viewBox="0 0 24 24" style="enable-background: new 0 0 24 24"
-                        xml:space="preserve">
+                      <svg
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 24 24"
+                        style="enable-background: new 0 0 24 24"
+                        xml:space="preserve"
+                      >
                         <path class="st0" d="M4,19.5C4,18.1,5.1,17,6.5,17H20" />
-                        <path class="st0" d="M6.5,2H20v20H6.5C5.1,22,4,20.9,4,19.5v-15C4,3.1,5.1,2,6.5,2z" />
+                        <path
+                          class="st0"
+                          d="M6.5,2H20v20H6.5C5.1,22,4,20.9,4,19.5v-15C4,3.1,5.1,2,6.5,2z"
+                        />
                       </svg>
                     </div>
                     <div class="course__video-info">
-                      <h5><span>Duration :</span>{{formation.nb_hours}} hours</h5>
+                      <h5>
+                        <span>Duration :</span>{{ formation.nb_hours }} hours
+                      </h5>
                     </div>
                   </li>
                   <li class="d-flex align-items-center">
                     <div class="course__video-icon">
-                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        x="0px" y="0px" viewBox="0 0 16 16" style="enable-background: new 0 0 16 16"
-                        xml:space="preserve">
+                      <svg
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 16 16"
+                        style="enable-background: new 0 0 16 16"
+                        xml:space="preserve"
+                      >
                         <circle class="st0" cx="8" cy="8" r="6.7" />
                         <polyline class="st0" points="8,4 8,8 10.7,9.3 " />
                       </svg>
                     </div>
                     <div class="course__video-info">
-                      <h5><span>City :</span>{{formation.city}}</h5>
+                      <h5><span>City :</span>{{ formation.city }}</h5>
                     </div>
                   </li>
                   <li class="d-flex align-items-center">
                     <div class="course__video-icon">
                       <svg>
-                        <path class="st0" d="M13.3,14v-1.3c0-1.5-1.2-2.7-2.7-2.7H5.3c-1.5,0-2.7,1.2-2.7,2.7V14" />
+                        <path
+                          class="st0"
+                          d="M13.3,14v-1.3c0-1.5-1.2-2.7-2.7-2.7H5.3c-1.5,0-2.7,1.2-2.7,2.7V14"
+                        />
                         <circle class="st0" cx="8" cy="4.7" r="2.7" />
                       </svg>
                     </div>
                     <div class="course__video-info text-primary">
-                      <h5><span>End of registration :</span>{{formation.end_registration}}</h5>
+                      <h5>
+                        <span>End of registration :</span
+                        >{{ formation.end_registration }}
+                      </h5>
                     </div>
                   </li>
                 </ul>
               </div>
-              <div class="course__enroll-btn">
-                <a [routerLink]="['/formation/'+formation.slug+'/enroll']" class="e-btn e-btn-7 w-100">Enroll <i class="far fa-arrow-right"></i></a>
+              <div class="course__enroll-btn" *ngIf="isInrolle">
+                <a
+                  [routerLink]="['/formation/' + formation.slug + '/enroll']"
+                  class="e-btn e-btn-7 w-100"
+                  >Enroll <i class="far fa-arrow-right"></i
+                ></a>
+              </div>
+              <div class="course__enroll-btn" *ngIf="!isInrolle">
+                <p class="text-denger">
+                  The registration is ended or the seats are taken
+                </p>
               </div>
             </div>
           </div>
@@ -306,23 +399,37 @@
     </div>
   </div>
 
-
   <div class="course-video-popup">
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
-            <iframe src="https://www.youtube.com/embed/yJg-Y5byMMw" title="YouTube video player" frameborder="0"
+            <iframe
+              src="https://www.youtube.com/embed/yJg-Y5byMMw"
+              title="YouTube video player"
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </section>

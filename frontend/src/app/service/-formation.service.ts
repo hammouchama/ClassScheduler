@@ -8,7 +8,7 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root',
 })
 export class FormationService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   public getAllFormation() {
     return this.httpClient.get<Formation[]>(
@@ -52,6 +52,11 @@ export class FormationService {
   public getPublicFormationBySlug(slug: String) {
     return this.httpClient.get<Formation>(
       environment.apiEndpoint + `/public/formation/getBySlug/${slug}`
+    );
+  }
+  public getAllByCityFormation() {
+    return this.httpClient.get<Formation[]>(
+      environment.apiEndpoint + '/formation/get/city'
     );
   }
 }

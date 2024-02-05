@@ -21,13 +21,13 @@ public class FormationDTOAdmin {
     private String status;
     private float cost;
     private int capacity;
-    private ImagesModel photo;
+    private byte[] photo;
     private LocalDate start_registration;
     private LocalDate end_registration;
     private String slug;
 
     public FormationDTOAdmin(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description, String status, float cost, int capacity, ImagesModel photo ,LocalDate start_registration,LocalDate end_registration,String slug) {
+            String description, String status, float cost, int capacity, byte[] photo ,LocalDate start_registration,LocalDate end_registration,String slug) {
         this.id = id;
         this.title = title;
         this.category = category;

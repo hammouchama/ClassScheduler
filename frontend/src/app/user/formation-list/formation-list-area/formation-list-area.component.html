@@ -1,14 +1,20 @@
 <section class="course__area pt-120 pb-120">
   <div class="container">
     <div class="row mainSections">
-      <div  class="col-xxl-8 col-xl-8 col-lg-8">
-        <div class="course__tab-inner grey-bg-2 mb-50 d-sm-flex justify-content-between align-items-center">
+      <div class="col-xxl-8 col-xl-8 col-lg-8">
+        <div
+          class="course__tab-inner grey-bg-2 mb-50 d-sm-flex justify-content-between align-items-center"
+        >
           <div class="course__tab-wrapper d-flex align-items-center">
             <div class="course__tab-btn">
               <ul class="nav nav-tabs" id="courseTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" [class.active]="activeTab === 'grid'" (click)="switchTab('grid')"
-                    type="button">
+                  <button
+                    class="nav-link"
+                    [class.active]="activeTab === 'grid'"
+                    (click)="switchTab('grid')"
+                    type="button"
+                  >
                     <svg class="grid" viewBox="0 0 24 24">
                       <rect x="3" y="3" class="st0" width="7" height="7" />
                       <rect x="14" y="3" class="st0" width="7" height="7" />
@@ -18,18 +24,28 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link list" [class.active]="activeTab === 'list'" (click)="switchTab('list')"
-                    type="button">
+                  <button
+                    class="nav-link list"
+                    [class.active]="activeTab === 'list'"
+                    (click)="switchTab('list')"
+                    type="button"
+                  >
                     <svg class="list" viewBox="0 0 512 512">
                       <g>
-                        <path class="st0"
-                          d="M448,69H192c-17.7,0-32,13.9-32,31s14.3,31,32,31h256c17.7,0,32-13.9,32-31S465.7,69,448,69z" />
+                        <path
+                          class="st0"
+                          d="M448,69H192c-17.7,0-32,13.9-32,31s14.3,31,32,31h256c17.7,0,32-13.9,32-31S465.7,69,448,69z"
+                        />
                         <circle class="st0" cx="64" cy="100" r="31" />
-                        <path class="st0"
-                          d="M448,225H192c-17.7,0-32,13.9-32,31s14.3,31,32,31h256c17.7,0,32-13.9,32-31S465.7,225,448,225z" />
+                        <path
+                          class="st0"
+                          d="M448,225H192c-17.7,0-32,13.9-32,31s14.3,31,32,31h256c17.7,0,32-13.9,32-31S465.7,225,448,225z"
+                        />
                         <circle class="st0" cx="64" cy="256" r="31" />
-                        <path class="st0"
-                          d="M448,381H192c-17.7,0-32,13.9-32,31s14.3,31,32,31h256c17.7,0,32-13.9,32-31S465.7,381,448,381z" />
+                        <path
+                          class="st0"
+                          d="M448,381H192c-17.7,0-32,13.9-32,31s14.3,31,32,31h256c17.7,0,32-13.9,32-31S465.7,381,448,381z"
+                        />
                         <circle class="st0" cx="64" cy="412" r="31" />
                       </g>
                     </svg>
@@ -38,7 +54,10 @@
               </ul>
             </div>
             <div class="course__view">
-              <h4>Showing {{ service.startIndex }} - {{ service.endIndex }} of {{ service.totalRecords }}</h4>
+              <h4>
+                Showing {{ service.startIndex }} - {{ service.endIndex }} of
+                {{ service.totalRecords }}
+              </h4>
             </div>
           </div>
           <div class="course__sort d-flex justify-content-sm-end">
@@ -56,61 +75,107 @@
           </div>
         </div>
 
-
         <!-- Loading -->
-        <div *ngIf="(service.loading$ | async)" class="d-flex justify-content-center align-items-center w-100">
+        <div
+          *ngIf="service.loading$ | async"
+          class="d-flex justify-content-center align-items-center w-100"
+        >
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
         <div *ngIf="!(service.loading$ | async)" class="course__tab-conent">
           <div class="" id="courseTabContent">
-            <div *ngIf="activeTab === 'grid'" class="tab-pane fade show active" id="grid" role="tabpanel"
-              aria-labelledby="grid-tab">
-
-
+            <div
+              *ngIf="activeTab === 'grid'"
+              class="tab-pane fade show active"
+              id="grid"
+              role="tabpanel"
+              aria-labelledby="grid-tab"
+            >
               <div class="row">
-                <div *ngIf="(tables$ | async)?.length === 0 && !(service.loading$ | async)" style="text-align: center">
-                  No formation found<br>
-                  <a href="javascript: void(0);" (click)="service.resetFilters()">Reset filters?</a>
+                <div
+                  *ngIf="
+                    (tables$ | async)?.length === 0 &&
+                    !(service.loading$ | async)
+                  "
+                  style="text-align: center"
+                >
+                  No formation found<br />
+                  <a
+                    href="javascript: void(0);"
+                    (click)="service.resetFilters()"
+                    >Reset filters?</a
+                  >
                 </div>
 
-                <div *ngFor="let formation of tables$ | async" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                <div
+                  *ngFor="let formation of tables$ | async"
+                  class="col-xxl-6 col-xl-6 col-lg-6 col-md-6"
+                >
                   <div class="course__item white-bg mb-30 fix">
                     <div class="course__thumb w-img p-relative fix">
-                      <a [routerLink]="['/formation/'+formation.slug]">
-                        <div *ngIf="formation.photo?.url" class="thumbnail">
-                          <img src="{{ formation.photo?.url }}" alt="" />
+                      <a [routerLink]="['/formation/' + formation.slug]">
+                        <div *ngIf="formation.photo" class="thumbnail">
+                          <img src="{{ formation.photo }}" alt="" />
                         </div>
-                        <div *ngIf="!formation.photo?.url" class="thumbnail">
-                          <img [src]="'assets/img/course/thumbnail/' + formation.category + '.jpg'" [alt]="formation.category" />
+                        <div *ngIf="!formation.photo" class="thumbnail">
+                          <img
+                            [src]="
+                              'assets/img/course/thumbnail/' +
+                              formation.category +
+                              '.jpg'
+                            "
+                            [alt]="formation.category"
+                          />
                         </div>
                       </a>
                       <div class="course__tag">
-                        <a href="#" [ngStyle]="{'background-color': categoryColors[formation.category]}">
+                        <a
+                          href="#"
+                          [ngStyle]="{
+                            'background-color':
+                              categoryColors[formation.category]
+                          }"
+                        >
                           {{ formation.category }}
                         </a>
                       </div>
                     </div>
                     <div class="course__content">
-                      <div class="course__meta d-flex align-items-center justify-content-between">
+                      <div
+                        class="course__meta d-flex align-items-center justify-content-between"
+                      >
                         <div class="course__nb_hours">
-                          <span class="d-flex"><i class="ri-time-line"></i>
-                            {{ formation.nb_hours }} Hours</span>
+                          <span class="d-flex"
+                            ><i class="ri-time-line"></i>
+                            {{ formation.nb_hours }} Hours</span
+                          >
                         </div>
                       </div>
                       <h3 class="course__title">
                         <a [routerLink]="['/formation/', formation.slug]">
-                          {{ formation.title }}</a>
+                          {{ formation.title }}</a
+                        >
                       </h3>
                     </div>
-                    <div class="course__more d-flex justify-content-between align-items-center">
+                    <div
+                      class="course__more d-flex justify-content-between align-items-center"
+                    >
                       <div class="course__status d-flex align-items-center">
-                        <span [style]="{ color: categoryColors[formation.category] }">{{ formation.cost }} DH</span>
+                        <span
+                          [style]="{
+                            color: categoryColors[formation.category]
+                          }"
+                          >{{ formation.cost }} DH</span
+                        >
                         <!-- <span *ngIf="formation.oldPrice" class="old-price">${{ formation.oldPrice }}</span> -->
                       </div>
                       <div class="course__btn">
-                        <a [routerLink]="['/formation/'+formation.slug]" class="link-btn">
+                        <a
+                          [routerLink]="['/formation/' + formation.slug]"
+                          class="link-btn"
+                        >
                           Know Details
                           <i class="far fa-arrow-right"></i>
                           <i class="far fa-arrow-right"></i>
@@ -121,24 +186,47 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="activeTab === 'list'" class="tab-pane fade show active" id="list" role="tabpanel"
-              aria-labelledby="list-tab">
+            <div
+              *ngIf="activeTab === 'list'"
+              class="tab-pane fade show active"
+              id="list"
+              role="tabpanel"
+              aria-labelledby="list-tab"
+            >
               <div class="row">
-                <div *ngFor="let formation of tables$ | async" class="col-xxl-12">
+                <div
+                  *ngFor="let formation of tables$ | async"
+                  class="col-xxl-12"
+                >
                   <div class="course__item white-bg mb-30 fix">
                     <div class="row gx-0">
                       <div class="col-xxl-4 col-xl-4 col-lg-4">
-                        <div class="course__thumb course__thumb-list w-img p-relative fix">
-                          <a [routerLink]="['/formation/'+formation.slug]">
+                        <div
+                          class="course__thumb course__thumb-list w-img p-relative fix"
+                        >
+                          <a [routerLink]="['/formation/' + formation.slug]">
                             <div *ngIf="formation.photo" class="thumbnail">
-                              <img src="{{ formation.photo.url }}" alt="" />
+                              <img src="{{ formation.photo }}" alt="" />
                             </div>
                             <div *ngIf="!formation.photo" class="thumbnail">
-                              <img [src]="'assets/img/course/thumbnail/' + formation.category + '.jpg'" [alt]="formation.category" />
+                              <img
+                                [src]="
+                                  'assets/img/course/thumbnail/' +
+                                  formation.category +
+                                  '.jpg'
+                                "
+                                [alt]="formation.category"
+                              />
                             </div>
                           </a>
                           <div class="course__tag">
-                            <a href="#" [ngStyle]="{'background-color': categoryColors[formation.category]}">
+                            <a
+                              href="#"
+                              [ngStyle]="{
+                                'background-color':
+                                  categoryColors[formation.category]
+                              }"
+                            >
                               {{ formation.category }}
                             </a>
                           </div>
@@ -149,25 +237,37 @@
                           <div class="course__content course__content-4">
                             <div class="course__meta d-flex align-items-center">
                               <div class="course__nb_hours mr-20">
-                                <span class="d-flex"><i class="ri-time-line"></i>
-                                {{ formation.nb_hours }} Hours</span>
+                                <span class="d-flex"
+                                  ><i class="ri-time-line"></i>
+                                  {{ formation.nb_hours }} Hours</span
+                                >
                               </div>
-
                             </div>
                             <h3 class="course__title">
                               <a [routerLink]="['/formation/', formation.slug]">
-                                {{ formation.title }}</a>
+                                {{ formation.title }}</a
+                              >
                             </h3>
-
                           </div>
                           <div
-                            class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center">
-                            <div class="course__status d-flex align-items-center">
-                        <span [style]="{ color: categoryColors[formation.category] }">{{ formation.cost }} DH</span>
+                            class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center"
+                          >
+                            <div
+                              class="course__status d-flex align-items-center"
+                            >
+                              <span
+                                [style]="{
+                                  color: categoryColors[formation.category]
+                                }"
+                                >{{ formation.cost }} DH</span
+                              >
                               <!-- <span class="old-price">${{course.oldPrice}}</span> -->
                             </div>
                             <div class="course__btn">
-                              <a [routerLink]="['/formation/'+formation.slug]" class="link-btn">
+                              <a
+                                [routerLink]="['/formation/' + formation.slug]"
+                                class="link-btn"
+                              >
                                 Know Details
                                 <i class="far fa-arrow-right"></i>
                                 <i class="far fa-arrow-right"></i>
@@ -179,7 +279,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -187,32 +286,42 @@
           <!-- app-pagination start -->
           <app-pagination></app-pagination>
           <!-- app-pagination end -->
-
         </div>
       </div>
-
 
       <div class="col-xxl-4 col-xl-4 col-lg-4">
         <div class="course__sidebar pl-70 mb-50">
           <div class="course__sidebar-search mb-50">
             <form action="#">
               <input
-                    type="text"
-                    name="searchTerm"
-                    class="form-control form-control-sm ms-2"
-                    aria-controls="tickets-table"
-                    [(ngModel)]="service.searchTerm"
-                    placeholder="Search for courses..."
-                />
+                type="text"
+                name="searchTerm"
+                class="form-control form-control-sm ms-2"
+                aria-controls="tickets-table"
+                [(ngModel)]="service.searchTerm"
+                placeholder="Search for courses..."
+              />
               <button type="submit">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                  y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;" xml:space="preserve">
+                <svg
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 584.4 584.4"
+                  style="enable-background: new 0 0 584.4 584.4"
+                  xml:space="preserve"
+                >
                   <g>
                     <g>
-                      <path class="st0"
-                        d="M565.7,474.9l-61.1-61.1c-3.8-3.8-8.8-5.9-13.9-5.9c-6.3,0-12.1,3-15.9,8.3c-16.3,22.4-36,42.1-58.4,58.4    c-4.8,3.5-7.8,8.8-8.3,14.5c-0.4,5.6,1.7,11.3,5.8,15.4l61.1,61.1c12.1,12.1,28.2,18.8,45.4,18.8c17.1,0,33.3-6.7,45.4-18.8    C590.7,540.6,590.7,499.9,565.7,474.9z" />
-                      <path class="st1"
-                        d="M254.6,509.1c140.4,0,254.5-114.2,254.5-254.5C509.1,114.2,394.9,0,254.6,0C114.2,0,0,114.2,0,254.5    C0,394.9,114.2,509.1,254.6,509.1z M254.6,76.4c98.2,0,178.1,79.9,178.1,178.1s-79.9,178.1-178.1,178.1S76.4,352.8,76.4,254.5    S156.3,76.4,254.6,76.4z" />
+                      <path
+                        class="st0"
+                        d="M565.7,474.9l-61.1-61.1c-3.8-3.8-8.8-5.9-13.9-5.9c-6.3,0-12.1,3-15.9,8.3c-16.3,22.4-36,42.1-58.4,58.4    c-4.8,3.5-7.8,8.8-8.3,14.5c-0.4,5.6,1.7,11.3,5.8,15.4l61.1,61.1c12.1,12.1,28.2,18.8,45.4,18.8c17.1,0,33.3-6.7,45.4-18.8    C590.7,540.6,590.7,499.9,565.7,474.9z"
+                      />
+                      <path
+                        class="st1"
+                        d="M254.6,509.1c140.4,0,254.5-114.2,254.5-254.5C509.1,114.2,394.9,0,254.6,0C114.2,0,0,114.2,0,254.5    C0,394.9,114.2,509.1,254.6,509.1z M254.6,76.4c98.2,0,178.1,79.9,178.1,178.1s-79.9,178.1-178.1,178.1S76.4,352.8,76.4,254.5    S156.3,76.4,254.6,76.4z"
+                      />
                     </g>
                   </g>
                 </svg>
@@ -223,25 +332,39 @@
           <div class="course__sidebar-widget grey-bg">
             <div class="course__sidebar-info">
               <h3 class="course__sidebar-title m-0">
-                <a (click)="collapsedCategories = !collapsedCategories" [attr.aria-expanded]="!collapsedCategories"
-                  class="text-dark d-block">
-                  Categories <i class="mdi float-end"
-                    [ngClass]="{'mdi-minus': !collapsedCategories, 'mdi-plus': collapsedCategories}"></i>
+                <a
+                  (click)="collapsedCategories = !collapsedCategories"
+                  [attr.aria-expanded]="!collapsedCategories"
+                  class="text-dark d-block"
+                >
+                  Categories
+                  <i
+                    class="mdi float-end"
+                    [ngClass]="{
+                      'mdi-minus': !collapsedCategories,
+                      'mdi-plus': collapsedCategories
+                    }"
+                  ></i>
                 </a>
               </h3>
 
               <ul [ngbCollapse]="collapsedCategories" class="pt-20">
                 <li *ngFor="let category of categories">
-                  <div class="course__sidebar-check mb-10 d-flex align-items-center">
+                  <div
+                    class="course__sidebar-check mb-10 d-flex align-items-center"
+                  >
                     <input
                       class="m-check-input"
                       type="checkbox"
                       [id]="'m-' + category"
                       [checked]="service.selectedCategories.includes(category)"
                       (change)="toggleCategory(category, $event)"
-
                     />
-                    <label class="m-check-label" [for]="'m-' + category">{{ category }} ({{ service.categoryCounts[category] || 0 }})</label>
+                    <label class="m-check-label" [for]="'m-' + category"
+                      >{{ category }} ({{
+                        service.categoryCounts[category] || 0
+                      }})</label
+                    >
                   </div>
                 </li>
               </ul>
@@ -251,39 +374,44 @@
           <div class="course__sidebar-widget grey-bg">
             <div class="course__sidebar-info">
               <h3 class="course__sidebar-title m-0">
-                <a (click)="collapsedCities = !collapsedCities" [attr.aria-expanded]="!collapsedCities"
-                  class="text-dark d-block">
-                  City <i class="mdi float-end"
-                    [ngClass]="{'mdi-minus': !collapsedCities, 'mdi-plus': collapsedCities}"></i>
+                <a
+                  (click)="collapsedCities = !collapsedCities"
+                  [attr.aria-expanded]="!collapsedCities"
+                  class="text-dark d-block"
+                >
+                  City
+                  <i
+                    class="mdi float-end"
+                    [ngClass]="{
+                      'mdi-minus': !collapsedCities,
+                      'mdi-plus': collapsedCities
+                    }"
+                  ></i>
                 </a>
               </h3>
 
               <ul [ngbCollapse]="collapsedCities" class="pt-20">
                 <li *ngFor="let city of cities">
-                  <div class="course__sidebar-check mb-10 d-flex align-items-center">
+                  <div
+                    class="course__sidebar-check mb-10 d-flex align-items-center"
+                  >
                     <input
                       class="m-check-input"
                       type="checkbox"
                       [id]="'m-' + city"
                       [checked]="service.selectedCities.includes(city)"
                       (change)="toggleCity(city, $event)"
-
                     />
-                    <label class="m-check-label" [for]="'m-' + city">{{ city }} ({{ service.cityCounts[city] || 0 }})</label>
+                    <label class="m-check-label" [for]="'m-' + city"
+                      >{{ city }} ({{ service.cityCounts[city] || 0 }})</label
+                    >
                   </div>
                 </li>
               </ul>
             </div>
           </div>
-
-
-
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
-
-

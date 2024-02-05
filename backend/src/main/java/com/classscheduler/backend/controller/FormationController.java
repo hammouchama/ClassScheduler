@@ -2,6 +2,7 @@ package com.classscheduler.backend.controller;
 
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.FormationDTO;
+import com.classscheduler.backend.dto.FormationDTOAdmin;
 import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.service.FormationService;
 import com.classscheduler.backend.utils.Helpers;
@@ -35,7 +36,7 @@ public class FormationController {
 
     //get All formation Active for admin
     @GetMapping("/formation/get")
-    public ResponseEntity<List<Formation>> getAllFormation(){
+    public ResponseEntity<List<FormationDTOAdmin>> getAllFormation(){
         try {
             return formationService.getAllFormation();
         }catch (Exception e){
@@ -107,5 +108,15 @@ public class FormationController {
             e.printStackTrace();
         }
         return new ResponseEntity<>(null ,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    //get formation by City
+    @GetMapping("/formation/get/city")
+    public ResponseEntity<List<FormationDTOAdmin>> getAllByCityFormation(){
+        try {
+            return formationService.getAllByCityFormation();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

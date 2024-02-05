@@ -57,6 +57,9 @@ export class TrainerListComponent implements OnInit {
   _fetchData() {
     this.trainerService.getAllTrainer().subscribe(
       (resp: Trainer[]) => {
+        resp.map(element => (
+          element.photo = 'data:image/jpeg;base64,' + element.photo
+        ))
         this.service.updateTableData(resp);
         this.trainerData = resp; // Assign data
 

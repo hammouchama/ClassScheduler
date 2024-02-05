@@ -1,6 +1,7 @@
 package com.classscheduler.backend.dto;
 
 import com.classscheduler.backend.model.Formation;
+import com.classscheduler.backend.model.ImagesModel;
 import com.classscheduler.backend.model.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class TrainerDTO {
     private String skills;
     private String description;
 
-    private String photo;
+    private byte[] photo;
     private String accepted;
 
 
@@ -34,7 +35,7 @@ public class TrainerDTO {
                       String email,
                       String skills,
                       String description,
-                      String photo,
+                      byte[] photo,
                       String accepted) {
         this.id = id;
         this.firstName = firstName;
@@ -58,7 +59,7 @@ public class TrainerDTO {
         trainerDTO.setEmail(trainer.getEmail());
         trainerDTO.setDescription(trainer.getDescription());
         trainerDTO.setSkills(trainer.getSkills());
-        trainerDTO.setPhoto(trainer.getPhoto().getUrl());
+        trainerDTO.setPhoto(trainer.getPhoto().getBytes());
         trainerDTO.setAccepted(trainer.getAccepted());
 
         return trainerDTO;

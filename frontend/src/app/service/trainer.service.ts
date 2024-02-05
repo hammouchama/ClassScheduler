@@ -34,4 +34,7 @@ export class TrainerService {
       data, { headers: this.requestHeader }
     );
   }
+  public getAllAceptedTrainers() {
+    return this.httpClient.get<Trainer[]>(environment.apiEndpoint + "/trainer/accepted")
+  }
 }

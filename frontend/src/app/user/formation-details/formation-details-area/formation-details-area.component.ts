@@ -1,13 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { cl } from '@fullcalendar/core/internal-common';
 import { Formation, categoryColors } from 'src/app/model/formation.model';
 import { FormationService } from 'src/app/service/-formation.service';
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Autoplay } from "swiper";
 
 // install Swiper modules
-SwiperCore.use([ Pagination, Autoplay])
+SwiperCore.use([Pagination, Autoplay])
 
 @Component({
   selector: 'app-formation-details-area',
@@ -17,7 +18,7 @@ SwiperCore.use([ Pagination, Autoplay])
 export class FormationDetailsAreaComponent implements OnInit {
   formation!: Formation;
   formationSlug: String = '';
-
+  isInrolle: boolean = true
   // For the price card
   isSticky: boolean = false;
 
@@ -27,7 +28,7 @@ export class FormationDetailsAreaComponent implements OnInit {
     private route: ActivatedRoute,
     private formationService: FormationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getSlug();
@@ -48,8 +49,13 @@ export class FormationDetailsAreaComponent implements OnInit {
     console.log('slug', slug);
     this.formationService.getPublicFormationBySlug(slug).subscribe(
       (resp: Formation) => {
+        resp.photo = 'data:image/jpeg;base64,' + resp.photo
         console.log('resp', resp);
         this.formation = resp;
+        console.log(this.formation.end_registration)
+        if (new Date() > new Date(this.formation.end_registration)) {
+          this.isInrolle = false
+        }
       },
       (error: HttpErrorResponse) => {
         console.log('error');
@@ -65,10 +71,10 @@ export class FormationDetailsAreaComponent implements OnInit {
     // if not mobile
     if (window.innerWidth > 991) {
       const scrollPosition =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
       this.isSticky = scrollPosition > 200; // Adjust this value based on when you want the right block to stick
     }
   }

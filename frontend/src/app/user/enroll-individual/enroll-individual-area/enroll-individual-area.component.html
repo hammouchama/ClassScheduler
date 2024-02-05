@@ -44,13 +44,13 @@
                     class="course__thumb course__thumb-list w-img p-relative fix"
                   >
                     <a [routerLink]="['/formation/' + formation.slug]">
-                      <div *ngIf="formation.photo?.url" class="thumbnail">
+                      <div *ngIf="formation.photo" class="thumbnail">
                         <img
-                          src="{{ formation.photo?.url }}"
+                          src="{{ formation.photo }}"
                           [alt]="formation.category"
                         />
                       </div>
-                      <div *ngIf="!formation.photo?.url" class="thumbnail">
+                      <div *ngIf="!formation.photo" class="thumbnail">
                         <img
                           [src]="
                             'assets/img/course/thumbnail/' +

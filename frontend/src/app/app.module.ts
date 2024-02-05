@@ -28,6 +28,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { UserModule } from './user/user.module';
 import { GlobalErrorHandler } from './error-handler/error-handler.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { GlobalErrorHandler } from './error-handler/error-handler.service';
     FormsModule,
     UserModule,
     ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     AuthGuard,

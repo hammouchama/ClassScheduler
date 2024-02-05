@@ -29,7 +29,7 @@ public class Individual {
 
     private boolean is_archived;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "formation_id")
     private Formation formation;
 

@@ -8,9 +8,11 @@ import com.classscheduler.backend.dto.FormationDTOAdmin;
 import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.model.ImagesModel;
 import com.classscheduler.backend.model.Individual;
+import com.classscheduler.backend.model.User;
 import com.classscheduler.backend.repository.FormationRepository;
 import com.classscheduler.backend.repository.ImageModelRepository;
 import com.classscheduler.backend.repository.IndividualRepository;
+import com.classscheduler.backend.repository.UserRepository;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -37,6 +39,7 @@ public class FormationService {
     JwtUtil jwtUtil;
     ModelMapper modelMapper;
     ImageModelRepository imageModelRepository;
+    UserRepository userRepository;
 
     @Transactional
     public ResponseEntity<String> addFormation(Map<String, String> requestyMap, MultipartFile image) {
@@ -53,7 +56,7 @@ public class FormationService {
                                 ImagesModel imagesModel = new ImagesModel();
                                 imagesModel.setName(image.getName());
                                 imagesModel.setType(image.getContentType());
-                                imagesModel.setUrl("http://localhost:8080/images/" + Helpers.saveImage(image, true));
+                                imagesModel.setBytes(image.getBytes());
                                 imagesModel = imageModelRepository.save(imagesModel);
                                 formation.setPhoto(imagesModel);
                             }
@@ -118,10 +121,10 @@ public class FormationService {
     }
 
     @Transactional
-    public ResponseEntity<List<Formation>> getAllFormation() {
+    public ResponseEntity<List<FormationDTOAdmin>> getAllFormation() {
         try {
             if (jwtFilter.isAdmin()) {
-                return new ResponseEntity<>(formationRepository.findAll(), HttpStatus.OK);
+                return new ResponseEntity<>(formationRepository.findAllFormation(), HttpStatus.OK);
             }
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
@@ -184,7 +187,7 @@ public class FormationService {
                                 }
                                 photo.setName(image.getName());
                                 photo.setType(image.getContentType());
-                                photo.setUrl("http://localhost:8080/images/" + Helpers.saveImage(image, true));
+                                photo.setBytes(image.getBytes());
                                 formation.setPhoto(photo);
                             }
 
@@ -269,5 +272,23 @@ public class FormationService {
             e.printStackTrace();
             return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public ResponseEntity<List<FormationDTOAdmin>> getAllByCityFormation() {
+        try {
+            if (jwtFilter.isAdmin()) {
+                return new ResponseEntity<>(formationRepository.findAllFormation(), HttpStatus.OK);
+            }else if(jwtFilter.isAssistant()){
+                User user=userRepository.findByEmail(jwtFilter.getCurrentUser());
+                if (user!=null){
+                    return new ResponseEntity<>(formationRepository.findFormationByCity(user.getAddress()), HttpStatus.OK);
+                }
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

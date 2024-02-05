@@ -46,7 +46,7 @@ public class TrainerService {
                       ImagesModel photo=new ImagesModel();
                       photo.setName(image.getName());
                       photo.setType(image.getContentType());
-                      photo.setUrl("http://localhost:8080/images/"+Helpers.saveImage(image,false));
+                      photo.setBytes(image.getBytes());
                       photo=imageModelRepository.save(photo);
                       trainer.setPhoto(photo);
                   }
@@ -179,5 +179,17 @@ public class TrainerService {
             e.printStackTrace();
         }
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<List<TrainerDTO>> getAcceptedTrainers() {
+        try {
+            if (jwtFilter.isAdmin() || jwtFilter.isAssistant()){
+                return new ResponseEntity<>(trainerRepository.getAcceptedTrainers(),HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -81,6 +81,7 @@ export class EnrollIndividualAreaComponent implements OnInit {
       (result) => {
         // Handle success
         console.log('Formation data:', result);
+        result.photo = 'data:image/jpeg;base64,' + result.photo
         this.formation = result;
       },
       (error: any) => {

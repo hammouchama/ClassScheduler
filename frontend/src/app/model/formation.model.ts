@@ -11,7 +11,7 @@ export interface Formation {
   status: string;
   cost: number;
   capacity: number;
-  photo?: ImagesModel;
+  photo?: string;
   start_registration: string;
   end_registration: string;
   slug?: string;

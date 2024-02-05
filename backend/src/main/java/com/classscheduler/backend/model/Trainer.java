@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(name = "Trainer.getTrainer", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.url,t.accepted) from Trainer t")
+@NamedQuery(name = "Trainer.getTrainer", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.bytes,t.accepted) from Trainer t")
+@NamedQuery(name = "Trainer.getAcceptedTrainers", query = "select new com.classscheduler.backend.dto.TrainerDTO(t.id,t.firstName,t.lastName,t.phone,t.address,t.email, t.skills,t.description,t.photo.bytes,t.accepted) from Trainer t where t.accepted='true'")
 @Entity
 @Data
 @AllArgsConstructor

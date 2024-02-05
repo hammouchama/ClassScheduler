@@ -29,7 +29,7 @@ export class FormationListComponent implements OnInit {
   hideme: boolean[] = [];
 
   // Table data
-  formationData: Formation[]= [];
+  formationData: Formation[] = [];
 
   tables$: Observable<Formation[]>;
   total$: Observable<number>;
@@ -71,6 +71,9 @@ export class FormationListComponent implements OnInit {
   _fetchData() {
     this.formationService.getAllFormation().subscribe(
       (resp: Formation[]) => {
+        resp.map(e => {
+          e.photo = 'data:image/jpeg;base64,' + e.photo
+        })
         this.service.updateTableData(resp);
         this.formationData = resp; // Assign data
 

@@ -1,5 +1,12 @@
 // Event Data
+// export interface Event {
+//     name: string;
+//     value: string;
+// }
+
 export interface Event {
-    name: string;
-    value: string;
+    title: string;
+    formation: string
+    trainer: string
+    company: string
 }

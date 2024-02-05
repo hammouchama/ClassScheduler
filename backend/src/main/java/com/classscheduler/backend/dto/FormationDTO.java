@@ -19,7 +19,7 @@ public class FormationDTO {
     private int nb_hours;
     private String objective;
     private String description;
-    private ImagesModel photo;
+    private byte[] photo;
     @Column(unique = true)
     private String slug;
     private float cost;
@@ -27,7 +27,7 @@ public class FormationDTO {
     private LocalDate end_registration;
 
     public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description,ImagesModel photo,LocalDate start_registration ,LocalDate end_registration, float cost, String slug) {
+            String description,byte[] photo,LocalDate start_registration ,LocalDate end_registration, float cost, String slug) {
         this.id = id;
         this.title = title;
         this.category = category;

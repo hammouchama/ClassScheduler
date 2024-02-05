@@ -88,4 +88,15 @@ public class TrainerController {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // get accepted trainer
+    @GetMapping("/trainer/accepted")
+    public ResponseEntity<List<TrainerDTO>> getAcceptedTrainers(){
+        try {
+            return trainerService.getAcceptedTrainers();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

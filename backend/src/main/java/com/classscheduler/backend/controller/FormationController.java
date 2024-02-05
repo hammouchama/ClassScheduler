@@ -47,7 +47,7 @@ public class FormationController {
 
     //get formation by id
     @GetMapping("/formation/get/{id}")
-     public ResponseEntity<Object> getFormation(@PathVariable  long id){
+     public ResponseEntity<FormationDTOAdmin> getFormation(@PathVariable  long id){
         try{
            return formationService.getFormation(id);
         }catch (Exception e){

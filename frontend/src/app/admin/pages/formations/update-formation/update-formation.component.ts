@@ -103,6 +103,7 @@ export class UpdateFormationComponent implements OnInit {
         console.log('resp', resp);
         this.formation = resp;
         this.imageUrl = this.formation.photo || null;
+        // console.log(this.imageUrl)
       },
       (error: HttpErrorResponse) => {
         console.log('error');

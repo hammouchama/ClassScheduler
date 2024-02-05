@@ -134,11 +134,12 @@ public class FormationService {
     }
 
     @Transactional
-    public ResponseEntity<Object> getFormation(long id) {
+    public ResponseEntity<FormationDTOAdmin> getFormation(long id) {
         try {
             if (jwtFilter.isAdmin()) {
                 Formation formation = formationRepository.findById(id).orElse(null);
                 if (!Objects.isNull(formation)) {
+                    //System.out.println(formation.getPhoto().getBytes());
                     return new ResponseEntity<>(modelMapper.map(formation, FormationDTOAdmin.class), HttpStatus.OK);
                 }
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

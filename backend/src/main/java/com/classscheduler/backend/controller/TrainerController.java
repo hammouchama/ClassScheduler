@@ -2,6 +2,7 @@ package com.classscheduler.backend.controller;
 
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.TrainerDTO;
+import com.classscheduler.backend.model.Scheduling;
 import com.classscheduler.backend.model.Trainer;
 import com.classscheduler.backend.service.TrainerService;
 import com.classscheduler.backend.utils.Helpers;
@@ -93,6 +94,17 @@ public class TrainerController {
     public ResponseEntity<List<TrainerDTO>> getAcceptedTrainers(){
         try {
             return trainerService.getAcceptedTrainers();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //gets sh
+    @GetMapping("/trainer/schaduling")
+    public ResponseEntity<List<Scheduling>> getTrainerFormation(){
+        try {
+            return trainerService.getSchaduling();
         }catch (Exception e){
             e.printStackTrace();
         }

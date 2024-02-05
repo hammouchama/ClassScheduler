@@ -134,9 +134,11 @@ export class AssistantListComponent implements OnInit {
       confirmButtonText: 'Yes, reset it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        Swal.showLoading();
         this.assistantService.resetPassword(id).subscribe(
           (respons: any) => {
             if (respons.message) {
+              Swal.close();
               Swal.fire({
                 title: 'Reseted!',
                 text: 'the password has been reseted.',

@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<AssistantDTO> findAllAssistant();
 
     User findAssistantById(@Param("id") long id);
+
+    List<User> findUserByRoleAndStatus(String role,String string);
 }

@@ -12,4 +12,6 @@ public interface TrainerRepository extends JpaRepository<Trainer,Long> {
 
     List<TrainerDTO> getTrainer();
     List<TrainerDTO> getAcceptedTrainers();
+
+    Trainer findTrainerByEmail(String email);
 }

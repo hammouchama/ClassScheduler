@@ -142,7 +142,7 @@ const chatData = [
         name: 'Ricky Clark',
         message: 'Hi, How are you? What about our next meeting?',
         time: '10:02'
-        
+
     },
     {
         text: 'Today'
@@ -218,16 +218,16 @@ const transactions = [
 const statData = [
     {
         icon: 'ri-stack-line',
-        title: 'Number of Sales',
-        value: '1452'
+        title: 'Number of Formations',
+        value: '102'
     }, {
         icon: 'ri-store-2-line',
-        title: 'Sales Revenue',
-        value: '$ 38452'
+        title: 'Number of Trainers',
+        value: '452'
     }, {
         icon: 'ri-briefcase-4-line',
-        title: 'Average Price',
-        value: '$ 15.4'
+        title: 'Nubmer of Students',
+        value: '305'
     }
 ];
 

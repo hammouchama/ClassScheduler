@@ -2,14 +2,8 @@ package com.classscheduler.backend.service;
 
 import com.classscheduler.backend.config.JwtFilter;
 import com.classscheduler.backend.constants.ProjectConst;
-import com.classscheduler.backend.model.Company;
-import com.classscheduler.backend.model.Formation;
-import com.classscheduler.backend.model.Scheduling;
-import com.classscheduler.backend.model.Trainer;
-import com.classscheduler.backend.repository.CompanyRepository;
-import com.classscheduler.backend.repository.FormationRepository;
-import com.classscheduler.backend.repository.SchedulingRepository;
-import com.classscheduler.backend.repository.TrainerRepository;
+import com.classscheduler.backend.model.*;
+import com.classscheduler.backend.repository.*;
 import com.classscheduler.backend.utils.Helpers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +25,7 @@ public class SchedulingService {
     TrainerRepository trainerRepository;
     SchedulingRepository schedulingRepository;
     CompanyRepository companyRepository;
-
+    UserRepository userRepository;
     public ResponseEntity<String> addScheduling(Map<String, String> requestMap) {
         try {
             if (jwtFilter.isAdmin() || jwtFilter.isAssistant()){
@@ -125,7 +119,7 @@ public class SchedulingService {
                 Scheduling scheduling=schedulingRepository.findById(id).get();
                 if(isValidData(requestMap)&& !Objects.isNull(scheduling)){
                     Formation formation=formationRepository.findById(Long.valueOf(requestMap.get("formation"))).get();
-                    Trainer  trainer =trainerRepository.findById(Long.valueOf(requestMap.get("trainer"))).get();
+                    Trainer trainer =trainerRepository.findById(Long.valueOf(requestMap.get("trainer"))).get();
                     if (formation!=null && trainer!=null) {
                         scheduling.setTitle(requestMap.get("title"));
                         scheduling.setFormation(formation);

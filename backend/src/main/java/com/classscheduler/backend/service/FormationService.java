@@ -140,7 +140,7 @@ public class FormationService {
                 Formation formation = formationRepository.findById(id).orElse(null);
                 if (!Objects.isNull(formation)) {
                     //System.out.println(formation.getPhoto().getBytes());
-                    return new ResponseEntity<>(modelMapper.map(formation, FormationDTOAdmin.class), HttpStatus.OK);
+                    return new ResponseEntity<>(FormationDTOAdmin.fromFormatioToFromationDTO(formation), HttpStatus.OK);
                 }
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
@@ -234,7 +234,7 @@ public class FormationService {
         try {
             Formation formation=formationRepository.findFormationBySlug(slug);
             if (!Objects.isNull(formation)){
-                return new ResponseEntity<>(modelMapper.map(formation,FormationDTO.class),HttpStatus.OK);
+                return new ResponseEntity<>(FormationDTO.fromFormatioToFromationDTO(formation),HttpStatus.OK);
             }
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }catch (Exception e){

@@ -19,7 +19,6 @@ export class LeaveRemarkAreaComponent implements OnInit {
 
   formation!: Formation;
   trainer!: Trainer;
-  remarksId!: number;
 
   submit: boolean = false;
 
@@ -49,8 +48,11 @@ export class LeaveRemarkAreaComponent implements OnInit {
     this.loading = true;
 
     this.getToken();
-    if (this.remarksToken && this.remarksToken.length > 0) {
-      /* this.getRemarksTokenValidation(this.remarksToken); */
+    if (this.remarksToken && this.remarksToken.length > 10 && this.remarksToken.split('.').length !== 2) {
+      this.getRemarksTokenValidation();
+    }else{
+      console.log("Invalid token");
+      this.router.navigate(['/401']);
     }
     this.loading = false;
     this.submit = false;
@@ -60,30 +62,28 @@ export class LeaveRemarkAreaComponent implements OnInit {
   public getToken() {
     this.route.paramMap.subscribe((params) => {
       this.remarksToken = params.get('token') || '';
+      console.log(this.remarksToken);
     });
   }
 
-  private getRemarksTokenValidation(token: string) {
-    this.remarksService.validateRemarksToken(token).subscribe(
+  private getRemarksTokenValidation() {
+    this.remarksService.validateRemarksToken(this.remarksToken).subscribe(
       (result) => {
         // Handle success
         console.log('Remarks token validation data:', result);
-        if (!result.valid) {
-          this.router.navigate(['/']);
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: result.error,
-          });
+        if (result.valid) {
+          this.router.navigate(['/401']);
+          console.log(result.error);
         } else {
           this.formation = result.formation;
           this.trainer = result.trainer;
-          this.remarksId = result.id;
         }
       },
       (error: any) => {
         // Handle error
         console.log('Error getting remarks token validation data:', error);
+        this.router.navigate(['/500']);
+
       }
     );
   }

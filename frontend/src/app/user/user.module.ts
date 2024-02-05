@@ -52,6 +52,7 @@ import { TrainerDetailsAreaComponent } from './trainer-details/trainer-details-a
 import { LeaveRemarkComponent } from './leave-remark/leave-remark-main/leave-remark.component';
 import { LeaveRemarkAreaComponent } from './leave-remark/leave-remark-area/leave-remark-area.component';
 import { StarRatingComponent } from './common/star-rating/star-rating.component';
+import { ErrorHandlerComponent } from '../error-handler/error-handler.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -110,6 +111,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     LeaveRemarkComponent,
     LeaveRemarkAreaComponent,
     StarRatingComponent,
+    ErrorHandlerComponent
   ],
   imports: [
     CommonModule,

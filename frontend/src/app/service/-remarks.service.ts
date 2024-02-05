@@ -33,9 +33,9 @@ export class RemarksService {
     return this.http.delete(`${environment.apiEndpoint}/remarks/delete/${id}`);
   }
 
-  submitRemarks(id: number, requestMap: Map<string, string>): Observable<any> {
+  submitRemarks(requestMap: Map<string, string>): Observable<any> {
     return this.http.put(
-      `${environment.apiEndpoint}/public/remarks/submit/${id}`,
+      `${environment.apiEndpoint}/public/remarks/submit`,
       requestMap
     );
   }

@@ -19,6 +19,22 @@ export class UserAuthService {
   public getToken(): string {
     return "" + localStorage.getItem("token")
   }
+  //get and set the user id
+  public setUserId(userId: string) {
+    localStorage.setItem("userId", userId)
+  }
+  public getUserId(): string {
+    return "" + localStorage.getItem("userId")
+  }
+  //get and set the user city
+  public setUserCity(city: string) {
+    localStorage.setItem("city", city)
+  }
+  public getUserCity(): string {
+    return "" + localStorage.getItem("city")
+  }
+
+  //Clears the local storage
   public clear() {
     localStorage.clear();
   }

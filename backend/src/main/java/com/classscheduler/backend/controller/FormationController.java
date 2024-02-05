@@ -109,6 +109,16 @@ public class FormationController {
         }
         return new ResponseEntity<>(null ,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @GetMapping("/public/formation/endFormationAndGenerateTokens/{formationId}/{trainerId}")
+    public ResponseEntity<String> endFormationAndGenerateTokens(@PathVariable long formationId, @PathVariable long trainerId) {
+        try {
+            return formationService.endFormationAndGenerateTokens(formationId, trainerId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     //get formation by City
     @GetMapping("/formation/get/city")
     public ResponseEntity<List<FormationDTOAdmin>> getAllByCityFormation(){

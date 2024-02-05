@@ -1,0 +1,49 @@
+<main class="Visitor">
+  <app-header headerShadow="header__area header__padding-2"></app-header>
+  <section class="error__area pt-20 pb-200">
+    <div class="container">
+       <div class="row">
+          <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+             <div class="error__item text-center">
+                <div class="error__thumb mb-45">
+                  <img *ngIf="errorCode===400" src="assets/img/error/400.jpg" alt="">
+                  <img *ngIf="errorCode===401" src="assets/img/error/401.jpg" alt="">
+                  <img *ngIf="errorCode===404" src="assets/img/error/404.jpg" alt="">
+                  <img *ngIf="errorCode===500" src="assets/img/error/500.jpg" alt="">
+                  <img *ngIf="![400,401,404,500].includes(errorCode)" src="assets/img/error/error.jpg" alt="">
+                </div>
+                <div class="error__content">
+                    <div class="error" *ngIf="errorCode===400">
+                      <h3 class="error__title">Bad Request!</h3>
+                      <p>Please check your request and try again.</p>
+                      <a [routerLink]="['/']" class="e-btn e-btn-3 e-btn-4">Back To Home</a>
+                    </div>
+                    <div class="error" *ngIf="errorCode===401">
+                      <h3 class="error__title">Unauthorized!</h3>
+                      <p>Please login to access this page.</p>
+                      <a [routerLink]="['/login']" class="e-btn e-btn-3 e-btn-4">Login</a>
+                    </div>
+                    <div class="error" *ngIf="errorCode===404">
+                      <h3 class="error__title">Page Not Found!</h3>
+                      <p>Please try searching for some other page.</p>
+                      <a [routerLink]="['/']" class="e-btn e-btn-3 e-btn-4">Back To Home</a>
+                    </div>
+                    <div class="error" *ngIf="errorCode===500">
+                      <h3 class="error__title">Internal Server Error!</h3>
+                      <p>Please try again later.</p>
+                      <a [routerLink]="['/']" class="e-btn e-btn-3 e-btn-4">Back To Home</a>
+                    </div>
+                    <div class="error" *ngIf="![400,401,404,500].includes(errorCode)">
+                      <h3 class="error__title">Oops! Something went wrong.</h3>
+                      <p>Please try again later.</p>
+                      <p>Error {{errorCode}}</p>
+                      <a [routerLink]="['/']" class="e-btn e-btn-3 e-btn-4">Back To Home</a>
+                    </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+  <app-footer footerPadd='footer__top pt-90 pb-40'></app-footer>
+</main>

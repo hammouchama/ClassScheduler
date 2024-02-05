@@ -139,6 +139,62 @@
                   </div>
                 </div>
 
+                <div class="sign__input-wrapper mb-10 birthDate">
+                  <h5>Birth Date<span class="text-danger">*</span></h5>
+                  <div class="sign__input">
+                    <div class="input-group">
+                      <input
+                        ngbInput
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        type="date"
+                        [ngClass]="{
+                          'is-invalid': submit && form['birth_date'].errors
+                        }"
+                        formControlName="birth_date"
+                      />
+                      <!-- <div class="input-group-append" (click)="d.toggle()">
+                        <span class="input-group-text"
+                          ><i class="mdi mdi-calendar icon"></i
+                        ></span>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="submit && form['birth_date'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['birth_date'].errors['required']"
+                      >This value is required.</span
+                    >
+                  </div>
+                </div>
+
+                <div class="sign__input-wrapper mb-25">
+                  <h5>City<span class="text-danger">*</span></h5>
+                  <div class="">
+                    <ng-select
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': submit && form['city'].errors
+                      }"
+                      id="city"
+                      [items]="cities"
+                      formControlName="city"
+                      [addTag]="true"
+                      addTagText="Add Another City"
+                    ></ng-select>
+                  </div>
+                  <div
+                    *ngIf="submit && form['city'].errors"
+                    class="invalid-feedback"
+                  >
+                    <span *ngIf="form['city'].errors['required']"
+                      >This value is required.</span
+                    >
+                  </div>
+                </div>
+
                 <div class="sign__input-wrapper mb-10">
                   <h5>Phone number<span class="text-danger">*</span></h5>
                   <div class="sign__input">
@@ -206,61 +262,9 @@
                   </div>
                 </div>
 
-                <div class="sign__input-wrapper mb-25">
-                  <h5>City<span class="text-danger">*</span></h5>
-                  <div class="">
-                    <ng-select
-                      class="form-control"
-                      [ngClass]="{
-                        'is-invalid': submit && form['city'].errors
-                      }"
-                      id="city"
-                      [items]="cities"
-                      formControlName="city"
-                      [addTag]="true"
-                      addTagText="Add Another City"
-                    ></ng-select>
-                  </div>
-                  <div
-                    *ngIf="submit && form['city'].errors"
-                    class="invalid-feedback"
-                  >
-                    <span *ngIf="form['city'].errors['required']"
-                      >This value is required.</span
-                    >
-                  </div>
-                </div>
 
-                <div class="sign__input-wrapper mb-10 birthDate">
-                  <h5>Birth Date<span class="text-danger">*</span></h5>
-                  <div class="sign__input">
-                    <div class="input-group">
-                      <input
-                        ngbInput
-                        class="form-control"
-                        placeholder="yyyy-mm-dd"
-                        type="date"
-                        [ngClass]="{
-                          'is-invalid': submit && form['birth_date'].errors
-                        }"
-                        formControlName="birth_date"
-                      />
-                      <!-- <div class="input-group-append" (click)="d.toggle()">
-                        <span class="input-group-text"
-                          ><i class="mdi mdi-calendar icon"></i
-                        ></span>
-                      </div> -->
-                    </div>
-                  </div>
-                  <div
-                    *ngIf="submit && form['birth_date'].errors"
-                    class="invalid-feedback"
-                  >
-                    <span *ngIf="form['birth_date'].errors['required']"
-                      >This value is required.</span
-                    >
-                  </div>
-                </div>
+
+
               </div>
               <ul class="list-inline mt-20 mb-40">
                 <li class="next list-inline-item float-end">

@@ -1,16 +1,11 @@
 package com.classscheduler.backend.service;
 
 import com.classscheduler.backend.config.JwtFilter;
+import com.classscheduler.backend.config.JwtUtil;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.RemarksTokenValidationDTO;
-import com.classscheduler.backend.model.Company;
-import com.classscheduler.backend.model.Formation;
-import com.classscheduler.backend.model.Individual;
-import com.classscheduler.backend.model.Remarks;
-import com.classscheduler.backend.repository.CompanyRepository;
-import com.classscheduler.backend.repository.IndividualRepository;
-import com.classscheduler.backend.repository.RemarksRepository;
-import com.classscheduler.backend.repository.TrainerRepository;
+import com.classscheduler.backend.model.*;
+import com.classscheduler.backend.repository.*;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -30,9 +25,10 @@ public class RemarksService {
 
     RemarksRepository remarksRepository;
     TrainerRepository trainerRepository;
-    IndividualRepository individualRepository;
+    FormationRepository formationRepository;
     CompanyRepository companyRepository;
     JwtFilter jwtFilter;
+    JwtUtil jwtUtil;
 
     @Transactional
     public List<Remarks> getAllRemarks() {
@@ -65,7 +61,7 @@ public class RemarksService {
     }
 
     @Transactional
-    public ResponseEntity<String> updateRemarks(Long id, Map<String, String> requestMap) {
+    public ResponseEntity<String> submitRemarks(Long id, Map<String, String> requestMap) {
         try {
             // Check if user is admin or assistant
 //            if (jwtFilter.isAdmin() || jwtFilter.isAssistant()) {
@@ -114,29 +110,41 @@ public class RemarksService {
         return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Transactional
-    public void createEmptyRemarksWithToken(Individual individual, String remarksToken) {
-        Remarks remarks = new Remarks();
-        remarks.setToken(remarksToken);
-        remarks.setIndividual(individual);
-
-        remarksRepository.save(remarks);
-    }
-
     // validate the remarks token and return RemarksTokenValidationDTO
     @Transactional
     public ResponseEntity<RemarksTokenValidationDTO> validateRemarksToken(String remarksToken) {
         RemarksTokenValidationDTO validationResult = new RemarksTokenValidationDTO();
-        Remarks remarks = remarksRepository.findByToken(remarksToken);
+        // get from validateRemarksToken method in JwtUtil
+        System.out.println(remarksToken);
+        Map<String, Object> remarksInfo = jwtUtil.validateRemarksToken(remarksToken);
 
-        if (remarks != null  && remarks.getToken() != null) {
 
-            validationResult.setFormation(remarks.getIndividual().getFormation());
-            validationResult.setTrainer(remarks.getTrainer());
+
+        System.out.println(remarksInfo);
+        if (remarksInfo != null) {
+            System.out.println(remarksInfo.get("formation_id"));
+            System.out.println(remarksInfo.get("trainer_id"));
+            Long formationId = Long.parseLong(remarksInfo.get("formation_id").toString());
+            Long trainerId = Long.parseLong(remarksInfo.get("trainer_id").toString());
+            if(formationId == null || trainerId == null){
+                validationResult.setValid(false);
+                validationResult.setError("Remarks token is invalid");
+                return new ResponseEntity<>(validationResult, HttpStatus.BAD_REQUEST);
+            }
+
+            Formation formation = formationRepository.findById(formationId).orElse(null);
+            Trainer trainer = trainerRepository.findById(trainerId).orElse(null);
+
+            if(formation == null || trainer == null){
+                validationResult.setValid(false);
+                validationResult.setError("Remarks token is invalid");
+                return new ResponseEntity<>(validationResult, HttpStatus.BAD_REQUEST);
+            }
+            validationResult.setFormation(formation);
+            validationResult.setTrainer(trainer);
 
             validationResult.setValid(true);
             return new ResponseEntity<>(validationResult, HttpStatus.OK);
-
 
         }
         validationResult.setValid(false);
@@ -156,7 +164,7 @@ public class RemarksService {
         // Assuming Trainer, Individual, and Company objects are already available
         // Set the corresponding objects using their IDs
         remarks.setTrainer(trainerRepository.findById(Long.parseLong(requestMap.get("trainer_id"))).orElse(null));
-        remarks.setIndividual(individualRepository.findById(Long.parseLong(requestMap.get("individual_id"))).orElse(null));
+        remarks.setFormation(formationRepository.findById(Long.parseLong(requestMap.get("formation_id"))).orElse(null));
 
         return remarks;
     }
@@ -168,8 +176,7 @@ public class RemarksService {
                 && requestMap.containsKey("note_support_tp")
                 && requestMap.containsKey("note_maitrise")
                 && requestMap.containsKey("trainer_id")
-                && requestMap.containsKey("individual_id")
-                && requestMap.containsKey("company_id");
+                && requestMap.containsKey("formation_id");
     }
 
 

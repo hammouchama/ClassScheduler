@@ -8,6 +8,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { SignInMainComponent } from './user/sign-in/sign-in-main/sign-in-main.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { UserRoutingModule } from './user/user-routing.module';
+import { ErrorHandlerComponent } from './error-handler/error-handler.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => UserRoutingModule },
@@ -31,6 +32,16 @@ const routes: Routes = [
     data: { role: 'Admin' },
   }, */
   { path: 'forbidden', component: ForbiddenComponent },
+
+  { path: '400', component: ErrorHandlerComponent, data: { error: 400 } },
+  { path: '401', component: ErrorHandlerComponent, data: { error: 401 } },
+  { path: '403', component: ErrorHandlerComponent, data: { error: 403 } },
+  { path: '404', component: ErrorHandlerComponent, data: { error: 404 } },
+  { path: '500', component: ErrorHandlerComponent, data: { error: 500 } },
+
+
+
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

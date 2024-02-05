@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class RemarksTokenValidationDTO {
-    private Long remarkId;
     private boolean valid;
     private String error;
     private Formation formation;

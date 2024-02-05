@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { UserModule } from './user/user.module';
+import { GlobalErrorHandler } from './error-handler/error-handler.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       multi: true,
     },
     UserService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

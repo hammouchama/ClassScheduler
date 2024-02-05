@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class RemarksTokenValidationDTO {
     private boolean valid;
     private String error;
-    private Formation formation;
-    private Trainer trainer;
+    private FormationDTO formation;
+    private TrainerDTO trainer;
 }

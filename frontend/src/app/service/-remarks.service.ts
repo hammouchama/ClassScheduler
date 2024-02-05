@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/envi';
 import { RemarksTokenValidationDTO } from '../model/remarks-token-validation.dto';
+import { Remarks } from '../model/remarks.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,33 +11,33 @@ import { RemarksTokenValidationDTO } from '../model/remarks-token-validation.dto
 export class RemarksService {
   constructor(private http: HttpClient) {}
 
-  getAllRemarks(): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/remarks/all`);
+  getAllRemarks(){
+    return this.http.get<Remarks[]>(`${environment.apiEndpoint}/remarks/all`);
   }
 
-  getRemarksById(id: number): Observable<any> {
-    return this.http.get(`${environment.apiEndpoint}/remarks/${id}`);
+  getRemarksById(id: number){
+    return this.http.get<Remarks>(`${environment.apiEndpoint}/remarks/${id}`);
   }
 
-  addRemarks(requestMap: Map<string, string>): Observable<any> {
-    return this.http.post(`${environment.apiEndpoint}/remarks/add`, requestMap);
+  addRemarks(data: any){
+    return this.http.post(`${environment.apiEndpoint}/remarks/add`, data);
   }
 
-  /* updateRemarks(id: number, requestMap: Map<string, string>): Observable<any> {
+  /* updateRemarks(id: number, data: any){
     return this.http.put(
       `${environment.apiEndpoint}/remarks/update/${id}`,
-      requestMap
+      data
     );
   } */
 
-  deleteRemarks(id: number): Observable<any> {
+  deleteRemarks(id: number){
     return this.http.delete(`${environment.apiEndpoint}/remarks/delete/${id}`);
   }
 
-  submitRemarks(requestMap: Map<string, string>): Observable<any> {
+  submitRemarks(data: any){
     return this.http.put(
       `${environment.apiEndpoint}/public/remarks/submit`,
-      requestMap
+      data
     );
   }
 

@@ -1,5 +1,4 @@
-import { Company } from "./company.model";
-import { Individual } from "./individual.model";
+import { Formation } from "./formation.model";
 import { Trainer } from "./trainer.model";
 
 export interface Remarks {
@@ -10,6 +9,5 @@ export interface Remarks {
   note_support_tp: number;
   note_maitrise: number;
   trainer: Trainer;
-  individual: Individual;
-  company: Company;
+  formation: Formation;
 }

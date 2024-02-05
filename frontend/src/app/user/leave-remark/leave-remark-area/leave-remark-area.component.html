@@ -1,25 +1,9 @@
 <section class="teacher__area pt-100 pb-110">
   <div class="page__title-shape">
-    <img
-      class="page-title-shape-5 d-none d-sm-block"
-      src="assets/img/page-title/page-title-shape-1.png"
-      alt=""
-    />
-    <img
-      class="page-title-shape-6"
-      src="assets/img/page-title/page-title-shape-6.png"
-      alt=""
-    />
-    <img
-      class="page-title-shape-3"
-      src="assets/img/page-title/page-title-shape-3.png"
-      alt=""
-    />
-    <img
-      class="page-title-shape-7"
-      src="assets/img/page-title/page-title-shape-4.png"
-      alt=""
-    />
+    <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="" />
+    <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="" />
+    <img class="page-title-shape-3" src="assets/img/page-title/page-title-shape-3.png" alt="" />
+    <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="" />
   </div>
   <div class="container">
     <div class="row">
@@ -30,24 +14,14 @@
 
 
           <div class="teacher__details-shape">
-            <img
-              class="teacher-details-shape-1"
-              src="assets/img/teacher/details/shape/shape-1.png"
-              alt=""
-            />
-            <img
-              class="teacher-details-shape-2"
-              src="assets/img/teacher/details/shape/shape-2.png"
-              alt=""
-            />
+            <img class="teacher-details-shape-1" src="assets/img/teacher/details/shape/shape-1.png" alt="" />
+            <img class="teacher-details-shape-2" src="assets/img/teacher/details/shape/shape-2.png" alt="" />
           </div>
         </div>
       </div>
       <div class="col-xxl-8 col-xl-8 col-lg-8">
         <div class="teacher__wrapper">
-          <div
-            class="teacher__top d-md-flex align-items-end justify-content-between"
-          >
+          <div class="teacher__top d-md-flex align-items-end justify-content-between">
             <div class="teacher__info">
               <h4>{{trainer.firstName}} {{trainer.lastName.toLocaleUpperCase()}}</h4>
               <!-- <span>Teaches Interior Markater</span> -->
@@ -77,40 +51,36 @@
             </div> -->
           </div>
           <div class="teacher__bio">
-            <h3>Short Bio</h3>
-            <p>
-              {{trainer.description}}
-            </p>
-          </div>
-          <div class="teacher__bio">
-            <h3>My skills</h3>
-            <div *ngFor="let skill of trainer.skills" class="skill-tag">{{ skill }}</div>
+            <div class="teacher__info">
+              <h3>Short Bio</h3>
+              <p>
+                {{trainer.description}}
+              </p>
+            </div>
+            <div class="teacher__info">
+              <h3>Skills</h3>
+              <div>
+                <div *ngFor="let skill of trainer.skills.split(',')" class="badge bg-info ms-1">
+                  {{ skill }}
+                </div>
+              </div>
+            </div>
+
+
           </div>
           <div class="teacher__courses pt-55">
             <div class="section__title-wrapper mb-30">
               <h2 class="section__title">
-                Teacher
-                <span class="yellow-bg yellow-bg-big"
-                  >Course<img src="assets/img/shape/yellow-bg.png" alt=""/></span>
+                Passed Formation
               </h2>
             </div>
             <div class="teacher__course-wrapper">
               <div class="row">
                 <div class="course__review">
-                  <h3>Reviews</h3>
-                  <p>
-                    Gosh william I'm telling crikey burke I don't want no agro A
-                    bit of how's your father bugger all mate off his nut that,
-                    what a plonker cuppa owt to do
-                  </p>
 
                   <div class="course__item white-bg mb-30 fix">
                     <!-- Loading -->
-                    <div
-                      *ngIf="loading"
-                      class="d-flex justify-content-center align-items-center"
-                      style="height: 200px"
-                    >
+                    <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px">
                       <div class="spinner-border text-primary" role="status">
                         <span class="visually-hidden">Loading...</span>
                       </div>
@@ -118,25 +88,17 @@
 
                     <div class="row gx-0" *ngIf="!loading">
                       <div class="col-xxl-4 col-xl-4 col-lg-4">
-                        <div
-                          class="course__thumb course__thumb-list w-img p-relative fix"
-                        >
+                        <div class="course__thumb course__thumb-list w-img p-relative fix">
                           <a [routerLink]="['/formation/' + formation.slug]">
                             <div *ngIf="formation.photo" class="thumbnail">
-                              <img
-                                src="{{ formation.photo }}"
-                                [alt]="formation.category"
-                              />
+                              <img src="{{ formation.photo }}" [alt]="formation.category" />
                             </div>
                             <div *ngIf="!formation.photo" class="thumbnail">
-                              <img
-                                [src]="
+                              <img [src]="
                                   'assets/img/course/thumbnail/' +
                                   formation.category +
                                   '.jpg'
-                                "
-                                [alt]="formation.category"
-                              />
+                                " [alt]="formation.category" />
                             </div>
                           </a>
                           <div class="course__tag"></div>
@@ -144,29 +106,17 @@
                       </div>
                       <div class="col-xxl-8 col-xl-8 col-lg-8">
                         <div class="course__right">
-                          <div class="course__content course__content-4 pb-20">
+                          <div class="course__content course__content-4">
                             <div class="course__meta d-flex align-items-center">
                               <div class="course__nb_hours mr-20">
-                                <span class="d-flex"
-                                  ><i class="ri-time-line"></i>
-                                  {{ formation.nb_hours }} Hours</span
-                                >
+                                <span class="d-flex"><i class="ri-time-line"></i>
+                                  {{ formation.nb_hours }} Hours</span>
                               </div>
                             </div>
                             <h3 class="course__title">
                               <a [routerLink]="['/formation/', formation.slug]">
-                                {{ formation.title }}</a
-                              >
+                                {{ formation.title }}</a>
                             </h3>
-                          </div>
-                          <div
-                            class="course__more course__more-2 course__more-3 d-flex justify-content-end align-items-center"
-                          >
-                            <div
-                              class="course__status d-flex align-items-center"
-                            >
-                              <!-- <span class="old-price">${{course.oldPrice}}</span> -->
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -174,23 +124,46 @@
                   </div>
 
                   <div class="course__form">
-                    <h3>Write a Review</h3>
+                    <h3 class="section__title">Write a <span class="yellow-bg yellow-bg-big">Review<img
+                          src="assets/img/shape/yellow-bg.png" alt="" /></span>
+                    </h3>
                     <div class="course__form-inner">
-                      <form [formGroup]="remarkForm" (ngSubmit)="submitForm()">
-                        <div class="form-group">
-                          <label for="note_quality">Note Quality:</label>
-                          <app-star-rating
-                            [rating]="noteQuality"
-                            (ratingChange)="noteQuality = $event"
-                            label="Note Quality"
-                          ></app-star-rating>
+                      <form (ngSubmit)="submitForm()">
+                        <div class="form-group mb-50">
+                          <label for="note_quality">Note Quality:<span class="text-danger">*</span></label>
+                          <app-star-rating [rating]="noteQuality" (ratingChange)="noteQuality = $event"
+                            [ratingLabels]="noteLabels"></app-star-rating>
+                        </div>
+
+                        <div class="form-group mb-50">
+                          <label for="note_quality">Note Rythme:<span class="text-danger">*</span></label>
+                          <app-star-rating [rating]="noteRythme" (ratingChange)="noteRythme = $event"
+                            [ratingLabels]="noteLabels"></app-star-rating>
+                        </div>
+
+                        <div class="form-group mb-50">
+                          <label for="note_quality">Note Support Cours:<span class="text-danger">*</span></label>
+                          <app-star-rating [rating]="noteSupportCours" (ratingChange)="noteSupportCours = $event"
+                            [ratingLabels]="noteLabels"></app-star-rating>
+                        </div>
+
+                        <div class="form-group mb-50">
+                          <label for="note_quality">Note Support TP:<span class="text-danger">*</span></label>
+                          <app-star-rating [rating]="noteSupportTP" (ratingChange)="noteSupportTP = $event"
+                            [ratingLabels]="noteLabels"></app-star-rating>
+                        </div>
+
+                        <div class="form-group mb-50">
+                          <label for="note_quality">Note Maitrise:<span class="text-danger">*</span></label>
+                          <app-star-rating [rating]="noteMaitrise" (ratingChange)="noteMaitrise = $event"
+                            [ratingLabels]="noteLabels"></app-star-rating>
                         </div>
 
                         <!-- Repeat the same structure for other note categories -->
 
                         <!-- Add submit button -->
                         <button type="submit" class="btn btn-primary">
-                          Submit
+                          Send Remarks
                         </button>
                       </form>
 

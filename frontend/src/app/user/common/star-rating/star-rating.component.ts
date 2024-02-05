@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class StarRatingComponent {
   @Input() rating!: number;
+  @Input() ratingLabels!: string[];
   @Output() ratingChange = new EventEmitter<number>();
-  @Input() label!: string;
 
   highlight!: number;
 

@@ -53,7 +53,9 @@ public class RemarksController {
 
 
     @PutMapping("/public/remarks/submit")
-    public ResponseEntity<String> submitRemarks(@RequestBody Map<String ,String > requestMap) {
+    public ResponseEntity<String> submitRemarks(@RequestBody Map<String ,String> requestMap) {
+        System.out.println("requestMap1");
+        System.out.println(requestMap);
         try {
             return remarksService.addRemarks(requestMap);
         }catch (Exception e){

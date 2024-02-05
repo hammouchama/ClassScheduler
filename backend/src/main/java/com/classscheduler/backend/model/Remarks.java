@@ -27,6 +27,4 @@ public class Remarks {
     @JoinColumn(name = "formation_id")
     private Formation formation;
 
-
-    private String token;
     }

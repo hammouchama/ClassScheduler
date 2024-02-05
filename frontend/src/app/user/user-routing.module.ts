@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'formation/:slug', component: FormationDetailsComponent },
   { path: 'formation/:slug/enroll', component: EnrollIndividualMainComponent },
   { path: 'contact', component: ContactMainComponent },
-  { path: 'trainer', component: TrainerDetailsComponent },
+  { path: 'myFormations', component: TrainerDetailsComponent},
   { path: 'trainer/:id', component: TrainerDetailsComponent },
   { path: 'leave-remark/:token', component: LeaveRemarkComponent },
 ];

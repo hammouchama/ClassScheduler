@@ -24,8 +24,8 @@ public class Remarks {
     private Trainer trainer;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "individual_id")
-    private Individual individual;
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
 
 
     private String token;

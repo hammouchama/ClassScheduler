@@ -52,15 +52,10 @@ public class RemarksController {
 
 
 
-    @PutMapping("/public/remarks/submit/{id}")
-    public ResponseEntity<String> submitRemarks(@PathVariable Long id, @RequestBody Map<String ,String > requestMap) {
+    @PutMapping("/public/remarks/submit")
+    public ResponseEntity<String> submitRemarks(@RequestBody Map<String ,String > requestMap) {
         try {
-            if (remarksService.getRemarksById(id) != null) {
-                remarksService.updateRemarks(id, requestMap);
-                return new ResponseEntity<>("Remarks Submited successfully", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Remarks not found", HttpStatus.NOT_FOUND);
-            }
+            return remarksService.addRemarks(requestMap);
         }catch (Exception e){
             e.printStackTrace();
         }

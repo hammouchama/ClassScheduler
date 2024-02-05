@@ -30,6 +30,9 @@ export class SignInAreaComponent implements OnInit {
         this.userAuthService.setToken(response.token);
         const role = response.role;
         this.userAuthService.setRole(role);
+        this.userAuthService.setUserId(response.id);
+        this.userAuthService.setUserCity(response.city);
+
         //! redarect
         role === 'Admin'
           ? this.router.navigate(['/dashboard'])

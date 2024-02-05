@@ -66,6 +66,9 @@ export class HeaderComponent implements OnInit {
     this.isAdmin = this.userAuthService.isAdmmin();
     this.username = this.userAuthService.getRole() || '';
     this.isTrainer = this.userAuthService.isTrainer()
+    // gets the role of the current user
+
+
   }
 
   /**

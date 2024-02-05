@@ -54,4 +54,11 @@ export class FormationService {
       environment.apiEndpoint + `/public/formation/getBySlug/${slug}`
     );
   }
+
+  public endFormationAndGenerateTokens(formationId: number, trainerId: number) {
+    return this.httpClient.get<Formation>(
+      environment.apiEndpoint +
+        `/public/formation/endFormationAndGenerateTokens/${formationId}/${trainerId}`
+    );
+  }
 }

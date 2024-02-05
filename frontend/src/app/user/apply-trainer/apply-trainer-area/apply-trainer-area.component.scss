@@ -67,3 +67,7 @@
     }
   }
 }
+
+li:has(button:disabled) {
+  cursor: not-allowed;
+}

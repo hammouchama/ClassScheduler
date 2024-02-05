@@ -243,29 +243,28 @@ public class FormationService {
 
 
     @Transactional
-    public ResponseEntity<String> endFormationAndGenerateTokens(long formationId) {
+    public ResponseEntity<String> endFormationAndGenerateTokens(long formationId, long trainerId) {
         try {
-            if (jwtFilter.isAdmin()) {
                 Formation formation = formationRepository.findById(formationId).orElse(null);
 
                 if (!Objects.isNull(formation)) {
-                    List<Individual> relatedIndividuals = individualRepository.findIndividualsByFormationId(formation.getId());
+                    List<Individual> relatedIndividuals = individualRepository.findIndividualsByFormationId(formationId);
+                    String remarksToken = jwtUtil.generateRemarksToken("email@gmaom.com", trainerId, formationId);
 
-                    for (Individual individual : relatedIndividuals) {
-                        String remarksToken = jwtUtil.generateRemarksToken(individual.getEmail());
-                        remarksService.createEmptyRemarksWithToken(individual, remarksToken);
-                    }
+                    /*for (Individual individual : relatedIndividuals) {
+                        String remarksToken = jwtUtil.generateRemarksToken(individual.getEmail(), individual.getId(), formation.getId());
+                        // Send the remarksToken to the individual's email
+                        System.out.println("Remarks token for " + remarksToken);
+                    }*/
 
                     // Additional logic for ending the formation...
                     // For example, set the formation status to "ENDED"
 
-                    return Helpers.getResponseEntity("Formation ended successfully and tokens generated", HttpStatus.OK);
+                    return Helpers.getResponseEntity("Formation ended successfully and tokens generated : "+remarksToken, HttpStatus.OK);
                 }
 
                 return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
-            }
 
-            return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS, HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
             e.printStackTrace();
             return Helpers.getResponseEntity(ProjectConst.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);

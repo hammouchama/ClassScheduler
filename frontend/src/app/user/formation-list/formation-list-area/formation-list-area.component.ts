@@ -77,7 +77,8 @@ export class FormationListAreaComponent implements OnInit {
   _fetchData() {
     this.formationService.getAllPublicFormation().subscribe(
       (resp: Formation[]) => {
-        resp.map(e => { e.photo = 'data:image/jpeg;base64,' + e.photo })
+        resp.map(e => e.photo = 'data:image/jpeg;base64,' + e.photo)
+        console.log(resp)
         this.service.updateTableData(resp);
 
       },

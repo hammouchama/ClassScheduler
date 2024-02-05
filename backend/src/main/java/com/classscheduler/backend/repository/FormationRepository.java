@@ -18,4 +18,6 @@ public interface FormationRepository extends JpaRepository<Formation,Long> {
     Formation findFormationBySlug(String slug);
     List<FormationDTOAdmin> findFormationByCity(String city);
     List<FormationDTOAdmin> findAllFormation();
+
+
 }

@@ -6,6 +6,7 @@ import { TrainerService } from 'src/app/service/trainer.service';
 import { UiModule } from "../../../shared/ui/ui.module";
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { cl } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-trainer-info',
@@ -67,8 +68,11 @@ export class TrainerInfoComponent implements OnInit {
   }
 
   public acceptTrainer(id: number) {
+    Swal.showLoading();
+
     this.trainerService.acceptTrainer(id).subscribe(
       (respo: any) => {
+        Swal.close();
         Swal.fire({
           title: "Accepted!",
           text: "Accepted successfully!",
@@ -76,6 +80,7 @@ export class TrainerInfoComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
+        Swal.close();
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -85,5 +90,4 @@ export class TrainerInfoComponent implements OnInit {
       }
     )
   }
-
 }

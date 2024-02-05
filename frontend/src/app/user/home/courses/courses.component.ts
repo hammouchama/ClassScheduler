@@ -18,17 +18,17 @@ export class CoursesComponent implements OnInit {
     Business: '#3b60ff',
     'IT & Software': '#f5a31a',
   };
- /*  colors = [
-    '#b128ff',
-    '#0fa0dd',
-    '#30a820',
-    '#3b60ff',
-    '#f5a31a',
-    '#1a8bf5',
-    '#b128ff',
-    '#fa7919',
-    '#f2277e',
-  ]; */
+  /*  colors = [
+     '#b128ff',
+     '#0fa0dd',
+     '#30a820',
+     '#3b60ff',
+     '#f5a31a',
+     '#1a8bf5',
+     '#b128ff',
+     '#fa7919',
+     '#f2277e',
+   ]; */
 
   formationData: Formation[] = [];
   /* formationData: Formation[] = [
@@ -201,7 +201,7 @@ export class CoursesComponent implements OnInit {
       color: 'blue-2',
     },
   ];
-  constructor(private formationService: FormationService) {}
+  constructor(private formationService: FormationService) { }
 
   ngOnInit(): void {
     this._fetchData();
@@ -213,6 +213,7 @@ export class CoursesComponent implements OnInit {
   _fetchData() {
     this.formationService.getAllPublicFormation().subscribe(
       (resp: Formation[]) => {
+        resp.map(e => e.photo = 'data:image/jpeg;base64,' + e.photo)
         this.formationData = resp; // Assign data
       },
       (error: HttpErrorResponse) => {

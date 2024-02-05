@@ -69,10 +69,12 @@ export class AssistantInfoComponent implements OnInit {
   //update assistant
   public Update(updateAssistantFrom: NgForm, id: number) {
     console.log(updateAssistantFrom.value);
+    Swal.showLoading();
     this.assistanService
       .updateAssistant(id, updateAssistantFrom.value)
       .subscribe(
         (respons: any) => {
+          Swal.close();
           Swal.fire({
             title: 'Updated!',
             text: respons.message,
@@ -80,6 +82,7 @@ export class AssistantInfoComponent implements OnInit {
           });
         },
         (error: HttpErrorResponse) => {
+          Swal.close();
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -129,8 +132,10 @@ export class AssistantInfoComponent implements OnInit {
   public AddAssistant(addAssistant: NgForm) {
     addAssistant.value['status'] = addAssistant.value['status'].toString();
     console.log(addAssistant.value);
+    Swal.showLoading();
     this.assistanService.addAssistant(addAssistant.value).subscribe(
       (respon: any) => {
+        Swal.close();
         Swal.fire({
           title: 'Added!',
           text: respon.message,
@@ -139,6 +144,7 @@ export class AssistantInfoComponent implements OnInit {
         this.router.navigate(['/dashboard/assistant/list']);
       },
       (error: any) => {
+        Swal.close();
         console.log(error)
         Swal.fire({
           icon: 'error',

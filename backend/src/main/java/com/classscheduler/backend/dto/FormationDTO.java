@@ -27,7 +27,7 @@ public class FormationDTO {
     private LocalDate end_registration;
 
     public FormationDTO(Long id, String title, String category, String city, int nb_hours, String objective,
-            String description,byte[] photo,LocalDate start_registration ,LocalDate end_registration, float cost, String slug) {
+                        String description, byte[] photo, LocalDate start_registration, LocalDate end_registration, float cost, String slug) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -36,15 +36,25 @@ public class FormationDTO {
         this.objective = objective;
         this.description = description;
         this.photo = photo;
-        this.start_registration=start_registration;
-        this.end_registration=end_registration;
+        this.start_registration = start_registration;
+        this.end_registration = end_registration;
         this.cost = cost;
         this.slug = slug;
     }
 
-    public FormationDTO fromFormation(Formation formation) {
-        FormationDTO formationDTO = new FormationDTO();
-        BeanUtils.copyProperties(formation, formationDTO);
-        return formationDTO;
+    public static FormationDTO fromFormatioToFromationDTO(Formation formation) {
+        FormationDTO formationDTOAdmin = new FormationDTO();
+        formationDTOAdmin.setId(formation.getId());
+        formationDTOAdmin.setTitle(formation.getTitle());
+        formationDTOAdmin.setCost(formation.getCost());
+        formationDTOAdmin.setCity(formation.getCity());
+        formationDTOAdmin.setCategory(formation.getCategory());
+        formationDTOAdmin.setDescription(formation.getDescription());
+        formationDTOAdmin.setNb_hours(formation.getNb_hours());
+        formationDTOAdmin.setSlug(formation.getSlug());
+        formationDTOAdmin.setStart_registration(formation.getStart_registration());
+        formationDTOAdmin.setEnd_registration(formation.getEnd_registration());
+        formationDTOAdmin.setPhoto(formation.getPhoto().getBytes());
+        return formationDTOAdmin;
     }
 }

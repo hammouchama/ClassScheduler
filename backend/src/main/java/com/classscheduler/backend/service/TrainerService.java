@@ -3,14 +3,8 @@ package com.classscheduler.backend.service;
 import com.classscheduler.backend.config.JwtFilter;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.TrainerDTO;
-import com.classscheduler.backend.model.Formation;
-import com.classscheduler.backend.model.ImagesModel;
-import com.classscheduler.backend.model.Trainer;
-import com.classscheduler.backend.model.User;
-import com.classscheduler.backend.repository.FormationRepository;
-import com.classscheduler.backend.repository.ImageModelRepository;
-import com.classscheduler.backend.repository.TrainerRepository;
-import com.classscheduler.backend.repository.UserRepository;
+import com.classscheduler.backend.model.*;
+import com.classscheduler.backend.repository.*;
 import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
@@ -35,26 +29,31 @@ public class TrainerService {
     EmailHelper emailHelper;
     ModelMapper modelMapper;
     UserRepository userRepository;
+    SchedulingRepository schedulingRepository;
 
     @Transactional
     public ResponseEntity<String> registerTrainer(Map<String, String> requestMap , MultipartFile image) {
         try{
            if (isValidInfo(requestMap)){
-               Trainer trainer =new Trainer();
+               Trainer trainerShech =trainerRepository.findTrainerByEmail(requestMap.get("email"));
+               if (Objects.isNull(trainerShech)) {
+                   Trainer trainer = new Trainer();
                    //###############photo###############
-                  if (image!=null){
-                      ImagesModel photo=new ImagesModel();
-                      photo.setName(image.getName());
-                      photo.setType(image.getContentType());
-                      photo.setBytes(image.getBytes());
-                      photo=imageModelRepository.save(photo);
-                      trainer.setPhoto(photo);
-                  }
+                   if (image != null) {
+                       ImagesModel photo = new ImagesModel();
+                       photo.setName(image.getName());
+                       photo.setType(image.getContentType());
+                       photo.setBytes(image.getBytes());
+                       photo = imageModelRepository.save(photo);
+                       trainer.setPhoto(photo);
+                   }
                    //##############################
-                   extractTrainerInfo(requestMap,trainer);
+                   extractTrainerInfo(requestMap, trainer);
 
                    trainerRepository.save(trainer);
-                   return Helpers.getResponseEntity("Register successfully",HttpStatus.OK);
+                   return Helpers.getResponseEntity("Register successfully", HttpStatus.OK);
+               }
+               return Helpers.getResponseEntity("Email are ready exist", HttpStatus.BAD_REQUEST);
                }
            return Helpers.getResponseEntity(ProjectConst.INVALID_DATA,HttpStatus.BAD_REQUEST);
         }catch (Exception e){
@@ -187,6 +186,23 @@ public class TrainerService {
                 return new ResponseEntity<>(trainerRepository.getAcceptedTrainers(),HttpStatus.OK);
             }
             return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<List<Scheduling>> getSchaduling() {
+        try {
+            if (jwtFilter.isTrainer()){
+              Trainer trainer =trainerRepository.findTrainerByEmail(jwtFilter.getCurrentUser());
+              if (trainer!=null){
+                  return new ResponseEntity<>(schedulingRepository.findAllByTrainer(trainer),HttpStatus.OK);
+              }
+              return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
+
         }catch (Exception e){
             e.printStackTrace();
         }

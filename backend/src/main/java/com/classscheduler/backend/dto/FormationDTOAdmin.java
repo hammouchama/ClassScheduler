@@ -45,5 +45,22 @@ public class FormationDTOAdmin {
 
 
     }
+    public static FormationDTOAdmin fromFormatioToFromationDTO(Formation formation){
+        FormationDTOAdmin formationDTOAdmin =new FormationDTOAdmin();
+        formationDTOAdmin.setId(formation.getId());
+        formationDTOAdmin.setTitle(formation.getTitle());
+        formationDTOAdmin.setCost(formation.getCost());
+        formationDTOAdmin.setCity(formation.getCity());
+        formationDTOAdmin.setCategory(formation.getCategory());
+        formationDTOAdmin.setCapacity(formation.getCapacity());
+        formationDTOAdmin.setDescription(formation.getDescription());
+        formationDTOAdmin.setNb_hours(formation.getNb_hours());
+        formationDTOAdmin.setSlug(formation.getSlug());
+        formationDTOAdmin.setStatus(formation.getStatus());
+        formationDTOAdmin.setStart_registration(formation.getStart_registration());
+        formationDTOAdmin.setEnd_registration(formation.getEnd_registration());
+        formationDTOAdmin.setPhoto(formation.getPhoto().getBytes());
+        return formationDTOAdmin;
+    }
 
 }

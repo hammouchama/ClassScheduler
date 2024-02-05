@@ -46,9 +46,4 @@ public class FormationDTOAdmin {
 
     }
 
-    public FormationDTOAdmin fromFormation(Formation formation) {
-        FormationDTOAdmin formationDTO = new FormationDTOAdmin();
-        BeanUtils.copyProperties(formation, formationDTO);
-        return formationDTO;
-    }
 }

@@ -1,5 +1,6 @@
 package com.classscheduler.backend.repository;
 
+import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.model.Individual;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,7 @@ public interface IndividualRepository extends JpaRepository<Individual,Long> {
     @Query("SELECT i FROM Individual i WHERE i.formation.id = :formationId and i.is_archived=false")
     List<Individual> findIndividualsByFormationId(@Param("formationId") Long formationId);
 
+    List<Individual> findAllByFormation(Formation formation);
 
 
 }

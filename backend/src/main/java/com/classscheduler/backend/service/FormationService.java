@@ -5,14 +5,8 @@ import com.classscheduler.backend.config.JwtUtil;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.FormationDTO;
 import com.classscheduler.backend.dto.FormationDTOAdmin;
-import com.classscheduler.backend.model.Formation;
-import com.classscheduler.backend.model.ImagesModel;
-import com.classscheduler.backend.model.Individual;
-import com.classscheduler.backend.model.User;
-import com.classscheduler.backend.repository.FormationRepository;
-import com.classscheduler.backend.repository.ImageModelRepository;
-import com.classscheduler.backend.repository.IndividualRepository;
-import com.classscheduler.backend.repository.UserRepository;
+import com.classscheduler.backend.model.*;
+import com.classscheduler.backend.repository.*;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -40,6 +34,7 @@ public class FormationService {
     ModelMapper modelMapper;
     ImageModelRepository imageModelRepository;
     UserRepository userRepository;
+    SchedulingRepository schedulingRepository;
 
     @Transactional
     public ResponseEntity<String> addFormation(Map<String, String> requestyMap, MultipartFile image) {
@@ -158,6 +153,16 @@ public class FormationService {
             if (jwtFilter.isAdmin()) {
                 Formation formation = formationRepository.findById(id).orElse(null);
                 if (!Objects.isNull(formation)) {
+                    List<Scheduling> schedulings=schedulingRepository.findAllByFormation(formation);
+                    for (Scheduling scheduling:schedulings) {
+                        scheduling.setFormation(null);
+                        schedulingRepository.save(scheduling);
+                    }
+                    List<Individual> individuals =individualRepository.findAllByFormation(formation);
+                    for (Individual individual:individuals) {
+                        individual.setFormation(null);
+                        individualRepository.save(individual);
+                    }
                     formationRepository.delete(formation);
                     return Helpers.getResponseEntity("Formation deleted successfully", HttpStatus.OK);
                 }

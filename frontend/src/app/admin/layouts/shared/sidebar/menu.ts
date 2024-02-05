@@ -103,37 +103,37 @@ export const MENU: MenuItem[] = [
 // for assistant 
 
 export const MENU_Assistant: MenuItem[] = [
-  {
-    id: 1,
-    label: 'Menu',
-    isTitle: true,
-  },
+  // {
+  //   id: 1,
+  //   label: 'Menu',
+  //   isTitle: true,
+  // },
+  // {
+  //   id: 2,
+  //   label: 'Dashboard',
+  //   icon: 'ri-dashboard-line',
+  //   badge: {
+  //     variant: 'success',
+  //     text: '03',
+  //   },
+  //   link: '/dashboard',
+  // },
   {
     id: 2,
-    label: 'Dashboard',
-    icon: 'ri-dashboard-line',
-    badge: {
-      variant: 'success',
-      text: '03',
-    },
-    link: '/dashboard',
-  },
-  {
-    id: 3,
     label: 'Company',
     icon: 'ri-user-settings-line',
     subItems: [
       {
-        id: 4,
+        id: 3,
         label: 'List of Company',
         link: '/dashboard/company/list',
-        parentId: 3,
+        parentId: 2,
       },
       {
-        id: 5,
+        id: 4,
         label: 'Add new Company',
         link: '/dashboard/company/new',
-        parentId: 3,
+        parentId: 2,
       },
     ],
   },
@@ -143,7 +143,7 @@ export const MENU_Assistant: MenuItem[] = [
     isTitle: true,
   },
   {
-    id: 7,
+    id: 1,
     label: 'Calendar',
     icon: 'ri-calendar-2-line',
     link: '/dashboard/calendar',

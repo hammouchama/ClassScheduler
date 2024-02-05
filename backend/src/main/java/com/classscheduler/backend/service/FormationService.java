@@ -252,7 +252,7 @@ public class FormationService {
 
                 if (!Objects.isNull(formation)) {
                     List<Individual> relatedIndividuals = individualRepository.findIndividualsByFormationId(formationId);
-                    String remarksToken = jwtUtil.generateRemarksToken("email@gmaom.com", trainerId, formationId);
+                    String remarksToken = jwtUtil.generateRemarksToken("email@gmaom.com", formationId, trainerId);
 
                     /*for (Individual individual : relatedIndividuals) {
                         String remarksToken = jwtUtil.generateRemarksToken(individual.getEmail(), individual.getId(), formation.getId());

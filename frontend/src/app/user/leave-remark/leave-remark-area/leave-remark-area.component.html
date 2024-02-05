@@ -25,7 +25,10 @@
     <div class="row">
       <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
         <div class="teacher__details-thumb p-relative w-img pr-30">
-          <img src="assets/img/teacher/details/teacer-details-1.jpg" alt="" />
+          <img *ngIf="trainer.photo" src="{{trainer.photo}}" alt="{{trainer.lastName}}" />
+          <img *ngIf="!trainer.photo" src="assets/img/teacher/unknown.jpg" alt="{{trainer.lastName}}" />
+
+
           <div class="teacher__details-shape">
             <img
               class="teacher-details-shape-1"
@@ -46,10 +49,10 @@
             class="teacher__top d-md-flex align-items-end justify-content-between"
           >
             <div class="teacher__info">
-              <h4>Hilary Ouse</h4>
-              <span>Teaches Interior Markater</span>
+              <h4>{{trainer.firstName}} {{trainer.lastName.toLocaleUpperCase()}}</h4>
+              <!-- <span>Teaches Interior Markater</span> -->
             </div>
-            <div class="teacher__rating">
+            <!-- <div class="teacher__rating">
               <h5>Review:</h5>
               <div class="teacher__rating-inner d-flex align-items-center">
                 <ul>
@@ -71,29 +74,24 @@
                 </ul>
                 <p>4.5</p>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="teacher__bio">
             <h3>Short Bio</h3>
             <p>
-              Only a quid me old mucker squiffy tomfoolery grub cheers ruddy cor
-              blimey guvnor in my flat, up the duff Eaton car boot up the kyver
-              pardon you A bit of how's your father David skive off sloshed,
-              don't get shirty with me chip shop vagabond crikey bugger Queen's
-              English chap. Matie boy nancy boy bite your arm off up the kyver
-              old no biggie fantastic boot, David have it show off show off pick
-              your nose and blow off lost the plot porkies bits and bobs only a
-              quid bugger all mate, absolutely bladdered bamboozled it's your
-              round don't get shirty with me down the pub well.
+              {{trainer.description}}
             </p>
+          </div>
+          <div class="teacher__bio">
+            <h3>My skills</h3>
+            <div *ngFor="let skill of trainer.skills" class="skill-tag">{{ skill }}</div>
           </div>
           <div class="teacher__courses pt-55">
             <div class="section__title-wrapper mb-30">
               <h2 class="section__title">
                 Teacher
                 <span class="yellow-bg yellow-bg-big"
-                  >Course<img src="assets/img/shape/yellow-bg.png" alt=""
-                /></span>
+                  >Course<img src="assets/img/shape/yellow-bg.png" alt=""/></span>
               </h2>
             </div>
             <div class="teacher__course-wrapper">

@@ -72,11 +72,11 @@ export class LeaveRemarkAreaComponent implements OnInit {
         // Handle success
         console.log('Remarks token validation data:', result);
         if (result.valid) {
-          this.router.navigate(['/401']);
-          console.log(result.error);
-        } else {
           this.formation = result.formation;
           this.trainer = result.trainer;
+        } else {
+          this.router.navigate(['/401']);
+          console.log(result.error);
         }
       },
       (error: any) => {

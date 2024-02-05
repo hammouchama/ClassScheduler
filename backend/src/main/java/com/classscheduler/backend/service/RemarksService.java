@@ -127,8 +127,12 @@ public class RemarksService {
             Long formationId = Long.parseLong(remarksInfo.get("formation_id").toString());
             Long trainerId = Long.parseLong(remarksInfo.get("trainer_id").toString());
             if(formationId == null || trainerId == null){
+                if(formationId == null){
+                    validationResult.setError("Remarks token is invalid, Formation id is invalid");
+                } else {
+                    validationResult.setError("Remarks token is invalid, Trainer id is invalid");
+                }
                 validationResult.setValid(false);
-                validationResult.setError("Remarks token is invalid");
                 return new ResponseEntity<>(validationResult, HttpStatus.BAD_REQUEST);
             }
 
@@ -136,8 +140,12 @@ public class RemarksService {
             Trainer trainer = trainerRepository.findById(trainerId).orElse(null);
 
             if(formation == null || trainer == null){
+                if(formation == null){
+                    validationResult.setError("Formation with the given id does not exist");
+                } else {
+                    validationResult.setError("Trainer with the given id does not exist");
+                }
                 validationResult.setValid(false);
-                validationResult.setError("Remarks token is invalid");
                 return new ResponseEntity<>(validationResult, HttpStatus.BAD_REQUEST);
             }
             validationResult.setFormation(formation);

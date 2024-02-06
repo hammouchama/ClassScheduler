@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/envi';
 import { Trainer } from '../model/trainer.model';
+import { an } from '@fullcalendar/core/internal-common';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class TrainerService {
   public deleteTrainer(id: number) {
     return this.httpClient.delete(environment.apiEndpoint + `/trainer/delete/${id}`)
   }
-  public getTrainer(id: number) {
+  public getTrainer(id:any) {
     return this.httpClient.get<Trainer>(environment.apiEndpoint + `/trainer/get/${id}`)
   }
 

@@ -35,6 +35,14 @@ public class SchedulingController {
             e.printStackTrace();
         }
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }@GetMapping("/get/trainer/{id}")
+    public ResponseEntity<List<Scheduling>> getAllByTrainerId(@PathVariable long id){
+        try {
+            return schedulingService.getAllByTrainerId(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /// delete Scheduling

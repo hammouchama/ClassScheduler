@@ -1,0 +1,379 @@
+<section class="teacher__area pt-100 pb-110">
+  <div class="page__title-shape">
+    <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="" />
+    <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="" />
+    <img class="page-title-shape-3" src="assets/img/page-title/page-title-shape-3.png" alt="" />
+    <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="" />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+        <div class="teacher__details-thumb p-relative w-img pr-30">
+          <img [src]="'data:image/jpeg;base64,'+trainer.photo" alt="" />
+          <div class="teacher__details-shape">
+            <img class="teacher-details-shape-1" src="assets/img/teacher/details/shape/shape-1.png" alt="" />
+            <img class="teacher-details-shape-2" src="assets/img/teacher/details/shape/shape-2.png" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="col-xxl-8 col-xl-8 col-lg-8">
+        <div class="teacher__wrapper">
+          <div class="teacher__top d-md-flex align-items-end justify-content-between">
+            <div class="teacher__info">
+              <h4>
+                {{ trainer.firstName }}
+                {{ trainer.lastName.toLocaleUpperCase() }}
+              </h4>
+            </div>
+            <!-- <div class="teacher__rating">
+              <h5>Review:</h5>
+              <div class="teacher__rating-inner d-flex align-items-center">
+                <ul>
+                  <li><a href="#"> <i class="icon_star"></i> </a></li>
+                  <li><a href="#"> <i class="icon_star"></i> </a></li>
+                  <li><a href="#"> <i class="icon_star"></i> </a></li>
+                  <li><a href="#"> <i class="icon_star"></i> </a></li>
+                  <li><a href="#"> <i class="icon_star"></i> </a></li>
+                </ul>
+                <p>4.5</p>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="teacher__courses pt-55">
+            <div class="teacher__course-wrapper">
+              <div class="row">
+                <div class="course__tab mb-45">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <button type="button" class="nav-link" [class.active]="choosedOption === 'Description'"
+                        (click)="chooseOption('Description')">
+                        <i class="icon_ribbon_alt"></i><span>Description</span>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="nav-link" [class.active]="choosedOption === 'Reviews'"
+                        (click)="chooseOption('Reviews')">
+                        <i class="icon_star_alt"></i><span>Reviews</span>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button type="button" class="nav-link" [class.active]="choosedOption === 'Sessions'"
+                        (click)="chooseOption('Sessions')">
+                        <i class="fal fa-user"></i><span>Sessions</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- <div class="section__title-wrapper mb-30">
+                  <h2 class="section__title">Teacher <span class="yellow-bg yellow-bg-big">Course<img
+                        src="assets/img/shape/yellow-bg.png" alt=""></span></h2>
+                </div> -->
+
+                <div class="course__review" *ngIf="choosedOption === 'Description'">
+                  <!-- Loading -->
+                  <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="teacher__info">
+                    <h3>Short Bio</h3>
+                    <p>
+                      {{ trainer.description }}
+                    </p>
+                  </div>
+                  <div class="teacher__info">
+                    <h3>Skills</h3>
+                    <div>
+                      <div *ngFor="let skill of trainer.skills.split(',')" class="badge bg-info ms-1">
+                        {{ skill }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="course__review" *ngIf="choosedOption === 'Reviews'">
+                  <div class="course__review-rating mb-50">
+                    <div class="row g-0">
+                        <div class="course__review-rating-info grey-bg text-center row">
+                          <h5 class="col">3.5</h5>
+                          <ul class="col">
+                            <li>
+                              <a href="#"> <i class="icon_star"></i> </a>
+                            </li>
+                            <li>
+                              <a href="#"> <i class="icon_star"></i> </a>
+                            </li>
+                            <li>
+                              <a href="#"> <i class="icon_star"></i> </a>
+                            </li>
+                            <li>
+                              <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                            </li>
+                            <li>
+                              <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                            </li>
+                          </ul>
+                        </div>
+
+                    </div>
+                  </div>
+                  <div class="course__comment mb-75">
+                    <h3 *ngIf="remarksList.length===1">One Comment</h3>
+                    <h3 *ngIf="remarksList.length!==1">{{remarksList.length}} Comments</h3>
+
+                    <div class="row gx-0 pr-50 pl-50 pt-25 pb-25 course__comment-box"
+                      *ngFor="let remarks of remarksList">
+                      <div class="col-xxl-8 col-xl-8 col-lg-8 course__comment-info">
+                        <div class="row remarks_item">
+                          <h4 for="note_quality">Note Quality:</h4>
+
+                          <div class="course__comment-rating float-start float-sm-end">
+                            <ul>
+                              <!-- Filled stars -->
+                              <ng-container *ngFor="let i of toArray(remarks.note_quality)">
+                                <li>
+                                  <a href="#"> <i class="icon_star"></i> </a>
+                                </li>
+                              </ng-container>
+
+                              <!-- Unfilled stars -->
+                              <ng-container *ngIf="remarks.note_quality < 5">
+                                <ng-container *ngFor="let i of toArray(5 - remarks.note_quality)">
+                                  <li>
+                                    <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                                  </li>
+                                </ng-container>
+                              </ng-container>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row remarks_item">
+                          <h4 for="note_quality">Note Rythme:</h4>
+                          <div class="course__comment-rating float-start float-sm-end">
+                            <ul>
+                              <!-- Filled stars -->
+                              <ng-container *ngFor="let i of toArray(remarks.note_rythme)">
+                                <li>
+                                  <a href="#"> <i class="icon_star"></i> </a>
+                                </li>
+                              </ng-container>
+
+                              <!-- Unfilled stars -->
+                              <ng-container *ngIf="remarks.note_rythme < 5">
+                                <ng-container *ngFor="let i of toArray(5 - remarks.note_rythme)">
+                                  <li>
+                                    <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                                  </li>
+                                </ng-container>
+                              </ng-container>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row remarks_item">
+                          <h4 for="note_quality">Note Support Cours:</h4>
+                          <div class="course__comment-rating float-start float-sm-end">
+                            <ul>
+                              <!-- Filled stars -->
+                              <ng-container *ngFor="let i of toArray(remarks.note_support_cours)">
+                                <li>
+                                  <a href="#"> <i class="icon_star"></i> </a>
+                                </li>
+                              </ng-container>
+
+                              <!-- Unfilled stars -->
+                              <ng-container *ngIf="remarks.note_support_cours < 5">
+                                <ng-container *ngFor="let i of toArray(5 - remarks.note_support_cours)">
+                                  <li>
+                                    <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                                  </li>
+                                </ng-container>
+                              </ng-container>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row remarks_item">
+                          <h4 for="note_quality">Note Support TP:</h4>
+                          <div class="course__comment-rating float-start float-sm-end">
+                            <ul>
+                              <!-- Filled stars -->
+                              <ng-container *ngFor="let i of toArray(remarks.note_support_tp)">
+                                <li>
+                                  <a href="#"> <i class="icon_star"></i> </a>
+                                </li>
+                              </ng-container>
+
+                              <!-- Unfilled stars -->
+                              <ng-container *ngIf="remarks.note_support_tp < 5">
+                                <ng-container *ngFor="let i of toArray(5 - remarks.note_support_tp)">
+                                  <li>
+                                    <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                                  </li>
+                                </ng-container>
+                              </ng-container>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row remarks_item">
+                          <h4 for="note_quality">Note Maitrise:</h4>
+                          <div class="course__comment-rating float-start float-sm-end">
+                            <ul>
+                              <!-- Filled stars -->
+                              <ng-container *ngFor="let i of toArray(remarks.note_maitrise)">
+                                <li>
+                                  <a href="#"> <i class="icon_star"></i> </a>
+                                </li>
+                              </ng-container>
+
+                              <!-- Unfilled stars -->
+                              <ng-container *ngIf="remarks.note_maitrise < 5">
+                                <ng-container *ngFor="let i of toArray(5 - remarks.note_maitrise)">
+                                  <li>
+                                    <a href="#" class="no-rating"> <i class="icon_star"></i> </a>
+                                  </li>
+                                </ng-container>
+                              </ng-container>
+                            </ul>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-xxl-4 col-xl-4 col-lg-4">
+                        <div class="course__thumb course__thumb-list w-img p-relative fix">
+                          <a class="formation_thumb" [routerLink]="[
+                                '/formation/' + remarks.formation.slug
+                              ]">
+                            <div *ngIf="remarks.formation?.photo" class="thumbnail">
+                              <img [src]="
+                                    'data:image/jpeg;base64,' +
+                                    remarks.formation.photo
+                                  " [alt]="remarks.formation.title" class="img-thumbnail" />
+                            </div>
+                            <div *ngIf="!remarks.formation.photo" class="thumbnail">
+                              <img [src]="
+                                    'assets/img/course/thumbnail/' +
+                                    remarks.formation.category +
+                                    '.jpg'
+                                  " [alt]="remarks.formation.title" class="img-thumbnail" />
+                            </div>
+                            <div class="formation_title">
+                              <h6>{{ remarks.formation.title }}</h6>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="course__review" *ngIf="choosedOption === 'Sessions'">
+                  <!-- Loading -->
+                  <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                  <div *ngFor="let session of schedulingList">
+                    <div class="course__item white-bg mb-30 fix" *ngIf="!loading">
+                      <div class="row gx-0 pr-50 pl-50 pt-25 pb-25">
+                        <div class="col-xxl-8 col-xl-8 col-lg-8">
+                          <div class="course__right">
+                            <div class="course__content course__content-4">
+                              <h3 class="course__title">
+                                {{ session.formation?.title }}
+                              </h3>
+                              <div class="course__meta d-flex align-items-center">
+                                <div class="course__nb_hours mr-20">
+                                  <span class="d-flex">
+                                    <i class="ri-calendar-event-line"></i>
+                                    <b>Date: </b>&nbsp;
+                                    {{
+                                    convertDate(session.start_date_time)
+                                    }}
+                                  </span>
+                                  <span class="d-flex">
+                                    <i class="ri-time-line"></i>
+                                    <b>Start Time:</b>&nbsp;{{
+                                    convertTime(session.start_date_time)
+                                    }}</span>
+                                  <span class="d-flex">
+                                    <i class="ri-map-pin-time-line"></i>
+                                    <b>End Time: </b>&nbsp;{{
+                                    convertTime(session.end_date_time)
+                                    }}
+                                  </span>
+                                  <span class="d-flex">
+                                    <i class="ri-map-pin-line"></i>
+                                    <b>City: </b>&nbsp;{{
+                                    session.formation.city
+                                    }}
+                                  </span>
+                                  <span class="d-flex align-items-center" *ngIf="session.for_company">
+                                    <i class="ri-focus-3-line"></i>
+                                    <b>Target: </b>&nbsp;<span class="badge bg-primary">{{session.company}}</span>
+                                  </span>
+                                  <span class="d-flex" *ngIf="!session.for_company">
+                                    <i class="ri-focus-3-line"></i>
+                                    <b>Target: </b>&nbsp;<span
+                                      class="badge bg-warning-subtle text-warning ms-1">Individuals</span>
+                                  </span>
+
+                                  <button
+                                    *ngIf="!session.for_company && isFormationEnded(session) && !session.feedback_sent"
+                                    class="btn btn-outline-primary sendFeedback"
+                                    (click)="sendIndividualsForFeedback(session)">
+                                    Send for feedback
+                                  </button>
+                                  <div
+                                    *ngIf="!session.for_company && isFormationEnded(session) && session.feedback_sent"
+                                    class="btn btn-outline-success sendFeedback disabled" disabled>
+                                    Already sent for feedback
+                                  </div>
+                                  <div *ngIf="!session.for_company && !isFormationEnded(session)"
+                                    class="btn btn-outline-danger sendFeedback disabled" disabled>
+                                    Formation not ended
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xxl-4 col-xl-4 col-lg-4">
+                          <div class="course__thumb course__thumb-list w-img p-relative fix">
+                            <a class="formation_thumb" [routerLink]="[
+                                '/formation/' + session.formation?.slug
+                              ]">
+                              <div *ngIf="session.formation?.photo?.bytes" class="thumbnail">
+                                <img [src]="
+                                    'data:image/jpeg;base64,' +
+                                    session.formation?.photo.bytes
+                                  " [alt]="session.formation?.title" class="img-thumbnail" />
+                              </div>
+                              <div *ngIf="!session.formation?.photo.bytes" class="thumbnail">
+                                <img [src]="
+                                    'assets/img/course/thumbnail/' +
+                                    session.formation?.category +
+                                    '.jpg'
+                                  " [alt]="session.formation?.title" class="img-thumbnail" />
+                              </div>
+                              <div class="formation_title">
+                                <h6>{{ session.formation?.title }}</h6>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

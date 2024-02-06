@@ -192,7 +192,7 @@ public class TrainerService {
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public ResponseEntity<List<Scheduling>> getSchaduling() {
+    public ResponseEntity<List<Scheduling>> getScheduling() {
         try {
             if (jwtFilter.isTrainer()){
               Trainer trainer =trainerRepository.findTrainerByEmail(jwtFilter.getCurrentUser());

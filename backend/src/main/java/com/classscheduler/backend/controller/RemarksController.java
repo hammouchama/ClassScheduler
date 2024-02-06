@@ -28,6 +28,13 @@ public class RemarksController {
         return new ResponseEntity<>(remarksList, HttpStatus.OK);
     }
 
+
+    @GetMapping("/remarks/trainer/{id}")
+    public ResponseEntity<List<Remarks>> getAllRemarksByTrainer(@PathVariable Long id) {
+        List<Remarks> remarksList = remarksService.getAllRemarksByTrainerId(id);
+        return new ResponseEntity<>(remarksList, HttpStatus.OK);
+    }
+
     @GetMapping("/remarks/{id}")
     public ResponseEntity<Remarks> getRemarksById(@PathVariable Long id) {
         Remarks remarks = remarksService.getRemarksById(id);

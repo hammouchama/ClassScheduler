@@ -96,6 +96,19 @@ public class SchedulingService {
         return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // get by trainerId
+    public ResponseEntity<List<Scheduling>> getAllByTrainerId(long id) {
+        try {
+            if (jwtFilter.isAdmin() || jwtFilter.isAssistant()){
+                return new ResponseEntity<>(schedulingRepository.findAllByTrainerId(id),HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     public ResponseEntity<String> deleteScheduling(long id) {
         try {
             if (jwtFilter.isAssistant()|| jwtFilter.isAdmin()){

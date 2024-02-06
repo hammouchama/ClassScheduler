@@ -47,8 +47,8 @@ import { EnrollIndividualMainComponent } from './enroll-individual/enroll-indivi
 import { EnrollIndividualAreaComponent } from './enroll-individual/enroll-individual-area/enroll-individual-area.component';
 import { ContactAreaComponent } from './contact/contact-area/contact-area.component';
 import { ContactMainComponent } from './contact/contact-main/contact-main.component';
-import { TrainerDetailsComponent } from './trainer-details/trainer-details-main/trainer-details.component';
-import { TrainerDetailsAreaComponent } from './trainer-details/trainer-details-area/trainer-details-area.component';
+import { TrainerDetailsComponent } from './profile/trainer-details-main/trainer-details.component';
+import { TrainerDetailsAreaComponent } from './profile/trainer-details-area/trainer-details-area.component';
 import { LeaveRemarkComponent } from './leave-remark/leave-remark-main/leave-remark.component';
 import { LeaveRemarkAreaComponent } from './leave-remark/leave-remark-area/leave-remark-area.component';
 import { StarRatingComponent } from './common/star-rating/star-rating.component';

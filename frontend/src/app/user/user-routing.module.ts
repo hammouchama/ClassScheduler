@@ -8,7 +8,7 @@ import { FormationListMainComponent } from './formation-list/formation-list-main
 import { FormationDetailsComponent } from './formation-details/formation-details-main/formation-details.component';
 import { EnrollIndividualMainComponent } from './enroll-individual/enroll-individual-main/enroll-individual-main.component';
 import { ContactMainComponent } from './contact/contact-main/contact-main.component';
-import { TrainerDetailsComponent } from './trainer-details/trainer-details-main/trainer-details.component';
+import { TrainerDetailsComponent } from './profile/trainer-details-main/trainer-details.component';
 import { LeaveRemarkComponent } from './leave-remark/leave-remark-main/leave-remark.component';
 /* import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';

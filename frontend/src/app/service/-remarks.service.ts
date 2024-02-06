@@ -11,15 +11,21 @@ import { Remarks } from '../model/remarks.model';
 export class RemarksService {
   constructor(private http: HttpClient) {}
 
-  getAllRemarks(){
+  getAllRemarks() {
     return this.http.get<Remarks[]>(`${environment.apiEndpoint}/remarks/all`);
   }
 
-  getRemarksById(id: number){
+  getAllRemarksByTrainer(id: any) {
+    return this.http.get<any[]>(
+      `${environment.apiEndpoint}/remarks/trainer/${id}`
+    );
+  }
+
+  getRemarksById(id: number) {
     return this.http.get<Remarks>(`${environment.apiEndpoint}/remarks/${id}`);
   }
 
-  addRemarks(data: any){
+  addRemarks(data: any) {
     return this.http.post(`${environment.apiEndpoint}/remarks/add`, data);
   }
 
@@ -30,11 +36,11 @@ export class RemarksService {
     );
   } */
 
-  deleteRemarks(id: number){
+  deleteRemarks(id: number) {
     return this.http.delete(`${environment.apiEndpoint}/remarks/delete/${id}`);
   }
 
-  submitRemarks(data: any){
+  submitRemarks(data: any) {
     return this.http.put(
       `${environment.apiEndpoint}/public/remarks/submit`,
       data

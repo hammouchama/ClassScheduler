@@ -3,7 +3,6 @@ package com.classscheduler.backend.controller;
 import com.classscheduler.backend.constants.ProjectConst;
 import com.classscheduler.backend.dto.TrainerDTO;
 import com.classscheduler.backend.model.Scheduling;
-import com.classscheduler.backend.model.Trainer;
 import com.classscheduler.backend.service.TrainerService;
 import com.classscheduler.backend.utils.Helpers;
 import lombok.AllArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +48,8 @@ public class TrainerController {
     //get trainer by id
     @GetMapping("/trainer/get/{id}")
     public ResponseEntity<TrainerDTO> getTrainer(@PathVariable long id){
+        System.out.println("id :");
+        System.out.println(id);
         try {
             return trainerService.getTrainerById(id);
         }catch (Exception e){
@@ -101,10 +101,10 @@ public class TrainerController {
     }
 
     //gets sh
-    @GetMapping("/trainer/schaduling")
+    @GetMapping("/trainer/scheduling")
     public ResponseEntity<List<Scheduling>> getTrainerFormation(){
         try {
-            return trainerService.getSchaduling();
+            return trainerService.getScheduling();
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -12,4 +12,5 @@ public interface SchedulingRepository  extends JpaRepository<Scheduling,Long> {
 
 
     List<Scheduling> findAllByTrainer(Trainer trainer);
+    List<Scheduling> findAllByTrainerId(Long id);
 }

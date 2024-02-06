@@ -53,7 +53,9 @@ public class UserService {
                         return new ResponseEntity<>("{\"token\":\"" +
                                 jwtUtil.genreateToken(customerUserDetailsService.getUserDetail().getEmail(),
                                         customerUserDetailsService.getUserDetail().getRole())
-                                + "\",\"role\":\"" + customerUserDetailsService.getUserDetail().getRole() + "\"}",
+                                + "\",\"role\":\"" + customerUserDetailsService.getUserDetail().getRole()
+                                + "\",\"id\":\"" + customerUserDetailsService.getUserDetail().getId()
+                                + "\",\"city\":\"" + customerUserDetailsService.getUserDetail().getAddress() + "\"}",
                                 HttpStatus.OK);
                     } else {
                         return new ResponseEntity<>("{\"message\":\"" + "This account is banned. " + "\"}",

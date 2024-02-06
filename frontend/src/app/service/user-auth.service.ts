@@ -24,6 +24,7 @@ export class UserAuthService {
     localStorage.setItem("userId", userId)
   }
   public getUserId(): string {
+    console.log(localStorage);
     return "" + localStorage.getItem("userId")
   }
   //get and set the user city

@@ -39,6 +39,11 @@ public class RemarksService {
         return remarksRepository.findAll();
     }
 
+    // get all remarks by trainer id
+    @Transactional
+    public List<Remarks> getAllRemarksByTrainerId(Long id) {
+        return remarksRepository.findAllByTrainerId(id);
+    }
     @Transactional
     public Remarks getRemarksById(Long id) {
         Optional<Remarks> optionalRemarks = remarksRepository.findById(id);

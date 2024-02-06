@@ -25,7 +25,7 @@ export class SignInAreaComponent implements OnInit {
     //! console.log(loginForm.value)
     this.userService.login(loginForm.value).subscribe(
       (response: any) => {
-        //console.log(response)
+        console.log(response)
         //? save the token and roles in localStorage
         this.userAuthService.setToken(response.token);
         const role = response.role;

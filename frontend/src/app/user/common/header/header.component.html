@@ -70,7 +70,7 @@
                       </li>
                     </ul>
                   </li>
-                  <li *ngIf="username!=='Trainer'">
+                  <li *ngIf="username!=='Trainer' && username!=='Admin'">
                     <a
                       [routerLink]="['/apply-trainer']"
                       routerLinkActive="active"

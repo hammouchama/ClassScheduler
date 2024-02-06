@@ -38,7 +38,7 @@ export const MENU: MenuItem[] = [
   {
     id: 6,
     label: 'Formations',
-    icon: 'ri-user-settings-line',
+    icon: 'ri-stack-line',
     subItems: [
       {
         id: 7,
@@ -57,7 +57,7 @@ export const MENU: MenuItem[] = [
   {
     id: 9,
     label: 'Company',
-    icon: 'ri-user-settings-line',
+    icon: ' ri-building-2-line',
     subItems: [
       {
         id: 10,
@@ -76,7 +76,7 @@ export const MENU: MenuItem[] = [
   {
     id: 10,
     label: 'Trainer',
-    icon: 'ri-user-settings-line',
+    icon: 'dripicons-user-group',
     subItems: [
       {
         id: 11,
@@ -100,7 +100,7 @@ export const MENU: MenuItem[] = [
 ];
 
 
-// for assistant 
+// for assistant
 
 export const MENU_Assistant: MenuItem[] = [
   // {

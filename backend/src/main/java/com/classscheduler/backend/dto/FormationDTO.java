@@ -49,6 +49,7 @@ public class FormationDTO {
         formationDTOAdmin.setCost(formation.getCost());
         formationDTOAdmin.setCity(formation.getCity());
         formationDTOAdmin.setCategory(formation.getCategory());
+        formationDTOAdmin.setObjective(formation.getObjective());
         formationDTOAdmin.setDescription(formation.getDescription());
         formationDTOAdmin.setNb_hours(formation.getNb_hours());
         formationDTOAdmin.setSlug(formation.getSlug());

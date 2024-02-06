@@ -216,19 +216,21 @@ const transactions = [
 ];
 
 const statData = [
-    {
-        icon: 'ri-stack-line',
-        title: 'Number of Formations',
-        value: '102'
-    }, {
-        icon: 'ri-store-2-line',
-        title: 'Number of Trainers',
-        value: '452'
-    }, {
-        icon: 'ri-briefcase-4-line',
-        title: 'Nubmer of Students',
-        value: '305'
-    }
+  {
+    icon: 'ri-stack-line',
+    title: 'Number of Formations',
+    value: '102',
+  },
+  {
+    icon: 'dripicons-user-group',
+    title: 'Number of Trainers',
+    value: '452',
+  },
+  {
+    icon: 'dripicons-graduation',
+    title: 'Nubmer of Students',
+    value: '305',
+  },
 ];
 
 export { revenueChart, salesAnalytics, sparklineEarning, sparklineMonthly, chatData, transactions, statData };

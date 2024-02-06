@@ -262,7 +262,7 @@ public class FormationService {
                 if (!Objects.isNull(formation)) {
                     List<Individual> relatedIndividuals = individualRepository.findIndividualsByFormationId(formationId);
                     // get trainer by id
-                    Trainer trainer = trainerRepository.findById(trainerId).get();
+                    User trainer = userRepository.findById(trainerId).get();
 
                     String remarksToken = jwtUtil.generateRemarksToken("email@gmaom.com", formationId, trainerId);
 

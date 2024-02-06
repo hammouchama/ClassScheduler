@@ -128,7 +128,7 @@ toArray(arg0: any): any {
   isFormationEnded(session: any) {
     let date = new Date(session.end_date_time);
     let now = new Date();
-    return now < date;
+    return now > date;
   }
 
 }

@@ -7,6 +7,7 @@ import com.classscheduler.backend.dto.FormationDTO;
 import com.classscheduler.backend.dto.FormationDTOAdmin;
 import com.classscheduler.backend.model.*;
 import com.classscheduler.backend.repository.*;
+import com.classscheduler.backend.utils.EmailHelper;
 import com.classscheduler.backend.utils.Helpers;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ import java.util.Objects;
 public class FormationService {
     FormationRepository formationRepository;
     IndividualRepository individualRepository;
+    TrainerRepository trainerRepository;
     RemarksService remarksService;
     JwtFilter jwtFilter;
     JwtUtil jwtUtil;
@@ -35,7 +37,7 @@ public class FormationService {
     ImageModelRepository imageModelRepository;
     UserRepository userRepository;
     SchedulingRepository schedulingRepository;
-
+    EmailHelper emailHelper;
     @Transactional
     public ResponseEntity<String> addFormation(Map<String, String> requestyMap, MultipartFile image) {
         try {
@@ -254,25 +256,32 @@ public class FormationService {
     @Transactional
     public ResponseEntity<String> endFormationAndGenerateTokens(long formationId, long trainerId) {
         try {
+            if (jwtFilter.isTrainer()) {
                 Formation formation = formationRepository.findById(formationId).orElse(null);
 
                 if (!Objects.isNull(formation)) {
                     List<Individual> relatedIndividuals = individualRepository.findIndividualsByFormationId(formationId);
+                    // get trainer by id
+                    Trainer trainer = trainerRepository.findById(trainerId).get();
+
                     String remarksToken = jwtUtil.generateRemarksToken("email@gmaom.com", formationId, trainerId);
 
-                    /*for (Individual individual : relatedIndividuals) {
-                        String remarksToken = jwtUtil.generateRemarksToken(individual.getEmail(), individual.getId(), formation.getId());
+                    for (Individual individual : relatedIndividuals) {
+
+                        emailHelper.sendFeedBack(individual.getEmail(), "http://localhost:4200/leave-remark/" + remarksToken, individual.getName(), trainer.getFirstName() + " " + trainer.getLastName().toUpperCase(), formation.getTitle());
                         // Send the remarksToken to the individual's email
-                        System.out.println("Remarks token for " + remarksToken);
-                    }*/
+                    }
+                    System.out.println("Remarks token for " + remarksToken);
 
                     // Additional logic for ending the formation...
                     // For example, set the formation status to "ENDED"
 
-                    return Helpers.getResponseEntity("Formation ended successfully and tokens generated : "+remarksToken, HttpStatus.OK);
+                    return Helpers.getResponseEntity("Formation ended successfully and tokens generated : " + remarksToken, HttpStatus.OK);
                 }
 
                 return Helpers.getResponseEntity(ProjectConst.INVALID_DATA, HttpStatus.BAD_REQUEST);
+            }
+            return Helpers.getResponseEntity(ProjectConst.UNAUTHORIZED8ACCESS, HttpStatus.UNAUTHORIZED);
 
         } catch (Exception e) {
             e.printStackTrace();

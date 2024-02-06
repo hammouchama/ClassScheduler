@@ -103,6 +103,7 @@ toArray(arg0: any): any {
       .subscribe((data) => {
         //handle the response about sending the feedback to individuals
         if(data){
+          console.log(data);
           // add attribute to the session to know if the feedback is sent to individuals
           session.feedback_sent = true;
           Swal.fire({

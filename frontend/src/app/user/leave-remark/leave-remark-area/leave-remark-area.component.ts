@@ -68,6 +68,8 @@ export class LeaveRemarkAreaComponent implements OnInit {
         // Handle success
         console.log('Remarks token validation data:', result);
         if (result.valid) {
+          result.formation.photo ='data:image/jpeg;base64,'+ result.formation.photo
+          result.trainer.photo ='data:image/jpeg;base64,'+ result.trainer.photo;
           this.formation = result.formation;
           this.trainer = result.trainer;
         } else {

@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
         <div class="teacher__details-thumb p-relative w-img pr-30">
-          <img *ngIf="trainer.photo" src="{{trainer.photo}}" alt="{{trainer.lastName}}" />
+          <img *ngIf="trainer.photo" [src]="trainer.photo" alt="{{trainer.lastName}}" />
           <img *ngIf="!trainer.photo" src="assets/img/teacher/unknown.jpg" alt="{{trainer.lastName}}" />
 
 

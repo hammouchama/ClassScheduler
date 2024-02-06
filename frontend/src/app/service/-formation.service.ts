@@ -56,9 +56,9 @@ export class FormationService {
   }
 
   public endFormationAndGenerateTokens(formationId: any, trainerId: any) {
-    return this.httpClient.get<Formation>(
+    return this.httpClient.get(
       environment.apiEndpoint +
-        `/public/formation/endFormationAndGenerateTokens/${formationId}/${trainerId}`
+        `/formation/endFormationAndGenerateTokens/${formationId}/${trainerId}`
     );
   }
   public getAllByCityFormation() {

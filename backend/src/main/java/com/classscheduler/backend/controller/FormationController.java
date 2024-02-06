@@ -109,7 +109,7 @@ public class FormationController {
         }
         return new ResponseEntity<>(null ,HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @GetMapping("/public/formation/endFormationAndGenerateTokens/{formationId}/{trainerId}")
+    @GetMapping("/formation/endFormationAndGenerateTokens/{formationId}/{trainerId}")
     public ResponseEntity<String> endFormationAndGenerateTokens(@PathVariable long formationId, @PathVariable long trainerId) {
         try {
             return formationService.endFormationAndGenerateTokens(formationId, trainerId);

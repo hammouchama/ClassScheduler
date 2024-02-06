@@ -126,9 +126,10 @@ public class RemarksService {
                 validationResult.setValid(false);
                 return new ResponseEntity<>(validationResult, HttpStatus.BAD_REQUEST);
             }
-
-            validationResult.setFormation(modelMapper.map(formation, FormationDTO.class));
-            validationResult.setTrainer(modelMapper.map(trainer, TrainerDTO.class));
+           TrainerDTO trainerDTO = modelMapper.map(trainer, TrainerDTO.class);
+            trainerDTO.setPhoto(trainer.getPhoto().getBytes());
+            validationResult.setFormation(FormationDTO.fromFormatioToFromationDTO(formation));
+            validationResult.setTrainer(trainerDTO);
 
             validationResult.setValid(true);
             return new ResponseEntity<>(validationResult, HttpStatus.OK);

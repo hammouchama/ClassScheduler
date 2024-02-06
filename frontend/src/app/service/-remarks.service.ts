@@ -47,8 +47,8 @@ export class RemarksService {
     );
   }
 
-  validateRemarksToken(token: string): Observable<RemarksTokenValidationDTO> {
-    return this.http.get<RemarksTokenValidationDTO>(
+  validateRemarksToken(token: string): Observable<any> {
+    return this.http.get<any>(
       `${environment.apiEndpoint}/public/remarks/verifyToken/${token}`
     );
   }

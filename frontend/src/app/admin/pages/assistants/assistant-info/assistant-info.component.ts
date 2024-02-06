@@ -141,7 +141,7 @@ export class AssistantInfoComponent implements OnInit {
           text: respon.message,
           icon: 'success',
         });
-        this.router.navigate(['/dashboard/assistant/list']);
+        this.router.navigate(['/dashboard/assistants/list']);
       },
       (error: any) => {
         Swal.close();

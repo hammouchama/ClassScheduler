@@ -25,7 +25,9 @@ public class Formation {
     private String category;
     private String city;
     private int nb_hours;
+    @Column(length = 500000)
     private String objective;
+    @Column(length = 500000)
     private String description;
     private String status = "ACTIVE";
     private float cost = 0.00F;

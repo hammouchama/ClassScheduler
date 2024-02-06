@@ -118,7 +118,8 @@ export class CalendarComponent implements OnInit {
           title: event.title,
           start: new Date(event.start_date_time),
           end: new Date(event.end_date_time),
-          extendedProps: { myCustomData: event }
+          extendedProps: { myCustomData: event },
+          color: '#06d6a0'
 
         }))
         console.log(res)

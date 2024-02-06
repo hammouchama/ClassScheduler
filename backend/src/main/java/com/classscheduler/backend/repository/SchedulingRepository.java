@@ -1,5 +1,6 @@
 package com.classscheduler.backend.repository;
 
+import com.classscheduler.backend.model.Formation;
 import com.classscheduler.backend.model.Scheduling;
 import com.classscheduler.backend.model.Trainer;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,5 @@ public interface SchedulingRepository  extends JpaRepository<Scheduling,Long> {
 
     List<Scheduling> findAllByTrainer(Trainer trainer);
     List<Scheduling> findAllByTrainerId(Long id);
+    List<Scheduling> findAllByFormation(Formation formation);
 }

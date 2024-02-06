@@ -52,6 +52,7 @@ public class FormationDTOAdmin {
         formationDTOAdmin.setCost(formation.getCost());
         formationDTOAdmin.setCity(formation.getCity());
         formationDTOAdmin.setCategory(formation.getCategory());
+        formationDTOAdmin.setObjective(formation.getObjective());
         formationDTOAdmin.setCapacity(formation.getCapacity());
         formationDTOAdmin.setDescription(formation.getDescription());
         formationDTOAdmin.setNb_hours(formation.getNb_hours());

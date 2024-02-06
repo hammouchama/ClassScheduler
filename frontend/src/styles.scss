@@ -46,3 +46,7 @@ h6 {
 .modal-content{
   background: #fff !important;
 }
+
+.fc-event, .fc-event-dot {
+    background-color: var(--bs-info-border-subtle);
+}

@@ -21,6 +21,6 @@ export class AppComponent {
   }
 
   public isForbedden() {
-    return this.currentRoute != "/forbidden"
+    return this.currentRoute != "/403"
   }
 }

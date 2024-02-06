@@ -30,6 +30,7 @@ public class TrainerService {
     ModelMapper modelMapper;
     UserRepository userRepository;
     SchedulingRepository schedulingRepository;
+    RemarksRepository remarksRepository;
 
     @Transactional
     public ResponseEntity<String> registerTrainer(Map<String, String> requestMap , MultipartFile image) {
@@ -150,6 +151,16 @@ public class TrainerService {
             if (jwtFilter.isAdmin()|| jwtFilter.isAssistant()){
                 Trainer trainer=trainerRepository.findById(id).orElse(null);
                 if(!Objects.isNull(trainer)){
+                    // gets all the remarks that the trainer is assigned to
+                    List<Scheduling> schedulings = schedulingRepository.findAllByTrainer(trainer);
+                    for (Scheduling scheduling:schedulings) {
+                        scheduling.setTrainer(null);
+                        schedulingRepository.save(scheduling);
+                    }
+                    List<Remarks> remarks = remarksRepository.findAllByTrainerId(trainer.getId());
+                    // deletes all the remarks
+                    remarksRepository.deleteAll(remarks);
+
                     trainerRepository.delete(trainer);
                     return Helpers.getResponseEntity("Trainer has been deleted successfully",HttpStatus.OK);
                 }

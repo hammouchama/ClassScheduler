@@ -36,7 +36,7 @@
             <div class="form-group mb-4">
               <label for="city">City</label>
               <span class="text-danger">*</span>
-              <ng-select [ngClass]="{ 'is-invalid': submit && form['city'].errors }" id="city" [items]="cities"
+              <ng-select [ngClass]="{ 'is-invalid': submit && form['city'].errors }" id="city" [items]="cities" [addTag]="true" addTagText="add city"
                 formControlName="city"></ng-select>
               <div *ngIf="submit && form['city'].errors" class="invalid-feedback">
                 <span *ngIf="form['city'].errors['required']">This value is required.</span>

@@ -42,7 +42,7 @@ export class AddCompanyComponent implements OnInit {
         ],
         phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
 
-        url: ['', [Validators.required, Validators.pattern('^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$')]],
+        url: ['', [Validators.required]],
 
         email: [
           '',

@@ -10,6 +10,7 @@ export class SchedulingService {
   constructor(private httpClient: HttpClient) {}
 
   public addScheduing(data: any) {
+    console.log(data);
     return this.httpClient.post(
       environment.apiEndpoint + '/scheduling/add',
       data

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-pagetitle
-    title="List of Formation"
+    title="List of Trainers"
     [breadcrumbItems]="breadCrumbItems"
   ></app-pagetitle>
 
@@ -122,21 +122,8 @@
                       ></i>
                     </ng-container>
                   </th>
-                  <th sortable="url" (sort)="onSort($event)">
+                  <th>
                     Skills
-                    <ng-container *ngIf="headers">
-                      <i
-                        *ngIf="headers.get(4)?.direction === 'asc'"
-                        class="fas fa-arrow-up"
-                      ></i>
-                      <i
-                        *ngIf="headers.get(4)?.direction === 'desc'"
-                        class="fas fa-arrow-down"
-                      ></i>
-                    </ng-container>
-                  </th>
-                  <th sortable="url" (sort)="onSort($event)">
-                    Description
                     <ng-container *ngIf="headers">
                       <i
                         *ngIf="headers.get(4)?.direction === 'asc'"
@@ -153,7 +140,14 @@
               </thead>
               <tbody *ngFor="let trainer of tables$ | async; let i = index">
                 <tr>
-                  <td class="text-center">
+                  <td class="text-center d-flex align-items-center">
+                    <!-- Add a green dot if trainer.accepted is true -->
+                    <i
+                      *ngIf="trainer.accepted==='true'"
+                      class="mdi mdi-circle text-success" ngbTooltip="Request Accepted" placement="top"></i>
+                    <i
+                      *ngIf="trainer.accepted==='false'"
+                      class="mdi mdi-circle text-danger" ngbTooltip="Request Not Accepted" placement="top"></i>
                     <img
                       src="{{ trainer.photo }}"
                       alt="image"
@@ -191,16 +185,16 @@
                     ></ngb-highlight>
                   </td>
                   <td>
-                    <ngb-highlight
+                    <!-- <ngb-highlight
                       [result]="trainer.skills"
                       [term]="service.searchTerm"
-                    ></ngb-highlight>
-                  </td>
-                  <td>
-                    <ngb-highlight
-                      [result]="trainer.description"
-                      [term]="service.searchTerm"
-                    ></ngb-highlight>
+                    > -->
+                    <!-- Show skills in badges -->
+                    <span
+                      *ngFor="let skill of trainer.skills.split(','); let i = index"
+                      class="badge bg-primary me-1"
+                      >{{ skill }}</span>
+                  <!-- </ngb-highlight> -->
                   </td>
                   <td>
                     <div ngbDropdown placement="bottom-left">
@@ -278,7 +272,7 @@
             <!-- Pagination -->
             <div class="col-sm-12 col-md-5">
               <div class="text-md-end float-md-end s pagination-rounded">
-                Loading : {{ service.loading$ | async }}
+
                 <!-- <ngb-pagination [collectionSize]="(total$ | async) || 0" [(page)]="service.page" [pageSize]="service.pageSize" >
                       </ngb-pagination> -->
               </div>

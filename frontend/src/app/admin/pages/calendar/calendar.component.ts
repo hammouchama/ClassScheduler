@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core
 import Swal from 'sweetalert2';
 
 // Calendar option
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, EventDropArg } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -27,14 +27,12 @@ import { Router } from '@angular/router';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-
 })
 
 /**
  * Calendar Component
  */
 export class CalendarComponent implements OnInit {
-
   // bread crumb items
   breadCrumbItems!: Array<{}>;
   selectedOption: string = '';
@@ -45,7 +43,7 @@ export class CalendarComponent implements OnInit {
 
   formationList!: Formation[];
   trainerList: Trainer[] = [];
-  companyList: Company[] = []
+  companyList: Company[] = [];
   // calendar
   calendarEvents!: any[];
   editEvent: any;
@@ -56,19 +54,19 @@ export class CalendarComponent implements OnInit {
   time = { hour: 13, minute: 30 };
   @ViewChild('editmodalShow') editmodalShow!: TemplateRef<any>;
   @ViewChild('modalShow') modalShow!: TemplateRef<any>;
-  option: string = "";
+  option: string = '';
 
-  constructor(private modalService: NgbModal,
+  constructor(
+    private modalService: NgbModal,
     private formBuilder: UntypedFormBuilder,
     private formationService: FormationService,
     private trainerService: TrainerService,
     private companyService: CompanyService,
-    private schedulingService: SchedulingService,
-    private router: Router
+    private schedulingService: SchedulingService
   ) { }
 
   changeOption(arg0: string) {
-    this.selectedOption = arg0
+    this.selectedOption = arg0;
   }
   ngOnInit() {
     this.breadCrumbItems = [
@@ -86,48 +84,41 @@ export class CalendarComponent implements OnInit {
       trainer: ['', [Validators.required]],
       start_time: ['', [Validators.required]],
       end_time: ['', [Validators.required]],
-      company: ['',],
+      company: [''],
     });
 
     this._fetchData();
   }
 
   private _fetchData() {
-    this.formationService.getAllByCityFormation().subscribe(
-      (resp: Formation[]) => {
-        this.formationList = resp
-      }
-    )
+    this.formationService
+      .getAllByCityFormation()
+      .subscribe((resp: Formation[]) => {
+        this.formationList = resp;
+      });
     //trainer
-    this.trainerService.getAllAceptedTrainers().subscribe(
-      (respo: Trainer[]) => {
-        this.trainerList = respo
-      }
-    )
+    this.trainerService
+      .getAllAceptedTrainers()
+      .subscribe((respo: Trainer[]) => {
+        this.trainerList = respo;
+      });
     //company
-    this.companyService.getAllCompany().subscribe(
-      (resp: Company[]) => {
-        this.companyList = resp;
-      }
-    )
-    this.schedulingService.getAllScheduing().subscribe(
-
-      (res: any) => {
-        this.calendarEvents = res
-        this.calendarOptions.events = this.calendarEvents.map(event => ({
-          title: event.title,
-          start: new Date(event.start_date_time),
-          end: new Date(event.end_date_time),
-          extendedProps: { myCustomData: event },
-          color: '#06d6a0'
-
-        }))
-        console.log(res)
-      }
-    )
+    this.companyService.getAllCompany().subscribe((resp: Company[]) => {
+      this.companyList = resp;
+    });
+    this.schedulingService.getAllScheduing().subscribe((res: any) => {
+      this.calendarEvents = res;
+      this.calendarOptions.events = this.calendarEvents.map((event) => ({
+        title: event.title,
+        start: new Date(event.start_date_time),
+        end: new Date(event.end_date_time),
+        extendedProps: { myCustomData: event },
+        color: '#06d6a0',
+      }));
+      console.log(res);
+    });
     // Calender Event Data
     // this.calendarEvents = calendarEvents;
-
   }
 
   /**
@@ -138,22 +129,17 @@ export class CalendarComponent implements OnInit {
   }
 
   /***
-  * Calender Set
-  */
+   * Calender Set
+   */
   calendarOptions: CalendarOptions = {
-    plugins: [
-      interactionPlugin,
-      dayGridPlugin,
-      timeGridPlugin,
-      listPlugin,
-    ],
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
       left: 'dayGridMonth,dayGridWeek,dayGridDay',
       center: 'title',
-      right: 'prevYear,prev,next,nextYear'
+      right: 'prevYear,prev,next,nextYear',
     },
-    initialView: "dayGridMonth",
-    themeSystem: "bootstrap",
+    initialView: 'dayGridMonth',
+    themeSystem: 'bootstrap',
     initialEvents: calendarEvents,
     weekends: true,
     editable: true,
@@ -162,7 +148,8 @@ export class CalendarComponent implements OnInit {
     dayMaxEvents: true,
     select: this.openModal.bind(this),
     eventClick: this.openEditModal.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventsSet: this.handleEvents.bind(this),
+    // eventDrop: this.handleEventDrop.bind(this),
   };
   currentEvents: EventApi[] = [];
 
@@ -171,11 +158,11 @@ export class CalendarComponent implements OnInit {
    */
   openModal(event?: any) {
     // this.submitted = false;
-    this.newEventDate = event,
-      // this.formBuilder.group({
-      //   editDate: this.newEventDate.date
-      // })
-      this.modalService.open(this.modalShow, { centered: true });
+    this.newEventDate = event;
+    // this.formBuilder.group({
+    //   editDate: this.newEventDate.date
+    // })
+    this.modalService.open(this.modalShow, { centered: true });
   }
 
   /**
@@ -184,32 +171,86 @@ export class CalendarComponent implements OnInit {
    * @param event calendar event
    */
   openEditModal(clickInfo: EventClickArg) {
-
     this.editEvent = clickInfo.event;
-    this.option = "individual"
+    this.option = 'individual';
     if (this.editEvent.extendedProps.myCustomData.for_company == true) {
-      this.option = "company"
+      this.option = 'company';
     }
     this.formEditData = this.formBuilder.group({
       title: this.editEvent.title,
       formation: this.editEvent.extendedProps.myCustomData.formation.id,
       trainer: this.editEvent.extendedProps.myCustomData.trainer.id,
-      start_time: this.editEvent.extendedProps.myCustomData.start_date_time.split("T")[1],
-      end_time: this.editEvent.extendedProps.myCustomData.end_date_time.split("T")[1],
-      company: this.editEvent.extendedProps.myCustomData.company != null ? this.editEvent.extendedProps.myCustomData.company : "",
+      start_time:
+        this.editEvent.extendedProps.myCustomData.start_date_time.split('T')[1],
+      end_time:
+        this.editEvent.extendedProps.myCustomData.end_date_time.split('T')[1],
+      company:
+        this.editEvent.extendedProps.myCustomData.company != null
+          ? this.editEvent.extendedProps.myCustomData.company
+          : '',
       selectedOption: this.option,
-
     });
     this.modalService.open(this.editmodalShow, { centered: true });
   }
 
   /**
- * Events bind in calander
- * @param events events
- */
+   * Events bind in calander
+   * @param events events
+   */
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
+  /* handleEventDrop(arg: EventDropArg) {
+    console.log(arg.event.extendedProps['myCustomData']);
+    console.log(arg.event);
+
+    const oldData = arg.oldEvent.extendedProps['myCustomData'];
+
+    const movedEvent = arg.event;
+    const newStartDate = new Date(movedEvent.start || oldData.start_date_time);
+    // newEndDate equals to to same as newStartDate but with old time values
+    const newEndDate = new Date(newStartDate || oldData.end_date_time);
+    newEndDate.setHours(oldData.end_date_time.split('T')[1].split(':')[0],oldData.end_date_time.split('T')[1].split(':')[1],0);
+
+    const timestampStartDate = new Date(newStartDate).getTime();
+    const timestampEndDate = new Date(newEndDate).getTime();
+
+
+    console.log('got here');
+    console.log(timestampStartDate);
+    console.log(timestampEndDate);
+    // get all data of moved event
+    const eventData = {
+      "title": oldData.title,
+      "formation": oldData.formation,
+      "trainer": oldData.trainer,
+      "start_time": oldData.start_date_time.split('T')[1],
+      "end_time": oldData.end_date_time.split('T')[1],
+      "company": oldData.company,
+      "selectedOption": oldData.for_company,
+      "start_dateTime": timestampStartDate,
+      "end_dateTime": timestampEndDate
+  };
+
+
+
+    console.log("_data after move");
+    console.log(eventData);
+    this.schedulingService
+      .updateScheduling(movedEvent.extendedProps['myCustomData'].id, eventData)
+      .subscribe(
+        (resp) => {
+          console.log('Event Updated');
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error,
+          });
+        }
+      );
+  } */
 
   /**
    * Show successfull Save Dialog
@@ -220,13 +261,13 @@ export class CalendarComponent implements OnInit {
       icon: 'success',
       title: 'Event has been saved',
       showConfirmButton: false,
-      timer: 2000
+      timer: 2000,
     });
   }
 
   /***
- * Model Edit Position Set
- */
+   * Model Edit Position Set
+   */
   Editposition() {
     Swal.fire({
       position: 'center',
@@ -242,26 +283,60 @@ export class CalendarComponent implements OnInit {
    */
   editEventSave() {
     if (this.formEditData.valid) {
-      console.log(this.formEditData.value)
-      console.log(this.editEvent.start)
+      console.log(this.formEditData.value);
+      console.log(this.editEvent.start);
       const _data = {
         ...this.formEditData.value,
-        start_dateTime: this.editEvent.start.setHours(this.formEditData.value["start_time"].split(":")[0], this.formEditData.value["start_time"].split(":")[1], 0),
-        end_dateTime: this.editEvent.end.setHours(this.formEditData.value["end_time"].split(":")[0], this.formEditData.value["end_time"].split(":")[1], 0)
-      }
-      this.schedulingService.updateScheduling(this.editEvent.extendedProps.myCustomData.id, _data).subscribe(
-        (resp) => {
+        start_dateTime: this.editEvent.start.setHours(
+          this.formEditData.value['start_time'].split(':')[0],
+          this.formEditData.value['start_time'].split(':')[1],
+          0
+        ),
+        end_dateTime: this.editEvent.end.setHours(
+          this.formEditData.value['end_time'].split(':')[0],
+          this.formEditData.value['end_time'].split(':')[1],
+          0
+        ),
+      };
+      console.log("_data after update");
+      console.log(_data);
+      this.schedulingService
+        .updateScheduling(this.editEvent.extendedProps.myCustomData.id, _data)
+        .subscribe(
+          (resp) => {
+            this.Editposition();
+            this.formEditData = this.formBuilder.group({
+              title: '',
+              formation: '',
+              selectedOption: '',
+              trainer: '',
+              start_time: '',
+              end_time: '',
+              company: '',
+            });
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: error,
+            });
+          }
+        );
+    }
+  }
 
-          this.Editposition();
-          this.formEditData = this.formBuilder.group({
-            title: '',
-            formation: '',
-            selectedOption: '',
-            trainer: '',
-            start_time: '',
-            end_time: '',
-            company: '',
-          });
+  /**
+   * Delete the event from calendar
+   */
+  deleteEventData() {
+    console.log(this.editEvent.extendedProps.myCustomData.id);
+    this.schedulingService
+      .deleteScheduling(this.editEvent.extendedProps.myCustomData.id)
+      .subscribe(
+        (response) => {
+          this.editEvent.remove();
           this.modalService.dismissAll();
         },
         (error) => {
@@ -271,30 +346,7 @@ export class CalendarComponent implements OnInit {
             text: error,
           });
         }
-      )
-    }
-
-  }
-
-  /**
-   * Delete the event from calendar
-   */
-  deleteEventData() {
-    console.log(this.editEvent.extendedProps.myCustomData.id)
-    this.schedulingService.deleteScheduling(this.editEvent.extendedProps.myCustomData.id).subscribe(
-      (response) => {
-        this.editEvent.remove();
-        this.modalService.dismissAll();
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error,
-        });
-      }
-    )
-
+      );
   }
 
   /**
@@ -302,17 +354,25 @@ export class CalendarComponent implements OnInit {
    */
   saveEvent() {
     if (this.formData.valid) {
-      console.log(this.formData.value)
+      console.log(this.formData.value);
+      this.newEventDate.end.setDate(this.newEventDate.end.getDate() - 1);
+
       const _data = {
         ...this.formData.value,
-        start_dateTime: this.newEventDate.start.setHours(this.formData.value["start_time"].split(":")[0], this.formData.value["start_time"].split(":")[1], 0),
-        end_dateTime: this.newEventDate.end.setHours(this.formData.value["end_time"].split(":")[0], this.formData.value["end_time"].split(":")[1], 0)
-      }
-
+        start_dateTime: this.newEventDate.start.setHours(
+          this.formData.value['start_time'].split(':')[0],
+          this.formData.value['start_time'].split(':')[1],
+          0
+        ),
+        end_dateTime: this.newEventDate.end.setHours(
+          this.formData.value['end_time'].split(':')[0],
+          this.formData.value['end_time'].split(':')[1],
+          0
+        ),
+      };
 
       this.schedulingService.addScheduing(_data).subscribe(
         (resp: any) => {
-
           this.position();
           this.formData = this.formBuilder.group({
             title: '',
@@ -324,19 +384,17 @@ export class CalendarComponent implements OnInit {
             company: '',
           });
           this.modalService.dismissAll();
-          this.router.navigate(["/dashboard/calendar"])
-
+          this._fetchData();
         },
         (error: any) => {
-          console.log("err", error)
+          console.log('err', error);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: error,
           });
         }
-      )
-
+      );
     }
     this.submitted = true;
   }
@@ -347,21 +405,19 @@ export class CalendarComponent implements OnInit {
   confirm() {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#34c38f',
       cancelButtonColor: '#f46a6a',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(result => {
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
       if (result.value) {
         this.deleteEventData();
         Swal.fire('Deleted!', 'Event has been deleted.', 'success');
       }
     });
   }
-
-
 
   closeEventModal() {
     this.formData = this.formBuilder.group({

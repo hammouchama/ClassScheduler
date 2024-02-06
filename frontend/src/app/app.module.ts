@@ -21,7 +21,6 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserService } from './service/user.service';
 import { ListAssistanComponent } from './admin/list-assistan/list-assistan.component';
 import { MatTableModule } from '@angular/material/table';
-import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -34,7 +33,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     AdminComponent,
     ListAssistanComponent,
-    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

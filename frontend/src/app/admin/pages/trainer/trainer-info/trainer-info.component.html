@@ -32,7 +32,10 @@
 
           <div class="form-group mb-4">
             <h5>Skills</h5>
-            <p>{{ trainer.skills }}</p>
+            <span
+              *ngFor="let skill of trainer.skills.split(','); let i = index"
+              class="badge bg-primary me-1"
+              >{{ skill }}</span>
           </div>
 
           <div class="form-group mb-4">
